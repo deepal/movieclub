@@ -12,55 +12,57 @@
     int slidesize = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["FeaturedSlideSize"]);
 }
 
-<div class="row collapse featured-div">
-    <div class="small-10 medium-10 large-5 columns featured-div-caption">
-        <p>Featured</p>
-    </div>
-    <div class="small-90 medium-90 large-95 columns">
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <div class="span12">
-                    <div class="carousel slide" id="myCarousel">
-                        <div class="carousel-inner">
-                            @for (i = 0; i < Math.Ceiling((double)(moviecount / 4)); i++)
-{
-    <div class="item @active">
-        @{
-    active = "";
-        }
-        <ul class="thumbnails">
+<div id="catagory-container">
+    <div class="row collapse featured-div">
+        <div class="small-10 medium-10 large-5 columns featured-div-caption">
+            <p>Featured</p>
+        </div>
+        <div class="small-90 medium-90 large-95 columns">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="carousel slide" id="myCarousel">
+                            <div class="carousel-inner">
+                                @for (i = 0; i < Math.Ceiling((double)(moviecount / 4)); i++)
+                                {
+                                    <div class="item @active">
+                                        @{
+                                    active = "";
+                                        }
+                                        <ul class="thumbnails">
 
-            @for (j = i * slidesize; j < moviecount && j < (i * slidesize + slidesize); j++)
-            {
-                {
-                    <li class="span2 offsettiny">
-                        <div class="thumbnail">
-                            <a href="#"><img src="@featuredmovies.ElementAt(j).PosterURL" alt=""></a>
-                        </div>
-                        <div class="caption">
-                            <h4>@featuredmovies.ElementAt(j).Name</h4>
-                            <p><img class="ratings-image" src="~/Content/images/stars.png" /><span class="ratings">@featuredmovies.ElementAt(j).ImdbRatings</span></p>
+                                            @for (j = i * slidesize; j < moviecount && j < (i * slidesize + slidesize); j++)
+                                            {
+                                                {
+                                                    <li class="span2 offsettiny">
+                                                        <div class="thumbnail">
+                                                            <a href="#"><img src="@featuredmovies.ElementAt(j).PosterURL" alt=""></a>
+                                                        </div>
+                                                        <div class="caption">
+                                                            <h4>@featuredmovies.ElementAt(j).Name</h4>
+                                                            <p><img class="ratings-image" src="~/Content/images/stars.png" /><span class="ratings">@featuredmovies.ElementAt(j).ImdbRatings</span></p>
 
-                        </div>
-                    </li>
-                }
-            }
+                                                        </div>
+                                                    </li>
+                                                }
+                                            }
 
-        </ul>
-    </div>
-}
+                                        </ul>
+                                    </div>
+                                }
 
-                        </div>
+                            </div>
 
-                        <div class="control-box">
-                            <a data-slide="prev" href="#myCarousel" class="carousel-control left button">‹</a>
-                            <a data-slide="next" href="#myCarousel" class="carousel-control right button">›</a>
-                        </div><!-- /.control-box -->
+                            <div class="control-box">
+                                <a data-slide="prev" href="#myCarousel" class="carousel-control left button">‹</a>
+                                <a data-slide="next" href="#myCarousel" class="carousel-control right button">›</a>
+                            </div><!-- /.control-box -->
 
-                    </div><!-- /#myCarousel -->
+                        </div><!-- /#myCarousel -->
 
-                </div><!-- /.span22 -->
-            </div><!-- /.row -->
-        </div><!-- /.container -->
+                    </div><!-- /.span22 -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </div>
     </div>
 </div>

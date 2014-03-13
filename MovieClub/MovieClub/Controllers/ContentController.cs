@@ -1,9 +1,15 @@
 ﻿using MovieClub.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using System.Net;
+using System.IO;
+using System.Text;
+using MovieClub.WebServices;
 
 namespace MovieClub.Controllers
 {
@@ -11,6 +17,8 @@ namespace MovieClub.Controllers
     {
         //
         // GET: /MovieClub/
+
+        private ImdbMovie moviedata;
 
         [HttpGet]
         public ActionResult Index()
@@ -33,9 +41,12 @@ namespace MovieClub.Controllers
             return View();
         }
 
-        public ActionResult MovieDetails(int movieid)
+        [HttpGet]
+        public ActionResult MovieDetails(string moviename)
         {
-            return View();
+            ViewBag.Name = moviename;
+            ImdbMovie moviedata = JsonConvert.DeserializeObject<ImdbMovie>(ImdbData.GetData(moviename));
+            return View(moviedata);
         }
 
         

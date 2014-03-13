@@ -186,16 +186,19 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\WebServiceController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\FeaturedMovieDetails.cs" />
+    <Compile Include="Models\ImdbMovie.cs" />
     <Compile Include="Models\MovieDetails.cs" />
     <Compile Include="Models\MovieDataContext.cs" />
     <Compile Include="Models\RecommendedMovies.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebServices\ImdbData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\glyphicons.css" />
@@ -365,6 +368,7 @@
     <Content Include="Views\Shared\_FeaturedPartial.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Shared\_FeaturedCatagoryPartial.cshtml" />
+    <Content Include="Views\Content\MovieDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

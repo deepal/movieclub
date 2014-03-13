@@ -1,0 +1,55 @@
+﻿@model MovieClub.Models.ImdbMovie
+
+@{
+    ViewBag.Title = @ViewBag.Name;
+    var movie = Model;
+}
+
+<h3>@ViewBag.Name</h3>
+
+<div id="moviedetails" class="moviedetails">
+    <div class="poster">
+        <img src="@movie.Poster" />
+    </div>
+    <div class="movie-name">
+        <h4>@movie.Title</h4>
+    </div>
+
+    <div class="general-details">
+        <!-- year,director,writer,imdb ratings etc -->
+    </div>
+
+    <div class="movie-plot">
+        <p>@movie.Plot</p>
+    </div>
+
+    <div class="action-pane">
+        <!-- buttons to reserve, request, order, add to watchlist etc. -->
+    </div>
+</div>
+
+@section scripts{
+    <!--<script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "http://www.omdbapi.com/",
+                data: {
+                    t: "",
+                    r: "json",
+                    plot: "full"
+                }
+                
+            }).success(function (data) {
+                
+                var obj = $.parseJSON(data);
+                $("#jsoncontent").html(obj.Plot);
+                $("#image").image = obj.Poster;
+            })
+            .error(function () {
+                $("#jsoncontent").html("Error getting movie details");
+            });
+        });
+
+    </script>-->
+}

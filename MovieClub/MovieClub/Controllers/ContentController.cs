@@ -45,8 +45,11 @@ namespace MovieClub.Controllers
         public ActionResult MovieDetails(string moviename)
         {
             ViewBag.Name = moviename;
-            ImdbMovie moviedata = JsonConvert.DeserializeObject<ImdbMovie>(ImdbData.GetData(moviename));
-            return View(moviedata);
+            ImdbMovie imdbmoviedata = JsonConvert.DeserializeObject<ImdbMovie>(ImdbData.GetData(moviename));
+            
+            //the logic should be to get imdb data and insert them into a MovieDetails model with every required fields converted
+            //the MovieDetails model should be passed to this' view. view should also strongly typed into this model.
+            return View(imdbmoviedata);
         }
 
         

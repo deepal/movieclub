@@ -4,28 +4,55 @@
     ViewBag.Title = @ViewBag.Name;
     var movie = Model;
 }
-
-<h3>@ViewBag.Name</h3>
-
 <div id="moviedetails" class="moviedetails">
-    <div class="poster">
-        <img src="@movie.Poster" />
-    </div>
-    <div class="movie-name">
-        <h4>@movie.Title</h4>
-    </div>
+    <div class="row">
+        <div class="small-100 medium-20 large-27 columns">
+            <div id="movie-poster">
+                <img src="@movie.Poster" />
+            </div>
+            <div id="movie-imdb">
+                <div id="rating"><img src="~/Content/images/stars.png" id="imdb-stars" /> @movie.imdbRating </div>(@movie.imdbVotes Votes) <p><a href="http://www.imdb.com/title/@movie.imdbID/">Look in IMDb</a></p>
+            </div>
+            <div id="action-buttons">
+                <ul>
+                    <li><a href="" class="button expand small radius">Reserve</a></li>
+                    <li><a href="" class="button expand info small radius">Add to Watchlist</a></li>
+                </ul>
+            </div>
 
-    <div class="general-details">
-        <!-- year,director,writer,imdb ratings etc -->
-    </div>
+        </div> 
+        <div class="small-100 medium-80 large-73 columns">
+            <div id="movie-info">
+                <div id="movie-title">
+                    <div id="movie-name">
+                        @movie.Title <span id="movie-year">(@movie.Year)</span>
+                        <div id="movie-locale">@movie.Country  <span>|</span>  @movie.Language</div>
+                    </div>
+                    <div id="movie-specs">
+                            Type: @movie.Type <span>|</span> @movie.Runtime  <span>-</span>  @movie.Genre  <span>-</span>  @movie.Released
+                    </div>
+                </div>
 
-    <div class="movie-plot">
-        <p>@movie.Plot</p>
-    </div>
+                <div id="plot">
+                    <p>@movie.Plot</p>
+                </div>
 
-    <div class="action-pane">
-        <!-- buttons to reserve, request, order, add to watchlist etc. -->
+                <div id="movie-stats">
+                    <div id="movie-contributors">
+                        <table>
+                            <tr><td>Director:</td><td>@movie.Director</td></tr>
+                            <tr><td>Writers:</td><td>@movie.Writer</td></tr>
+                            <tr><td>Stars:</td><td>@movie.Actors</td></tr>
+                            <tr><td>Awards:</td><td>@movie.Awards</td></tr>
+                        </table>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
     </div>
+    
 </div>
 
 @section scripts{

@@ -83,6 +83,10 @@
     padding:0;
 }
 
+.wrapper-custom{
+    margin:15px;
+}
+
 
     .row{
     max-width:initial !important;
@@ -127,4 +131,90 @@
     border-radius:15px;
 }
 
+
+
 /*movie details page-----------------------------------------------------------------*/
+
+#moviedetails{
+    background:#fafafa;
+    margin-left:10px;
+    overflow:hidden;
+    padding:10px 20px 0 10px;
+}
+
+#action-buttons{
+    max-width:200px;
+    margin-top:20px
+}
+
+#action-buttons ul li{
+    list-style-type:none;
+}
+
+#movie-poster img{
+    text-align:center;
+    border-radius:10px;
+    border:5px solid #dadada;
+}
+
+#movie-title{
+    margin-bottom:40px;
+}
+
+#movie-year{
+    font-size:18px;
+    font-weight:normal;
+}
+
+#movie-name{
+    font-size:180%;
+    font-weight:bold;
+}
+
+#movie-locale{
+    margin-top:10px;
+    clear:both;
+    font-size:12px;
+    font-weight:normal;
+}
+
+#movie-locale span{
+    margin:0 10px;
+}
+
+#movie-specs{
+    font-size:12px;
+    margin-top:5px;
+}
+
+#movie-specs span{
+    margin:0 10px;
+}
+
+#movie-imdb{
+    margin-top:20px;
+    text-align:center;
+}
+
+#rating{
+    padding:15px;
+    font-size:28px;
+    color:#808080;
+}
+
+#imdb-stars{
+    height:40px;
+    width:40px;
+}
+
+#plot{
+    background-color:whitesmoke;
+    padding:7px;
+    margin-bottom:20px;
+    border-radius:10px;
+}
+
+#plot p{
+    font-size:14px;
+    line-height:200%;
+}

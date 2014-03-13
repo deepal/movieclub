@@ -14,6 +14,7 @@ namespace MovieClub.Models
         public int Runtime { get; set; }
         public string Genre { get; set; }
         public string Director { get; set; }
+        public string Actors { get; set; }
         public string Writer { get; set; }
         public string PlotShort { get; set; }
         public string PlotFull { get; set; }

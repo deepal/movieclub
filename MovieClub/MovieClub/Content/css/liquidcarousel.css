@@ -1,0 +1,34 @@
+.liquid {
+	background-color:none;
+    overflow:visible !important;
+}
+.liquid .previous {
+	display:block;
+	height:126px;
+	width:64px;
+	background-image:url("../images/previous.png");
+    background-repeat:no-repeat;
+	float:left;
+	margin:0;
+	padding:0;
+}
+.liquid .next {
+	display:block;
+	height:126px;
+	width:64px;
+	background-image:url('../images/next.png');
+    background-repeat:no-repeat;
+	float:right;
+	margin:0;
+	padding:0;
+}
+.liquid ul li {
+	width:126px;
+	padding:0 2px;
+	margin:0;
+}
+.liquid ul li a img {
+	-moz-box-shadow: 5px 5px 3px #222;
+   	-webkit-box-shadow: 5px 5px 3px #222;
+   	box-shadow: 5px 5px 3px #222;
+}

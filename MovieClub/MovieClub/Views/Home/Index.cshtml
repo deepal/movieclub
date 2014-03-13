@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MovieClub.Models.FeaturedMovieDetails>
+@{
+    ViewBag.Title = "Home Page";
+    var movies = Model;
+}
+
+
+@section featured{
+    @Html.Partial("_FeaturedPartial")
+}
+
+@section actioncatagory{
+    @Html.Partial("_FeaturedPartial")
+}
+
+@section thrillercatagory{
+    @Html.Partial("_FeaturedPartial")
+}
+
+@section customstyles{
+    <link type='text/css' rel='stylesheet' href='~/Content/css/bootstrap.min.css' />
+    <link type='text/css' rel='stylesheet' href='~/Content/css/carousal.css' />
+}
+
+@section customscripts{
+    
+    <script type="text/javascript" src="~/Content/js/bootstrap.min.js"></script>
+}
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.carousel').carousel({
+                interval: 6000
+            })
+        });
+    </script>
+}

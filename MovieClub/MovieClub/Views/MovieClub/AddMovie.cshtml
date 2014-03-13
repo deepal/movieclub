@@ -1,0 +1,161 @@
+﻿@model MovieClub.Models.Movie
+
+@{
+    ViewBag.Title = "AddMovie";
+}
+
+<h2>AddMovie</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Movie</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Id)
+            @Html.ValidationMessageFor(model => model.Id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Year)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Year)
+            @Html.ValidationMessageFor(model => model.Year)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ReleaseDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ReleaseDate)
+            @Html.ValidationMessageFor(model => model.ReleaseDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Runtime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Runtime)
+            @Html.ValidationMessageFor(model => model.Runtime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Genre)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Genre)
+            @Html.ValidationMessageFor(model => model.Genre)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Director)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Director)
+            @Html.ValidationMessageFor(model => model.Director)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Writer)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Writer)
+            @Html.ValidationMessageFor(model => model.Writer)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PlotShort)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PlotShort)
+            @Html.ValidationMessageFor(model => model.PlotShort)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PlotFull)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PlotFull)
+            @Html.ValidationMessageFor(model => model.PlotFull)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Language)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Language)
+            @Html.ValidationMessageFor(model => model.Language)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Country)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Country)
+            @Html.ValidationMessageFor(model => model.Country)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Awards)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Awards)
+            @Html.ValidationMessageFor(model => model.Awards)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PosterURL)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PosterURL)
+            @Html.ValidationMessageFor(model => model.PosterURL)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ImdbRatings)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ImdbRatings)
+            @Html.ValidationMessageFor(model => model.ImdbRatings)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ImdbVotes)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ImdbVotes)
+            @Html.ValidationMessageFor(model => model.ImdbVotes)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ImdbId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ImdbId)
+            @Html.ValidationMessageFor(model => model.ImdbId)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

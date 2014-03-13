@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/css/normalize.css")
+    @Styles.Render("~/Content/css/foundation.css")
+    
+    @Scripts.Render("~/Scripts/jquery-1.8.2.js")
+    @Scripts.Render("~/Content/js/vendor/modernizr.js")
+    @RenderSection("customstyles", required: false)
+    @RenderSection("customscripts", required: false)
+
+</head>
+<body>
+    
+    @RenderBody()
+
+    @Scripts.Render("~/Content/js/foundation.min.js")
+    <script>
+        $(document).foundation();
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

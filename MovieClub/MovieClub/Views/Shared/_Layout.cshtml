@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title> 
+    
+    @Styles.Render("~/Content/css/normalize.css")
+    @Styles.Render("~/Content/css/foundation.css")
+    @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/css/glyphicons.css")
+    @Scripts.Render("~/Scripts/jquery-1.8.2.js")
+    @Scripts.Render("~/Content/js/vendor/modernizr.js")
+    @RenderSection("customstyles",required:false)
+    @RenderSection("customscripts",required:false)
+      
+</head>
+<body>
+    <div id="header" class="movieclub-header">
+        <h2>Movie Club</h2>
+    </div>
+
+    <div class="sticky" data-options="sticky_on: large">
+        <nav class="top-bar sticky" data-topbar>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li class="has-form">
+                        <div class="row collapse">
+                            <div class="small-70 large-70 columns">
+                                <input class="textinput-custom" type="text" placeholder="Search Movies" />
+                            </div>
+                            <div class="small-30 large-30 columns">
+                                <a href="#" class="button expand button-custom">Search</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <ul class="left">
+                            <li class="has-dropdown">
+                                <a href="#">Quick Links</a>
+                                <ul class="dropdown">
+                                    <li><a href="">Link 1</a></li>
+                                    <li><a href="">Link 2</a></li>
+                                    <li><a href="">Link 2</a></li>
+                                </ul>
+                        </ul>
+                    </li>
+
+                </ul>
+            </section>
+            <section class="top-bar-section">
+                
+                
+            </section>
+            <section class="top-bar-section">
+                <ul class="right">
+                    <li class="divider"></li>
+                    <li>@Html.Partial("_LoginPartial")</li>
+                </ul>
+            </section>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="large-19 medium-19 sidebar-custom columns medi" >
+            <div class="sidebar">
+                <ul class="side-nav side-nav-custom">
+                    <li class="heading">Movies</li>
+                    <li><a href="#">Latest</a></li>
+                    <li><a href="#">Top Imdb Rated</a></li>
+                    <li><a href="#">Top Movie Club Rated</a></li>
+                    <li><a href="#">Most Viewed</a></li>
+                    <li><a href="#">Most Comments</a></li>
+
+                    <li class="divider"></li>
+
+                    <li class="heading">Catagories</li>
+                    <li><a href="#">Action<span class="label right">42</span></a></li>
+                    <li><a href="#">Sci-Fi<span class="label right">32</span></a></li>
+                    <li><a href="#">Drama<span class="label right">11</span></a></li>
+                    <li><a href="#">Comedy<span class="label right">10</span></a></li>
+                    <li><a href="#">Thriller<span class="label right">33</span></a></li>
+                    <li><a href="#">Horror<span class="label right">4</span></a></li>
+                    <li><a href="#">Romance<span class="label right">12</span></a></li>
+                    <li><a href="#">Documentary<span class="label right">4</span></a></li>
+
+                    <li class="divider"></li>
+                </ul>
+                <div id="recommendations">
+                    <h5>Recommended for you</h5>
+                    <div id="recommended-movie-tile">
+                        <div id="recommended-movie-poster" class="left">
+
+                        </div>
+                        <div id="recommended-movie-caption" class="right">
+                            <h6>A movie</h6>
+                            <p>This movie is really nice</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="dummy" style="clear:both"></div>
+            </div>
+        </div> 
+        <div class="large-81 medium-81 columns content-wrapper-custom">
+            <div class="content-custom">
+                <div id="catagory-container">
+                        <!-- featured content start-->
+                        @RenderSection("featured", required: false)
+                        <!-- Featured content end-->
+                </div>
+
+                <div id="catagory-container">
+                        <!-- featured content start-->
+                        @RenderSection("actioncatagory", required: false)
+                        <!-- Featured content end-->
+                </div>
+
+                <div id="catagory-container">
+                    <div id="featured">
+                        <!-- featured content start-->
+                        @RenderSection("thrillercatagory", required: false)
+                        <!-- Featured content end-->
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="content-wrapper">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    
+    @Scripts.Render("~/Content/js/foundation.min.js")
+    <script>
+        $(document).foundation();
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

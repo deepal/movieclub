@@ -1,0 +1,11 @@
+﻿.tabs-content-custom{
+    padding:5px 20px;    
+}
+
+.tabs-content-custom div{
+    overflow:auto;
+}
+
+#myaccount{
+    background-color:#fafafa;
+}

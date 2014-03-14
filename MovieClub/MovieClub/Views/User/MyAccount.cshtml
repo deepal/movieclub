@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "MyAccount";
+}
+
+<div id="myaccount">
+    <dl class="tabs" data-tab>
+        <dd class="active"><a href="#panel-profile">Profile</a></dd>
+        <dd><a href="#panel-favorites">My Favorites</a></dd>
+        <dd><a href="#panel-history">History</a></dd>
+        <dd><a href="#panel-recommendations">Recommendations</a></dd>
+    </dl>
+    <div class="tabs-content tabs-content-custom">
+        <div class="content active small" id="panel-profile">
+            <p>Profile</p>
+        </div>
+        <div class="content small" id="panel-favorites">
+            <table>
+                <thead>
+                    <tr>
+                        <td width="250px">Movie Name</td>
+                        <td width="200px">Catagories</td>
+                        <td width="200px">Actors</td>
+                        <td width="100px">Year</td>
+                        <td width="100px">IMDb Rating</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="content small" id="panel-history">
+            <table>
+                <thead>
+                    <tr>
+                        <td>Date</td>
+                        <td>Activity</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="content small" id="panel-recommendations">
+            <table>
+                <thead>
+                    <tr>
+                        <td>Movie Name</td>
+                        <td>Recommended By</td>
+                        <td>Date</td>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section customstyles{
+    @Styles.Render("~/Content/css/myaccount.css")
+}

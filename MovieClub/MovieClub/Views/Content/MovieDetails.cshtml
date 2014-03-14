@@ -11,13 +11,41 @@
                 <img src="@movie.Poster" />
             </div>
             <div id="movie-imdb">
-                <div id="rating"><img src="~/Content/images/stars.png" id="imdb-stars" /> @movie.imdbRating </div>(@movie.imdbVotes Votes) <p><a href="http://www.imdb.com/title/@movie.imdbID/">Look in IMDb</a></p>
+                <p>IMDb Rated</p>
+                <div id="rating"><img src="/Content/images/stars.png" width="24" height="24"/>@movie.imdbRating<img src="/Content/images/stars.png" width="24" height="24" /> </div>(@movie.imdbVotes Votes) <p><a href="http://www.imdb.com/title/@movie.imdbID/">Look in IMDb</a></p>
             </div>
             <div id="action-buttons">
                 <ul>
-                    <li><a href="" class="button expand small radius">Reserve</a></li>
-                    <li><a href="" class="button expand info small radius">Add to Watchlist</a></li>
+                    <li><a href="" class="button expand small">Reserve</a></li>
+                    <li><a href="#" class="button expand small split">Add to Watchlist <span data-dropdown="drop"></span></a><br></li>
                 </ul>
+                <ul id="drop" class="f-dropdown" data-dropdown-content>
+                    <li><a href="#">Recommend</a></li>
+                    <li><a href="#">Add to favorites</a></li>
+                </ul>
+            </div>
+            <div id="movieclub-stats">
+                <table>
+                    <tr><th colspan="2">MovieClub Statistics</th></tr>
+                    <tr>
+                        <td colspan="2">
+                            <div id="movie-pearson">
+                                <p>Pearson Rated</p>
+                                <div id="rating-pearson"><img src="/Content/images/stars.png" width="16" height="16" />4.9<img src="/Content/images/stars.png" width="16" height="16" /> </div>(14 Votes)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Your Rating</td>
+                        <td>
+                            <div id="movieclub-rating">
+                                <input type="range" min="0" max="5" value="0" step="0.5" id="backing2">
+                                <div class="rateit" data-rateit-backingfld="#backing2"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr><td>Rents</td><td>5 times</td></tr>
+                </table>
             </div>
 
         </div> 
@@ -48,6 +76,17 @@
                     </div>
                     
                 </div>
+                <div id="movie-media">
+                    <div id="movie-trailer">
+                        <h5>Trailer</h5>
+                        <video id="video-clip" class="video-js vjs-default-skin" controls
+                               preload="auto" width="640" height="264" poster=""
+                               data-setup="{}">
+                            <source src="~/Content/multimedia/ironman.mp4" type='video/mp4'>
+                        </video>
+                    </div>
+                </div>
+                
             </div>
         </div>
         
@@ -79,4 +118,25 @@
         });
 
     </script>-->
+}
+
+@section customstyles{
+    <link href='http://fonts.googleapis.com/css?family=Gilda+Display' rel='stylesheet' type='text/css'>
+    <link href="http://vjs.zencdn.net/4.4/video-js.css" rel="stylesheet">
+    <style type="text/css">
+        .vjs-default-skin {
+            color: #949494;
+        }
+
+            .vjs-default-skin .vjs-play-progress,
+            .vjs-default-skin .vjs-volume-level {
+                background-color: #00a5ff;
+            }
+    </style>
+    @Styles.Render("~/Content/css/rateit.css")
+}
+
+@section customscripts{
+    <script src="http://vjs.zencdn.net/4.4/video.js"></script>
+    @Scripts.Render("~/Content/js/jquery.rateit.js")
 }

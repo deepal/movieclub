@@ -144,11 +144,21 @@
 
 #action-buttons{
     max-width:200px;
-    margin-top:20px
+    margin:20px auto;
+    margin-bottom:0;
+    margin-top:40px;
+}
+
+#action-buttons ul li a{
+    min-width:65px;
 }
 
 #action-buttons ul li{
     list-style-type:none;
+}
+
+#action-buttons ul{
+    margin-left:0;
 }
 
 #movie-poster img{
@@ -194,12 +204,67 @@
 #movie-imdb{
     margin-top:20px;
     text-align:center;
+    font-size:12px;
+    border-bottom:1px solid #dadada;
+    border-top:1px solid #dadada;
+    margin-bottom:10px;
+    padding:5px 0;
+}
+
+#movie-imdb p{
+    font-size:12px;
+    padding:0;
+    margin:0;
+}
+
+#movie-pearson{
+    margin-top:5px;
+    text-align:center;
+    font-size:12px;
+    border-bottom:1px solid #dadada;
+    border-top:1px solid #dadada;
+    margin-bottom:10px;
+    padding:5px 0;
+}
+
+#movie-pearson p{
+    font-size:12px;
+    padding:0;
+    margin:0;
 }
 
 #rating{
-    padding:15px;
-    font-size:28px;
-    color:#808080;
+    padding:10px;
+    font-size:34px;
+    color:#535353;
+    font-weight:bold;
+    font-family: 'Gilda Display', serif;
+}
+
+#rating-pearson{
+    padding:10px;
+    font-size:24px;
+    color:#535353;
+    font-weight:bold;
+    font-family: 'Gilda Display', serif;
+}
+
+#rating-pearson img{
+    margin:0 10px;
+}
+
+#rating img{
+    margin:0 10px;
+}
+
+.circle {
+    width: 80px;
+    height: 80px;
+    margin:0 auto;
+    -moz-border-radius: 50%; 
+    -webkit-border-radius: 50%; 
+    border-radius: 50%;
+    background: #f2ef49;
 }
 
 #imdb-stars{
@@ -211,10 +276,39 @@
     background-color:whitesmoke;
     padding:7px;
     margin-bottom:20px;
-    border-radius:10px;
+    /*border-radius:10px;*/
 }
 
 #plot p{
     font-size:14px;
     line-height:200%;
+}
+
+#video-clip{
+    margin:0 auto;
+    max-width:inherit;
+}
+
+#movie-trailer{
+    padding:5px 20px 20px 20px;
+    background-color:whitesmoke;
+}
+
+
+#movieclub-stats table{
+    margin: 0 auto;
+    margin-bottom:25px;
+}
+
+#movieclub-stats table tr td{
+    font-size:12px;
+}
+
+#movieclub-stats table tr th{
+    font-size:12px;
+}
+
+footer{
+    height:50px;
+    background-color:#dadada;
 }

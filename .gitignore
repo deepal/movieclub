@@ -16,6 +16,7 @@ local.properties
 .settings/
 .loadpath
 MovieClub/packages/
+MovieClub/MovieClub/Content/multimedia/
 
 # External tool builders
 .externalToolBuilders/

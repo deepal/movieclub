@@ -208,7 +208,9 @@
     <Content Include="Content\css\foundation.min.css" />
     <Content Include="Content\css\liquidcarousel.css" />
     <Content Include="Content\css\normalize.css" />
+    <Content Include="Content\css\rateit.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\video-js.css" />
     <Content Include="Content\images\01.jpg" />
     <Content Include="Content\images\02.jpg" />
     <Content Include="Content\images\03.jpg" />
@@ -226,9 +228,11 @@
     <Content Include="Content\images\15.jpg" />
     <Content Include="Content\images\16.jpg" />
     <Content Include="Content\images\bodybackground.png" />
+    <Content Include="Content\images\delete.gif" />
     <Content Include="Content\images\download.png" />
     <Content Include="Content\images\next.png" />
     <Content Include="Content\images\previous.png" />
+    <Content Include="Content\images\star.gif" />
     <Content Include="Content\images\stars.png" />
     <Content Include="Content\images\text.jpg" />
     <Content Include="Content\js\bootstrap.min.js" />
@@ -254,11 +258,15 @@
     <Content Include="Content\js\jquery.liquidcarousel.js" />
     <Content Include="Content\js\jquery.liquidcarousel.min.js" />
     <Content Include="Content\js\jquery.liquidcarousel.pack.js" />
+    <Content Include="Content\js\jquery.rateit.js" />
     <Content Include="Content\js\vendor\fastclick.js" />
     <Content Include="Content\js\vendor\jquery.cookie.js" />
     <Content Include="Content\js\vendor\jquery.js" />
     <Content Include="Content\js\vendor\modernizr.js" />
     <Content Include="Content\js\vendor\placeholder.js" />
+    <Content Include="Content\js\video.js" />
+    <Content Include="Content\multimedia\ironman.mp4" />
+    <Content Include="Content\multimedia\linkin.MP4" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />

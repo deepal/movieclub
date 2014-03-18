@@ -1,0 +1,36 @@
+﻿@model MovieClub.Models.CategoryModel
+
+@{
+    var movies = Model.MovieList;
+    Layout = null;
+}
+
+
+<div class="content-block">
+    @if (movies == null)
+    {
+        <h5>No more movies</h5>
+    }
+    else
+    {
+        foreach (var movie in movies)
+        {
+            <div id="cat-movie-item">
+                <div id="smallposter" class="thumbnail">
+                    <img src="@movie.PosterURL" />
+                </div>
+                <div id="shortdetails">
+                    <div id="cat-movie-name">
+                        @movie.Name
+                    </div>
+                    <div id="cat-movie-year">
+                        (@movie.Year)
+                    </div>
+                    <div id="cat-movie-catagory">
+                        @movie.Category
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

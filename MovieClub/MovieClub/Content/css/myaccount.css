@@ -9,3 +9,24 @@
 #myaccount{
     background-color:#fafafa;
 }
+
+#myaccount dl dd a{
+    font-size:13px;
+    padding:10px 20px;
+}
+
+table{
+    width:inherit;
+}
+
+.tabs dd.active a{
+    background-color:#fafafa;
+}
+
+table thead tr td{
+    font-size:12px;
+}
+
+table tbody tr td{
+    font-size:12px;
+}

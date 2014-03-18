@@ -1,0 +1,76 @@
+﻿#category *{
+    font-size:12px;
+}
+
+#cat-movie-item{
+    float:left;
+    margin:0 20px 20px 20px;
+    padding:10px;
+    background-color:#fafafa;
+}
+
+#cat-movie-item:hover{
+    background-color:#dddddd;
+    transition-property:all;
+    transition-duration:500ms;
+}
+
+
+#smallposter{
+    width:100px;
+    height:148px;
+    margin:auto auto;
+    border-radius:5px;
+}
+
+#shortdetails{
+    margin-top:20px;
+    margin-bottom:10px;
+    text-align:center;
+}
+
+#shortdetails div{
+    padding:2px 0;
+}
+
+#cat-movie-name{
+    
+}
+
+#cat-movie-year{
+
+}
+
+#cat-movie-catagory{
+    font-size:11px;
+}
+
+.cat-pagination{
+    clear:both;
+}
+
+.content-block{
+    clear:both;
+}
+
+#pagination-top, #pagination-bottom{
+    margin-left:10px;
+    padding:10px;
+}
+
+#pagination-bottom{
+    clear:both;
+}
+
+.ias-trigger{
+    padding:10px;
+    margin:10px 20px;
+    border-radius:5px;
+    background-color:whitesmoke;
+}
+
+.ias-trigger:hover{
+    background-color:#dddddd;
+    transition-property:all;
+    transition-duration:500ms;
+}

@@ -5,6 +5,9 @@ using System.Web;
 
 namespace MovieClub.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ImdbMovie
     {
         public string Title { get; set; }

@@ -1,19 +1,22 @@
 ﻿/*Movie club header--------------------------------------------------------------------*/
+
+
 .movieclub-header{
     background-color:black;
     padding:0;
-    height:100px;
+    height:125px;
 }
 
-.movieclub-header h2 {
-    color: snow;
-    padding: 0 20px;
-    margin: 0;
+.movieclub-header img {
+    overflow:hidden;
+    z-index:0;
 }
 .textinput-custom, .button-custom{
     height:30px !important;
     margin-bottom:0;
+    font-size:12px !important;
 }
+
 
 /*sidebar--------------------------------------------------------------------*/
 .sidebar{
@@ -217,6 +220,7 @@
     margin:0;
 }
 
+
 #movie-pearson{
     margin-top:5px;
     text-align:center;
@@ -309,6 +313,11 @@
 }
 
 footer{
-    height:50px;
-    background-color:#dadada;
+    height:150px;
+    /*background-color:#2ba6cb;*/
+    background-color:whitesmoke;
+}
+
+footer *{
+    color:white;
 }

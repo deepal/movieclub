@@ -16,7 +16,13 @@ namespace MovieClub
             routes.MapRoute(
                 name: "MovieDetails",
                 url: "{controller}/MovieDetails/{*moviename}",
-                defaults: new { controller = "Home", action = "MovieDetails"}
+                defaults: new { controller = "Home", action = "MovieDetails" }
+            );
+
+            routes.MapRoute(
+                name: "Collection",
+                url: "{controller}/{action}/{Id}",
+                defaults: new { controller = "Content", action = "Collection"}
             );
 
             routes.MapRoute(

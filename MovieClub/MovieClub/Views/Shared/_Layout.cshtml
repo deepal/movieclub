@@ -14,12 +14,19 @@
       
 </head>
 <body>
-    <div id="header" class="movieclub-header">
-        <h2>Movie Club</h2>
-    </div>
+    <!--
+        <div id="header" class="movieclub-header">
+            <img src="~/Content/images/210.jpg" />
+        </div>
+    -->
 
-    <div class="sticky" data-options="sticky_on: large">
+    <div class="fixed" data-options="sticky_on: large"> <!-- replace fixed with sticky if a sticky bar is needed -->
         <nav class="top-bar sticky" data-topbar>
+            <ul class="title-area">
+                <li class="name">
+                    <h1 id="header-text"><a href="/">Pearson Movie Club</a></h1>
+                </li>
+            </ul>
             <section class="top-bar-section">
                 <ul class="left">
                     <li class="has-form">
@@ -84,23 +91,12 @@
 
                     <li class="divider"></li>
                 </ul>
-                <div id="recommendations">
-                    <h5>Recommended for you</h5>
-                    <div id="recommended-movie-tile">
-                        <div id="recommended-movie-poster" class="left">
-
-                        </div>
-                        <div id="recommended-movie-caption" class="right">
-                            <h6>A movie</h6>
-                            <p>This movie is really nice</p>
-                        </div>
-                    </div>
-                </div>
+                
                 <div id="dummy" style="clear:both"></div>
             </div>
         </div> 
         <div class="large-81 medium-81 columns content-wrapper-custom">
-            <div class="content-custom">
+            <div id="body-content" class="content-custom">
                 
                 <!-- featured content start-->
                 @RenderSection("featured", required: false)
@@ -129,8 +125,21 @@
     </script>
     @RenderSection("scripts", required: false)
 
-    <footer>
+    <!--
+        <footer>
+            <div id="recommendations">
+                <h5>Recommended for you</h5>
+                <div id="recommended-movie-tile">
+                    <div id="recommended-movie-poster" class="left">
 
-    </footer>
+                    </div>
+                    <div id="recommended-movie-caption" class="right">
+                        <h6>A movie</h6>
+                        <p>This movie is really nice</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    -->
 </body>
 </html>

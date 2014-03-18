@@ -9,6 +9,8 @@ namespace MovieClub.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var movies = new List<FeaturedMovieDetails>()
@@ -81,18 +83,5 @@ namespace MovieClub.Controllers
             return View(movies);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your app description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }

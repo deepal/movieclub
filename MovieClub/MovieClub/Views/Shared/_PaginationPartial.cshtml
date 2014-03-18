@@ -1,0 +1,11 @@
+﻿@model MovieClub.Models.CategoryModel
+
+@{
+    var currentpage = Model.CurrentPage;
+    Layout = null;
+}
+
+
+<div class="cat-pagination">
+    <a href="/Content/Collection/@ViewBag.CollectionId/?Page=@(currentpage+1)" class="nextblock">Next</a>
+</div>

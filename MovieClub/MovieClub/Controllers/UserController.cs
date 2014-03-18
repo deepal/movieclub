@@ -6,15 +6,9 @@ using System.Web.Mvc;
 
 namespace MovieClub.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
-        //
-        // GET: /User/
-
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         public ActionResult MyAccount()
         {

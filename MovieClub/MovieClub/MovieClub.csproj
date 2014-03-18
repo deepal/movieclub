@@ -193,15 +193,18 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\FeaturedMovieDetails.cs" />
     <Compile Include="Models\ImdbMovie.cs" />
     <Compile Include="Models\MovieDetails.cs" />
     <Compile Include="Models\MovieDataContext.cs" />
     <Compile Include="Models\RecommendedMovies.cs" />
+    <Compile Include="Models\SimpleMovieDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebServices\ImdbData.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\categorypage.css" />
     <Content Include="Content\css\glyphicons.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\carousal.css" />
@@ -211,6 +214,7 @@
     <Content Include="Content\css\myaccount.css" />
     <Content Include="Content\css\normalize.css" />
     <Content Include="Content\css\rateit.css" />
+    <Content Include="Content\css\simplePagination.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\video-js.css" />
     <Content Include="Content\images\01.jpg" />
@@ -229,6 +233,7 @@
     <Content Include="Content\images\14.jpg" />
     <Content Include="Content\images\15.jpg" />
     <Content Include="Content\images\16.jpg" />
+    <Content Include="Content\images\210.jpg" />
     <Content Include="Content\images\bodybackground.png" />
     <Content Include="Content\images\delete.gif" />
     <Content Include="Content\images\download.png" />
@@ -238,6 +243,9 @@
     <Content Include="Content\images\stars.png" />
     <Content Include="Content\images\text.jpg" />
     <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\jquery-ias.min.js" />
+    <Content Include="Content\js\jquery.pagination.js" />
+    <Content Include="Content\js\moviecollection.js" />
     <Content Include="Content\js\foundation.min.js" />
     <Content Include="Content\js\foundation\foundation.abide.js" />
     <Content Include="Content\js\foundation\foundation.accordion.js" />
@@ -261,6 +269,7 @@
     <Content Include="Content\js\jquery.liquidcarousel.min.js" />
     <Content Include="Content\js\jquery.liquidcarousel.pack.js" />
     <Content Include="Content\js\jquery.rateit.js" />
+    <Content Include="Content\js\jquery.tablesorter.js" />
     <Content Include="Content\js\vendor\fastclick.js" />
     <Content Include="Content\js\vendor\jquery.cookie.js" />
     <Content Include="Content\js\vendor\jquery.js" />
@@ -380,6 +389,9 @@
     <Content Include="Views\Shared\_FeaturedCatagoryPartial.cshtml" />
     <Content Include="Views\Content\MovieDetails.cshtml" />
     <Content Include="Views\User\MyAccount.cshtml" />
+    <Content Include="Views\Content\Collection.cshtml" />
+    <Content Include="Views\Shared\_PaginationPartial.cshtml" />
+    <Content Include="Views\Shared\_CollectionContentPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

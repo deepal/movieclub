@@ -7,15 +7,9 @@ using System.Web.Mvc;
 
 namespace MovieClub.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
-        //
-        // GET: /Admin/
-
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         [HttpGet]
         public ActionResult AddMovie()
@@ -24,6 +18,7 @@ namespace MovieClub.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddMovie(Models.MovieDetails movie)
         {
             if (ModelState.IsValid)

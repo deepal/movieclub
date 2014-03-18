@@ -10,7 +10,8 @@ namespace MovieClub.Controllers
     {
         //
         // GET: /Search/
-
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult Index(string query)
         {
             return View();

@@ -1,0 +1,87 @@
+﻿@model MovieClub.Models.CategoryModel
+
+@{
+    ViewBag.Title = "Catagory";
+    var catmodel = Model;
+    if (catmodel.CurrentPage == 0 || catmodel.CurrentPage == null) 
+    {
+        catmodel.CurrentPage = 1;
+    }
+}
+
+<div id="category">
+    <div class="row-fluid" id="category-content">
+        @Html.Partial("_CollectionContentPartial", catmodel)
+    </div>
+    <div id="pagination-bottom">
+        @Html.Partial("_PaginationPartial", catmodel)
+    </div>
+</div>
+
+@section customstyles{
+    @Styles.Render("~/Content/css/categorypage.css")
+    @Styles.Render("~/Content/css/simplePagination.css")
+}
+
+@section customscripts{
+    @Scripts.Render("~/Content/js/jquery-ias.min.js")
+}
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            var ias = jQuery.ias({
+                container: '#category-content',
+                item: '.content-block',
+                pagination: '.cat-pagination',
+                next: '.nextblock'
+            });
+
+            // Adds a link which has to be clicked to load the next page
+            ias.extension(new IASTriggerExtension({
+                html: '<div class="ias-trigger" style="text-align: center; cursor: pointer; clear:both"><a>{text}</a></div>',
+            }));
+
+            // Adds a loader image which is displayed during loading
+            ias.extension(new IASSpinnerExtension({
+                html: '<div class="ias-spinner" style="text-align: center; clear:both"><img src="{src}"/></div>'
+            }));
+
+            // Adds a text when there are no more pages left to load
+            ias.extension(new IASNoneLeftExtension({
+                text: 'You reached the end.',
+            }));
+
+            ias.extension(new IASPagingExtension());
+
+            ias.extension(new IASHistoryExtension({
+                prev: '.previous',
+            }));
+
+        });
+
+    </script>
+
+    @*@Scripts.Render("~/Content/js/moviecollection.js")*@
+
+    @*
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "/Content/Collection/" + "@ViewBag.CollectionId" + "/?",
+                data: { Page: 1, Method: 1 }
+            })
+            .success(function (data) {
+                $("#category-content").html(data);
+            })
+            .error(function () {
+                $("#category-content").html("Error Loading Category content!");
+            });
+        });
+    </script>
+
+    *@
+}
+

@@ -234,6 +234,7 @@
     <Content Include="Content\images\15.jpg" />
     <Content Include="Content\images\16.jpg" />
     <Content Include="Content\images\210.jpg" />
+    <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\bodybackground.png" />
     <Content Include="Content\images\delete.gif" />
     <Content Include="Content\images\download.png" />

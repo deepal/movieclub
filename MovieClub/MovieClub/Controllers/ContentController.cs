@@ -218,6 +218,111 @@ namespace MovieClub.Controllers
                     Category = "Biography, Drama",
                     PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
                 },
+                new Models.SimpleMovieDetails(){
+                    Id = 1,
+                    Name = "The Pursuit of Happiness",
+                    Year = "2006",
+                    Category = "Biography, Drama",
+                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
+                },
+                new Models.SimpleMovieDetails(){
+                    Id = 1,
+                    Name = "The Pursuit of Happiness",
+                    Year = "2006",
+                    Category = "Biography, Drama",
+                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
+                },
+                new Models.SimpleMovieDetails(){
+                    Id = 1,
+                    Name = "The Pursuit of Happiness",
+                    Year = "2006",
+                    Category = "Biography, Drama",
+                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
+                },
+                new Models.SimpleMovieDetails(){
+                    Id = 1,
+                    Name = "The Pursuit of Happiness",
+                    Year = "2006",
+                    Category = "Biography, Drama",
+                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
+                },
+                new Models.SimpleMovieDetails(){
+                    Id = 1,
+                    Name = "The Pursuit of Happiness",
+                    Year = "2006",
+                    Category = "Biography, Drama",
+                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
+                },
+                new Models.SimpleMovieDetails(){
+                    Id = 1,
+                    Name = "The Pursuit of Happiness",
+                    Year = "2006",
+                    Category = "Biography, Drama",
+                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
+                },
+                new Models.SimpleMovieDetails(){
+                    Id = 1,
+                    Name = "The Pursuit of Happiness",
+                    Year = "2006",
+                    Category = "Biography, Drama",
+                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
+                },
+                new Models.SimpleMovieDetails(){
+                    Id = 1,
+                    Name = "The Pursuit of Happiness",
+                    Year = "2006",
+                    Category = "Biography, Drama",
+                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
+                },
+                new Models.SimpleMovieDetails(){
+                    Id = 1,
+                    Name = "The Pursuit of Happiness",
+                    Year = "2006",
+                    Category = "Biography, Drama",
+                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
+                },
+                new Models.SimpleMovieDetails(){
+                    Id = 1,
+                    Name = "The Pursuit of Happiness",
+                    Year = "2006",
+                    Category = "Biography, Drama",
+                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
+                },
+                new Models.SimpleMovieDetails(){
+                    Id = 1,
+                    Name = "The Pursuit of Happiness",
+                    Year = "2006",
+                    Category = "Biography, Drama",
+                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
+                },
+                new Models.SimpleMovieDetails(){
+                    Id = 1,
+                    Name = "The Pursuit of Happiness",
+                    Year = "2006",
+                    Category = "Biography, Drama",
+                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
+                },
+                new Models.SimpleMovieDetails(){
+                    Id = 1,
+                    Name = "The Pursuit of Happiness",
+                    Year = "2006",
+                    Category = "Biography, Drama",
+                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
+                },
+                new Models.SimpleMovieDetails(){
+                    Id = 1,
+                    Name = "The Pursuit of Happiness",
+                    Year = "2006",
+                    Category = "Biography, Drama",
+                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
+                },
+                new Models.SimpleMovieDetails(){
+                    Id = 1,
+                    Name = "The Pursuit of Happiness",
+                    Year = "2006",
+                    Category = "Biography, Drama",
+                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
+                },
             };
 
             return movies;
@@ -237,10 +342,10 @@ namespace MovieClub.Controllers
             }
 
             Models.CategoryModel catmodel;
-
+            int remaining;
             if (Page <= pageC)
             {
-                var remaining = (movies.Count) - (15 * (((int)Page) - 1));
+                remaining = (movies.Count) - (15 * (((int)Page) - 1));
 
                 catmodel = new Models.CategoryModel()
                 {
@@ -259,6 +364,7 @@ namespace MovieClub.Controllers
             }
 
             ViewBag.CollectionId = Id;
+            ViewBag.Remaining = remaining;
             if (Method == 0 || Method == null)
             {
                 return View(catmodel);

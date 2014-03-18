@@ -2,6 +2,8 @@
 
 @{
     var movies = Model.MovieList;
+    var pagecount = Model.PageCount;
+    var currentpage = Model.CurrentPage;
     Layout = null;
 }
 
@@ -33,4 +35,19 @@
             </div>
         }
     }
+</div>
+<div class="cat-pagination">
+    <ul id="pagination">
+        <li><a class="previous" href="/Content/Collection/@ViewBag.CollectionId/?Page=@(currentpage-1)">Previous</a></li>
+
+        @for (var i = 0; i < pagecount; i++)
+        {
+            <li><a href="/Content/Collection/@ViewBag.CollectionId/?Page=@(i+1)">@(i + 1)</a></li>
+        }
+
+        @if (currentpage != pagecount)
+        {
+            <li><a href="/Content/Collection/@ViewBag.CollectionId/?Page=@(currentpage+1)" class="nextblock">Next</a></li>
+        }
+    </ul>
 </div>

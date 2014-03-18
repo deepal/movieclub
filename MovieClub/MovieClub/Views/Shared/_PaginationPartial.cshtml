@@ -2,10 +2,9 @@
 
 @{
     var currentpage = Model.CurrentPage;
+    var pagecount = Model.PageCount;
     Layout = null;
 }
 
 
-<div class="cat-pagination">
-    <a href="/Content/Collection/@ViewBag.CollectionId/?Page=@(currentpage+1)" class="nextblock">Next</a>
-</div>
+

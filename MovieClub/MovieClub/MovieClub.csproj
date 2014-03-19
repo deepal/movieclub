@@ -235,6 +235,7 @@
     <Content Include="Content\images\15.jpg" />
     <Content Include="Content\images\16.jpg" />
     <Content Include="Content\images\210.jpg" />
+    <Content Include="Content\images\ajax-loader-circle.gif" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\bodybackground.png" />
     <Content Include="Content\images\delete.gif" />
@@ -388,6 +389,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\images\posters\" />
     <Folder Include="Images\" />
     <Folder Include="Views\FileUpload\" />
   </ItemGroup>

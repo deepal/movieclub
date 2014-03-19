@@ -34,3 +34,17 @@ fieldset *{
     margin-bottom:5px;
     clear:none;
 }
+
+.validation-summary-errors ul li{
+    font-size:12px !important;
+}
+
+.validation-summary-errors span{
+    font-weight:bold;
+    padding-bottom:10px;
+}
+
+.validation-summary-errors ul{
+    margin-top:10px;
+    margin-bottom:0;
+}

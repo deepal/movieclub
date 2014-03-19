@@ -46,10 +46,12 @@ namespace MovieClub.Controllers
                     {
                         string filePath = Path.Combine(HttpContext.Server.MapPath("/Content/multimedia"), Path.GetFileName(movie.ImdbId+".mp4"));
                         uploadFile.SaveAs(filePath);
+                        ViewBag.SuccessMessage = "Movie \""+movie.Name+"\" added successfully!";
+                        ModelState.Clear();
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Trailer should be a MP4 type Video !");
+                        ModelState.AddModelError("", "Could not upload trailer! Video file extension should be \".mp4\" ");
                         return View(movie);
                     }
                 }
@@ -58,7 +60,7 @@ namespace MovieClub.Controllers
                 return View(new Models.MovieDetails());
 
             }
-            ModelState.AddModelError("", "Error adding movie!");
+            ModelState.AddModelError("", "Error occured adding movie! Check whether required fields are filled.");
             return View(movie);
         }
 

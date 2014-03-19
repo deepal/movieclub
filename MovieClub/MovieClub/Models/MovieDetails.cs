@@ -14,7 +14,7 @@ namespace MovieClub.Models
         [Required]
         public string Name { get; set; }
         public string Year { get; set; }
-        public DateTime ReleaseDate { get; set; }
+        public string ReleaseDate { get; set; }
         public int Runtime { get; set; }
         [Required]
         public string Genre { get; set; }

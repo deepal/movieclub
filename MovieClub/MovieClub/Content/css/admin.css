@@ -12,9 +12,16 @@ fieldset *{
     line-height:180%;
 }
 
-th{
-    margin-bottom:20px;
-    height:inherit;
+#movie-poster a img{
+    height:215px !important;
 }
 
+#movie-poster a{
+    margin:0 auto;
+}
+
+#movie-poster{
+    margin-bottom:10px;
+    padding:0 25px 0 30px;
+}
 

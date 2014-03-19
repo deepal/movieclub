@@ -121,7 +121,12 @@
     
     @Scripts.Render("~/Content/js/foundation.min.js")
     <script>
-        $(document).foundation();
+        $(document).foundation({
+            alert: {
+                animation_speed: 500,
+                animation: 'fadeOut'
+            }
+        });
     </script>
     @RenderSection("scripts", required: false)
 

@@ -9,7 +9,8 @@ namespace MovieClub.Models
     public class MovieDetails
     {
         public int Id { get; set; }
-
+        [Required]
+        public int ImdbId { get; set; }
         [Required]
         public string Name { get; set; }
         public string Year { get; set; }

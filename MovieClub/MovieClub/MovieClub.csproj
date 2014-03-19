@@ -204,6 +204,7 @@
     <Compile Include="WebServices\ImdbData.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\admin.css" />
     <Content Include="Content\css\categorypage.css" />
     <Content Include="Content\css\glyphicons.css" />
     <Content Include="Content\css\bootstrap.min.css" />
@@ -393,6 +394,8 @@
     <Content Include="Views\Content\Collection.cshtml" />
     <Content Include="Views\Shared\_PaginationPartial.cshtml" />
     <Content Include="Views\Shared\_CollectionContentPartial.cshtml" />
+    <Content Include="Views\Admin\AddMovie.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

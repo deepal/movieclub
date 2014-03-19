@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/css/normalize.css")
+    @Styles.Render("~/Content/css/foundation.css")
+    @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/css/glyphicons.css")
+    @Scripts.Render("~/Scripts/jquery-1.8.2.js")
+    @Scripts.Render("~/Content/js/vendor/modernizr.js")
+    @RenderSection("customstyles", required: false)
+    @RenderSection("customscripts", required: false)
+
+</head>
+<body>
+    <!--
+        <div id="header" class="movieclub-header">
+            <img src="~/Content/images/210.jpg" />
+        </div>
+    -->
+
+    <div class="fixed" data-options="sticky_on: large">
+        <!-- replace fixed with sticky if a sticky bar is needed -->
+        <nav class="top-bar sticky" data-topbar>
+            <ul class="title-area">
+                <li class="name">
+                    <h1 id="header-text"><a href="/">Pearson Movie Club</a></h1>
+                </li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="left">
+                    <li class="has-form">
+                        <div class="row collapse">
+                            <div class="small-70 large-70 columns">
+                                <input class="textinput-custom" type="text" placeholder="Search Movies" />
+                            </div>
+                            <div class="small-30 large-30 columns">
+                                <a href="#" class="button expand button-custom">Search</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <ul class="left">
+                            <li class="has-dropdown">
+                                <a href="#">Quick Links</a>
+                                <ul class="dropdown">
+                                    <li><a href="">Watchlist</a></li>
+                                    <li><a href="">My Favorites</a></li>
+                                </ul>
+                        </ul>
+                    </li>
+
+                </ul>
+            </section>
+            <section class="top-bar-section"></section>
+            <section class="top-bar-section">
+                <ul class="right">
+                    <li class="divider"></li>
+                    <li>@Html.Partial("_LoginPartial")</li>
+                </ul>
+            </section>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="large-90 large-centered medium-90 medium-centered small-100 columns content-wrapper-custom">
+            <div id="body-content" class="content-custom">
+
+                <!-- featured content start-->
+                @RenderSection("featured", required: false)
+                <!-- Featured content end-->
+                <!-- featured content start-->
+                @RenderSection("actioncatagory", required: false)
+                <!-- Featured content end-->
+                <!-- featured content start-->
+                @RenderSection("thrillercatagory", required: false)
+                <!-- Featured content end-->
+                @RenderBody()
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    @Scripts.Render("~/Content/js/foundation.min.js")
+    <script>
+        $(document).foundation();
+    </script>
+    @RenderSection("scripts", required: false)
+
+    <!--
+        <footer>
+            <div id="recommendations">
+                <h5>Recommended for you</h5>
+                <div id="recommended-movie-tile">
+                    <div id="recommended-movie-poster" class="left">
+
+                    </div>
+                    <div id="recommended-movie-caption" class="right">
+                        <h6>A movie</h6>
+                        <p>This movie is really nice</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    -->
+</body>
+</html>

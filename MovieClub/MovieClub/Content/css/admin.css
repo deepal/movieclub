@@ -1,0 +1,20 @@
+﻿label{
+    font-size:12px;
+}
+
+.field-validation-error{
+    font-size:12px;
+    color:#ce0000;
+}
+
+fieldset *{
+    font-size:12px !important;
+    line-height:180%;
+}
+
+th{
+    margin-bottom:20px;
+    height:inherit;
+}
+
+

@@ -25,3 +25,12 @@ fieldset *{
     padding:0 25px 0 30px;
 }
 
+#trailerupload input{
+    margin-bottom:5px;
+    clear:none;
+}
+
+#trailerupload button{
+    margin-bottom:5px;
+    clear:none;
+}

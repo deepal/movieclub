@@ -19,11 +19,13 @@ namespace MovieClub.Controllers
         }
 
         [HttpPost]
+        [HandleError]
         [ValidateAntiForgeryToken]
-        public ActionResult AddMovie(Models.MovieDetails movie)
+        public ActionResult AddMovie(Models.MovieDetails movie, HttpPostedFileBase uploadFile)
         {
             if (ModelState.IsValid)
             {
+                /*
                 try
                 {
                     var db = new MovieDataContext();
@@ -34,29 +36,33 @@ namespace MovieClub.Controllers
                 {
                     throw;
                 }
-                return RedirectToAction("Index", "Home");
+                
+                 */
+
+                //upload trailer start
+                if (uploadFile.ContentLength > 0)
+                {
+                    if (Path.GetExtension(uploadFile.FileName) == ".mp4")
+                    {
+                        string filePath = Path.Combine(HttpContext.Server.MapPath("/Content/multimedia"), Path.GetFileName(movie.ImdbId+".mp4"));
+                        uploadFile.SaveAs(filePath);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Trailer should be a MP4 type Video !");
+                        return View(movie);
+                    }
+                }
+                //upload trailer end
+
+                return View(new Models.MovieDetails());
+
             }
             ModelState.AddModelError("", "Error adding movie!");
             return View(movie);
         }
 
-        [HandleError]
-        [HttpGet]
-        public ActionResult Upload()
-        {
-            return PartialView("_Trailer");
-        }
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Upload(HttpPostedFileBase uploadFile)
-        {
-            if (uploadFile.ContentLength > 0)
-            {
-                string filePath = Path.Combine(HttpContext.Server.MapPath("/Content/multimedia"), Path.GetFileName(uploadFile.FileName));
-                uploadFile.SaveAs(filePath);
-            }
-            return View();
-        }
+        
 
     }
 }

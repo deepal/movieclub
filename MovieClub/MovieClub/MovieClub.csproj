@@ -202,6 +202,27 @@
     <Compile Include="Models\MovieDataContext.cs" />
     <Compile Include="Models\RecommendedMovies.cs" />
     <Compile Include="Models\SimpleMovieDetails.cs" />
+    <Compile Include="MovieDB\DBCategory.cs">
+      <DependentUpon>MovieClubDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDB\DBMovie.cs">
+      <DependentUpon>MovieClubDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDB\MovieClubDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MovieClubDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDB\MovieClubDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MovieClubDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDB\MovieClubDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MovieClubDB.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebServices\ImdbData.cs" />
   </ItemGroup>
@@ -320,6 +341,23 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <EntityDeploy Include="MovieDB\MovieClubDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MovieClubDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="MovieDB\MovieClubDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MovieClubDB.edmx</DependentUpon>
+      <LastGenOutput>MovieClubDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="MovieDB\MovieClubDB.edmx.diagram">
+      <DependentUpon>MovieClubDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="MovieDB\MovieClubDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MovieClubDB.edmx</DependentUpon>
+      <LastGenOutput>MovieClubDB.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Content\images\poster.jpg" />
     <Content Include="Scripts\jquery-1.8.2.js" />
@@ -374,7 +412,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\images\posters\" />
     <Folder Include="Images\" />
-    <Folder Include="MovieDB\" />
     <Folder Include="Views\FileUpload\" />
   </ItemGroup>
   <ItemGroup>

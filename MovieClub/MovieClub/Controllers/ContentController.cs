@@ -24,9 +24,7 @@ namespace MovieClub.Controllers
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Index()
-        {
-            MovieDB.MovieClubDBEntities db = new MovieDB.MovieClubDBEntities();
-            db.Movies.
+        {            
             return View();
         }
 

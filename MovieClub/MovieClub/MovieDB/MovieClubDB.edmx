@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MovieClubDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DBCategories">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="DBMovies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImdbId" Type="varchar" MaxLength="20" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Year" Type="varchar" MaxLength="6" />
+          <Property Name="ReleaseDate" Type="varchar" MaxLength="20" />
+          <Property Name="Runtime" Type="int" Nullable="false" />
+          <Property Name="Genre" Type="text" />
+          <Property Name="Director" Type="text" />
+          <Property Name="Actors" Type="text" />
+          <Property Name="Writer" Type="text" />
+          <Property Name="PlotShort" Type="text" />
+          <Property Name="PlotFull" Type="text" />
+          <Property Name="Language" Type="text" />
+          <Property Name="Country" Type="text" />
+          <Property Name="Awards" Type="text" />
+          <Property Name="PosterURL" Type="text" />
+          <Property Name="ImdbRatings" Type="float" Nullable="false" />
+          <Property Name="ImdbVotes" Type="bigint" Nullable="false" />
+          <Property Name="MovieClubRatings" Type="float" Nullable="false" />
+          <Property Name="MovieClubRentCount" Type="int" Nullable="false" />
+          <Property Name="AddedDate" Type="date" />
+        </EntityType>
+        <EntityContainer Name="MovieClubDBModelStoreContainer">
+          <EntitySet Name="DBCategories" EntityType="Self.DBCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DBMovies" EntityType="Self.DBMovies" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MovieClubDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DBMovie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImdbId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="ReleaseDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Runtime" Type="Int32" Nullable="false" />
+          <Property Name="Genre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Director" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Actors" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Writer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PlotShort" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PlotFull" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Language" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Awards" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PosterURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ImdbRatings" Type="Double" Nullable="false" />
+          <Property Name="ImdbVotes" Type="Int64" Nullable="false" />
+          <Property Name="MovieClubRatings" Type="Double" Nullable="false" />
+          <Property Name="MovieClubRentCount" Type="Int32" Nullable="false" />
+          <Property Name="AddedDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="DBCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="MovieClubDBE" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DBMovies1" EntityType="MovieClubDBModel.DBMovie" />
+          <EntitySet Name="DBCategories" EntityType="Self.DBCategory" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MovieClubDBModelStoreContainer" CdmEntityContainer="MovieClubDBE">
+          <EntitySetMapping Name="DBMovies1">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBMovie">
+              <MappingFragment StoreEntitySet="DBMovies">
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ImdbId" ColumnName="ImdbId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+                <ScalarProperty Name="Runtime" ColumnName="Runtime" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="Actors" ColumnName="Actors" />
+                <ScalarProperty Name="Writer" ColumnName="Writer" />
+                <ScalarProperty Name="PlotShort" ColumnName="PlotShort" />
+                <ScalarProperty Name="PlotFull" ColumnName="PlotFull" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Awards" ColumnName="Awards" />
+                <ScalarProperty Name="PosterURL" ColumnName="PosterURL" />
+                <ScalarProperty Name="ImdbRatings" ColumnName="ImdbRatings" />
+                <ScalarProperty Name="ImdbVotes" ColumnName="ImdbVotes" />
+                <ScalarProperty Name="MovieClubRatings" ColumnName="MovieClubRatings" />
+                <ScalarProperty Name="MovieClubRentCount" ColumnName="MovieClubRentCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBCategories">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBCategory">
+              <MappingFragment StoreEntitySet="DBCategories">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

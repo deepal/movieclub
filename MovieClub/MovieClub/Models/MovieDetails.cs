@@ -15,6 +15,7 @@ namespace MovieClub.Models
         public string Name { get; set; }
         public string Year { get; set; }
         public string ReleaseDate { get; set; }
+        [Range(0,Int32.MaxValue)]
         public int Runtime { get; set; }
         [Required]
         public string Genre { get; set; }
@@ -30,9 +31,13 @@ namespace MovieClub.Models
         public string Awards { get; set; }
         [Required]
         public string PosterURL { get; set; }
+        [Range(0,10)]
         public float ImdbRatings { get; set; }
+        [Range(0,Int32.MaxValue)]
         public long ImdbVotes { get; set; }
+        [Range(0,5)]
         public float MovieClubRatings { get; set; }
+        [Range(0, Int32.MaxValue)]
         public int MovieClubRentCount { get; set; }
 
         

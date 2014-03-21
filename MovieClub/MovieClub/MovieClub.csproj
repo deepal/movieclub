@@ -44,6 +44,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -218,33 +220,14 @@
     <Content Include="Content\css\simplePagination.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\video-js.css" />
-    <Content Include="Content\images\01.jpg" />
-    <Content Include="Content\images\02.jpg" />
-    <Content Include="Content\images\03.jpg" />
-    <Content Include="Content\images\04.jpg" />
-    <Content Include="Content\images\05.jpg" />
-    <Content Include="Content\images\06.jpg" />
-    <Content Include="Content\images\07.jpg" />
-    <Content Include="Content\images\08.jpg" />
-    <Content Include="Content\images\09.jpg" />
-    <Content Include="Content\images\10.jpg" />
-    <Content Include="Content\images\11.jpg" />
-    <Content Include="Content\images\12.jpg" />
-    <Content Include="Content\images\13.jpg" />
-    <Content Include="Content\images\14.jpg" />
-    <Content Include="Content\images\15.jpg" />
-    <Content Include="Content\images\16.jpg" />
-    <Content Include="Content\images\210.jpg" />
     <Content Include="Content\images\ajax-loader-circle.gif" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\bodybackground.png" />
     <Content Include="Content\images\delete.gif" />
     <Content Include="Content\images\download.png" />
-    <Content Include="Content\images\next.png" />
-    <Content Include="Content\images\previous.png" />
+    <Content Include="Content\images\poster-na.jpg" />
     <Content Include="Content\images\star.gif" />
     <Content Include="Content\images\stars.png" />
-    <Content Include="Content\images\text.jpg" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery-ias.min.js" />
     <Content Include="Content\js\jquery.pagination.js" />
@@ -391,10 +374,14 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\images\posters\" />
     <Folder Include="Images\" />
+    <Folder Include="MovieDB\" />
     <Folder Include="Views\FileUpload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

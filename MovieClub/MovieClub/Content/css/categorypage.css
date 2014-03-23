@@ -8,6 +8,8 @@
     padding:15px;
     padding-top:20px;
     background-color:#efefef;
+    width:170px;
+    height:280px;
 }
 
 #cat-movie-item:hover{
@@ -16,6 +18,7 @@
     transition-property:all;
     transition-duration:300ms;
 }
+
 
 
 #smallposter{

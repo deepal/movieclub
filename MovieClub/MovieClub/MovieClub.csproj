@@ -205,7 +205,28 @@
     <Compile Include="MovieDB\DBCategory.cs">
       <DependentUpon>MovieClubDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="MovieDB\DBFavorite.cs">
+      <DependentUpon>MovieClubDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="MovieDB\DBMovie.cs">
+      <DependentUpon>MovieClubDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDB\DBMovieSuggestion.cs">
+      <DependentUpon>MovieClubDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDB\DBMovieToCategory.cs">
+      <DependentUpon>MovieClubDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDB\DBRecommendation.cs">
+      <DependentUpon>MovieClubDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDB\DBRent.cs">
+      <DependentUpon>MovieClubDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDB\DBReservation.cs">
+      <DependentUpon>MovieClubDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDB\DBUser.cs">
       <DependentUpon>MovieClubDB.tt</DependentUpon>
     </Compile>
     <Compile Include="MovieDB\MovieClubDB.Context.cs">

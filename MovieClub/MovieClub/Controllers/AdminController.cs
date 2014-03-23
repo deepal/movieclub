@@ -74,51 +74,57 @@ namespace MovieClub.Controllers
 
         public bool AddMovieToDB(MovieDB.MovieClubDBE db, MovieDetails movie)
         {
-            try
+            MovieDB.DBMovie dbmovie = new MovieDB.DBMovie();
+            MovieDB.DBCategory dbcat = new MovieDB.DBCategory();
+            dbmovie.Actors = movie.Actors;
+            dbmovie.Awards = movie.Awards;
+            dbmovie.Country = movie.Country;
+            dbmovie.Director = movie.Director;
+            dbmovie.Genre = movie.Genre;
+            dbmovie.ImdbId = movie.ImdbId;
+            dbmovie.ImdbRatings = movie.ImdbRatings;
+            dbmovie.ImdbVotes = movie.ImdbVotes;
+            dbmovie.Language = movie.Language;
+            dbmovie.MovieClubRatings = movie.MovieClubRatings;
+            dbmovie.MovieClubRentCount = movie.MovieClubRentCount;
+            dbmovie.Name = movie.Name;
+            dbmovie.PlotFull = movie.PlotFull;
+            dbmovie.PlotShort = movie.PlotShort;
+            dbmovie.PosterURL = System.Configuration.ConfigurationManager.AppSettings["PosterPath"]+"/"+movie.ImdbId+Path.GetExtension(movie.PosterURL);
+            dbmovie.ReleaseDate = movie.ReleaseDate;
+            dbmovie.Runtime = movie.Runtime;
+            dbmovie.Writer = movie.Writer;
+            dbmovie.Year = movie.Year;
+            dbmovie.AddedDate = DateTime.Today;
+            db.DBMovies.Add(dbmovie);
+            db.SaveChanges();
+            string[] categories = (movie.Genre).Split(',');
+
+            var currentMovieId = db.DBMovies.Where(m => m.Name == movie.Name).First().Id;
+
+            List<MovieDB.DBCategory> currentlist = db.DBCategories.ToList<MovieDB.DBCategory>();
+            foreach (string cat in categories)
             {
-                MovieDB.DBMovie dbmovie = new MovieDB.DBMovie();
-                MovieDB.DBCategory dbcat = new MovieDB.DBCategory();
-                dbmovie.Actors = movie.Actors;
-                dbmovie.Awards = movie.Awards;
-                dbmovie.Country = movie.Country;
-                dbmovie.Director = movie.Director;
-                dbmovie.Genre = movie.Genre;
-                dbmovie.ImdbId = movie.ImdbId;
-                dbmovie.ImdbRatings = movie.ImdbRatings;
-                dbmovie.ImdbVotes = movie.ImdbVotes;
-                dbmovie.Language = movie.Language;
-                dbmovie.MovieClubRatings = movie.MovieClubRatings;
-                dbmovie.MovieClubRentCount = movie.MovieClubRentCount;
-                dbmovie.Name = movie.Name;
-                dbmovie.PlotFull = movie.PlotFull;
-                dbmovie.PlotShort = movie.PlotShort;
-                dbmovie.PosterURL = movie.PosterURL;
-                dbmovie.ReleaseDate = movie.ReleaseDate;
-                dbmovie.Runtime = movie.Runtime;
-                dbmovie.Writer = movie.Writer;
-                dbmovie.Year = movie.Year;
-                dbmovie.AddedDate = DateTime.Today;
-                db.DBMovies.Add(dbmovie);
-
-                string[] categories = (movie.Genre).Split(',');
-                List<MovieDB.DBCategory> currentlist = db.DBCategories.ToList<MovieDB.DBCategory>();
-                foreach (string cat in categories)
+                cat.Replace(" ", "");
+                if ((currentlist.FindAll(c => c.CategoryName == cat)).Count == 0)
                 {
-                    cat.Replace(" ", "");
-                    if ((currentlist.FindAll(c => c.CategoryName == cat)).Count == 0)
-                    {
-                        dbcat.CategoryName = cat;
-                        db.DBCategories.Add(dbcat);
-                        db.SaveChanges();
-                    }
+                    dbcat.CategoryName = cat;
+                    db.DBCategories.Add(dbcat);
+                    db.SaveChanges();
                 }
+                var currentcatId = db.DBCategories.Where(c => c.CategoryName == cat).First().CategoryId;
 
+                MovieDB.DBMovieToCategory entry = new MovieDB.DBMovieToCategory();
+
+                entry.MovieId = currentMovieId;
+                entry.CategoryId = (int?)currentcatId;
+
+                db.DBMovieToCategory.Add(entry);
                 db.SaveChanges();
             }
-            catch (Exception e)
-            {
-                throw;
-            }
+
+            db.SaveChanges();
+
             return true;
             
         }

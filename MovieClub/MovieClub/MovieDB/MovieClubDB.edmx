@@ -12,6 +12,14 @@
           <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryName" Type="varchar" MaxLength="80" />
         </EntityType>
+        <EntityType Name="DBFavorites">
+          <Key>
+            <PropertyRef Name="FavoritesID" />
+          </Key>
+          <Property Name="FavoritesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieID" Type="int" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
         <EntityType Name="DBMovies">
           <Key>
             <PropertyRef Name="Id" />
@@ -38,9 +46,70 @@
           <Property Name="MovieClubRentCount" Type="int" Nullable="false" />
           <Property Name="AddedDate" Type="date" />
         </EntityType>
+        <EntityType Name="DBMovieSuggestions">
+          <Key>
+            <PropertyRef Name="SuggestionId" />
+          </Key>
+          <Property Name="SuggestionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ImdbId" Type="varchar" MaxLength="10" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="DBMovieToCategory">
+          <Key>
+            <PropertyRef Name="RelationshipId" />
+          </Key>
+          <Property Name="RelationshipId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieId" Type="int" />
+          <Property Name="CategoryId" Type="int" />
+        </EntityType>
+        <EntityType Name="DBRecommendations">
+          <Key>
+            <PropertyRef Name="MovieId" />
+          </Key>
+          <Property Name="RecommendationId" Type="int" Nullable="false" />
+          <Property Name="MovieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Comment" Type="text" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="DBRents">
+          <Key>
+            <PropertyRef Name="RentId" />
+          </Key>
+          <Property Name="RentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="DBReservations">
+          <Key>
+            <PropertyRef Name="ReservationId" />
+          </Key>
+          <Property Name="ReservationId" Type="int" Nullable="false" />
+          <Property Name="MovieId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Priority" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DBUsers">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="text" />
+          <Property Name="BorrowedCount" Type="int" />
+          <Property Name="PhotoURL" Type="text" />
+        </EntityType>
         <EntityContainer Name="MovieClubDBModelStoreContainer">
           <EntitySet Name="DBCategories" EntityType="Self.DBCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DBFavorites" EntityType="Self.DBFavorites" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBMovies" EntityType="Self.DBMovies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DBMovieSuggestions" EntityType="Self.DBMovieSuggestions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DBMovieToCategory" EntityType="Self.DBMovieToCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DBRecommendations" EntityType="Self.DBRecommendations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DBRents" EntityType="Self.DBRents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DBReservations" EntityType="Self.DBReservations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DBUsers" EntityType="Self.DBUsers" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -82,7 +151,76 @@
         <EntityContainer Name="MovieClubDBE" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="DBMovies1" EntityType="MovieClubDBModel.DBMovie" />
           <EntitySet Name="DBCategories" EntityType="Self.DBCategory" />
+          <EntitySet Name="DBFavorites" EntityType="MovieClubDBModel.DBFavorite" />
+          <EntitySet Name="DBMovieSuggestions" EntityType="MovieClubDBModel.DBMovieSuggestion" />
+          <EntitySet Name="DBRecommendations" EntityType="MovieClubDBModel.DBRecommendation" />
+          <EntitySet Name="DBReservations" EntityType="MovieClubDBModel.DBReservation" />
+          <EntitySet Name="DBUsers" EntityType="MovieClubDBModel.DBUser" />
+          <EntitySet Name="DBRents" EntityType="MovieClubDBModel.DBRent" />
+          <EntitySet Name="DBMovieToCategory" EntityType="MovieClubDBModel.DBMovieToCategory" />
         </EntityContainer>
+        <EntityType Name="DBFavorite">
+          <Key>
+            <PropertyRef Name="FavoritesID" />
+          </Key>
+          <Property Name="FavoritesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DBMovieSuggestion">
+          <Key>
+            <PropertyRef Name="SuggestionId" />
+          </Key>
+          <Property Name="SuggestionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ImdbId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="DBRecommendation">
+          <Key>
+            <PropertyRef Name="MovieId" />
+          </Key>
+          <Property Name="RecommendationId" Type="Int32" Nullable="false" />
+          <Property Name="MovieId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="DBReservation">
+          <Key>
+            <PropertyRef Name="ReservationId" />
+          </Key>
+          <Property Name="ReservationId" Type="Int32" Nullable="false" />
+          <Property Name="MovieId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Priority" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DBUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BorrowedCount" Type="Int32" />
+          <Property Name="PhotoURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DBRent">
+          <Key>
+            <PropertyRef Name="RentId" />
+          </Key>
+          <Property Name="RentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="DBMovieToCategory">
+          <Key>
+            <PropertyRef Name="RelationshipId" />
+          </Key>
+          <Property Name="RelationshipId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieId" Type="Int32" />
+          <Property Name="CategoryId" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -124,6 +262,75 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DBFavorites">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBFavorite">
+              <MappingFragment StoreEntitySet="DBFavorites">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+                <ScalarProperty Name="FavoritesID" ColumnName="FavoritesID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBMovieSuggestions">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBMovieSuggestion">
+              <MappingFragment StoreEntitySet="DBMovieSuggestions">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ImdbId" ColumnName="ImdbId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SuggestionId" ColumnName="SuggestionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBRecommendations">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBRecommendation">
+              <MappingFragment StoreEntitySet="DBRecommendations">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="RecommendationId" ColumnName="RecommendationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBReservations">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBReservation">
+              <MappingFragment StoreEntitySet="DBReservations">
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBUsers">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBUser">
+              <MappingFragment StoreEntitySet="DBUsers">
+                <ScalarProperty Name="PhotoURL" ColumnName="PhotoURL" />
+                <ScalarProperty Name="BorrowedCount" ColumnName="BorrowedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBRents">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBRent">
+              <MappingFragment StoreEntitySet="DBRents">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="RentId" ColumnName="RentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBMovieToCategory">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBMovieToCategory">
+              <MappingFragment StoreEntitySet="DBMovieToCategory">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="RelationshipId" ColumnName="RelationshipId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -138,7 +345,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="true" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

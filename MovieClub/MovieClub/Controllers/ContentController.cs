@@ -32,11 +32,7 @@ namespace MovieClub.Controllers
         [AllowAnonymous]
         public ActionResult Item(int id)
         {
-            var db = new MovieDataContext();
-            var movie = db.Movies.Find(3);
-            var movies = db.Movies.ToArray();
-            int len = movies.Length;
-            return View(movie);
+            return View();
         }
 
         public List<SimpleMovieDetails> GetMovieList()
@@ -332,8 +328,38 @@ namespace MovieClub.Controllers
         [AllowAnonymous]
         public ActionResult Collection(int Id, int? Page, int? Method)
         {
+            
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            var query = db.DBMovieToCategory.Where(ent => ent.CategoryId == Id).Join(db.DBMovies,
+                r => r.MovieId,
+                l => l.Id,
+                (r, l) => new
+                {
+                    Id = l.Id,
+                    MovieName = l.Name,
+                    Year = l.Year,
+                    Category = l.Genre,
+                    PosterURL = l.PosterURL,
+                });
 
-            var movies = GetMovieList();
+            List<SimpleMovieDetails> movielist = new List<SimpleMovieDetails>();
+
+            foreach (var movie in query)
+            {
+                SimpleMovieDetails item =
+                    new Models.SimpleMovieDetails()
+                    {
+                        Id = movie.Id,
+                        Name = movie.MovieName,
+                        Year = movie.Year,
+                        Category = movie.Category,
+                        PosterURL = movie.PosterURL,
+                    };
+                movielist.Add(item);
+            }
+
+            var movies = movielist;
+
             var pageC = (int)(Math.Ceiling(((double)(movies.Count)) / 15));
 
             if (Page == null || Page == 0)
@@ -347,9 +373,11 @@ namespace MovieClub.Controllers
             {
                 remaining = (movies.Count) - (15 * (((int)Page) - 1));
 
+                var currentindex = (((int)Page) - 1) * 15;
+
                 catmodel = new Models.CategoryModel()
                 {
-                    MovieList = movies.GetRange((int)Page, Math.Min(15, remaining)),
+                    MovieList = movies.GetRange(currentindex, currentindex + Math.Min(15, remaining)),
                     PageCount = pageC,
                 };
             }
@@ -380,14 +408,11 @@ namespace MovieClub.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult MovieDetails(string moviename)
+        public ActionResult MovieDetails(int movieId)
         {
-            ViewBag.Name = moviename;
-            ImdbMovie imdbmoviedata = JsonConvert.DeserializeObject<ImdbMovie>(ImdbData.GetData(moviename));
-            
-            //the logic should be to get imdb data and insert them into a MovieDetails model with every required fields converted
-            //the MovieDetails model should be passed to this' view. view should also strongly typed into this model.
-            return View(imdbmoviedata);
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            MovieDB.DBMovie dbmovieitem = db.DBMovies.First(mv => mv.Id == movieId);
+            return View(dbmovieitem);
         }
 
 

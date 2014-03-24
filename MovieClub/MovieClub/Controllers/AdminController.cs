@@ -96,6 +96,7 @@ namespace MovieClub.Controllers
             dbmovie.Writer = movie.Writer;
             dbmovie.Year = movie.Year;
             dbmovie.AddedDate = DateTime.Today;
+            dbmovie.TrailerURL = System.Configuration.ConfigurationManager.AppSettings["VideoSavePath"] + "/" + movie.ImdbId + ".mp4";
             db.DBMovies.Add(dbmovie);
             db.SaveChanges();
             string[] categories = (movie.Genre).Split(',');
@@ -105,14 +106,15 @@ namespace MovieClub.Controllers
             List<MovieDB.DBCategory> currentlist = db.DBCategories.ToList<MovieDB.DBCategory>();
             foreach (string cat in categories)
             {
-                cat.Replace(" ", "");
-                if ((currentlist.FindAll(c => c.CategoryName == cat)).Count == 0)
+                var tag = cat.Trim();
+                tag.Replace(" ", string.Empty);
+                if ((currentlist.FindAll(c => c.CategoryName == tag)).Count == 0)
                 {
-                    dbcat.CategoryName = cat;
+                    dbcat.CategoryName = tag;
                     db.DBCategories.Add(dbcat);
                     db.SaveChanges();
                 }
-                var currentcatId = db.DBCategories.Where(c => c.CategoryName == cat).First().CategoryId;
+                var currentcatId = db.DBCategories.Where(c => c.CategoryName == tag).First().CategoryId;
 
                 MovieDB.DBMovieToCategory entry = new MovieDB.DBMovieToCategory();
 

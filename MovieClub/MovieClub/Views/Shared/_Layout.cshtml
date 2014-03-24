@@ -30,14 +30,19 @@
             <section class="top-bar-section">
                 <ul class="left">
                     <li class="has-form">
-                        <div class="row collapse">
-                            <div class="small-70 large-70 columns">
-                                <input class="textinput-custom" type="text" placeholder="Search Movies" />
-                            </div>
-                            <div class="small-30 large-30 columns">
-                                <a href="#" class="button expand button-custom postfix">Search</a>
-                            </div>
-                        </div>
+                        
+                            @using (Html.BeginForm("Search", "Content", FormMethod.Get))
+                            {
+                                <div class="row collapse">
+                                    <div class="small-70 large-70 columns">
+                                        <input name="q" class="textinput-custom" type="text" placeholder="Search Movies" />
+                                    </div>
+                                    <div class="small-30 large-30 columns">
+                                        <button type="submit" class="button expand button-custom postfix">Search</button>
+                                    </div>
+                                </div>
+                            }
+                        
                     </li>
                     <li class="divider"></li>
                     <li>
@@ -68,32 +73,7 @@
 
     <div class="row">
         <div class="large-19 medium-19 sidebar-custom columns medi" >
-            <div class="sidebar">
-                <ul class="side-nav side-nav-custom">
-                    <li class="heading">Movies</li>
-                    <li><a href="#">Latest</a></li>
-                    <li><a href="#">Top Imdb Rated</a></li>
-                    <li><a href="#">Top Movie Club Rated</a></li>
-                    <li><a href="#">Most Viewed</a></li>
-                    <li><a href="#">Most Comments</a></li>
-
-                    <li class="divider"></li>
-
-                    <li class="heading">Catagories</li>
-                    <li><a href="#">Action<span class="label right">42</span></a></li>
-                    <li><a href="#">Sci-Fi<span class="label right">32</span></a></li>
-                    <li><a href="#">Drama<span class="label right">11</span></a></li>
-                    <li><a href="#">Comedy<span class="label right">10</span></a></li>
-                    <li><a href="#">Thriller<span class="label right">33</span></a></li>
-                    <li><a href="#">Horror<span class="label right">4</span></a></li>
-                    <li><a href="#">Romance<span class="label right">12</span></a></li>
-                    <li><a href="#">Documentary<span class="label right">4</span></a></li>
-
-                    <li class="divider"></li>
-                </ul>
-                
-                <div id="dummy" style="clear:both"></div>
-            </div>
+            @{Html.RenderAction("Sidebar", "Content");}
         </div> 
         <div class="large-81 medium-81 columns content-wrapper-custom">
             <div id="body-content" class="content-custom">

@@ -1,18 +1,18 @@
-﻿@model MovieClub.Models.ImdbMovie
+﻿@model MovieClub.Models.MovieDetails
 
 @{
-    ViewBag.Title = @ViewBag.Name;
+    ViewBag.Title = Model.Name;
     var movie = Model;
 }
 <div id="moviedetails" class="moviedetails">
     <div class="row">
         <div class="small-100 medium-20 large-27 columns">
             <div id="movie-poster">
-                <img src="@movie.Poster" />
+                <img src="@movie.PosterURL" />
             </div>
             <div id="movie-imdb">
                 <p>IMDb Rated</p>
-                <div id="rating"><img src="/Content/images/stars.png" width="24" height="24"/>@movie.imdbRating<img src="/Content/images/stars.png" width="24" height="24" /> </div>(@movie.imdbVotes Votes) <p><a href="http://www.imdb.com/title/@movie.imdbID/">Look in IMDb</a></p>
+                <div id="rating"><img src="/Content/images/stars.png" width="24" height="24"/>@movie.ImdbRatings<img src="/Content/images/stars.png" width="24" height="24" /> </div>(@movie.ImdbVotes Votes) <p><a href="http://www.imdb.com/title/@movie.ImdbId/">Look in IMDb</a></p>
             </div>
             <div id="action-buttons">
                 <ul>
@@ -32,7 +32,7 @@
                             <td colspan="2">
                                 <div id="movie-pearson">
                                     <p>Pearson Rated</p>
-                                    <div id="rating-pearson"><img src="/Content/images/stars.png" width="16" height="16" />4.9<img src="/Content/images/stars.png" width="16" height="16" /> </div>(14 Votes)
+                                    <div id="rating-pearson"><img src="/Content/images/stars.png" width="16" height="16" />@movie.MovieClubRatings<img src="/Content/images/stars.png" width="16" height="16" /> </div>
                                 </div>
                             </td>
                         </tr>
@@ -45,7 +45,7 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr><td>Rents</td><td>5 times</td></tr>
+                        <tr><td>Rents</td><td>@movie.MovieClubRentCount times</td></tr>
                     
                 </table>
             </div>
@@ -55,16 +55,16 @@
             <div id="movie-info">
                 <div id="movie-title">
                     <div id="movie-name">
-                        @movie.Title <span id="movie-year">(@movie.Year)</span>
+                        @movie.Name <span id="movie-year">(@movie.Year)</span>
                         <div id="movie-locale">@movie.Country  <span>|</span>  @movie.Language</div>
                     </div>
                     <div id="movie-specs">
-                            Type: @movie.Type <span>|</span> @movie.Runtime  <span>-</span>  @movie.Genre  <span>-</span>  @movie.Released
+                            Type: @movie.Genre <span>|</span> @movie.Runtime  <span>-</span>  @movie.Genre  <span>-</span>  @movie.ReleaseDate
                     </div>
                 </div>
 
                 <div id="plot">
-                    <p>@movie.Plot</p>
+                    <p>@movie.PlotFull</p>
                 </div>
 
                 <div id="movie-stats">
@@ -78,16 +78,19 @@
                     </div>
                     
                 </div>
-                <div id="movie-media">
-                    <div id="movie-trailer">
-                        <h5>Trailer</h5>
-                        <video id="video-clip" class="video-js vjs-default-skin" controls
-                               preload="auto" width="640" height="264" poster=""
-                               data-setup="{}">
-                            <source src="~/Content/multimedia/tt1300854.mp4" type='video/mp4'>
-                        </video>
+                @if (movie.TrailerURL != null)
+                {
+                    <div id="movie-media">
+                        <div id="movie-trailer">
+                            <h5>Trailer</h5>
+                            <video id="video-clip" class="video-js vjs-default-skin" controls
+                                   preload="auto" width="640" height="264" poster=""
+                                   data-setup="{}">
+                                <source src="~/Content/multimedia/tt1300854.mp4" type='video/mp4'>
+                            </video>
+                        </div>
                     </div>
-                </div>
+                }
                 
             </div>
         </div>

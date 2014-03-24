@@ -45,6 +45,8 @@
           <Property Name="MovieClubRatings" Type="float" Nullable="false" />
           <Property Name="MovieClubRentCount" Type="int" Nullable="false" />
           <Property Name="AddedDate" Type="date" />
+          <Property Name="Views" Type="int" Nullable="false" />
+          <Property Name="TrailerURL" Type="text" />
         </EntityType>
         <EntityType Name="DBMovieSuggestions">
           <Key>
@@ -115,32 +117,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MovieClubDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="DBMovie">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ImdbId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Year" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
-          <Property Name="ReleaseDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Runtime" Type="Int32" Nullable="false" />
-          <Property Name="Genre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Director" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Actors" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Writer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="PlotShort" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="PlotFull" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Language" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Awards" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="PosterURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="ImdbRatings" Type="Double" Nullable="false" />
-          <Property Name="ImdbVotes" Type="Int64" Nullable="false" />
-          <Property Name="MovieClubRatings" Type="Double" Nullable="false" />
-          <Property Name="MovieClubRentCount" Type="Int32" Nullable="false" />
-          <Property Name="AddedDate" Type="DateTime" Precision="0" />
-        </EntityType>
         <EntityType Name="DBCategory">
           <Key>
             <PropertyRef Name="CategoryId" />
@@ -149,7 +125,6 @@
           <Property Name="CategoryName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="MovieClubDBE" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="DBMovies1" EntityType="MovieClubDBModel.DBMovie" />
           <EntitySet Name="DBCategories" EntityType="Self.DBCategory" />
           <EntitySet Name="DBFavorites" EntityType="MovieClubDBModel.DBFavorite" />
           <EntitySet Name="DBMovieSuggestions" EntityType="MovieClubDBModel.DBMovieSuggestion" />
@@ -158,6 +133,7 @@
           <EntitySet Name="DBUsers" EntityType="MovieClubDBModel.DBUser" />
           <EntitySet Name="DBRents" EntityType="MovieClubDBModel.DBRent" />
           <EntitySet Name="DBMovieToCategory" EntityType="MovieClubDBModel.DBMovieToCategory" />
+          <EntitySet Name="DBMovies" EntityType="MovieClubDBModel.DBMovie" />
         </EntityContainer>
         <EntityType Name="DBFavorite">
           <Key>
@@ -221,39 +197,40 @@
           <Property Name="MovieId" Type="Int32" />
           <Property Name="CategoryId" Type="Int32" />
         </EntityType>
+        <EntityType Name="DBMovie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImdbId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Year" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="ReleaseDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Runtime" Type="Int32" Nullable="false" />
+          <Property Name="Genre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Director" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Actors" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Writer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PlotShort" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PlotFull" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Language" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Awards" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PosterURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ImdbRatings" Type="Double" Nullable="false" />
+          <Property Name="ImdbVotes" Type="Int64" Nullable="false" />
+          <Property Name="MovieClubRatings" Type="Double" Nullable="false" />
+          <Property Name="MovieClubRentCount" Type="Int32" Nullable="false" />
+          <Property Name="AddedDate" Type="DateTime" Precision="0" />
+          <Property Name="Views" Type="Int32" Nullable="false" />
+          <Property Name="TrailerURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MovieClubDBModelStoreContainer" CdmEntityContainer="MovieClubDBE">
-          <EntitySetMapping Name="DBMovies1">
-            <EntityTypeMapping TypeName="MovieClubDBModel.DBMovie">
-              <MappingFragment StoreEntitySet="DBMovies">
-                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ImdbId" ColumnName="ImdbId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
-                <ScalarProperty Name="Runtime" ColumnName="Runtime" />
-                <ScalarProperty Name="Genre" ColumnName="Genre" />
-                <ScalarProperty Name="Director" ColumnName="Director" />
-                <ScalarProperty Name="Actors" ColumnName="Actors" />
-                <ScalarProperty Name="Writer" ColumnName="Writer" />
-                <ScalarProperty Name="PlotShort" ColumnName="PlotShort" />
-                <ScalarProperty Name="PlotFull" ColumnName="PlotFull" />
-                <ScalarProperty Name="Language" ColumnName="Language" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="Awards" ColumnName="Awards" />
-                <ScalarProperty Name="PosterURL" ColumnName="PosterURL" />
-                <ScalarProperty Name="ImdbRatings" ColumnName="ImdbRatings" />
-                <ScalarProperty Name="ImdbVotes" ColumnName="ImdbVotes" />
-                <ScalarProperty Name="MovieClubRatings" ColumnName="MovieClubRatings" />
-                <ScalarProperty Name="MovieClubRentCount" ColumnName="MovieClubRentCount" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DBCategories">
             <EntityTypeMapping TypeName="MovieClubDBModel.DBCategory">
               <MappingFragment StoreEntitySet="DBCategories">
@@ -328,6 +305,35 @@
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="MovieId" ColumnName="MovieId" />
                 <ScalarProperty Name="RelationshipId" ColumnName="RelationshipId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBMovies">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBMovie">
+              <MappingFragment StoreEntitySet="DBMovies">
+                <ScalarProperty Name="TrailerURL" ColumnName="TrailerURL" />
+                <ScalarProperty Name="Views" ColumnName="Views" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="MovieClubRentCount" ColumnName="MovieClubRentCount" />
+                <ScalarProperty Name="MovieClubRatings" ColumnName="MovieClubRatings" />
+                <ScalarProperty Name="ImdbVotes" ColumnName="ImdbVotes" />
+                <ScalarProperty Name="ImdbRatings" ColumnName="ImdbRatings" />
+                <ScalarProperty Name="PosterURL" ColumnName="PosterURL" />
+                <ScalarProperty Name="Awards" ColumnName="Awards" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="PlotFull" ColumnName="PlotFull" />
+                <ScalarProperty Name="PlotShort" ColumnName="PlotShort" />
+                <ScalarProperty Name="Writer" ColumnName="Writer" />
+                <ScalarProperty Name="Actors" ColumnName="Actors" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="Runtime" ColumnName="Runtime" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ImdbId" ColumnName="ImdbId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

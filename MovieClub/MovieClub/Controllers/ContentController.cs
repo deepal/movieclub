@@ -374,10 +374,11 @@ namespace MovieClub.Controllers
                 remaining = (movies.Count) - (15 * (((int)Page) - 1));
 
                 var currentindex = (((int)Page) - 1) * 15;
+                var currentpagemovies = movies.GetRange(currentindex, Math.Min(15, remaining));
 
                 catmodel = new Models.CategoryModel()
                 {
-                    MovieList = movies.GetRange(currentindex, currentindex + Math.Min(15, remaining)),
+                    MovieList = currentpagemovies,
                     PageCount = pageC,
                 };
             }
@@ -408,13 +409,87 @@ namespace MovieClub.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult MovieDetails(int movieId)
+        public ActionResult MovieDetails(int Id)
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
-            MovieDB.DBMovie dbmovieitem = db.DBMovies.First(mv => mv.Id == movieId);
-            return View(dbmovieitem);
+            MovieDB.DBMovie dbmovieitem = db.DBMovies.First(mv => mv.Id == Id);
+
+            return View(new MovieDetails() {
+                Actors = dbmovieitem.Actors,
+                Awards = dbmovieitem.Awards,
+                Country = dbmovieitem.Country,
+                Director = dbmovieitem.Director,
+                Genre = dbmovieitem.Genre,
+                Id = dbmovieitem.Id,
+                ImdbId = dbmovieitem.ImdbId,
+                ImdbRatings = (float)dbmovieitem.ImdbRatings,
+                ImdbVotes = dbmovieitem.ImdbVotes,
+                Language = dbmovieitem.Language,
+                MovieClubRatings = (float)dbmovieitem.MovieClubRatings,
+                MovieClubRentCount = dbmovieitem.MovieClubRentCount,
+                Name = dbmovieitem.Name,
+                PlotFull = dbmovieitem.PlotFull,
+                PlotShort = dbmovieitem.PlotShort,
+                PosterURL = dbmovieitem.PosterURL,
+                ReleaseDate = dbmovieitem.ReleaseDate,
+                Runtime = dbmovieitem.Runtime,
+                Writer = dbmovieitem.Writer,
+                Year = dbmovieitem.Year
+            });
         }
 
+        [AllowAnonymous]
+        public ActionResult Sidebar()
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            var Categories = db.DBCategories.ToList<MovieDB.DBCategory>();
+            Categories.Sort((c1, c2) => c1.CategoryName.CompareTo(c2.CategoryName));
+            Models.SidebarCategoriesModel sidebardata = new Models.SidebarCategoriesModel();
+            sidebardata.categorylist = new List<Category>();
+
+            foreach (var category in Categories)
+            {
+                var taggedCount = db.DBMovieToCategory.Count(m => m.CategoryId == category.CategoryId);
+
+                sidebardata.categorylist.Add(new Models.Category() { 
+                    Id = category.CategoryId,
+                    Name = category.CategoryName,
+                    TaggedMovieCount = taggedCount
+                });
+
+            }
+
+            return PartialView("_Sidebar", sidebardata);
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Search(string q)
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            //var query = formdata["search-text"];
+            var resultsquery = db.DBMovies.Where(m => ((m.Name).ToLower()).Contains(q.ToLower()));
+            var resultslist = new Models.SearchResults();
+
+            foreach (var item in resultsquery)
+            {
+                resultslist.AddResult(new MovieResult(){ 
+                    Id = item.Id,
+                    Name = item.Name,
+                    PlotShort = item.PlotShort,
+                    PosterURL = item.PosterURL,
+                    Genre = item.Genre,
+                    MovieClubRatings = (float)item.MovieClubRatings,
+                    ImdbRatings = (float)item.ImdbRatings,
+                    Year = item.Year,
+                    Actors = item.Actors
+                });
+                
+            }
+            ViewBag.SearchQuery = q;
+            return View(resultslist);
+        }
 
         
     }

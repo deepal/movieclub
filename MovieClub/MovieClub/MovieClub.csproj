@@ -187,7 +187,6 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
-    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WebServiceController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -195,6 +194,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\MovieCollection.cs" />
+    <Compile Include="Models\SearchResults.cs" />
+    <Compile Include="Models\SidebarCategoriesModel.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\FeaturedMovieDetails.cs" />
     <Compile Include="Models\ImdbMovie.cs" />
@@ -259,6 +262,7 @@
     <Content Include="Content\css\myaccount.css" />
     <Content Include="Content\css\normalize.css" />
     <Content Include="Content\css\rateit.css" />
+    <Content Include="Content\css\searchpage.css" />
     <Content Include="Content\css\simplePagination.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\video-js.css" />
@@ -428,6 +432,8 @@
     <Content Include="Views\Admin\AddMovie.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Shared\_Trailer.cshtml" />
+    <Content Include="Views\Shared\_Sidebar.cshtml" />
+    <Content Include="Views\Content\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

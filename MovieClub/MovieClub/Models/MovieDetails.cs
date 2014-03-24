@@ -31,6 +31,7 @@ namespace MovieClub.Models
         public string Awards { get; set; }
         [Required]
         public string PosterURL { get; set; }
+        public string TrailerURL { get; set; }
         [Range(0,10)]
         public float ImdbRatings { get; set; }
         [Range(0,Int32.MaxValue)]           

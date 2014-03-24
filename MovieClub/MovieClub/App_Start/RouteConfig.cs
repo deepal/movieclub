@@ -13,15 +13,22 @@ namespace MovieClub
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
             routes.MapRoute(
                 name: "MovieDetails",
-                url: "{controller}/MovieDetails/{*moviename}",
+                url: "{controller}/MovieDetails/{*Id}",
                 defaults: new { controller = "Home", action = "MovieDetails" }
             );
 
             routes.MapRoute(
+                name: "Search",
+                url: "{controller}/Search/",
+                defaults: new { controller = "Content", action = "Search" }
+            );
+
+            routes.MapRoute(
                 name: "Collection",
-                url: "{controller}/{action}/{Id}",
+                url: "{controller}/Collection/{Id}",
                 defaults: new { controller = "Content", action = "Collection"}
             );
 

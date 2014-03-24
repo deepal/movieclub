@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="401b64cba2774ca9bd07a3fd76bc9c5e" Name="Diagram1" ZoomLevel="84">
-        <EntityTypeShape EntityType="MovieClubDBModel.DBMovie" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBCategory" Width="1.5" PointX="2.875" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBFavorite" Width="2" PointX="9.625" PointY="5.5" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBMovieSuggestion" Width="2" PointX="9.5" PointY="0.5" />
@@ -14,6 +13,7 @@
         <EntityTypeShape EntityType="MovieClubDBModel.DBUser" Width="2" PointX="6.5" PointY="3.875" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBRent" Width="1.5" PointX="5.375" PointY="6.75" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBMovieToCategory" Width="1.75" PointX="2.875" PointY="2.5" />
+        <EntityTypeShape EntityType="MovieClubDBModel.DBMovie" Width="1.5" PointX="0.5" PointY="0.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

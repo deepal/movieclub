@@ -1,0 +1,28 @@
+﻿@model MovieClub.Models.SidebarCategoriesModel
+
+@{
+    var model = Model;
+}
+
+<div class="sidebar">
+    <ul class="side-nav side-nav-custom">
+        <li class="heading">Movies</li>
+        <li><a href="#">Latest</a></li>
+        <li><a href="#">Top Imdb Rated</a></li>
+        <li><a href="#">Top Movie Club Rated</a></li>
+        <li><a href="#">Most Viewed</a></li>
+
+        <li class="divider"></li>
+
+        <li class="heading">Catagories</li>
+
+        @foreach (var cat in model.categorylist)
+        {
+            <li><a href="/Content/Collection/@cat.Id">@cat.Name<span class="label right">@cat.TaggedMovieCount</span></a></li>
+        }
+
+        <li class="divider"></li>
+    </ul>
+
+    <div id="dummy" style="clear:both"></div>
+</div>

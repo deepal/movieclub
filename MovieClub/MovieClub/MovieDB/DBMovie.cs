@@ -35,5 +35,7 @@ namespace MovieClub.MovieDB
         public double MovieClubRatings { get; set; }
         public int MovieClubRentCount { get; set; }
         public Nullable<System.DateTime> AddedDate { get; set; }
+        public int Views { get; set; }
+        public string TrailerURL { get; set; }
     }
 }

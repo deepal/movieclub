@@ -4,6 +4,7 @@
     var movies = Model.MovieList;
     var pagecount = Model.PageCount;
     var currentpage = Model.CurrentPage;
+    var list = Model.list;
     Layout = null;
 }
 
@@ -42,16 +43,33 @@
 
 <div class="cat-pagination">
     <ul id="pagination">
-        <li><a class="previous" href="/Content/Collection/@ViewBag.CollectionId/?Page=@(currentpage-1)">Previous</a></li>
-
-        @for (var i = 0; i < pagecount; i++)
+        @if (list == null)
         {
-            <li><a href="/Content/Collection/@ViewBag.CollectionId/?Page=@(i+1)">@(i + 1)</a></li>
+            <li><a class="previous" href="/Content/Collection/@ViewBag.CollectionId/?Page=@(currentpage-1)">Previous</a></li>
+
+            for (var i = 0; i < pagecount; i++)
+            {
+                <li><a href="/Content/Collection/@ViewBag.CollectionId/?Page=@(i+1)">@(i + 1)</a></li>
+            }
+
+            if (currentpage != pagecount)
+            {
+                <li><a href="/Content/Collection/@ViewBag.CollectionId/?Page=@(currentpage+1)" class="nextblock">Next</a></li>
+            }
         }
-
-        @if (currentpage != pagecount)
+        else
         {
-            <li><a href="/Content/Collection/@ViewBag.CollectionId/?Page=@(currentpage+1)" class="nextblock">Next</a></li>
+            <li><a class="previous" href="/Content/Collection/List/@list/?Page=@(currentpage-1)">Previous</a></li>
+
+            for (var i = 0; i < pagecount; i++)
+            {
+                <li><a href="/Content/Collection/List/@list/?Page=@(i+1)">@(i + 1)</a></li>
+            }
+
+            if (currentpage != pagecount)
+            {
+                <li><a href="/Content/Collection/List/@list/?Page=@(currentpage+1)" class="nextblock">Next</a></li>
+            }
         }
     </ul>
 </div>

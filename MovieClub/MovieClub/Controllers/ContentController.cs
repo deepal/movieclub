@@ -16,11 +16,13 @@ namespace MovieClub.Controllers
     [Authorize]
     public class ContentController : Controller
     {
-        //
+
+        public const int LATEST = 1;
+        public const int TOP_IMDB = 2;
+        public const int TOP_MOVIECLUB = 3;
+        public const int MOST_VIEWED = 4;
+
         // GET: /MovieClub/
-
-        private ImdbMovie moviedata;
-
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Index()
@@ -326,11 +328,15 @@ namespace MovieClub.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Collection(int Id, int? Page, int? Method)
+        public ActionResult Collection(int Id, int? Page, int? Method, int? list)
         {
             
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
-            var query = db.DBMovieToCategory.Where(ent => ent.CategoryId == Id).Join(db.DBMovies,
+            List<SimpleMovieDetails> movielist = new List<SimpleMovieDetails>();
+
+            if (list == null)
+            {
+                var query = db.DBMovieToCategory.Where(ent => ent.CategoryId == Id).Join(db.DBMovies,
                 r => r.MovieId,
                 l => l.Id,
                 (r, l) => new
@@ -340,22 +346,132 @@ namespace MovieClub.Controllers
                     Year = l.Year,
                     Category = l.Genre,
                     PosterURL = l.PosterURL,
+                    ImdbRating = l.ImdbRatings,
+                    ViewsCount = l.Views,
+                    MovieClubRating = l.MovieClubRatings,
+                    MovieClubRentCount = l.MovieClubRentCount
                 });
 
-            List<SimpleMovieDetails> movielist = new List<SimpleMovieDetails>();
-
-            foreach (var movie in query)
+                foreach (var movie in query)
+                {
+                    SimpleMovieDetails item =
+                        new Models.SimpleMovieDetails()
+                        {
+                            Id = movie.Id,
+                            Name = movie.MovieName,
+                            Year = movie.Year,
+                            Category = movie.Category,
+                            PosterURL = movie.PosterURL,
+                            ImdbRating = (float)movie.ImdbRating,
+                            MovieClubRating = (float)movie.MovieClubRating,
+                            MovieClubRentCount = movie.MovieClubRentCount,
+                            ViewsCount = movie.ViewsCount
+                        };
+                    movielist.Add(item);
+                }
+            }
+            else
             {
-                SimpleMovieDetails item =
-                    new Models.SimpleMovieDetails()
-                    {
-                        Id = movie.Id,
-                        Name = movie.MovieName,
-                        Year = movie.Year,
-                        Category = movie.Category,
-                        PosterURL = movie.PosterURL,
-                    };
-                movielist.Add(item);
+                switch (list)
+                {
+                    case LATEST:
+                        var querylatest = db.DBMovies.ToList();
+                        querylatest.Sort((x, y) => ((DateTime)y.AddedDate).CompareTo((DateTime)x.AddedDate));
+                        foreach (var movie in querylatest)
+                        {
+                            SimpleMovieDetails item =
+                                new Models.SimpleMovieDetails()
+                                {
+                                    Id = movie.Id,
+                                    Name = movie.Name,
+                                    Year = movie.Year,
+                                    Category = movie.Genre,
+                                    PosterURL = movie.PosterURL,
+                                    ImdbRating = (float)movie.ImdbRatings,
+                                    ImdbId = movie.ImdbId,
+                                    MovieClubRating = (float)movie.MovieClubRatings,
+                                    MovieClubRentCount = movie.MovieClubRentCount,
+                                    ViewsCount = movie.Views
+                                };
+                            movielist.Add(item);
+                        }
+                        break;
+
+                    case TOP_IMDB:
+                        var queryImdb = db.DBMovies.ToList();
+                        queryImdb.Sort((x, y) => (y.ImdbRatings).CompareTo(x.ImdbRatings));
+                        foreach (var movie in queryImdb)
+                        {
+                            SimpleMovieDetails item =
+                                new Models.SimpleMovieDetails()
+                                {
+                                    Id = movie.Id,
+                                    Name = movie.Name,
+                                    Year = movie.Year,
+                                    Category = movie.Genre,
+                                    PosterURL = movie.PosterURL,
+                                    ImdbRating = (float)movie.ImdbRatings,
+                                    ImdbId = movie.ImdbId,
+                                    MovieClubRating = (float)movie.MovieClubRatings,
+                                    MovieClubRentCount = movie.MovieClubRentCount,
+                                    ViewsCount = movie.Views
+                                };
+                            movielist.Add(item);
+                        }
+                        break;
+
+
+                    case TOP_MOVIECLUB:
+                        var querymovieclub = db.DBMovies.ToList();
+                        querymovieclub.Sort((x, y) => (y.MovieClubRatings).CompareTo(x.MovieClubRatings));
+                        foreach (var movie in querymovieclub)
+                        {
+                            SimpleMovieDetails item =
+                                new Models.SimpleMovieDetails()
+                                {
+                                    Id = movie.Id,
+                                    Name = movie.Name,
+                                    Year = movie.Year,
+                                    Category = movie.Genre,
+                                    PosterURL = movie.PosterURL,
+                                    ImdbRating = (float)movie.ImdbRatings,
+                                    ImdbId = movie.ImdbId,
+                                    MovieClubRating = (float)movie.MovieClubRatings,
+                                    MovieClubRentCount = movie.MovieClubRentCount,
+                                    ViewsCount = movie.Views
+                                };
+                            movielist.Add(item);
+                        }
+                        break;
+
+
+                    case MOST_VIEWED:
+                        var queryview = db.DBMovies.ToList();
+                        queryview.Sort((x, y) => (y.Views).CompareTo(x.Views));
+                        foreach (var movie in queryview)
+                        {
+                            SimpleMovieDetails item =
+                                new Models.SimpleMovieDetails()
+                                {
+                                    Id = movie.Id,
+                                    Name = movie.Name,
+                                    Year = movie.Year,
+                                    Category = movie.Genre,
+                                    PosterURL = movie.PosterURL,
+                                    ImdbRating = (float)movie.ImdbRatings,
+                                    ImdbId = movie.ImdbId,
+                                    MovieClubRating = (float)movie.MovieClubRatings,
+                                    MovieClubRentCount = movie.MovieClubRentCount,
+                                    ViewsCount = movie.Views
+                                };
+                            movielist.Add(item);
+                        }
+                        break;
+
+                    default:
+                        //show error
+                        break;
+                }
             }
 
             var movies = movielist;
@@ -393,6 +509,7 @@ namespace MovieClub.Controllers
             }
 
             ViewBag.CollectionId = Id;
+            catmodel.list = list;
             ViewBag.Remaining = remaining;
             if (Method == 0 || Method == null)
             {
@@ -404,6 +521,8 @@ namespace MovieClub.Controllers
             }
 
         }
+
+        
 
         
 
@@ -491,6 +610,5 @@ namespace MovieClub.Controllers
             return View(resultslist);
         }
 
-        
     }
 }

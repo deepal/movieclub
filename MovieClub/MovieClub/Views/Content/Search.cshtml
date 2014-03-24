@@ -1,0 +1,71 @@
+﻿@model MovieClub.Models.SearchResults
+@{
+    ViewBag.Title = "Search";
+}
+
+@{
+    var results = Model.results;
+    var query = ViewBag.SearchQuery;
+}
+
+<h4>Search results for "@Html.Encode(query)"</h4>
+
+<div id="search-results">
+    <div id="result-block">
+        
+
+        @if(results.Count == 0){
+            <div id="result-notice" data-alert class="alert-box secondary">
+                No results found!
+            </div>
+        }
+        else
+        {
+            foreach (var item in results)
+            {
+                <a href="/Content/MovieDetails/@item.Id">
+                    <div class="result-tile">
+                        <div class="row">
+                            <div class="small-50 medium-10 large-10 columns">
+                                <img src="@item.PosterURL" />
+                            </div>
+
+                            <div class="small-100 medium-90 large-90 columns">
+                                <div id="result-info">
+                                    <div id="result-title">
+                                        @item.Name (@item.Year)
+                                    </div>
+                                    <div id="result-plot">
+                                        @item.PlotShort
+                                    </div>
+                                    <div id="result-footer">
+                                        <div id="result-genre">
+                                            @item.Genre
+                                        </div>
+                                        <div id="result-actors">
+                                            Acting: @item.Actors
+                                        </div>
+                                        <div id="result-imdb">
+                                            Imdb: @item.ImdbRatings /10
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </a>
+            }
+        }
+        
+
+        
+    </div>
+</div>
+
+
+
+
+@section customstyles{
+    @Styles.Render("~/Content/css/searchpage.css")
+}

@@ -10,5 +10,7 @@ namespace MovieClub.Models
         public List<SimpleMovieDetails> MovieList { get; set; }
         public int? CurrentPage { get; set; }
         public int PageCount { get; set; }
+        public int? list { get; set; }
+             
     }
 }

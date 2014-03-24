@@ -194,6 +194,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ConfigData.cs" />
     <Compile Include="Models\MovieCollection.cs" />
     <Compile Include="Models\SearchResults.cs" />
     <Compile Include="Models\SidebarCategoriesModel.cs" />
@@ -277,6 +278,7 @@
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery-ias.min.js" />
     <Content Include="Content\js\jquery.pagination.js" />
+    <Content Include="Content\js\jquery.simplePagination.js" />
     <Content Include="Content\js\moviecollection.js" />
     <Content Include="Content\js\foundation.min.js" />
     <Content Include="Content\js\foundation\foundation.abide.js" />
@@ -427,13 +429,13 @@
     <Content Include="Views\Content\MovieDetails.cshtml" />
     <Content Include="Views\User\MyAccount.cshtml" />
     <Content Include="Views\Content\Collection.cshtml" />
-    <Content Include="Views\Shared\_PaginationPartial.cshtml" />
     <Content Include="Views\Shared\_CollectionContentPartial.cshtml" />
     <Content Include="Views\Admin\AddMovie.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Shared\_Trailer.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Content\Search.cshtml" />
+    <Content Include="Views\Shared\_Playlist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

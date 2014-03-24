@@ -12,5 +12,10 @@ namespace MovieClub.Models
         public string Category { get; set; }
         public string PosterURL { get; set; }
         public string Year { get; set; }
+        public string ImdbId { get; set; }
+        public float MovieClubRating { get; set; }
+        public float ImdbRating { get; set; }
+        public int MovieClubRentCount { get; set; }
+        public int ViewsCount { get; set; }
     }
 }

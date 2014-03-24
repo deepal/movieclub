@@ -1,0 +1,72 @@
+﻿td{
+    font-size:12px !important;
+    line-height:180% !important;
+}
+
+h4{
+    font-size:24px !important;
+    font-weight:bold;
+    color:#808080;
+}
+
+#result-block{
+    max-height:200px;
+}
+
+
+#result-block a{
+    color:#424242;
+}
+
+.result-tile{
+    background-color:#f1f1f1;
+    margin-bottom:10px;
+    padding:10px 10px;
+    border-radius:5px;
+}
+
+.result-tile:hover{
+    background-color:#f7f7f7;
+}
+
+#result-poster{
+    float:left;
+    clear:none;
+}
+
+#result-poster img{
+    clear:none;
+}
+
+#result-info{
+    float:left;
+}
+
+#result-title{
+    font-weight:bold;
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+#result-plot{
+    font-size:12px;
+    line-height:130%;
+}
+
+#result-footer{
+    margin-top:5px;
+    font-size:11px;
+    color:#808080;
+}
+
+#result-actors{
+    margin-bottom:5px;
+}
+
+#result-genre{
+    margin-bottom:5px;
+}
+
+#result-imdb{
+    margin-bottom:5px;
+}

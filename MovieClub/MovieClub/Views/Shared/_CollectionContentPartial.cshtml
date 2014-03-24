@@ -19,22 +19,34 @@
         foreach (var movie in movies)
         {
             <a id="movie-details-url" href="/Content/MovieDetails/@movie.Id">
-                <div id="cat-movie-item" style="display:block">
-                    <div id="smallposter" class="thumbnail">
-                        <img src="@movie.PosterURL" />
+                <div>
+                    <div>
+                        <div id="cat-movie-item">
+                            <div class="flip-container">
+                                <div class="flipper">
+                                    <div class="front-card">
+                                        <div id="smallposter" class="thumbnail">
+                                            <img src="@movie.PosterURL" />
+                                        </div>
+                                        <div id="shortdetails">
+                                            <div id="cat-movie-name">
+                                                @movie.Name
+                                            </div>
+                                            <div id="cat-movie-year">
+                                                (@movie.Year)
+                                            </div>
+                                            <div id="cat-movie-catagory">
+                                                @movie.Category
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="back-card">
+                                        aaaaaaaaaaaaaaaa
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div id="shortdetails">
-                        <div id="cat-movie-name">
-                            @movie.Name
-                        </div>
-                        <div id="cat-movie-year">
-                            (@movie.Year)
-                        </div>
-                        <div id="cat-movie-catagory">
-                            @movie.Category
-                        </div>
-                    </div>
-
                 </div>
             </a>
         }

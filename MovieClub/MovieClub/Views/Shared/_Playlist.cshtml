@@ -1,0 +1,57 @@
+﻿@model MovieClub.Models.SearchResults
+
+@{
+    var movies = Model.MovieList;
+    var pagecount = Model.PageCount;
+    var currentpage = Model.CurrentPage;
+    Layout = null;
+}
+
+
+<div class="content-block">
+    @if (movies == null)
+    {
+        <h5>No more movies</h5>
+    }
+    else
+    {
+        foreach (var movie in movies)
+        {
+            <a id="movie-details-url" href="/Content/MovieDetails/@movie.Id">
+                <div id="cat-movie-item" style="display:block">
+                    <div id="smallposter" class="thumbnail">
+                        <img src="@movie.PosterURL" />
+                    </div>
+                    <div id="shortdetails">
+                        <div id="cat-movie-name">
+                            @movie.Name
+                        </div>
+                        <div id="cat-movie-year">
+                            (@movie.Year)
+                        </div>
+                        <div id="cat-movie-catagory">
+                            @movie.Category
+                        </div>
+                    </div>
+
+                </div>
+            </a>
+        }
+    }
+</div>
+
+<div class="cat-pagination">
+    <ul id="pagination">
+        <li><a class="previous" href="/Content/Collection/@ViewBag.CollectionId/?Page=@(currentpage-1)">Previous</a></li>
+
+        @for (var i = 0; i < pagecount; i++)
+        {
+            <li><a href="/Content/Collection/@ViewBag.CollectionId/?Page=@(i+1)">@(i + 1)</a></li>
+        }
+
+        @if (currentpage != pagecount)
+        {
+            <li><a href="/Content/Collection/@ViewBag.CollectionId/?Page=@(currentpage+1)" class="nextblock">Next</a></li>
+        }
+    </ul>
+</div>

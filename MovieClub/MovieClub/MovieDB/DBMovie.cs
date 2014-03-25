@@ -37,5 +37,6 @@ namespace MovieClub.MovieDB
         public Nullable<System.DateTime> AddedDate { get; set; }
         public int Views { get; set; }
         public string TrailerURL { get; set; }
+        public int MovieClubVotes { get; set; }
     }
 }

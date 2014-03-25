@@ -266,6 +266,7 @@
     <Content Include="Content\css\searchpage.css" />
     <Content Include="Content\css\simplePagination.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\toastr.css" />
     <Content Include="Content\css\video-js.css" />
     <Content Include="Content\images\ajax-loader-circle.gif" />
     <Content Include="Content\images\ajax-loader.gif" />
@@ -304,6 +305,7 @@
     <Content Include="Content\js\jquery.liquidcarousel.pack.js" />
     <Content Include="Content\js\jquery.rateit.js" />
     <Content Include="Content\js\jquery.tablesorter.js" />
+    <Content Include="Content\js\toastr.js" />
     <Content Include="Content\js\vendor\fastclick.js" />
     <Content Include="Content\js\vendor\jquery.cookie.js" />
     <Content Include="Content\js\vendor\jquery.js" />

@@ -40,7 +40,9 @@ namespace MovieClub.Models
         public float MovieClubRatings { get; set; }
         [Range(0, Int32.MaxValue)]
         public int MovieClubRentCount { get; set; }
-
+        public int Views { get; set; }
+        public DateTime AddedDate { get; set; }
+        public int MovieClubVotes { get; set; }
         
     }
 }

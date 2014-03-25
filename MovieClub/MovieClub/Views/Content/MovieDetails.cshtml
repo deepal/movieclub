@@ -31,8 +31,8 @@
                         <tr>
                             <td colspan="2">
                                 <div id="movie-pearson">
-                                    <p>Pearson Rated</p>
-                                    <div id="rating-pearson"><img src="/Content/images/stars.png" width="16" height="16" />@movie.MovieClubRatings<img src="/Content/images/stars.png" width="16" height="16" /> </div>
+                                    <p>Pearson Star Rating</p>
+                                    <div id="rating-pearson"><img src="/Content/images/stars.png" width="16" height="16" /><span>@Math.Round(movie.MovieClubRatings, 1)</span><img src="/Content/images/stars.png" width="16" height="16" /> </div>
                                 </div>
                             </td>
                         </tr>
@@ -46,7 +46,6 @@
                             </td>
                         </tr>
                         <tr><td>Rents</td><td>@movie.MovieClubRentCount times</td></tr>
-                    
                 </table>
             </div>
 
@@ -91,6 +90,16 @@
                         </div>
                     </div>
                 }
+                <div id="moviedetails-footer">
+                    <div id="md-views">
+                        @movie.Views Views
+                    </div>
+                    <div id="md-date">
+                        Added on @String.Format("{0:MMMM dd yyyy}", movie.AddedDate); 
+                    </div>
+                    <div style="clear:both">
+                    </div>
+                </div>
                 
             </div>
         </div>
@@ -139,9 +148,46 @@
             }
     </style>
     @Styles.Render("~/Content/css/rateit.css")
+    @Styles.Render("~/Content/css/toastr.css")
 }
 
 @section customscripts{
     <script src="http://vjs.zencdn.net/4.4/video.js"></script>
     @Scripts.Render("~/Content/js/jquery.rateit.js")
+    @Scripts.Render("~/Content/js/toastr.js")
+
+    <script>
+        $(document).ready(function () {
+            $('#movieclub-rating .rateit').bind('rated reset', function (e) {
+                var ri = $(this);
+
+                //if the use pressed reset, it will get value: 0 (to be compatible with the HTML range control), we could check if e.type == 'reset', and then set the value to  null .
+                var value = ri.rateit('value');
+
+                $.ajax({
+                    url: "/Content/RateMovie", 
+                    data: { movieid: "@movie.Id", rating: value },
+                    type: "POST",
+                    dataType: "text"
+                })
+                .success(function (data) {
+                    var obj = $.parseJSON(data);
+                    var res = obj.Result;
+                    var newrating = obj.Rating;
+                    if (obj.Result == "ok") {
+                        toastr.info("Thank you for voting!");
+                    }
+                    else {
+                        $("#movieclub-rating").html("Error!");
+                    }
+                })
+                .error(function () {
+                    $("#movieclub-rating").html("Error!");
+                });
+
+                //maybe we want to disable voting?
+                ri.rateit('readonly', true);
+            });
+        });
+    </script>
 }

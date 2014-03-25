@@ -32,6 +32,7 @@
                                             <div id="cat-movie-name">
                                                 @movie.Name
                                             </div>
+                                            <hr class="movietile-hr" />
                                             <div id="cat-movie-year">
                                                 (@movie.Year)
                                             </div>
@@ -41,7 +42,31 @@
                                         </div>
                                     </div>
                                     <div class="back-card">
-                                        aaaaaaaaaaaaaaaa
+                                        <span id="card-imdb-title">IMDb Rated</span>
+                                        <div id="card-imdb">
+                                            <img src="~/Content/images/stars.png"/><span>@movie.ImdbRating</span><img src="~/Content/images/stars.png" height="24" width="24" />
+                                        </div>
+                                        <hr />
+                                        <div id="card-movieclub">
+                                            <span id="card-movieclub-title">Pearson Rated</span>
+                                            <div id="card-movieclub-rating">
+                                                <img src="~/Content/images/stars.png" /><span>@Math.Round(movie.MovieClubRating,1)</span>/5<img src="~/Content/images/stars.png" height="24" width="24" />
+                                            </div>
+                                            <hr />
+                                            <div id="card-movieclub-rents">
+                                                @if (movie.MovieClubRentCount == 0)
+                                                {
+                                                     @:No previous rents!
+                                                }
+                                                else
+                                                {
+                                                    @:@movie.MovieClubRentCount rents
+                                                }
+                                            </div>
+                                        </div>
+                                        <div id="card-views">
+                                            @movie.ViewsCount Views
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -522,17 +522,14 @@ namespace MovieClub.Controllers
 
         }
 
-        
-
-        
-
         [HttpGet]
         [AllowAnonymous]
         public ActionResult MovieDetails(int Id)
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
             MovieDB.DBMovie dbmovieitem = db.DBMovies.First(mv => mv.Id == Id);
-
+            dbmovieitem.Views += 1;
+            db.SaveChanges();
             return View(new MovieDetails() {
                 Actors = dbmovieitem.Actors,
                 Awards = dbmovieitem.Awards,
@@ -553,7 +550,9 @@ namespace MovieClub.Controllers
                 ReleaseDate = dbmovieitem.ReleaseDate,
                 Runtime = dbmovieitem.Runtime,
                 Writer = dbmovieitem.Writer,
-                Year = dbmovieitem.Year
+                Year = dbmovieitem.Year,
+                Views = dbmovieitem.Views,
+                AddedDate = (DateTime)dbmovieitem.AddedDate
             });
         }
 
@@ -608,6 +607,36 @@ namespace MovieClub.Controllers
             }
             ViewBag.SearchQuery = q;
             return View(resultslist);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]  //remove this attribute after testing
+        public ActionResult RateMovie()
+        {
+            int movieid = int.Parse(Request.Form["movieid"]);
+            float rating = float.Parse(Request.Form["rating"]);
+
+            try{
+                MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+                MovieDB.DBMovie dbmovie = db.DBMovies.First(m=>m.Id==movieid);
+                dbmovie.MovieClubVotes = dbmovie.MovieClubVotes + 1;
+                var newrating = ((dbmovie.MovieClubRatings * (float)dbmovie.MovieClubVotes) + rating) / ((float)(dbmovie.MovieClubVotes + 1));
+                dbmovie.MovieClubRatings = (double)newrating;
+                db.SaveChanges();
+
+                return Json(new
+                {
+                    Rating = ""+newrating,
+                    Result = "ok"
+                });
+
+            }
+            catch(Exception e){
+                return Json(new
+                {
+                    Result = "error"
+                });
+            }
         }
 
     }

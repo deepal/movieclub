@@ -47,6 +47,7 @@
           <Property Name="AddedDate" Type="date" />
           <Property Name="Views" Type="int" Nullable="false" />
           <Property Name="TrailerURL" Type="text" />
+          <Property Name="MovieClubVotes" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DBMovieSuggestions">
           <Key>
@@ -224,6 +225,7 @@
           <Property Name="AddedDate" Type="DateTime" Precision="0" />
           <Property Name="Views" Type="Int32" Nullable="false" />
           <Property Name="TrailerURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MovieClubVotes" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -311,6 +313,7 @@
           <EntitySetMapping Name="DBMovies">
             <EntityTypeMapping TypeName="MovieClubDBModel.DBMovie">
               <MappingFragment StoreEntitySet="DBMovies">
+                <ScalarProperty Name="MovieClubVotes" ColumnName="MovieClubVotes" />
                 <ScalarProperty Name="TrailerURL" ColumnName="TrailerURL" />
                 <ScalarProperty Name="Views" ColumnName="Views" />
                 <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />

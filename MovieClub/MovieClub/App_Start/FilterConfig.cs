@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using MovieClub.CustomAttributes;
+using System.Web;
 using System.Web.Mvc;
 
 namespace MovieClub
@@ -8,7 +9,8 @@ namespace MovieClub
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
-            filters.Add(new AuthorizeAttribute());
+            //filters.Add(new RequireMembershipAttribute());
+            //filters.Add(new RequireAdminAttribute());
         }
     }
 }

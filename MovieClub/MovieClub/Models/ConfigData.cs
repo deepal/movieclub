@@ -5,8 +5,10 @@ using System.Web;
 
 namespace MovieClub.Models
 {
-    public class ConfigData
+    public static class ConfigData
     {
-        
+        public static string SolUsername { get; set; }
+        public static int? CurrentUserId { get; set; }
+
     }
 }

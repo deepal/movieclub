@@ -10,10 +10,11 @@ using System.Net;
 using System.IO;
 using System.Text;
 using MovieClub.WebServices;
+using MovieClub.Operations;
 
 namespace MovieClub.Controllers
 {
-    [Authorize]
+    
     public class ContentController : Controller
     {
 
@@ -336,7 +337,7 @@ namespace MovieClub.Controllers
 
             if (list == null)
             {
-                var query = db.DBMovieToCategory.Where(ent => ent.CategoryId == Id).Join(db.DBMovies,
+                var query = db.DBMovieToCategories.Where(ent => ent.CategoryId == Id).Join(db.DBMovies,
                 r => r.MovieId,
                 l => l.Id,
                 (r, l) => new
@@ -349,7 +350,8 @@ namespace MovieClub.Controllers
                     ImdbRating = l.ImdbRatings,
                     ViewsCount = l.Views,
                     MovieClubRating = l.MovieClubRatings,
-                    MovieClubRentCount = l.MovieClubRentCount
+                    MovieClubRentCount = l.MovieClubRentCount,
+                    AddedDate = l.AddedDate
                 });
 
                 foreach (var movie in query)
@@ -365,7 +367,8 @@ namespace MovieClub.Controllers
                             ImdbRating = (float)movie.ImdbRating,
                             MovieClubRating = (float)movie.MovieClubRating,
                             MovieClubRentCount = movie.MovieClubRentCount,
-                            ViewsCount = movie.ViewsCount
+                            ViewsCount = movie.ViewsCount,
+                            AddedDate = (DateTime)movie.AddedDate
                         };
                     movielist.Add(item);
                 }
@@ -391,7 +394,8 @@ namespace MovieClub.Controllers
                                     ImdbId = movie.ImdbId,
                                     MovieClubRating = (float)movie.MovieClubRatings,
                                     MovieClubRentCount = movie.MovieClubRentCount,
-                                    ViewsCount = movie.Views
+                                    ViewsCount = movie.Views,
+                                    AddedDate = (DateTime)movie.AddedDate
                                 };
                             movielist.Add(item);
                         }
@@ -414,7 +418,8 @@ namespace MovieClub.Controllers
                                     ImdbId = movie.ImdbId,
                                     MovieClubRating = (float)movie.MovieClubRatings,
                                     MovieClubRentCount = movie.MovieClubRentCount,
-                                    ViewsCount = movie.Views
+                                    ViewsCount = movie.Views,
+                                    AddedDate = (DateTime)movie.AddedDate
                                 };
                             movielist.Add(item);
                         }
@@ -438,7 +443,8 @@ namespace MovieClub.Controllers
                                     ImdbId = movie.ImdbId,
                                     MovieClubRating = (float)movie.MovieClubRatings,
                                     MovieClubRentCount = movie.MovieClubRentCount,
-                                    ViewsCount = movie.Views
+                                    ViewsCount = movie.Views,
+                                    AddedDate = (DateTime)movie.AddedDate
                                 };
                             movielist.Add(item);
                         }
@@ -462,7 +468,8 @@ namespace MovieClub.Controllers
                                     ImdbId = movie.ImdbId,
                                     MovieClubRating = (float)movie.MovieClubRatings,
                                     MovieClubRentCount = movie.MovieClubRentCount,
-                                    ViewsCount = movie.Views
+                                    ViewsCount = movie.Views,
+                                    AddedDate = (DateTime)movie.AddedDate
                                 };
                             movielist.Add(item);
                         }
@@ -530,6 +537,14 @@ namespace MovieClub.Controllers
             MovieDB.DBMovie dbmovieitem = db.DBMovies.First(mv => mv.Id == Id);
             dbmovieitem.Views += 1;
             db.SaveChanges();
+            ViewBag.HasVoted = false;
+            var userid = UserOperations.GetCurrentUser().UserId;
+            var votes = db.DBRatings.Where(v => (v.UserId == userid) && (v.MovieId == Id));
+            if (votes.Count() != 0)
+            {
+                ViewBag.HasVoted = true;
+                ViewBag.UserRating = votes.First().Rating;
+            }
             return View(new MovieDetails() {
                 Actors = dbmovieitem.Actors,
                 Awards = dbmovieitem.Awards,
@@ -567,7 +582,7 @@ namespace MovieClub.Controllers
 
             foreach (var category in Categories)
             {
-                var taggedCount = db.DBMovieToCategory.Count(m => m.CategoryId == category.CategoryId);
+                var taggedCount = db.DBMovieToCategories.Count(m => m.CategoryId == category.CategoryId);
 
                 sidebardata.categorylist.Add(new Models.Category() { 
                     Id = category.CategoryId,
@@ -622,6 +637,11 @@ namespace MovieClub.Controllers
                 dbmovie.MovieClubVotes = dbmovie.MovieClubVotes + 1;
                 var newrating = ((dbmovie.MovieClubRatings * (float)dbmovie.MovieClubVotes) + rating) / ((float)(dbmovie.MovieClubVotes + 1));
                 dbmovie.MovieClubRatings = (double)newrating;
+                db.DBRatings.Add(new MovieDB.DBRating() { 
+                    MovieId=movieid,
+                    Rating = rating,
+                    UserId = UserOperations.GetCurrentUser().UserId
+                });
                 db.SaveChanges();
 
                 return Json(new
@@ -631,7 +651,7 @@ namespace MovieClub.Controllers
                 });
 
             }
-            catch(Exception e){
+            catch(Exception){
                 return Json(new
                 {
                     Result = "error"

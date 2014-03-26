@@ -17,5 +17,6 @@ namespace MovieClub.Models
         public float ImdbRating { get; set; }
         public int MovieClubRentCount { get; set; }
         public int ViewsCount { get; set; }
+        public DateTime AddedDate { get; set; }
     }
 }

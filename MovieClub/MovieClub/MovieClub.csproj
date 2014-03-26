@@ -189,7 +189,9 @@
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WebServiceController.cs" />
-    <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
+    <Compile Include="CustomAttributes\RequireAdminAttribute.cs" />
+    <Compile Include="CustomAttributes\RequireMembershipAttribute.cs" />
+    <Compile Include="CustomAttributes\ValidatePearsonEmailAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -206,6 +208,10 @@
     <Compile Include="Models\MovieDataContext.cs" />
     <Compile Include="Models\RecommendedMovies.cs" />
     <Compile Include="Models\SimpleMovieDetails.cs" />
+    <Compile Include="Models\UserDetails.cs" />
+    <Compile Include="MovieDB\DBAdmin.cs">
+      <DependentUpon>MovieClubDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="MovieDB\DBCategory.cs">
       <DependentUpon>MovieClubDB.tt</DependentUpon>
     </Compile>
@@ -219,6 +225,9 @@
       <DependentUpon>MovieClubDB.tt</DependentUpon>
     </Compile>
     <Compile Include="MovieDB\DBMovieToCategory.cs">
+      <DependentUpon>MovieClubDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDB\DBRating.cs">
       <DependentUpon>MovieClubDB.tt</DependentUpon>
     </Compile>
     <Compile Include="MovieDB\DBRecommendation.cs">
@@ -248,6 +257,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MovieClubDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="MovieDB\MovieClubDB1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MovieClubDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Operations\UserOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebServices\ImdbData.cs" />
   </ItemGroup>
@@ -385,7 +400,7 @@
     <Content Include="MovieDB\MovieClubDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MovieClubDB.edmx</DependentUpon>
-      <LastGenOutput>MovieClubDB.cs</LastGenOutput>
+      <LastGenOutput>MovieClubDB1.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Content\images\poster.jpg" />
@@ -413,11 +428,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Manage.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
@@ -438,6 +448,7 @@
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Content\Search.cshtml" />
     <Content Include="Views\Shared\_Playlist.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

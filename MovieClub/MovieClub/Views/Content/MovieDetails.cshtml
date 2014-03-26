@@ -14,16 +14,18 @@
                 <p>IMDb Rated</p>
                 <div id="rating"><img src="/Content/images/stars.png" width="24" height="24"/>@movie.ImdbRatings<img src="/Content/images/stars.png" width="24" height="24" /> </div>(@movie.ImdbVotes Votes) <p><a href="http://www.imdb.com/title/@movie.ImdbId/">Look in IMDb</a></p>
             </div>
-            <div id="action-buttons">
-                <ul>
-                    <li><a href="" class="button expand small">Reserve</a></li>
-                    <li><a href="#" class="button expand small split">Add to Watchlist <span data-dropdown="drop"></span></a><br></li>
-                </ul>
-                <ul id="drop" class="f-dropdown" data-dropdown-content>
-                    <li><a href="#">Recommend</a></li>
-                    <li><a href="#">Add to favorites</a></li>
-                </ul>
-            </div>
+            @if(Request.IsAuthenticated){
+                <div id="action-buttons">
+                    <ul>
+                        <li><a href="" class="button expand small">Reserve</a></li>
+                        <li><a href="#" class="button expand small split">Add to Watchlist <span data-dropdown="drop"></span></a><br></li>
+                    </ul>
+                    <ul id="drop" class="f-dropdown" data-dropdown-content>
+                        <li><a href="#">Recommend</a></li>
+                        <li><a href="#">Add to favorites</a></li>
+                    </ul>
+                </div>
+            }
             <div id="movieclub-stats">
                 <table>
                     <tr><th colspan="2">MovieClub Statistics</th></tr>
@@ -36,15 +38,18 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Your Rating</td>
-                            <td>
-                                <div id="movieclub-rating">
-                                    <input type="range" min="0" max="5" value="0" step="0.5" id="backing2">
-                                    <div class="rateit" data-rateit-backingfld="#backing2"></div>
-                                </div>
-                            </td>
-                        </tr>
+                        @if (Request.IsAuthenticated)
+                        {
+                            <tr>
+                                <td>Your Rating</td>
+                                <td>
+                                    <div id="movieclub-rating">
+                                        <input type="range" min="0" max="5" @if (ViewBag.HasVoted) { <text> value="@ViewBag.UserRating" </text>   } else { <text>value="0"</text>  } step="0.5" id="backing2">
+                                        <div class="rateit" data-rateit-backingfld="#backing2" @if (ViewBag.HasVoted) { <text> data-rateit-ispreset="true" data-rateit-readonly="true" data-rateit-value="@ViewBag.UserRating" </text>   }></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
                         <tr><td>Rents</td><td>@movie.MovieClubRentCount times</td></tr>
                 </table>
             </div>
@@ -156,11 +161,12 @@
     @Scripts.Render("~/Content/js/jquery.rateit.js")
     @Scripts.Render("~/Content/js/toastr.js")
 
+    
     <script>
         $(document).ready(function () {
             $('#movieclub-rating .rateit').bind('rated reset', function (e) {
                 var ri = $(this);
-
+                
                 //if the use pressed reset, it will get value: 0 (to be compatible with the HTML range control), we could check if e.type == 'reset', and then set the value to  null .
                 var value = ri.rateit('value');
 

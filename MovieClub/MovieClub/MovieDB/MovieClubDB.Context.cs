@@ -28,11 +28,13 @@ namespace MovieClub.MovieDB
         public DbSet<DBCategory> DBCategories { get; set; }
         public DbSet<DBFavorite> DBFavorites { get; set; }
         public DbSet<DBMovieSuggestion> DBMovieSuggestions { get; set; }
+        public DbSet<DBMovieToCategory> DBMovieToCategories { get; set; }
         public DbSet<DBRecommendation> DBRecommendations { get; set; }
-        public DbSet<DBReservation> DBReservations { get; set; }
-        public DbSet<DBUser> DBUsers { get; set; }
         public DbSet<DBRent> DBRents { get; set; }
-        public DbSet<DBMovieToCategory> DBMovieToCategory { get; set; }
+        public DbSet<DBReservation> DBReservations { get; set; }
+        public DbSet<DBAdmin> DBAdmins { get; set; }
         public DbSet<DBMovie> DBMovies { get; set; }
+        public DbSet<DBUser> DBUsers { get; set; }
+        public DbSet<DBRating> DBRatings { get; set; }
     }
 }

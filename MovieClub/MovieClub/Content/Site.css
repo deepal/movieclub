@@ -154,7 +154,7 @@
     max-width:200px;
     margin:20px auto;
     margin-bottom:0;
-    margin-top:40px;
+    margin-top:20px;
 }
 
 #action-buttons ul li a{
@@ -307,6 +307,7 @@
 #movieclub-stats table{
     margin: 0 auto;
     margin-bottom:25px;
+    min-width:200px;
 }
 
 #movieclub-stats table tr td{

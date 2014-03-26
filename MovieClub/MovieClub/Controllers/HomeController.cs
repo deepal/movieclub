@@ -13,6 +13,7 @@ namespace MovieClub.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
+
             var movies = new List<FeaturedMovieDetails>()
             {
                 new Models.FeaturedMovieDetails(){

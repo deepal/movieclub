@@ -15,7 +15,7 @@ namespace MovieClub.MovieDB
     public partial class DBFavorite
     {
         public int FavoritesID { get; set; }
-        public Nullable<int> MovieID { get; set; }
-        public Nullable<int> UserID { get; set; }
+        public int MovieID { get; set; }
+        public int UserID { get; set; }
     }
 }

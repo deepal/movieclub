@@ -198,3 +198,15 @@
 #card-views{
     font-size:11px;
 }
+
+#card-date{
+    margin-top:10px;
+    padding:5px;
+    font-size:11px;
+    color:#7e7e7e;
+    background-color:whitesmoke;
+}
+
+#card-date-title{
+    font-size:9px;
+}

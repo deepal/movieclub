@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace MovieClub.Controllers
 {
-    [Authorize]
+    
     public class UserController : Controller
     {
 

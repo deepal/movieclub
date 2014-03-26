@@ -12,13 +12,11 @@ namespace MovieClub.MovieDB
     using System;
     using System.Collections.Generic;
     
-    public partial class DBUser
+    public partial class DBRating
     {
+        public int RatingId { get; set; }
         public int UserId { get; set; }
-        public string UserName { get; set; }
-        public string PhotoURL { get; set; }
-        public Nullable<System.DateTime> AccountCreatedDate { get; set; }
-        public int EmpId { get; set; }
-        public string Email { get; set; }
+        public int MovieId { get; set; }
+        public double Rating { get; set; }
     }
 }

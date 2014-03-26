@@ -67,6 +67,9 @@
                                         <div id="card-views">
                                             @movie.ViewsCount Views
                                         </div>
+                                        <div id="card-date">
+                                            @String.Format("{0:MMMM dd yyyy}", movie.AddedDate)
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -82,30 +85,30 @@
     <ul id="pagination">
         @if (list == null)
         {
-            <li><a class="previous" href="/Content/Collection/@ViewBag.CollectionId/?Page=@(currentpage-1)">Previous</a></li>
+            <li><a class="previous" href="/Content/Collection/@ViewBag.CollectionId/?Page=@(currentpage - 1)">Previous</a></li>
 
             for (var i = 0; i < pagecount; i++)
             {
-                <li><a href="/Content/Collection/@ViewBag.CollectionId/?Page=@(i+1)">@(i + 1)</a></li>
+                <li><a href="/Content/Collection/@ViewBag.CollectionId/?Page=@(i + 1)">@(i + 1)</a></li>
             }
 
             if (currentpage != pagecount)
             {
-                <li><a href="/Content/Collection/@ViewBag.CollectionId/?Page=@(currentpage+1)" class="nextblock">Next</a></li>
+                <li><a href="/Content/Collection/@ViewBag.CollectionId/?Page=@(currentpage + 1)" class="nextblock">Next</a></li>
             }
         }
         else
         {
-            <li><a class="previous" href="/Content/Collection/List/@list/?Page=@(currentpage-1)">Previous</a></li>
+            <li><a class="previous" href="/Content/Collection/List/@list/?Page=@(currentpage - 1)">Previous</a></li>
 
             for (var i = 0; i < pagecount; i++)
             {
-                <li><a href="/Content/Collection/List/@list/?Page=@(i+1)">@(i + 1)</a></li>
+                <li><a href="/Content/Collection/List/@list/?Page=@(i + 1)">@(i + 1)</a></li>
             }
 
             if (currentpage != pagecount)
             {
-                <li><a href="/Content/Collection/List/@list/?Page=@(currentpage+1)" class="nextblock">Next</a></li>
+                <li><a href="/Content/Collection/List/@list/?Page=@(currentpage + 1)" class="nextblock">Next</a></li>
             }
         }
     </ul>

@@ -1,4 +1,5 @@
-﻿using MovieClub.Models;
+﻿using MovieClub.CustomAttributes;
+using MovieClub.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +10,6 @@ using System.Web.Mvc;
 
 namespace MovieClub.Controllers
 {
-    [Authorize]
     public class AdminController : Controller
     {
 
@@ -121,7 +121,7 @@ namespace MovieClub.Controllers
                 entry.MovieId = currentMovieId;
                 entry.CategoryId = (int?)currentcatId;
 
-                db.DBMovieToCategory.Add(entry);
+                db.DBMovieToCategories.Add(entry);
                 db.SaveChanges();
             }
 

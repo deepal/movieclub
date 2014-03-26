@@ -15,8 +15,8 @@ namespace MovieClub.MovieDB
     public partial class DBReservation
     {
         public int ReservationId { get; set; }
-        public Nullable<int> MovieId { get; set; }
-        public Nullable<int> UserId { get; set; }
-        public int Priority { get; set; }
+        public int MovieId { get; set; }
+        public int UserId { get; set; }
+        public System.DateTime Timestamp { get; set; }
     }
 }

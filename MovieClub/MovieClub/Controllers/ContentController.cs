@@ -570,7 +570,10 @@ namespace MovieClub.Controllers
                 Writer = dbmovieitem.Writer,
                 Year = dbmovieitem.Year,
                 Views = dbmovieitem.Views,
-                AddedDate = (DateTime)dbmovieitem.AddedDate
+                AddedDate = (DateTime)dbmovieitem.AddedDate,
+                ActorsList = stringToTagList(dbmovieitem.Actors,','),
+                WritersList = stringToTagList(dbmovieitem.Writer,','),
+                DirectorsList = stringToTagList(dbmovieitem.Director,',')
             });
         }
 
@@ -601,11 +604,34 @@ namespace MovieClub.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Search(string q)
+        public ActionResult Search(string q, string by)
         {
+            if (by == null)
+            {
+                by = "name";
+            }
+
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
             //var query = formdata["search-text"];
-            var resultsquery = db.DBMovies.Where(m => ((m.Name).ToLower()).Contains(q.ToLower()));
+            System.Linq.IQueryable<MovieDB.DBMovie> resultsquery = null;
+            switch (by)
+            {
+                case "name":
+                    resultsquery = db.DBMovies.Where(m => (m.Name.ToLower()).Contains(q.ToLower()));
+                    break;
+
+                case "actor":
+                    resultsquery = db.DBMovies.Where(m => m.Actors.Contains(q.ToLower()));
+                    break;
+
+                case "director":
+                    resultsquery = db.DBMovies.Where(m => m.Director.Contains(q.ToLower()));
+                    break;
+
+                case "writer":
+                    resultsquery = db.DBMovies.Where(m => m.Writer.Contains(q.ToLower()));
+                    break;
+            }
             var resultslist = new Models.SearchResults();
 
             foreach (var item in resultsquery)
@@ -639,6 +665,17 @@ namespace MovieClub.Controllers
             {
                 return false;
             }
+        }
+
+        public List<string> stringToTagList(string inputstring,char delimiter)
+        {
+            List<string> tags = new List<string>();
+            string[] items = inputstring.Split(delimiter);
+            foreach (var item in items)
+            {
+                tags.Add(item.Trim());
+            }
+            return tags;
         }
 
         [HttpPost]

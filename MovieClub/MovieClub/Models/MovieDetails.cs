@@ -43,6 +43,10 @@ namespace MovieClub.Models
         public int Views { get; set; }
         public DateTime AddedDate { get; set; }
         public int MovieClubVotes { get; set; }
+
+        public List<string> ActorsList { get; set; }
+        public List<string> WritersList { get; set; }
+        public List<string> DirectorsList { get; set; }
         
     }
 }

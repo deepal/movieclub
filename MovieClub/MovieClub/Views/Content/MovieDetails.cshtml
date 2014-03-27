@@ -95,9 +95,54 @@
                 <div id="movie-stats">
                     <div id="movie-contributors">
                         <table>
-                            <tr><td>Director:</td><td>@movie.Director</td></tr>
-                            <tr><td>Writers:</td><td>@movie.Writer</td></tr>
-                            <tr><td>Stars:</td><td>@movie.Actors</td></tr>
+                            <tr>
+                                <td>Director:</td>
+                                <td>
+                                    @if (movie.DirectorsList.Count() > 1)
+                                    {
+                                        foreach (var director in movie.DirectorsList)
+                                        {
+                                            @:<a href="/Content/Search/?q=@director&&by=director">@director</a>,
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <a href="/Content/Search/?q=@movie.Director&&by=director">@movie.Director</a>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Writers:</td>
+                                <td>
+                                    @if (movie.WritersList.Count() > 1)
+                                    {
+                                        foreach (var writer in movie.WritersList)
+                                        {
+                                            @:<a href="/Content/Search/?q=@writer&&by=writer">@writer</a>,
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <a href="/Content/Search/?q=@movie.Writer&&by=writer">@movie.Writer</a>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Stars:</td>
+                                <td>
+                                    @if (movie.ActorsList.Count() > 1)
+                                    {
+                                        foreach (var actor in movie.ActorsList)
+                                        {
+                                            @:<a href="/Content/Search/?q=@actor&&by=actor">@actor</a>,
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <a href="/Content/Search/?q=@movie.Actors&&by=actor">@movie.Actors</a>
+                                    }
+                                </td>
+                            </tr>
                             <tr><td>Awards:</td><td>@movie.Awards</td></tr>
                         </table>
                     </div>

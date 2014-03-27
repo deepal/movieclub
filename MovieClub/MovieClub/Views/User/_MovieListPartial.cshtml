@@ -1,0 +1,16 @@
+﻿@model List<MovieClub.Models.MyAccountModels.MyAccountMovieModel>
+
+@{
+    var watchlist = Model;
+}
+
+@foreach (var item in watchlist)
+{
+    <tr>
+        <td><a href="/Content/MovieDetails/@item.MovieId">@item.MovieName</a></td>
+        <td>@item.Categories</td>
+        <td>@item.Actors</td>
+        <td>@item.Year</td>
+        <td>@item.Imdb</td>
+    </tr>
+}

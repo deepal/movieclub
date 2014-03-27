@@ -159,10 +159,12 @@ namespace MovieClub.Controllers
             });
         }
 
+        [HttpGet]
         public ActionResult Favorites()
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
-            var favorites = db.DBFavorites.Where(f => f.UserID == UserOperations.GetCurrentUser().UserId).Join(db.DBMovies,
+            var uid = UserOperations.GetCurrentUser().UserId;
+            var favorites = db.DBFavorites.Where(f => f.UserID == uid).Join(db.DBMovies,
                 r=>r.MovieID,
                 l=>l.Id,
                 (r, l) => new
@@ -175,13 +177,31 @@ namespace MovieClub.Controllers
                     ImdbRatings = l.ImdbRatings
                 });
 
-            return Json(favorites.ToList(), JsonRequestBehavior.AllowGet);
+            List<Models.MyAccountModels.MyAccountMovieModel> favmovies = new List<Models.MyAccountModels.MyAccountMovieModel>();
+
+            foreach (var item in favorites)
+            {
+                favmovies.Add(new Models.MyAccountModels.MyAccountMovieModel()
+                {
+                    MovieId = item.MovieId,
+                    MovieName = item.MovieName,
+                    Categories = item.Categories,
+                    Actors = item.Actors,
+                    Year = item.Year,
+                    Imdb = (float)item.ImdbRatings
+                });
+            }
+            //return Json(watchlist.ToList(), JsonRequestBehavior.AllowGet);
+            return PartialView("_MovieListPartial", favmovies);
+            //return Json(favorites.ToList(), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
         public ActionResult Watchlist()
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
-            var watchlist = db.DBWatchLists.Where(w => w.UserId == UserOperations.GetCurrentUser().UserId).Join(db.DBMovies,
+            var uid = UserOperations.GetCurrentUser().UserId;
+            var watchlist = db.DBWatchLists.Where(w => w.UserId == uid).Join(db.DBMovies,
                     l=>l.MovieId,
                     r=>r.Id,
                     (l, r) => new
@@ -193,9 +213,24 @@ namespace MovieClub.Controllers
                         Year = r.Year,
                         ImdbRatings = r.ImdbRatings
                     });
-            return Json(watchlist.ToList(), JsonRequestBehavior.AllowGet);
+            List<Models.MyAccountModels.MyAccountMovieModel> watchlistmovies = new List<Models.MyAccountModels.MyAccountMovieModel>();
+
+            foreach (var item in watchlist)
+            {
+                watchlistmovies.Add(new Models.MyAccountModels.MyAccountMovieModel() {
+                    MovieId = item.MovieId,
+                    MovieName = item.MovieName,
+                    Categories = item.Categories,
+                    Actors = item.Actors,
+                    Year = item.Year,
+                    Imdb = (float)item.ImdbRatings
+                });
+            }
+            //return Json(watchlist.ToList(), JsonRequestBehavior.AllowGet);
+            return PartialView("_MovieListPartial", watchlistmovies);
         }
 
+        [HttpGet]
         public ActionResult Recommendations()
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
@@ -210,7 +245,19 @@ namespace MovieClub.Controllers
                         Comment = l.Comment,
                         Date = l.Date
                     });
-            return Json(recommendations.ToList(), JsonRequestBehavior.AllowGet);
+            List<Models.MyAccountModels.RecommendationModel> recomList = new List<Models.MyAccountModels.RecommendationModel>();
+            foreach (var recom in recommendations)
+            {
+                recomList.Add(new Models.MyAccountModels.RecommendationModel() {
+                    MovieId = recom.MovieId,
+                    MovieName = recom.MovieName,
+                    RecommendedBy = recom.RecommendedBy,
+                    Comment = recom.Comment,
+                    Date = (DateTime)recom.Date
+                });
+            }
+            return PartialView("_RecommendationsPartial", recomList);
+           // return Json(recommendations.ToList(), JsonRequestBehavior.AllowGet);
         }
 
         /*public ActionResult Activity()

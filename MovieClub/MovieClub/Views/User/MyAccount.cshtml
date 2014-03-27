@@ -50,12 +50,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>The Pursuit of Happiness</td>
-                        <td>Will Smith</td>
-                        <td>This is a really nice movie to watch!</td>
-                        <td>2014-02-01</td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -87,13 +81,38 @@
 @section scripts{
     <script>
         $(document).ready(function () {
+
             $.ajax({
-                url: "/User/Favorites",
-                type: "POST",
-                data: "text"
+                url: "/User/Recommendations",
+                type: "GET",
             })
             .success(function (data) {
-                var jsonobj = $.parseJSON(data);
+                $("#recom-table tbody").html(data);
+            })
+            .error(function () {
+                $("#recom-table tbody").html("<p>Loading recommendations failed!</p>");
+            });
+
+            $.ajax({
+                url: "/User/Favorites",
+                type: "GET"
+            })
+            .success(function (data) {
+                $("#fav-table tbody").html(data);
+            })
+            .error(function () {
+                $("#fav-table tbody").html("<p>Loading favorites failed!</p>");
+            });
+
+            $.ajax({
+                url: "/User/Watchlist",
+                type: "GET"
+            })
+            .success(function (data) {
+                $("#watchlist-table tbody").html(data);
+            })
+            .error(function () {
+                $("#watchlist-table tbody").html("<p>Loading favorites failed!</p>");
             });
         });
     </script>

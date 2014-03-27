@@ -1,0 +1,15 @@
+﻿@model List<MovieClub.Models.MyAccountModels.RecommendationModel>
+
+@{
+    var recomlist = Model;
+}
+
+@foreach (var item in recomlist)
+{
+    <tr>
+        <td><a href="/Content/MovieDetails/@item.MovieId">@item.MovieName</a></td>
+        <td>@item.RecommendedBy</td>
+        <td>@item.Comment</td>
+        <td>@String.Format("{0:MM-dd-yyyy}", @item.Date)</td>
+    </tr>
+}

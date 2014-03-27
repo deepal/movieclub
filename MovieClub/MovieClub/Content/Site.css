@@ -318,6 +318,37 @@
     font-size:12px;
 }
 
+#lean_overlay {
+    position: fixed;
+    z-index:100;
+    top: 0px;
+    left: 0px;
+    height:100%;
+    width:100%;
+    background: #000;
+    display: none;
+}
+
+#recommend-popup{
+    display:none;
+    margin-left: -350px;
+}
+
+#recommend-popup-inner{
+    padding:10px;
+    border-radius:5px;
+    background-color:#f2f2f2;
+    left:100px;
+}
+
+#recommend-popup-inner form fieldset legend{
+    background-color:#f2f2f2;
+}
+
+#recommend-button{
+    margin-bottom:0px;
+}
+
 footer{
     height:150px;
     /*background-color:#2ba6cb;*/

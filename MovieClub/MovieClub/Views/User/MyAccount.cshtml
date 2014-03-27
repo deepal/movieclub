@@ -87,22 +87,13 @@
 @section scripts{
     <script>
         $(document).ready(function () {
-
-            $("table").tablesorter();
-
-            $("#clearlog").click(function (e) {
-                $.ajax({
-                    type: "GET",
-                    url: "http://omdbapi.com/?",
-                    data:{t:"up"}
-                })
-                .success(function (data) {
-                    aler(data);
-                })
-                .error(function () {
-                    alert(123);
-                });
-                e.preventDefault();
+            $.ajax({
+                url: "/User/Favorites",
+                type: "POST",
+                data: "text"
+            })
+            .success(function (data) {
+                var jsonobj = $.parseJSON(data);
             });
         });
     </script>

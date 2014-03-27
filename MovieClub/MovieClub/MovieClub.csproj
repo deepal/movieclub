@@ -242,6 +242,9 @@
     <Compile Include="MovieDB\DBUser.cs">
       <DependentUpon>MovieClubDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="MovieDB\DBWatchList.cs">
+      <DependentUpon>MovieClubDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="MovieDB\MovieClubDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -293,6 +296,7 @@
     <Content Include="Content\images\stars.png" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery-ias.min.js" />
+    <Content Include="Content\js\jquery.leanModal.min.js" />
     <Content Include="Content\js\jquery.pagination.js" />
     <Content Include="Content\js\jquery.simplePagination.js" />
     <Content Include="Content\js\moviecollection.js" />

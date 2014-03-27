@@ -12,12 +12,10 @@ namespace MovieClub.MovieDB
     using System;
     using System.Collections.Generic;
     
-    public partial class DBRecommendation
+    public partial class DBWatchList
     {
-        public int RecommendationId { get; set; }
+        public int WatchId { get; set; }
         public int MovieId { get; set; }
-        public string Username { get; set; }
-        public string Comment { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public int UserId { get; set; }
     }
 }

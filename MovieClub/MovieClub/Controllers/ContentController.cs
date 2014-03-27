@@ -37,7 +37,7 @@ namespace MovieClub.Controllers
         {
             return View();
         }
-
+        /*
         public List<SimpleMovieDetails> GetMovieList()
         {
             var movies = new List<SimpleMovieDetails>()
@@ -326,7 +326,7 @@ namespace MovieClub.Controllers
 
             return movies;
         }
-
+        */
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Collection(int Id, int? Page, int? Method, int? list)
@@ -538,12 +538,15 @@ namespace MovieClub.Controllers
             dbmovieitem.Views += 1;
             db.SaveChanges();
             ViewBag.HasVoted = false;
-            var userid = UserOperations.GetCurrentUser().UserId;
-            var votes = db.DBRatings.Where(v => (v.UserId == userid) && (v.MovieId == Id));
-            if (votes.Count() != 0)
+            if (Request.IsAuthenticated)
             {
-                ViewBag.HasVoted = true;
-                ViewBag.UserRating = votes.First().Rating;
+                var userid = UserOperations.GetCurrentUser().UserId;
+                var votes = db.DBRatings.Where(v => (v.UserId == userid) && (v.MovieId == Id));
+                if (votes.Count() != 0)
+                {
+                    ViewBag.HasVoted = true;
+                    ViewBag.UserRating = votes.First().Rating;
+                }
             }
             return View(new MovieDetails() {
                 Actors = dbmovieitem.Actors,
@@ -624,29 +627,57 @@ namespace MovieClub.Controllers
             return View(resultslist);
         }
 
+        public bool hasRated(int userid, int movieid)
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            int rated = db.DBRatings.Count(r => r.MovieId == movieid && r.UserId == userid);
+            if (rated != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         [HttpPost]
         [AllowAnonymous]  //remove this attribute after testing
         public ActionResult RateMovie()
         {
-            int movieid = int.Parse(Request.Form["movieid"]);
+            int mid = int.Parse(Request.Form["movieid"]);
+            int uid = UserOperations.GetCurrentUser().UserId;
             float rating = float.Parse(Request.Form["rating"]);
 
             try{
                 MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
-                MovieDB.DBMovie dbmovie = db.DBMovies.First(m=>m.Id==movieid);
-                dbmovie.MovieClubVotes = dbmovie.MovieClubVotes + 1;
-                var newrating = ((dbmovie.MovieClubRatings * (float)dbmovie.MovieClubVotes) + rating) / ((float)(dbmovie.MovieClubVotes + 1));
+                MovieDB.DBMovie dbmovie = db.DBMovies.First(m=>m.Id==mid);
+                //var newrating = ((dbmovie.MovieClubRatings * (float)dbmovie.MovieClubVotes) + rating) / ((float)(dbmovie.MovieClubVotes+1));
+                //
+                if (!hasRated(uid, mid))
+                {
+                    db.DBRatings.Add(new MovieDB.DBRating()
+                    {
+                        MovieId = mid,
+                        Rating = rating,
+                        UserId = uid
+                    });
+                    db.SaveChanges();
+                }
+                else
+                {
+                    db.DBRatings.First(m => m.UserId == uid && m.MovieId == mid).Rating = rating;
+                    db.SaveChanges();
+                }
+
+                var newrating = db.DBRatings.Where(m => m.MovieId == mid).Average(a => a.Rating);
                 dbmovie.MovieClubRatings = (double)newrating;
-                db.DBRatings.Add(new MovieDB.DBRating() { 
-                    MovieId=movieid,
-                    Rating = rating,
-                    UserId = UserOperations.GetCurrentUser().UserId
-                });
+
                 db.SaveChanges();
 
                 return Json(new
                 {
-                    Rating = ""+newrating,
+                    Rating = "" + newrating,
                     Result = "ok"
                 });
 

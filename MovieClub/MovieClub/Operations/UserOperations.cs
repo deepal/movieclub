@@ -31,23 +31,28 @@ namespace MovieClub.Operations
             string username = HttpContext.Current.User.Identity.Name;
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
 
-            var dbuser = db.DBUsers.Where(u => u.UserName == username).First();
-            var dbadmin = db.DBAdmins.Count(a => a.UserId == dbuser.UserId);
-            Models.UserDetails currentuser = new Models.UserDetails();
-
-            currentuser.UserId = dbuser.UserId;
-            if (dbadmin == 1)
+            var dbuserlist = db.DBUsers.Where(u => u.UserName == username);
+            if (dbuserlist.Count() != 0)
             {
-                currentuser.IsAdmin = true;
-            }
-            else
-            {
-                currentuser.IsAdmin = false;
-            }
-            currentuser.UserName = username;
-            currentuser.PhotoURL = dbuser.PhotoURL;
+                var dbuser = dbuserlist.First();
+                var dbadmin = db.DBAdmins.Count(a => a.UserId == dbuser.UserId);
+                Models.UserDetails currentuser = new Models.UserDetails();
 
-            return currentuser;
+                currentuser.UserId = dbuser.UserId;
+                if (dbadmin == 1)
+                {
+                    currentuser.IsAdmin = true;
+                }
+                else
+                {
+                    currentuser.IsAdmin = false;
+                }
+                currentuser.UserName = username;
+                currentuser.PhotoURL = dbuser.PhotoURL;
+
+                return currentuser;
+            }
+            return null;
         }
 
         public static bool IsAdmin()

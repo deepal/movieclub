@@ -17,14 +17,35 @@
             @if(Request.IsAuthenticated){
                 <div id="action-buttons">
                     <ul>
-                        <li><a href="" class="button expand small">Reserve</a></li>
-                        <li><a href="#" class="button expand small split">Add to Watchlist <span data-dropdown="drop"></span></a><br></li>
+                        <li><a href="" class="button expand small" id="reserve-movie">Reserve</a></li>
+                        <li>
+                            <a href="#" data-dropdown="dropd" data-options="align:right" class="button dropdown small expand">More Options</a><br>
+                        </li>
                     </ul>
-                    <ul id="drop" class="f-dropdown" data-dropdown-content>
-                        <li><a href="#">Recommend</a></li>
-                        <li><a href="#">Add to favorites</a></li>
+                    <ul id="dropd" data-dropdown-content class="f-dropdown">
+                        <li><a href="#recommend-popup" class="small" id="recommend-movie" data-options="align:left">Recommend</a></li>
+                        <li><a href="#" id="add-to-favorites" class="small">+ Add to favorites</a></li>
+                        <li><a href="#" id="add-to-watchlist" class="small">+ Add to watchlist</a></li>
                     </ul>
                 </div>
+                <div id="recommend-popup">
+                    <div id="recommend-popup-inner">
+                        @using (Html.BeginForm())
+                        {
+                            <fieldset>
+                                <legend>Recommend</legend>
+
+                                <label>Comment
+                                    <textarea placeholder="What do you think about ''@movie.Name'" id="comment-text" cols="100" rows="4"></textarea>
+                                </label>
+                                <div class="right">
+                                    <button class="button tiny" id="recommend-button">Recommend</button>
+                                </div>
+                            </fieldset>
+                        }
+                    </div>
+                </div>
+
             }
             <div id="movieclub-stats">
                 <table>
@@ -45,7 +66,7 @@
                                 <td>
                                     <div id="movieclub-rating">
                                         <input type="range" min="0" max="5" @if (ViewBag.HasVoted) { <text> value="@ViewBag.UserRating" </text>   } else { <text>value="0"</text>  } step="0.5" id="backing2">
-                                        <div class="rateit" data-rateit-backingfld="#backing2" @if (ViewBag.HasVoted) { <text> data-rateit-ispreset="true" data-rateit-readonly="true" data-rateit-value="@ViewBag.UserRating" </text>   }></div>
+                                        <div class="rateit" data-rateit-backingfld="#backing2" @if (ViewBag.HasVoted) { <text> data-rateit-ispreset="true" data-rateit-value="@ViewBag.UserRating" </text>   }></div>
                                     </div>
                                 </td>
                             </tr>
@@ -160,10 +181,96 @@
     <script src="http://vjs.zencdn.net/4.4/video.js"></script>
     @Scripts.Render("~/Content/js/jquery.rateit.js")
     @Scripts.Render("~/Content/js/toastr.js")
-
+    @Scripts.Render("~/Content/js/jquery.leanModal.min.js")
     
     <script>
+
         $(document).ready(function () {
+
+            function closeModal() {
+                $("#recommend-popup").attr({ style: "display:none" });
+                $("#lean_overlay").attr({ style: "display:none" });
+            }
+
+            $("#recommend-movie").leanModal({ closeButton: ".modal_close" });
+
+            $("#recommend-button").click(function (e) {
+                var mid = "@movie.Id"
+                closeModal();
+                $.ajax({
+                    url: "/User/Recommend",
+                    type: "POST",
+                    data: { movieid: mid, comment: $("#comment-text").val() },
+                    dataType: "text"
+                })
+                .success(function (data) {
+                    var obj = $.parseJSON(data);
+                    if (obj.result == "ok") {
+                        toastr.success("You recommended '@movie.Name'!");
+                    }
+                    else if (obj.result == "error") {
+                        toastr.info(obj.reason);
+                    }
+                    else {
+                        toastr.error("Failed! Check your connection.");
+                    }
+                })
+                .error(function () {
+                    toastr.error("Failed! Check your connection.");
+                });
+
+                e.preventDefault();
+            });
+
+            $("#add-to-favorites").click(function (e) {
+                var mid = "@movie.Id";
+                $.ajax({
+                    url: "/User/AddToFavorites",
+                    type: "POST",
+                    data:{movieid:mid},
+                    dataType:"text"
+                })
+                .success(function (data) {
+                    var obj = $.parseJSON(data);
+                    if (obj.result == "ok") {
+                        toastr.success("'@movie.Name' added to your favorites!");
+                    }
+                    else if (obj.result == "error") {
+                        toastr.info(obj.reason);
+                    }
+                })
+                .error(function () {
+                    toastr.error("Failed! Check your connection.");
+                });
+                e.preventDefault();
+            });
+
+            $("#add-to-watchlist").click(function (e) {
+                var mid = "@movie.Id";
+                $.ajax({
+                    url: "/User/AddToWatchList",
+                    type: "POST",
+                    data: { movieid: mid },
+                    dataType: "text"
+                })
+                .success(function (data) {
+                    var obj = $.parseJSON(data);
+                    if (obj.result == "ok") {
+                        toastr.success("'@movie.Name' added to your watchlist!");
+                    }
+                    else if (obj.result == "error") {
+                        toastr.info(obj.reason);
+                    }
+                })
+                .error(function () {
+                    toastr.error("Failed! Check your connection.");
+                });
+
+                e.preventDefault();
+            });
+
+
+
             $('#movieclub-rating .rateit').bind('rated reset', function (e) {
                 var ri = $(this);
                 
@@ -192,7 +299,7 @@
                 });
 
                 //maybe we want to disable voting?
-                ri.rateit('readonly', true);
+                //ri.rateit('readonly', true);
             });
         });
     </script>

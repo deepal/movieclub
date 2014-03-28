@@ -1,0 +1,26 @@
+﻿@model List<MovieClub.Models.AdminModels.UserModel>
+
+@{
+    var users = Model;
+}
+
+@if (users.Count != 0)
+{
+    int i=1;
+    foreach (var user in users)
+    {
+        <tr>
+            <td>@i</td>
+            <td>@user.UserID</td>
+            <td>@user.Username</td>
+            <td>@user.EmployeeId</td>
+            <td><a href="mailto:@user.Email">@user.Email</a></td>
+        </tr>
+        i++;
+    }
+}
+else
+{
+    <td colspan="5"></td>
+}
+

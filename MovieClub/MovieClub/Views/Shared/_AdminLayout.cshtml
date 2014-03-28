@@ -31,15 +31,21 @@
             <section class="top-bar-section">
                 <ul class="left">
                     <li class="has-form">
-                        <div class="row collapse">
-                            <div class="small-70 large-70 columns">
-                                <input class="textinput-custom" type="text" placeholder="Search Movies" />
+
+                        @using (Html.BeginForm("Search", "Content", FormMethod.Get))
+                        {
+                            <div class="row collapse">
+                                <div class="small-70 large-70 columns">
+                                    <input name="q" class="textinput-custom" type="text" placeholder="Search Movies" />
+                                </div>
+                                <div class="small-30 large-30 columns">
+                                    <button type="submit" class="button expand button-custom postfix">Search</button>
+                                </div>
                             </div>
-                            <div class="small-30 large-30 columns">
-                                <a href="#" class="button expand button-custom">Search</a>
-                            </div>
-                        </div>
+                        }
+
                     </li>
+
                     <li class="divider"></li>
                     <li>
                         <ul class="left">

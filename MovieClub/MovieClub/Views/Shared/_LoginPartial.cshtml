@@ -2,7 +2,7 @@
 {
     <text>
         <li class="has-dropdown">
-            @Html.ActionLink("Hello " + User.Identity.Name + " !", "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "", title = "Manage" })
+            @Html.ActionLink("Hello " + User.Identity.Name + " !", "MyAccount", "User", routeValues: null, htmlAttributes: new { @class = "", title = "Manage" })
             <ul class="dropdown">
                 @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                 {

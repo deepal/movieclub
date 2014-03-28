@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MovieClubDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DBActivityLogs">
+          <Key>
+            <PropertyRef Name="LogEntryId" />
+          </Key>
+          <Property Name="LogEntryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Activity" Type="text" />
+        </EntityType>
         <EntityType Name="DBAdmins">
           <Key>
             <PropertyRef Name="UserId" />
@@ -105,7 +113,7 @@
           <Key>
             <PropertyRef Name="ReservationId" />
           </Key>
-          <Property Name="ReservationId" Type="int" Nullable="false" />
+          <Property Name="ReservationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MovieId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Timestamp" Type="datetime" Nullable="false" />
@@ -130,6 +138,7 @@
           <Property Name="UserId" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="MovieClubDBModelStoreContainer">
+          <EntitySet Name="DBActivityLogs" EntityType="Self.DBActivityLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBAdmins" EntityType="Self.DBAdmins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBCategories" EntityType="Self.DBCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBFavorites" EntityType="Self.DBFavorites" Schema="dbo" store:Type="Tables" />
@@ -160,6 +169,7 @@
           <EntitySet Name="DBRatings" EntityType="MovieClubDBModel.DBRating" />
           <EntitySet Name="DBWatchLists" EntityType="MovieClubDBModel.DBWatchList" />
           <EntitySet Name="DBRecommendations" EntityType="MovieClubDBModel.DBRecommendation" />
+          <EntitySet Name="DBActivityLogs" EntityType="MovieClubDBModel.DBActivityLog" />
         </EntityContainer>
         <EntityType Name="DBCategory">
           <Key>
@@ -284,6 +294,14 @@
           <Property Name="Username" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
           <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="DBActivityLog">
+          <Key>
+            <PropertyRef Name="LogEntryId" />
+          </Key>
+          <Property Name="LogEntryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Activity" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -424,6 +442,15 @@
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="MovieId" ColumnName="MovieId" />
                 <ScalarProperty Name="RecommendationId" ColumnName="RecommendationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBActivityLogs">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBActivityLog">
+              <MappingFragment StoreEntitySet="DBActivityLogs">
+                <ScalarProperty Name="Activity" ColumnName="Activity" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LogEntryId" ColumnName="LogEntryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

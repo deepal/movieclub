@@ -32,7 +32,6 @@ namespace MovieClub.Controllers
                     UserID = userid
                 });
                 db.SaveChanges();
-
                 return Json(new
                 {
                     result = "ok"
@@ -143,21 +142,78 @@ namespace MovieClub.Controllers
         }
         //end of helper methods--------------------------------------------------------------------------------------
 
-        public ActionResult Reserve()
+        [HttpPost]
+        public ActionResult Reserve(int id)
         {
-            return Json(new
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            var reservs = db.DBReservations.Count(r => r.MovieId == id);
+            var moviename = db.DBMovies.First(m=>m.Id==id).Name;
+            var uid = UserOperations.GetCurrentUser().UserId;
+
+            //surround following block in try catch, and return result error in case of an error
+
+            if ((db.DBReservations.Count(m => m.MovieId == id && m.UserId == uid)) == 0)
             {
-                result = "ok"
-            });
+                if ((db.DBRents.Count(m => m.MovieId == id && m.UserId == uid)) == 0)
+                {
+                    db.DBReservations.Add(new MovieDB.DBReservation()
+                    {
+                        MovieId = id,
+                        UserId = UserOperations.GetCurrentUser().UserId,
+                        Timestamp = DateTime.Now
+                    });
+                    db.SaveChanges();
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        result = "error",
+                        message = "You already own this!"
+                    });
+                }
+            }
+            else
+            {
+                return Json(new
+                {
+                    result = "error",
+                    message = "You have already reserved this movie!"
+                });
+            }
+
+            if (reservs == 0)
+            {
+                var rents = db.DBRents.Where(re => re.MovieId == id);
+                if (rents.Count() == 0)
+                {
+                    return Json(new
+                    {
+                        result = "ok",
+                        message = "You have reserved \""+moviename+"\". Movie is available"
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        result = "ok",
+                        message = "You have reserved \"" + moviename + "\". Your position is 1"
+                    });
+                }
+            }
+            else
+            {
+                //there are more than 1 reservations
+                return Json(new
+                {
+                    result = "ok",
+                    message = "Your request has been placed \"" + moviename + "\". Your position is "+(reservs+1)
+                });
+            }
+
         }
 
-        public ActionResult RequestQueue()
-        {
-            return Json(new
-            {
-                result = "ok"
-            });
-        }
 
         [HttpGet]
         public ActionResult Favorites()

@@ -331,7 +331,7 @@
 
 #recommend-popup{
     display:none;
-    margin-left: -350px;
+    margin-left: -360px !important;
 }
 
 #recommend-popup-inner{

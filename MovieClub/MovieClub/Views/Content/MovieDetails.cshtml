@@ -17,9 +17,20 @@
             @if(Request.IsAuthenticated){
                 <div id="action-buttons">
                     <ul>
-                        <li><a href="" class="button expand small" id="reserve-movie">Reserve</a></li>
                         <li>
-                            <a href="#" data-dropdown="dropd" data-options="align:right" class="button dropdown small expand">More Options</a><br>
+                            <button @if (ViewBag.ReservationDisabled){ <text> class="button expand small disabled" </text>  }else{ <text> class="button expand small" </text>} id="reserve-movie">
+                                @if (ViewBag.HasReservations)
+                                {
+                                    @:Place a request
+                                }
+                                else
+                                {
+                                    @:Reserve
+                                }
+                            </button>
+                        </li>
+                        <li>
+                            <button data-dropdown="dropd" data-options="align:right" class="button dropdown small expand">More Options</button><br>
                         </li>
                     </ul>
                     <ul id="dropd" data-dropdown-content class="f-dropdown">
@@ -84,7 +95,7 @@
                         <div id="movie-locale">@movie.Country  <span>|</span>  @movie.Language</div>
                     </div>
                     <div id="movie-specs">
-                            Type: @movie.Genre <span>|</span> @movie.Runtime  <span>-</span>  @movie.Genre  <span>-</span>  @movie.ReleaseDate
+                            Type: @movie.Genre <span>|</span> @movie.Runtime min <span>-</span> @movie.ReleaseDate
                     </div>
                 </div>
 
@@ -315,6 +326,31 @@
             });
 
 
+            //this ajax call performs reservation/requesting of movies
+            $("#reserve-movie").click(function (e) {
+                $.ajax({
+                    url: "/User/Reserve",
+                    type: "POST",
+                    data: {id:"@movie.Id"},
+                    dataType: "text"
+                })
+                .success(function (data) {
+                    var obj = $.parseJSON(data);
+                    if (obj.result == "ok") {
+                        toastr.success(obj.message);
+                    }
+                    else if (obj.result == "error") {
+                        toastr.info(obj.message);
+                    }
+                    else {
+                        toastr.error("Something went wrong! Your request couldn't be performed!");
+                    }
+                })
+                .error(function () {
+                    toastr.error("Failed to connect! Check your connection.");
+                });
+                e.preventDefault();
+            });
 
             $('#movieclub-rating .rateit').bind('rated reset', function (e) {
                 var ri = $(this);

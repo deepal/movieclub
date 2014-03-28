@@ -37,5 +37,6 @@ namespace MovieClub.MovieDB
         public DbSet<DBRating> DBRatings { get; set; }
         public DbSet<DBWatchList> DBWatchLists { get; set; }
         public DbSet<DBRecommendation> DBRecommendations { get; set; }
+        public DbSet<DBActivityLog> DBActivityLogs { get; set; }
     }
 }

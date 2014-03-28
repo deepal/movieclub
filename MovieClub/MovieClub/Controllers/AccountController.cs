@@ -22,7 +22,7 @@ namespace MovieClub.Controllers
 
         public string GetSolUserName()
         {
-            return "deepal";
+            return "ethicalhacker";
             //return HttpContext.User.Identity.Name;
         }
 

@@ -59,5 +59,16 @@ namespace MovieClub.Operations
         {
             return MovieClub.Operations.UserOperations.GetCurrentUser().IsAdmin;
         }
+
+        public static bool LogActivity(string act)
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            db.DBActivityLogs.Add(new MovieDB.DBActivityLog() { 
+                UserId = GetCurrentUser().UserId,
+                Activity = act
+            });
+            db.SaveChanges();
+            return true;
+        }
     }
 }

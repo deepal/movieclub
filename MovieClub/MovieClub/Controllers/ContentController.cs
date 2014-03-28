@@ -541,6 +541,24 @@ namespace MovieClub.Controllers
             if (Request.IsAuthenticated)
             {
                 var userid = UserOperations.GetCurrentUser().UserId;
+
+                if ((db.DBReservations.Count(r => r.MovieId == Id)) > 0)
+                {
+                    ViewBag.HasReservations = true;
+                }
+                else
+                {
+                    ViewBag.HasReservations = false;
+                }
+                if ((db.DBReservations.Count(r => r.MovieId == Id && r.UserId == userid) != 0) || (db.DBRents.Count(r => r.MovieId == Id && r.UserId == userid)!=0))
+                {
+                    ViewBag.ReservationDisabled = true;
+                }
+                else
+                {
+                    ViewBag.ReservationDisabled = false;
+                }
+
                 var votes = db.DBRatings.Where(v => (v.UserId == userid) && (v.MovieId == Id));
                 if (votes.Count() != 0)
                 {

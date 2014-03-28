@@ -212,6 +212,9 @@
     <Compile Include="Models\RecommendedMovies.cs" />
     <Compile Include="Models\SimpleMovieDetails.cs" />
     <Compile Include="Models\UserDetails.cs" />
+    <Compile Include="MovieDB\DBActivityLog.cs">
+      <DependentUpon>MovieClubDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="MovieDB\DBAdmin.cs">
       <DependentUpon>MovieClubDB.tt</DependentUpon>
     </Compile>

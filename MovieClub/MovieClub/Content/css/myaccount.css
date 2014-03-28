@@ -30,3 +30,17 @@ table thead tr td{
 table tbody tr td{
     font-size:12px;
 }
+
+#notif-count{
+    padding:3px 6px !important;
+    margin-left:10px;
+}
+
+.read-message td{
+    color:#bfbfbf;
+}
+
+.unread-message td{
+    background-color:#e4f4ff !important;
+    font-weight:bold !important;
+}

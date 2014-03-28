@@ -13,7 +13,10 @@ namespace MovieClub.Controllers
 
         public ActionResult MyAccount()
         {
-
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            var uid = UserOperations.GetCurrentUser().UserId;
+            var messagecount = db.DBInboxMessages.Count(m=>m.UserId==uid&&m.Status==1);
+            ViewBag.NewMessageCount = messagecount;
             return View();
         }
 
@@ -314,6 +317,118 @@ namespace MovieClub.Controllers
             }
             return PartialView("_RecommendationsPartial", recomList);
            // return Json(recommendations.ToList(), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult Reservations()
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            var uid = UserOperations.GetCurrentUser().UserId;
+            var reservations = db.DBReservations.Where(u=>u.UserId==uid).Join(db.DBMovies,
+                l=>l.MovieId,
+                r=>r.Id,
+                (l, r) => new
+                {
+                    MovieId = r.Id,
+                    MovieName = r.Name,
+                    ReservedDate = l.Timestamp
+                });
+            List<Models.MyAccountModels.ReservationModel> reservlist = new List<Models.MyAccountModels.ReservationModel>();
+
+            foreach (var reserv in reservations)
+            {
+                reservlist.Add(new Models.MyAccountModels.ReservationModel() {
+                    MovieId = reserv.MovieId,
+                    MovieName = reserv.MovieName,
+                    ReservedOn = reserv.ReservedDate
+                });
+            }
+            return PartialView("_ReservationsPartial", reservlist);
+
+        }
+
+        [HttpGet]
+        public ActionResult CurrentRents()
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            var uid = UserOperations.GetCurrentUser().UserId;
+            var rents = db.DBRents.Where(r => r.UserId == uid && ((r.DueDate > DateTime.Now && r.Returned==0)||(r.Returned==0))).Join(db.DBMovies,
+                l => l.MovieId,
+                r => r.Id,
+                (l, r) => new
+                {
+                    MovieId = r.Id,
+                    MovieName = r.Name,
+                    DateBorrowed = l.BorrowedDate,
+                    DueDate = l.DueDate
+                });
+
+            List<Models.MyAccountModels.CurrentRentModel> currentrents = new List<Models.MyAccountModels.CurrentRentModel>();
+
+            foreach (var item in rents)
+            {
+                currentrents.Add(new Models.MyAccountModels.CurrentRentModel()
+                {
+                    MovieId = item.MovieId,
+                    MovieName = item.MovieName,
+                    DateBorrowed = (DateTime)item.DateBorrowed,
+                    DueDate = (DateTime)item.DueDate
+                });
+            }
+            return PartialView("_CurrentRentsPartial", currentrents);
+        }
+
+        [HttpGet]
+        public ActionResult RentsHistory()
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            var uid = UserOperations.GetCurrentUser().UserId;
+            var history = db.DBRents.Where(r => r.UserId == uid && ((r.DueDate < DateTime.Now && r.Returned==1)||(r.Returned==1))).Join(db.DBMovies,
+                l => l.MovieId,
+                r => r.Id,
+                (l, r) => new
+                {
+                    MovieId = r.Id,
+                    MovieName= r.Name,
+                    DateBorrowed = l.BorrowedDate,
+                    DateReturned = l.ReturnedDate
+                });
+
+            List<Models.MyAccountModels.RentsHistoryModel> rentshistory = new List<Models.MyAccountModels.RentsHistoryModel>();
+
+            foreach (var item in history)
+            {
+                rentshistory.Add(new Models.MyAccountModels.RentsHistoryModel() {
+                    MovieId = item.MovieId,
+                    MovieName = item.MovieName,
+                    DateBorrowed = (DateTime)item.DateBorrowed,
+                    DateReturned = item.DateReturned
+                });
+            }
+
+            return PartialView("_RentsHistoryPartial", rentshistory);
+        }
+
+        [HttpGet]
+        public ActionResult Messages()
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            var uid = UserOperations.GetCurrentUser().UserId;
+
+            var messages = db.DBInboxMessages.Where(m => m.UserId == uid).ToList();
+            messages.Sort((x, y) => ((DateTime)x.Date).CompareTo((DateTime)x.Date));
+            List<Models.MyAccountModels.InboxMessageModel> messagebox = new List<Models.MyAccountModels.InboxMessageModel>();
+            foreach (var message in messages)
+            {
+                messagebox.Add(new Models.MyAccountModels.InboxMessageModel()
+                {
+                    Date = (DateTime)message.Date,
+                    Description = message.Message,
+                    MessageId = message.MessageId,
+                    Status = message.Status
+                });
+            }
+            return PartialView("_InboxMessagesPartial", messagebox);
         }
 
         /*public ActionResult Activity()

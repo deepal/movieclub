@@ -1,0 +1,29 @@
+﻿@model List<MovieClub.Models.MyAccountModels.RentsHistoryModel>
+
+@{
+    var history = Model;
+}
+
+@if (history.Count!=0)
+{
+    foreach (var item in history)
+    {
+        <tr>
+            <td><a href="/Content/MovieDetails/@item.MovieId">@item.MovieName</a></td>
+            <td>@item.DateBorrowed</td>
+            if(@item.DateReturned==null){
+                <td>-</td>
+            }
+            else{
+                <td>@item.DateReturned</td>
+            }
+        </tr>
+    }
+}
+else
+{
+    <tr>
+        <td colspan="3">No history</td>
+    </tr>
+}
+

@@ -1,0 +1,38 @@
+﻿@model List<MovieClub.Models.MyAccountModels.InboxMessageModel>
+
+@{
+    var messagebox = Model;   
+}
+
+@if (messagebox.Count != 0)
+{
+    var unreads = messagebox.Where(m => m.Status == 1);
+    if ( unreads.Count() != 0)
+    {
+        foreach (var item in unreads)
+        {
+            <tr class="unread-message">
+                <td>@item.Date</td>
+                <td>@item.Description</td>
+            </tr>
+        }
+    }
+    var reads = messagebox.Where(m => m.Status == 0);
+    if (reads.Count() != 0)
+    {
+        foreach (var item in reads)
+        {
+            <tr class="read-message">
+                <td>@item.Date</td>
+                <td>@item.Description</td>
+            </tr>
+        }
+    }
+}
+else
+{
+    <tr>
+        <td colspan="2">No messages yet!</td>
+    </tr>
+}
+    

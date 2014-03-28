@@ -15,11 +15,32 @@ namespace MovieClub.Controllers
 
         
         [HttpGet]
-        public ActionResult AddMovie()
+        public ActionResult CPanel()
         {
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Users()
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+
+            var users = db.DBUsers.ToList();
+            users.Sort((x, y) => (x.UserId).CompareTo(y.UserId));
+            List<Models.AdminModels.UserModel> userlist = new List<Models.AdminModels.UserModel>();
+
+            foreach (var user in users)
+            {
+                userlist.Add(new Models.AdminModels.UserModel() {
+                    UserID = user.UserId,
+                    Username = user.UserName,
+                    Email = user.Email,
+                    EmployeeId = user.EmpId
+                });
+            }
+
+            return PartialView("_UsersAdminPartial",userlist);
+        }
 
         [HttpPost]
         [HandleError]
@@ -95,7 +116,7 @@ namespace MovieClub.Controllers
             dbmovie.Runtime = movie.Runtime;
             dbmovie.Writer = movie.Writer;
             dbmovie.Year = movie.Year;
-            dbmovie.AddedDate = DateTime.Today;
+            dbmovie.AddedDate = DateTime.Now;
             dbmovie.TrailerURL = System.Configuration.ConfigurationManager.AppSettings["VideoSavePath"] + "/" + movie.ImdbId + ".mp4";
             db.DBMovies.Add(dbmovie);
             db.SaveChanges();

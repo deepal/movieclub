@@ -196,11 +196,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AdminModels\UserModel.cs" />
     <Compile Include="Models\ConfigData.cs" />
     <Compile Include="Models\MovieCollection.cs" />
-    <Compile Include="Models\MyAccountModels\HistoryModel.cs" />
+    <Compile Include="Models\MyAccountModels\CurrentRentModel.cs" />
+    <Compile Include="Models\MyAccountModels\InboxMessageModel.cs" />
     <Compile Include="Models\MyAccountModels\MyAccountMovieModel.cs" />
     <Compile Include="Models\MyAccountModels\RecommendationModel.cs" />
+    <Compile Include="Models\MyAccountModels\RentsHistoryModel.cs" />
+    <Compile Include="Models\MyAccountModels\ReservationModel.cs" />
     <Compile Include="Models\SearchResults.cs" />
     <Compile Include="Models\SidebarCategoriesModel.cs" />
     <Compile Include="Models\Category.cs" />
@@ -222,6 +226,9 @@
       <DependentUpon>MovieClubDB.tt</DependentUpon>
     </Compile>
     <Compile Include="MovieDB\DBFavorite.cs">
+      <DependentUpon>MovieClubDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDB\DBInboxMessage.cs">
       <DependentUpon>MovieClubDB.tt</DependentUpon>
     </Compile>
     <Compile Include="MovieDB\DBMovie.cs">
@@ -452,7 +459,7 @@
     <Content Include="Views\User\MyAccount.cshtml" />
     <Content Include="Views\Content\Collection.cshtml" />
     <Content Include="Views\Shared\_CollectionContentPartial.cshtml" />
-    <Content Include="Views\Admin\AddMovie.cshtml" />
+    <Content Include="Views\Admin\CPanel.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Shared\_Trailer.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
@@ -461,6 +468,11 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\User\_RecommendationsPartial.cshtml" />
     <Content Include="Views\User\_MovieListPartial.cshtml" />
+    <Content Include="Views\User\_ReservationsPartial.cshtml" />
+    <Content Include="Views\User\_CurrentRentsPartial.cshtml" />
+    <Content Include="Views\User\_RentsHistoryPartial.cshtml" />
+    <Content Include="Views\User\_InboxMessagesPartial.cshtml" />
+    <Content Include="Views\Admin\_UsersAdminPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

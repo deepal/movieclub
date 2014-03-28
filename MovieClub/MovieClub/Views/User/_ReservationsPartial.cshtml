@@ -1,0 +1,14 @@
+﻿@model List<MovieClub.Models.MyAccountModels.ReservationModel>
+
+@{
+    var reservlist = Model;
+}
+
+@foreach (var item in reservlist)
+{
+    <tr>
+        <td>@item.ReservedOn</td>
+        <td><a href="/Content/MovieDetails/@item.MovieId">@item.MovieName</a></td>
+    </tr>
+}
+

@@ -1,0 +1,24 @@
+﻿@model List<MovieClub.Models.MyAccountModels.CurrentRentModel>
+
+@{
+    var rents = Model;
+}
+
+@if (rents.Count() != 0)
+{
+    foreach (var item in rents)
+    {
+        <tr>
+            <td><a href="/Content/MovieDetails/@item.MovieId">@item.MovieName</a></td>
+            <td>@item.DateBorrowed</td>
+            <td>@item.DueDate</td>
+        </tr>
+    }
+}
+else
+{
+    <tr>
+        <td colspan="3">You have no current rents!</td>
+    </tr>
+}
+

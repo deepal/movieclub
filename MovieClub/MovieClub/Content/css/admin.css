@@ -48,3 +48,33 @@ fieldset *{
     margin-top:10px;
     margin-bottom:0;
 }
+
+#body-content dl dd a{
+    font-size:13px;
+    padding:10px 20px;
+}
+
+.tabs dd.active a{
+    background-color:#fafafa;
+}
+
+.tabs-content-custom{
+    padding:5px 20px;    
+}
+
+.tabs-content-custom div{
+    overflow:auto;
+}
+
+dl{
+    padding-left:20px;
+    padding-right:20px;
+}
+
+#panel-addmovie{
+    padding-top:0;
+}
+
+td, th{
+    font-size:12px !important;
+}

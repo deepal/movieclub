@@ -12,14 +12,12 @@ namespace MovieClub.MovieDB
     using System;
     using System.Collections.Generic;
     
-    public partial class DBRent
+    public partial class DBInboxMessage
     {
-        public int RentId { get; set; }
-        public Nullable<int> MovieId { get; set; }
-        public Nullable<int> UserId { get; set; }
-        public Nullable<System.DateTime> BorrowedDate { get; set; }
-        public Nullable<System.DateTime> DueDate { get; set; }
-        public int Returned { get; set; }
-        public Nullable<System.DateTime> ReturnedDate { get; set; }
+        public int MessageId { get; set; }
+        public int UserId { get; set; }
+        public string Message { get; set; }
+        public int Status { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
     }
 }

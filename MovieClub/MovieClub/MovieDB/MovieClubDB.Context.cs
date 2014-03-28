@@ -29,7 +29,6 @@ namespace MovieClub.MovieDB
         public DbSet<DBFavorite> DBFavorites { get; set; }
         public DbSet<DBMovieSuggestion> DBMovieSuggestions { get; set; }
         public DbSet<DBMovieToCategory> DBMovieToCategories { get; set; }
-        public DbSet<DBRent> DBRents { get; set; }
         public DbSet<DBReservation> DBReservations { get; set; }
         public DbSet<DBAdmin> DBAdmins { get; set; }
         public DbSet<DBMovie> DBMovies { get; set; }
@@ -38,5 +37,7 @@ namespace MovieClub.MovieDB
         public DbSet<DBWatchList> DBWatchLists { get; set; }
         public DbSet<DBRecommendation> DBRecommendations { get; set; }
         public DbSet<DBActivityLog> DBActivityLogs { get; set; }
+        public DbSet<DBInboxMessage> DBInboxMessages { get; set; }
+        public DbSet<DBRent> DBRents { get; set; }
     }
 }

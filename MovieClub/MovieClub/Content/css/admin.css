@@ -78,3 +78,38 @@ dl{
 td, th{
     font-size:12px !important;
 }
+
+td a{
+    margin-right:20px;
+}
+
+#passedduedate{
+    color:red;
+}
+
+#lean_overlay {
+    position: fixed;
+    z-index:100;
+    top: 0px;
+    left: 0px;
+    height:100%;
+    width:100%;
+    background: #000;
+    display: none;
+}
+
+#sendmessage{
+    display:none;
+}
+
+#notice span{
+    font-weight:bold;
+}
+
+#notice ul li a{
+    color:#333333;
+}
+
+#notice ul{
+    margin-bottom:0;
+}

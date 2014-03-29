@@ -196,6 +196,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AdminModels\PendingReturnsModel.cs" />
     <Compile Include="Models\AdminModels\UserModel.cs" />
     <Compile Include="Models\ConfigData.cs" />
     <Compile Include="Models\MovieCollection.cs" />
@@ -473,6 +474,7 @@
     <Content Include="Views\User\_RentsHistoryPartial.cshtml" />
     <Content Include="Views\User\_InboxMessagesPartial.cshtml" />
     <Content Include="Views\Admin\_UsersAdminPartial.cshtml" />
+    <Content Include="Views\Admin\_PendingReturnsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

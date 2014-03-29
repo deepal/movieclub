@@ -21,6 +21,8 @@ namespace MovieClub.Controllers
         }
 
         [HttpGet]
+
+
         public ActionResult Users()
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
@@ -42,6 +44,13 @@ namespace MovieClub.Controllers
             return PartialView("_UsersAdminPartial",userlist);
         }
 
+        [HttpGet]
+        public ActionResult AddMovie()
+        {
+            return View();
+        }
+
+
         [HttpPost]
         [HandleError]
         [ValidateAntiForgeryToken]
@@ -56,12 +65,16 @@ namespace MovieClub.Controllers
 
                 if (movieexists != 0)
                 {
+                    ModelState.AddModelError("","\""+movie.Name+"\" already exists!");
+                    return View(movie);
 
+                    /*
                     return Json(new
                     {
                         result = "error",
-                        message = "\""+movie.Name+"\" already exists!"
-                    });
+                        message = 
+                    });*/
+
                 }
 
                 //upload trailer start
@@ -76,10 +89,16 @@ namespace MovieClub.Controllers
                         }
                         else
                         {
-                            return Json(new {
+
+                            ModelState.AddModelError("", "Could not upload trailer! Video file extension should be \".mp4\" ");
+                            return View(movie);
+                            /*
+                             return Json(new {
                                 result = "error",
                                 message = "Could not upload trailer! Video file extension should be \".mp4\" "
-                            });
+                             });
+                             
+                             */
                         }
                     }
                 }
@@ -89,25 +108,38 @@ namespace MovieClub.Controllers
                 //save movie to db
                 if (AddMovieToDB(db, movie))
                 {
+                    /*
                     return Json(new {
                         result="ok",
                         message = "Movie \"" + movie.Name + "\" added successfully!"
-                    });
+                    });*/
+                    ModelState.AddModelError("","Movie \"" + movie.Name + "\" added successfully!");
+                    return View(movie);
                 }
                 else
                 {
+
+                    ModelState.AddModelError("", "Could not add movie to the database! Check your connection.");
+                    return View(movie);
+
+                    /*
                     return Json(new {
                         result = "fail",
                         message = "Could not add movie to the database! Check your connection."
-                    });
+                    });*/
                 }
 
 
             }
+
+            ModelState.AddModelError("", "Error occured adding movie! Check whether required fields are filled.");
+            return View(movie);
+
+            /*
             return Json(new {
                 result = "fail",
                 message = "Error occured adding movie! Check whether required fields are filled."
-            });
+            });*/
         }
 
 

@@ -1,0 +1,494 @@
+﻿@model MovieClub.Models.MovieDetails
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("AddMovie", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "addmovie-form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true,"Could not add movie!", new { @class = "alert-box alert" })
+
+
+    <fieldset>
+        <legend>Add new Movie</legend>
+
+        <div id="notice" data-alert class="alert-box tiny" style="display:none">
+            <span></span>
+            <ul></ul>
+        </div>
+
+        <div class="row">
+            <div class="small-70 medium-80 large-80 columns">
+                <div class="row collapse">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Name, "Movie Name")
+                    </div>
+                    <div class="small-70 medium-80 large-80 columns">
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Name)
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+                    </div>
+                    <div class="small-30 medium-20 large-20 columns fetch-imdb-data">
+                        <button class="button small postfix" id="btn-fetch-imdb">Fetch IMDb data</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="small-30 medium-20 large-20 columns">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Genre)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Genre)
+                    @Html.ValidationMessageFor(model => model.Genre)
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="small-100 medium-20 large-20 columns">
+                <div id="movie-poster">
+                    <a class="th"><img id="moviecover" src="~/Content/images/poster.jpg" class="" alt="Movie Poster" /></a>
+                </div>
+            </div>
+            <div class="small-100 medium-80 large-80 columns">
+                <div class="row">
+                    <div class="small-25 medi-25 large-25 columns">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.ImdbId, "IMDb ID")
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.ImdbId)
+                            @Html.ValidationMessageFor(model => model.ImdbId)
+                        </div>
+                    </div>
+
+                    <div class="small-25 medi-25 large-25 columns">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Year)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Year)
+                            @Html.ValidationMessageFor(model => model.Year)
+                        </div>
+                    </div>
+
+                    <div class="small-25 medi-25 large-25 columns">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.ReleaseDate, "Release Date")
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.ReleaseDate)
+                            @Html.ValidationMessageFor(model => model.ReleaseDate)
+                        </div>
+                    </div>
+
+                    <div class="small-25 medi-25 large-25 columns">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Runtime, "Runtime (in minutes)")
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextBoxFor(model => model.Runtime)
+                            @Html.ValidationMessageFor(model => model.Runtime)
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="small-100 medium-50 large-50 columns">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Writer)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Writer)
+                            @Html.ValidationMessageFor(model => model.Writer)
+                        </div>
+                    </div>
+
+                    <div class="small-100 medium-50 large-50 columns">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Director)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Director)
+                            @Html.ValidationMessageFor(model => model.Director)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="small-100 large-100 medium-100 columns">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Actors)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Actors)
+                            @Html.ValidationMessageFor(model => model.Actors)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="small-100 large-100 medium-100 columns">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PlotShort, "Plot (Short)")
+                </div>
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.PlotShort)
+                    @Html.ValidationMessageFor(model => model.PlotShort)
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="small-100 large-100 medium-100 columns">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PlotFull, "Plot (Full)")
+                </div>
+                <div class="editor-field">
+                    @Html.TextAreaFor(model => model.PlotFull, new { @rows = "5" })
+                    @Html.ValidationMessageFor(model => model.PlotFull)
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="small-100 medium-50 large-50 columns">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Country)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Country)
+                    @Html.ValidationMessageFor(model => model.Country)
+                </div>
+            </div>
+
+            <div class="small-100 medium-50 large-50 columns">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Language, "Languages")
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Language)
+                    @Html.ValidationMessageFor(model => model.Language)
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="small-100 large-100 medium-100 columns">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Awards)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Awards)
+                    @Html.ValidationMessageFor(model => model.Awards)
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="small-100 large-100 medium-100 columns">
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.PosterURL, "Poster URL")
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.PosterURL)
+                    @Html.ValidationMessageFor(model => model.PosterURL)
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="small-50 large-50 medium-50 columns">
+                <fieldset>
+                    <legend>IMDb Statistics</legend>
+                    <div class="row">
+                        <div class="small-50 large-50 medium-50 columns">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.ImdbRatings, "Imdb Ratings")
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.ImdbRatings, new { disabled = "disabled" })
+                                @Html.ValidationMessageFor(model => model.ImdbRatings)
+                            </div>
+                        </div>
+                        <div class="small-50 large-50 medium-50 columns">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.ImdbVotes, "Imdb Votes")
+                            </div>
+                            <div class="editor-field">
+                                @Html.TextBoxFor(model => model.ImdbVotes)
+                                @Html.ValidationMessageFor(model => model.ImdbVotes)
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="small-50 large-50 medium-50 columns">
+                <fieldset>
+                    <legend>Pearson Statistics</legend>
+                    <div class="row">
+                        <div class="small-50 medium-50 large-50 columns">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.MovieClubRatings, "Rating")
+                            </div>
+                            <div class="editor-field">
+                                @Html.EditorFor(model => model.MovieClubRatings)
+                                @Html.ValidationMessageFor(model => model.MovieClubRatings)
+                            </div>
+                        </div>
+                        <div class="small-50 medium-50 large-50 columns">
+                            <div class="editor-label">
+                                @Html.LabelFor(model => model.MovieClubRentCount, "Rents")
+                            </div>
+                            <div class="editor-field">
+                                @Html.TextBoxFor(model => model.MovieClubRentCount)
+                                @Html.ValidationMessageFor(model => model.MovieClubRentCount)
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-100 medium-100 large-100 columns upload-trailer">
+                <fieldset>
+                    <legend>Upload Trailer</legend>
+                    <div id="trailerupload">
+                        <input name="uploadFile" id="tupload" type="file" />
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <button class="button small left" id="addmovie-button">Add Movie</button>
+        <button class="button small right" id="btn-clear">Clear</button>
+    </fieldset>
+}
+
+@section customstyles{
+    @Styles.Render("~/Content/css/admin.css")
+    @Styles.Render("~/Content/css/toastr.css")
+}
+
+@section customscripts{
+    @Scripts.Render("~/Content/js/toastr.js")
+    @Scripts.Render("~/Content/js/jquery.leanModal.min.js")
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    <script>
+        $(document).ready(function () {
+
+
+
+            function disableAdding() {
+                $("#addmovie-button").addClass("disabled");
+                $("#btn-clear").addClass("disabled");
+            }
+
+            function enableAdding() {
+                $("addmovie-button").removeClass("disabled");
+                $("btn-clear").removeClass("disabled");
+            }
+
+            function clearform() {
+                $("#notice").attr({ style: "display:none" });
+                $("#ImdbId").val("");
+                $("#Name").val("");
+                $("#Year").val("");
+                $("#Genre").val("");
+                $("#ReleaseDate").val("");
+                $("#Runtime").val("");
+                $("#Writer").val("");
+                $("#Director").val("");
+                $("#Actors").val("");
+                $("#PlotShort").val("");
+                $("#PlotFull").val("");
+                $("#Country").val("");
+                $("#Language").val("");
+                $("#Awards").val("");
+                $("#PosterURL").val("");
+                $("#moviecover").attr({ src: "/Content/images/poster.jpg" });
+                $("#ImdbRatings").val("0");
+                $("#ImdbVotes").val("0");
+                $("#MovieClubRatings").val("0");
+                $("#MovieClubRentCount").val("0");
+
+                //$("#tupload").replaceWith($("#tupload") = $("#tupload").clone(true));
+
+            }
+
+
+            $("#btn-clear").click(function (e) {
+                clearform();
+                e.preventDefault();
+            });
+
+            function showSuggestions(displaytext, moviename) {
+                resetNotice("secondary");
+                $.ajax({
+                    url: "http://www.omdbapi.com/?",
+                    type: "GET",
+                    data: {
+                        s: moviename,
+                        r: "json"
+                    }
+                })
+                .success(function (data) {
+                    var obj = $.parseJSON(data);
+                    if (obj.Search.length > 0) {
+                        $("#notice span").html(displaytext + " :")
+                    }
+                    for (var i = 0, len = obj.Search.length; i < len; i++) {
+                        $("#notice ul").append("<li><a class=\"suggestion\" href=\"" + obj.Search[i].Title + "\">" + obj.Search[i].Title + "(" + obj.Search[i].Year + ")</a></li>");
+                    }
+
+                    $("#notice").removeAttr("style");
+
+                    $(".suggestion").click(function (e) {
+                        fetchImdbData($(this).attr("href"));
+                        e.preventDefault();
+                    });
+
+                });
+            }
+
+            function resetNotice(classname) {
+                $("#notice span").html("");
+                $("#notice ul").html("");
+                $("#notice").removeAttr("class");
+                $("#notice").addClass("alert-box");
+                $("#notice").addClass("tiny");
+                $("#notice").addClass(classname);
+            }
+
+            function fillImdbData(movieobj) {
+                $("#notice").attr({ style: "display:none" });
+                $("#ImdbId").val(movieobj.imdbID);
+                $("#Name").val(movieobj.Title);
+                $("#Year").val(movieobj.Year);
+                $("#Genre").val((movieobj.Genre).replace(" ", ""));
+                $("#ReleaseDate").val(movieobj.Released);
+                $("#Runtime").val((movieobj.Runtime).substr(0, (movieobj.Runtime).indexOf(" min")));
+                $("#Writer").val(movieobj.Writer);
+                $("#Director").val(movieobj.Director);
+                $("#Actors").val(movieobj.Actors);
+                $("#PlotShort").val(movieobj.Plot);
+                $("#Country").val(movieobj.Country);
+                $("#Language").val(movieobj.Language);
+                $("#Awards").val(movieobj.Awards);
+                $("#PosterURL").val(movieobj.Poster);
+                if (movieobj.Poster != "N/A" && movieobj.Poster != null) {
+                    $("#moviecover").attr({ src: movieobj.Poster });
+                }
+                else {
+                    $("#moviecover").attr({ src: "/Content/images/poster-na.jpg" });
+                }
+                $("#ImdbRatings").val(movieobj.imdbRating);
+                $("#ImdbVotes").val((movieobj.imdbVotes).replace(",", ""));
+                $("#MovieClubRatings").val("0");
+                $("#MovieClubRentCount").val("0");
+
+                $("#PlotFull").val("Loading...");
+
+                $.ajax({
+                    type: "GET",
+                    url: "http://www.omdbapi.com/?",
+                    data: {
+                        t: movieobj.Title,
+                        plot: "full",
+                        r: "json"
+                    }
+                })
+                .success(function (data) {
+                    var fullplotobj = jQuery.parseJSON(data);
+                    if (fullplotobj.Response == "False") {
+                        $("#PlotFull").val("");
+                    }
+                    else {
+                        $("#PlotFull").val(fullplotobj.Plot);
+                    }
+                })
+                .error(function () {
+                    $("#PlotFull").val("");
+                });
+            }
+
+            function showMessage(message, classname) {
+                resetNotice(classname);
+                $("#notice span").html(message);
+                $("#notice").removeAttr("style");
+            }
+
+            function fetchImdbData(moviename) {
+                $.ajax({
+                    type: "GET",
+                    url: "http://www.omdbapi.com/?",
+                    data: {
+                        t: moviename,
+                        plot: "short",
+                        r: "json"
+                    }
+                })
+                .success(function (data) {
+                    $("#btn-fetch-imdb").html("Fetch IMDb data");
+                    $("#btn-fetch-imdb").removeClass("disabled");
+                    var movieobj = jQuery.parseJSON(data);
+                    if (movieobj.Response == "False") {
+                        clearform();
+                        showMessage(movieobj.Error, "warning");
+                    }
+                    else {
+                        showSuggestions("More suggestions", moviename);
+                        fillImdbData(movieobj);
+                    }
+                })
+                .error(function () {
+                    $("#btn-fetch-imdb").html("Fetch IMDb data");
+                    $("#btn-fetch-imdb").removeClass("disabled");
+                    $("#notice span").html("Cannot connect to IMDb right now !");
+                    $("#notice").removeAttr("style");
+                });
+            }
+
+            $("#btn-fetch-imdb").click(function (e) {
+                $("#moviecover").attr("src", "/Content/images/ajax-loader-circle.gif");
+                var moviename = $("#Name").val();
+                $("#btn-fetch-imdb").html("Fetching...");
+                $("#btn-fetch-imdb").addClass("disabled");
+                e.preventDefault();
+                if (moviename != "" && moviename != null) {
+                    fetchImdbData(moviename);
+                }
+                else {
+                    $("#Name").attr({
+                        placeholder: "Enter Movie Name here"
+                    });
+                    $("#notice").removeAttr("style");
+                    resetNotice("warning");
+                    $("#notice span").html("Enter Movie Name to search in IMDb !");
+                    $("#btn-fetch-imdb").html("Fetch IMDb data");
+                    $("#btn-fetch-imdb").removeClass("disabled");
+
+                }
+            });
+
+        });
+    </script>
+
+
+}
+
+
+
+

@@ -475,6 +475,29 @@ namespace MovieClub.Controllers
             return View();
         } 
 
+        [HttpPost]
+        public ActionResult SendMessage()
+        {
+            var to = int.Parse((string)Request.Form["To"]);
+            var comment = Request.Form["Comment"];
+
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+
+            db.DBInboxMessages.Add(new MovieDB.DBInboxMessage() {
+                Date = DateTime.Now,
+                Message = comment,
+                Status = 1,
+                UserId = to
+            });
+
+            db.SaveChanges();
+
+            return Json(new {
+                result="ok",
+                message = "Message sent!"
+            });
+        }
+
         public void SavePoster(string Url, string ImdbId)
         {
             string LocalPath = HttpContext.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["PosterDownloadPath"]) + "/" + ImdbId + Path.GetExtension(Url);

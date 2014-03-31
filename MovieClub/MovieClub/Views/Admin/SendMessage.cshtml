@@ -16,13 +16,37 @@
     </div>
 </fieldset>
 
-@section scripts{
-    <script>
-        $(document).ready(function () {
-            $("#recommend-button").click(function (e) {
-
-                e.preventDefault();
-            });
+<script>
+    $("#recommend-button").click(function (e) {
+        var comment = $("#comment-text").val();
+        var to = "@sendto";
+        $.ajax({
+            type: "POST",
+            url: "/Admin/SendMessage",
+            dataType: "text",
+            data: {
+                To: to,
+                Comment: comment
+            }
+        })
+        .success(function (data) {
+            var obj = $.parseJSON(data);
+            if (obj.result == "ok") {
+                $('#myModal').foundation('reveal', 'close');
+                toastr.success(obj.message);
+            }
+        })
+        .error(function () {
+            toastr.error("Error sending message! Check your connection.");
         });
-    </script>
+        e.preventDefault();
+    });
+</script>
+
+@section customstyles{
+    @Styles.Render("~/Content/css/toastr.css")
+}
+
+@section customscripts{
+    @Scripts.Render("~/Content/js/toastr.js")
 }

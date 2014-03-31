@@ -15,6 +15,7 @@ namespace MovieClub.Controllers
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
             var uid = UserOperations.GetCurrentUser().UserId;
+            ViewBag.UserId = uid;
             var messagecount = db.DBInboxMessages.Count(m=>m.UserId==uid&&m.Status==1);
             ViewBag.NewMessageCount = messagecount;
             return View();
@@ -417,8 +418,8 @@ namespace MovieClub.Controllers
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
             var uid = UserOperations.GetCurrentUser().UserId;
 
-            var messages = db.DBInboxMessages.Where(m => m.UserId == uid).ToList();
-            messages.Sort((x, y) => ((DateTime)x.Date).CompareTo((DateTime)x.Date));
+            var messages = db.DBInboxMessages.Where(m => m.UserId == uid).ToList().OrderByDescending(m=>m.Date);
+            //messages.Sort((x, y) => ((DateTime)x.Date).CompareTo((DateTime)y.Date));
             List<Models.MyAccountModels.InboxMessageModel> messagebox = new List<Models.MyAccountModels.InboxMessageModel>();
             foreach (var message in messages)
             {
@@ -431,6 +432,19 @@ namespace MovieClub.Controllers
                 });
             }
             return PartialView("_InboxMessagesPartial", messagebox);
+        }
+
+        [HttpPost]
+        public ActionResult MarkMessagesRead(int uid)
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            db.DBInboxMessages.Where(m => m.UserId == uid).ToList().ForEach(m => m.Status = 0);
+            db.SaveChanges();
+
+            return Json(new {
+                result="ok",
+                message="All messages marked as read!"
+            });
         }
 
         /*public ActionResult Activity()

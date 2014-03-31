@@ -17,11 +17,13 @@ namespace MovieClub.Controllers
     
     public class ContentController : Controller
     {
-
+        
         public const int LATEST = 1;
         public const int TOP_IMDB = 2;
         public const int TOP_MOVIECLUB = 3;
         public const int MOST_VIEWED = 4;
+        public const int ALL = 5;
+        
 
         // GET: /MovieClub/
         [HttpGet]
@@ -37,296 +39,7 @@ namespace MovieClub.Controllers
         {
             return View();
         }
-        /*
-        public List<SimpleMovieDetails> GetMovieList()
-        {
-            var movies = new List<SimpleMovieDetails>()
-            {
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-                new Models.SimpleMovieDetails(){
-                    Id = 1,
-                    Name = "The Pursuit of Happiness",
-                    Year = "2006",
-                    Category = "Biography, Drama",
-                    PosterURL = "http://ia.media-imdb.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg",
-                },
-            };
-
-            return movies;
-        }
-        */
+        
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Collection(int Id, int? Page, int? Method, int? list)
@@ -337,6 +50,8 @@ namespace MovieClub.Controllers
 
             if (list == null)
             {
+                //ViewBag.ListName
+                var catname = db.DBCategories.First(c => c.CategoryId == Id).CategoryName;
                 var query = db.DBMovieToCategories.Where(ent => ent.CategoryId == Id).Join(db.DBMovies,
                 r => r.MovieId,
                 l => l.Id,
@@ -372,6 +87,7 @@ namespace MovieClub.Controllers
                         };
                     movielist.Add(item);
                 }
+                ViewBag.ListName = catname;
             }
             else
             {
@@ -380,6 +96,7 @@ namespace MovieClub.Controllers
                     case LATEST:
                         var querylatest = db.DBMovies.ToList();
                         querylatest.Sort((x, y) => ((DateTime)y.AddedDate).CompareTo((DateTime)x.AddedDate));
+                        querylatest = querylatest.GetRange(0, 30);
                         foreach (var movie in querylatest)
                         {
                             SimpleMovieDetails item =
@@ -399,6 +116,7 @@ namespace MovieClub.Controllers
                                 };
                             movielist.Add(item);
                         }
+                        ViewBag.ListName = "Latest 30";
                         break;
 
                     case TOP_IMDB:
@@ -423,6 +141,7 @@ namespace MovieClub.Controllers
                                 };
                             movielist.Add(item);
                         }
+                        ViewBag.ListName = "Top IMDb Rated";
                         break;
 
 
@@ -448,6 +167,7 @@ namespace MovieClub.Controllers
                                 };
                             movielist.Add(item);
                         }
+                        ViewBag.ListName = "Top Pearson Rated";
                         break;
 
 
@@ -473,6 +193,32 @@ namespace MovieClub.Controllers
                                 };
                             movielist.Add(item);
                         }
+                        ViewBag.ListName = "Most Viewed";
+                        break;
+
+                    case ALL:
+                        var queryall = db.DBMovies.ToList();
+                        queryall.Sort((x, y) => ((DateTime)y.AddedDate).CompareTo((DateTime)x.AddedDate));
+                        foreach (var movie in queryall)
+                        {
+                            SimpleMovieDetails item =
+                                new Models.SimpleMovieDetails()
+                                {
+                                    Id = movie.Id,
+                                    Name = movie.Name,
+                                    Year = movie.Year,
+                                    Category = movie.Genre,
+                                    PosterURL = movie.PosterURL,
+                                    ImdbRating = (float)movie.ImdbRatings,
+                                    ImdbId = movie.ImdbId,
+                                    MovieClubRating = (float)movie.MovieClubRatings,
+                                    MovieClubRentCount = movie.MovieClubRentCount,
+                                    ViewsCount = movie.Views,
+                                    AddedDate = (DateTime)movie.AddedDate
+                                };
+                            movielist.Add(item);
+                        }
+                        ViewBag.ListName = "All Movies";
                         break;
 
                     default:

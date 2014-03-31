@@ -1,0 +1,28 @@
+﻿@{
+    
+    var sendto = ViewBag.To;
+    Layout = null;
+}
+
+<fieldset>
+    <legend>Send message</legend>
+
+    <label>
+        Message
+        <textarea placeholder="Your message here" id="comment-text" cols="100" rows="4"></textarea>
+    </label>
+    <div class="right">
+        <button class="button tiny" id="recommend-button">Send</button>
+    </div>
+</fieldset>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#recommend-button").click(function (e) {
+
+                e.preventDefault();
+            });
+        });
+    </script>
+}

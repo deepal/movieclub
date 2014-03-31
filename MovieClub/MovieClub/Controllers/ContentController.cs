@@ -542,7 +542,9 @@ namespace MovieClub.Controllers
             {
                 var userid = UserOperations.GetCurrentUser().UserId;
 
-                if ((db.DBReservations.Count(r => r.MovieId == Id)) > 0)
+                var dbreservations = db.DBReservations.Where(rs => rs.Issued == 0).ToList();
+
+                if ((dbreservations.Count(r => r.MovieId == Id)) > 0)
                 {
                     ViewBag.HasReservations = true;
                 }
@@ -550,7 +552,7 @@ namespace MovieClub.Controllers
                 {
                     ViewBag.HasReservations = false;
                 }
-                if ((db.DBReservations.Count(r => r.MovieId == Id && r.UserId == userid) != 0) || (db.DBRents.Count(r => r.MovieId == Id && r.UserId == userid)!=0))
+                if ((dbreservations.Count(r => r.MovieId == Id && r.UserId == userid) != 0) || (db.DBRents.Count(r => r.MovieId == Id && r.UserId == userid&&r.Returned==0) != 0))
                 {
                     ViewBag.ReservationDisabled = true;
                 }

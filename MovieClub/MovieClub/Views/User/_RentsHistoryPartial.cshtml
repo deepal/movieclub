@@ -11,12 +11,14 @@
         <tr>
             <td><a href="/Content/MovieDetails/@item.MovieId">@item.MovieName</a></td>
             <td>@item.DateBorrowed</td>
-            if(@item.DateReturned==null){
-                <td>-</td>
-            }
-            else{
-                <td>@item.DateReturned</td>
-            }
+            <td>
+                @if(@item.DateReturned==null){
+                    <text>-</text>
+                }
+                else{
+                    @item.DateReturned
+                }
+            </td>
         </tr>
     }
 }

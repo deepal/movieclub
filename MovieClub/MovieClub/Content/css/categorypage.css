@@ -111,6 +111,8 @@
 	/* flip the pane when hovered */
 #cat-movie-item:hover .flipper, .flip-container.hover .flipper{
 	transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
 }
 
 .flip-container, .front, .back {
@@ -121,7 +123,11 @@
 /* flip speed goes here */
 .flipper {
 	transition: 0.3s;
+    -moz-transition: 0.3s;
+    -webkit-transition: 0.3s;
 	transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
     width: 100%;
 	height: 100%;
 	position: relative;
@@ -130,6 +136,8 @@
 /* hide back of pane during swap */
 .front-card, .back-card {
 	backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-backface-visibility:hidden;
     margin:0 auto;
 	position: absolute;
 	top: 0;
@@ -146,6 +154,8 @@
 /* back, initially hidden pane */
 .back-card {
 	transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
 }
 
 /*back-card styles*/

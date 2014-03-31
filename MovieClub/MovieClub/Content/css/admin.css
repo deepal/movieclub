@@ -113,3 +113,8 @@ td a{
 #notice ul{
     margin-bottom:0;
 }
+
+input[type=checkbox]{
+    margin-top:8px;
+    margin-bottom:8px;
+}

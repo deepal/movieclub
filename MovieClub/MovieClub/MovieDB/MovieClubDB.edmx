@@ -27,6 +27,15 @@
           <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryName" Type="varchar" MaxLength="80" />
         </EntityType>
+        <EntityType Name="DBEmployeePendingPayments">
+          <Key>
+            <PropertyRef Name="PendingPaymentId" />
+          </Key>
+          <Property Name="PendingPaymentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="PayAmount" Type="int" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="DBFavorites">
           <Key>
             <PropertyRef Name="FavoritesID" />
@@ -34,6 +43,14 @@
           <Property Name="FavoritesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MovieID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DBFeatured">
+          <Key>
+            <PropertyRef Name="FeaturedId" />
+          </Key>
+          <Property Name="FeaturedId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="DBInboxMessages">
           <Key>
@@ -91,6 +108,15 @@
           <Property Name="MovieId" Type="int" />
           <Property Name="CategoryId" Type="int" />
         </EntityType>
+        <EntityType Name="DBPaymentHistory">
+          <Key>
+            <PropertyRef Name="PaymentHistoryId" />
+          </Key>
+          <Property Name="PaymentHistoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="PayAmount" Type="int" Nullable="false" />
+          <Property Name="Timestamp" Type="datetime" />
+        </EntityType>
         <EntityType Name="DBRatings">
           <Key>
             <PropertyRef Name="RatingId" />
@@ -130,6 +156,7 @@
           <Property Name="MovieId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Timestamp" Type="datetime" Nullable="false" />
+          <Property Name="Issued" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DBUsers">
           <Key>
@@ -154,11 +181,14 @@
           <EntitySet Name="DBActivityLogs" EntityType="Self.DBActivityLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBAdmins" EntityType="Self.DBAdmins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBCategories" EntityType="Self.DBCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DBEmployeePendingPayments" EntityType="Self.DBEmployeePendingPayments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBFavorites" EntityType="Self.DBFavorites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DBFeatured" EntityType="Self.DBFeatured" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBInboxMessages" EntityType="Self.DBInboxMessages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBMovies" EntityType="Self.DBMovies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBMovieSuggestions" EntityType="Self.DBMovieSuggestions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBMovieToCategory" EntityType="Self.DBMovieToCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DBPaymentHistory" EntityType="Self.DBPaymentHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBRatings" EntityType="Self.DBRatings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBRecommendations" EntityType="Self.DBRecommendations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBRents" EntityType="Self.DBRents" Schema="dbo" store:Type="Tables" />
@@ -185,6 +215,9 @@
           <EntitySet Name="DBActivityLogs" EntityType="MovieClubDBModel.DBActivityLog" />
           <EntitySet Name="DBInboxMessages" EntityType="MovieClubDBModel.DBInboxMessage" />
           <EntitySet Name="DBRents" EntityType="MovieClubDBModel.DBRent" />
+          <EntitySet Name="DBFeatureds" EntityType="MovieClubDBModel.DBFeatured" />
+          <EntitySet Name="DBEmployeePendingPayments" EntityType="MovieClubDBModel.DBEmployeePendingPayment" />
+          <EntitySet Name="DBPaymentHistories" EntityType="MovieClubDBModel.DBPaymentHistory" />
         </EntityContainer>
         <EntityType Name="DBCategory">
           <Key>
@@ -226,6 +259,7 @@
           <Property Name="MovieId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Issued" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="DBAdmin">
           <Key>
@@ -331,6 +365,32 @@
           <Property Name="Returned" Type="Int32" Nullable="false" />
           <Property Name="ReturnedDate" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="DBFeatured">
+          <Key>
+            <PropertyRef Name="FeaturedId" />
+          </Key>
+          <Property Name="FeaturedId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="DBEmployeePendingPayment">
+          <Key>
+            <PropertyRef Name="PendingPaymentId" />
+          </Key>
+          <Property Name="PendingPaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="PayAmount" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DBPaymentHistory">
+          <Key>
+            <PropertyRef Name="PaymentHistoryId" />
+          </Key>
+          <Property Name="PaymentHistoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="PayAmount" Type="Int32" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -376,6 +436,7 @@
           <EntitySetMapping Name="DBReservations">
             <EntityTypeMapping TypeName="MovieClubDBModel.DBReservation">
               <MappingFragment StoreEntitySet="DBReservations">
+                <ScalarProperty Name="Issued" ColumnName="Issued" />
                 <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="MovieId" ColumnName="MovieId" />
@@ -493,6 +554,35 @@
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="MovieId" ColumnName="MovieId" />
                 <ScalarProperty Name="RentId" ColumnName="RentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBFeatureds">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBFeatured">
+              <MappingFragment StoreEntitySet="DBFeatured">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="FeaturedId" ColumnName="FeaturedId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBEmployeePendingPayments">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBEmployeePendingPayment">
+              <MappingFragment StoreEntitySet="DBEmployeePendingPayments">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="PayAmount" ColumnName="PayAmount" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PendingPaymentId" ColumnName="PendingPaymentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBPaymentHistories">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBPaymentHistory">
+              <MappingFragment StoreEntitySet="DBPaymentHistory">
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="PayAmount" ColumnName="PayAmount" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PaymentHistoryId" ColumnName="PaymentHistoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

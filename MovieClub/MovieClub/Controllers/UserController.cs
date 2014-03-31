@@ -149,15 +149,17 @@ namespace MovieClub.Controllers
         public ActionResult Reserve(int id)
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
-            var reservs = db.DBReservations.Count(r => r.MovieId == id);
+            var reservs = db.DBReservations.Count(r => r.MovieId == id&&r.Issued==0);
             var moviename = db.DBMovies.First(m=>m.Id==id).Name;
             var uid = UserOperations.GetCurrentUser().UserId;
 
+            var dbreservations = db.DBReservations.Where(rs => rs.Issued == 0);
+
             //surround following block in try catch, and return result error in case of an error
 
-            if ((db.DBReservations.Count(m => m.MovieId == id && m.UserId == uid)) == 0)
+            if ((dbreservations.Count(m => m.MovieId == id && m.UserId == uid)) == 0)
             {
-                if ((db.DBRents.Count(m => m.MovieId == id && m.UserId == uid)) == 0)
+                if ((db.DBRents.Count(m => m.MovieId == id && m.UserId == uid&&m.Returned==0)) == 0)
                 {
                     db.DBReservations.Add(new MovieDB.DBReservation()
                     {
@@ -324,7 +326,7 @@ namespace MovieClub.Controllers
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
             var uid = UserOperations.GetCurrentUser().UserId;
-            var reservations = db.DBReservations.Where(u=>u.UserId==uid).Join(db.DBMovies,
+            var reservations = db.DBReservations.Where(u=>u.UserId==uid&&u.Issued==0).Join(db.DBMovies,
                 l=>l.MovieId,
                 r=>r.Id,
                 (l, r) => new

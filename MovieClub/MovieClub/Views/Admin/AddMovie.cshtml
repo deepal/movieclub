@@ -10,6 +10,12 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true,"Could not add movie!", new { @class = "alert-box alert" })
 
+    if (ViewBag.SuccessMessage != null)
+    {
+        <div id="notice-success" class="alert-box success">
+            @ViewBag.SuccessMessage
+        </div>
+    }
 
     <fieldset>
         <legend>Add new Movie</legend>
@@ -288,9 +294,6 @@
     
     <script>
         $(document).ready(function () {
-
-
-
             function disableAdding() {
                 $("#addmovie-button").addClass("disabled");
                 $("#btn-clear").addClass("disabled");

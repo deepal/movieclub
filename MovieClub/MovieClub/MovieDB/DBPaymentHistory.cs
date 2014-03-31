@@ -12,12 +12,11 @@ namespace MovieClub.MovieDB
     using System;
     using System.Collections.Generic;
     
-    public partial class DBReservation
+    public partial class DBPaymentHistory
     {
-        public int ReservationId { get; set; }
-        public int MovieId { get; set; }
+        public int PaymentHistoryId { get; set; }
         public int UserId { get; set; }
-        public System.DateTime Timestamp { get; set; }
-        public int Issued { get; set; }
+        public int PayAmount { get; set; }
+        public Nullable<System.DateTime> Timestamp { get; set; }
     }
 }

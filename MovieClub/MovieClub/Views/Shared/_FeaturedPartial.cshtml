@@ -36,11 +36,11 @@
                                                 {
                                                     <li class="span2 offsettiny">
                                                         <div class="thumbnail">
-                                                            <a href="#"><img src="@featuredmovies.ElementAt(j).PosterURL" alt=""></a>
+                                                            <a href="/Content/MovieDetails/@featuredmovies.ElementAt(j).Id"><img src="@featuredmovies.ElementAt(j).PosterURL" alt=""></a>
                                                         </div>
                                                         <div class="caption">
                                                             <h4>@featuredmovies.ElementAt(j).Name</h4>
-                                                            <p><img class="ratings-image" src="~/Content/images/stars.png" /><span class="ratings">@featuredmovies.ElementAt(j).ImdbRatings</span></p>
+                                                            <p><img class="ratings-image" src="~/Content/images/stars.png" /><span class="ratings">@Math.Round(featuredmovies.ElementAt(j).ImdbRatings,1)</span></p>
 
                                                         </div>
                                                     </li>

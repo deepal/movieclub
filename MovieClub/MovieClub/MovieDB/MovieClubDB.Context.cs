@@ -39,5 +39,8 @@ namespace MovieClub.MovieDB
         public DbSet<DBActivityLog> DBActivityLogs { get; set; }
         public DbSet<DBInboxMessage> DBInboxMessages { get; set; }
         public DbSet<DBRent> DBRents { get; set; }
+        public DbSet<DBFeatured> DBFeatureds { get; set; }
+        public DbSet<DBEmployeePendingPayment> DBEmployeePendingPayments { get; set; }
+        public DbSet<DBPaymentHistory> DBPaymentHistories { get; set; }
     }
 }

@@ -12,6 +12,10 @@
     z-index:0;
 }
 
+#allmovies-button{
+    margin-bottom:5px;
+}
+
 #movieclub-rating{
     height:21px !important;
     width:101px !important;
@@ -124,6 +128,8 @@
 
 .featured-div-caption{
     -webkit-transform:rotate(270deg);
+    -moz-transform:rotate(270deg);
+    transform:rotate(270deg);
     padding:10px 20px 0 0;
     margin-top:50px;
 }
@@ -371,6 +377,18 @@ footer{
     padding:20px;
     background-color:#f2f2f2;
     margin-top:20px;
+}
+
+.thumbnails .thumbnail{
+    height:212px;
+    width:150px;
+    overflow:hidden;
+}
+
+.thumbnails .thumbnail a img{
+    max-height:208px;
+    max-width:150px;
+    z-index:-100
 }
 
 footer *{

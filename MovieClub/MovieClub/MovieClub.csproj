@@ -230,6 +230,9 @@
     <Compile Include="MovieDB\DBCategory.cs">
       <DependentUpon>MovieClubDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="MovieDB\DBCharge.cs">
+      <DependentUpon>MovieClubDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="MovieDB\DBEmployeePendingPayment.cs">
       <DependentUpon>MovieClubDB.tt</DependentUpon>
     </Compile>
@@ -237,6 +240,9 @@
       <DependentUpon>MovieClubDB.tt</DependentUpon>
     </Compile>
     <Compile Include="MovieDB\DBFeatured.cs">
+      <DependentUpon>MovieClubDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDB\DBFine.cs">
       <DependentUpon>MovieClubDB.tt</DependentUpon>
     </Compile>
     <Compile Include="MovieDB\DBInboxMessage.cs">
@@ -292,6 +298,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MovieClubDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Operations\MovieIssuesOperations.cs" />
     <Compile Include="Operations\UserOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebServices\ImdbData.cs" />

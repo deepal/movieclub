@@ -14,12 +14,13 @@ using MovieClub.CustomAttributes;
 
 namespace MovieClub.Controllers
 {
+
     
     public class AccountController : Controller
     {
         //
         // GET: /Account/Login
-
+        [AllowAnonymous]
         public string GetSolUserName()
         {
             return "deepal";
@@ -45,8 +46,8 @@ namespace MovieClub.Controllers
 
         //
         // POST: /Account/LogOff
-
         [HttpPost]
+        [RequireMembership]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
@@ -57,6 +58,7 @@ namespace MovieClub.Controllers
 
         //
         // GET: /Account/Register
+
 
         [AllowAnonymous]
         public ActionResult Register()
@@ -96,7 +98,8 @@ namespace MovieClub.Controllers
         // POST: /Account/Disassociate
 
         
-        #region Helpers
+        /*
+         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -109,6 +112,8 @@ namespace MovieClub.Controllers
             }
         }
 
-        #endregion
+        #endregion 
+         
+         */
     }
 }

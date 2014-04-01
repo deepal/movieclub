@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace MovieClub.Controllers
 {
+    [RequireAdmin]
     public class AdminController : Controller
     {
 

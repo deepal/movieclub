@@ -1,16 +1,9 @@
 ﻿@if (Request.IsAuthenticated)
 {
     <text>
-        <li class="has-dropdown">
+        <li>
             @Html.ActionLink("Hello " + User.Identity.Name + " !", "MyAccount", "User", routeValues: null, htmlAttributes: new { @class = "", title = "Manage" })
-            <ul class="dropdown">
-                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                {
-                    @Html.AntiForgeryToken()
-                    <li>@Html.ActionLink("My Account", "MyAccount", "User")</li>
-                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-                }
-            </ul>
+            
         </li>
     </text>
 }

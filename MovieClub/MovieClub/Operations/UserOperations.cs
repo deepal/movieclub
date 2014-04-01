@@ -55,9 +55,17 @@ namespace MovieClub.Operations
             return null;
         }
 
+        
         public static bool IsAdmin()
         {
-            return MovieClub.Operations.UserOperations.GetCurrentUser().IsAdmin;
+            if (!HttpContext.Current.Request.IsAuthenticated)
+            {
+                return false;
+            }
+            else
+            {
+                return MovieClub.Operations.UserOperations.GetCurrentUser().IsAdmin;
+            }
         }
 
         public static bool LogActivity(string act)

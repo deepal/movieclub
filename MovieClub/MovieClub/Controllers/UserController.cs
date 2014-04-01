@@ -1,4 +1,5 @@
-﻿using MovieClub.Operations;
+﻿using MovieClub.CustomAttributes;
+using MovieClub.Operations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Web.Mvc;
 
 namespace MovieClub.Controllers
 {
-    
+    [RequireMembership]
     public class UserController : Controller
     {
 

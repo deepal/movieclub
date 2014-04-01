@@ -10,12 +10,17 @@ namespace MovieClub.CustomAttributes
 {
     public class RequireMembershipAttribute: ActionFilterAttribute
     {
-        public override void OnActionExecuted(ActionExecutedContext filterContext)
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            string loggedIn = (string)filterContext.HttpContext.Session["LoggedIn"];
-            if (loggedIn != "true")
-            {
-                filterContext.Result = new RedirectToRouteResult("Registration", new RouteValueDictionary(new { action="Register", controller="Account" }));
+            //string loggedIn = (string)filterContext.HttpContext.Session["LoggedIn"];
+            //string loggedIn = HttpContext.Current.User.Identity.Name;
+            if (!HttpContext.Current.User.Identity.IsAuthenticated)
+            {                
+                filterContext.Result = new RedirectToRouteResult(
+                    new RouteValueDictionary { 
+                        { "controller", "Account" }, 
+                        { "action", "Register" } }
+                    );
             }
         }
     }

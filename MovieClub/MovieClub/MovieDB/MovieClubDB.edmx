@@ -27,6 +27,16 @@
           <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryName" Type="varchar" MaxLength="80" />
         </EntityType>
+        <EntityType Name="DBCharges">
+          <Key>
+            <PropertyRef Name="ChargeId" />
+          </Key>
+          <Property Name="ChargeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="MovieId" Type="int" />
+          <Property Name="Charge" Type="float" />
+          <Property Name="Paid" Type="int" />
+        </EntityType>
         <EntityType Name="DBEmployeePendingPayments">
           <Key>
             <PropertyRef Name="PendingPaymentId" />
@@ -51,6 +61,16 @@
           <Property Name="FeaturedId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MovieId" Type="int" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DBFines">
+          <Key>
+            <PropertyRef Name="FineId" />
+          </Key>
+          <Property Name="FineId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="MovieId" Type="int" Nullable="false" />
+          <Property Name="Fine" Type="float" Nullable="false" />
+          <Property Name="Paid" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DBInboxMessages">
           <Key>
@@ -181,9 +201,11 @@
           <EntitySet Name="DBActivityLogs" EntityType="Self.DBActivityLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBAdmins" EntityType="Self.DBAdmins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBCategories" EntityType="Self.DBCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DBCharges" EntityType="Self.DBCharges" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBEmployeePendingPayments" EntityType="Self.DBEmployeePendingPayments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBFavorites" EntityType="Self.DBFavorites" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBFeatured" EntityType="Self.DBFeatured" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DBFines" EntityType="Self.DBFines" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBInboxMessages" EntityType="Self.DBInboxMessages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBMovies" EntityType="Self.DBMovies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBMovieSuggestions" EntityType="Self.DBMovieSuggestions" Schema="dbo" store:Type="Tables" />
@@ -218,6 +240,8 @@
           <EntitySet Name="DBFeatureds" EntityType="MovieClubDBModel.DBFeatured" />
           <EntitySet Name="DBEmployeePendingPayments" EntityType="MovieClubDBModel.DBEmployeePendingPayment" />
           <EntitySet Name="DBPaymentHistories" EntityType="MovieClubDBModel.DBPaymentHistory" />
+          <EntitySet Name="DBCharges" EntityType="MovieClubDBModel.DBCharge" />
+          <EntitySet Name="DBFines" EntityType="MovieClubDBModel.DBFine" />
         </EntityContainer>
         <EntityType Name="DBCategory">
           <Key>
@@ -390,6 +414,26 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="PayAmount" Type="Int32" Nullable="false" />
           <Property Name="Timestamp" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="DBCharge">
+          <Key>
+            <PropertyRef Name="ChargeId" />
+          </Key>
+          <Property Name="ChargeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="MovieId" Type="Int32" />
+          <Property Name="Charge" Type="Double" />
+          <Property Name="Paid" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DBFine">
+          <Key>
+            <PropertyRef Name="FineId" />
+          </Key>
+          <Property Name="FineId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <Property Name="Fine" Type="Double" Nullable="false" />
+          <Property Name="Paid" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -583,6 +627,28 @@
                 <ScalarProperty Name="PayAmount" ColumnName="PayAmount" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="PaymentHistoryId" ColumnName="PaymentHistoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBCharges">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBCharge">
+              <MappingFragment StoreEntitySet="DBCharges">
+                <ScalarProperty Name="Paid" ColumnName="Paid" />
+                <ScalarProperty Name="Charge" ColumnName="Charge" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ChargeId" ColumnName="ChargeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBFines">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBFine">
+              <MappingFragment StoreEntitySet="DBFines">
+                <ScalarProperty Name="Paid" ColumnName="Paid" />
+                <ScalarProperty Name="Fine" ColumnName="Fine" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FineId" ColumnName="FineId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -11,6 +11,7 @@ using System.IO;
 using System.Text;
 using MovieClub.WebServices;
 using MovieClub.Operations;
+using MovieClub.CustomAttributes;
 
 namespace MovieClub.Controllers
 {
@@ -445,7 +446,7 @@ namespace MovieClub.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]  //remove this attribute after testing
+        [RequireMembership]  //remove this attribute after testing
         public ActionResult RateMovie()
         {
             int mid = int.Parse(Request.Form["movieid"]);

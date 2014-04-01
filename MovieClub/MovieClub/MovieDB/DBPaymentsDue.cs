@@ -12,12 +12,13 @@ namespace MovieClub.MovieDB
     using System;
     using System.Collections.Generic;
     
-    public partial class DBCharge
+    public partial class DBPaymentsDue
     {
-        public int ChargeId { get; set; }
+        public int PaymentId { get; set; }
         public Nullable<int> UserId { get; set; }
         public Nullable<int> MovieId { get; set; }
         public Nullable<double> Charge { get; set; }
+        public Nullable<double> Fine { get; set; }
         public Nullable<int> Paid { get; set; }
     }
 }

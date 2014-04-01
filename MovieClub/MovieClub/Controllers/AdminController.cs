@@ -1,5 +1,6 @@
-﻿using MovieClub.CustomAttributes;
+using MovieClub.CustomAttributes;
 using MovieClub.Models;
+using MovieClub.Operations;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,7 +15,7 @@ namespace MovieClub.Controllers
     public class AdminController : Controller
     {
 
-        
+
         [HttpGet]
         public ActionResult CPanel()
         {
@@ -32,7 +33,8 @@ namespace MovieClub.Controllers
 
             foreach (var user in users)
             {
-                userlist.Add(new Models.AdminModels.UserModel() {
+                userlist.Add(new Models.AdminModels.UserModel()
+                {
                     UserID = user.UserId,
                     Username = user.UserName,
                     Email = user.Email,
@@ -40,7 +42,7 @@ namespace MovieClub.Controllers
                 });
             }
 
-            return PartialView("_UsersAdminPartial",userlist);
+            return PartialView("_UsersAdminPartial", userlist);
         }
 
         [HttpGet]
@@ -50,28 +52,29 @@ namespace MovieClub.Controllers
 
 
             var dbmovies = from movie in db.DBMovies.ToList()
-                       join reserv in db.DBReservations.ToList() on movie.Id equals reserv.MovieId into movreserv
-                       from item in movreserv.DefaultIfEmpty()
-                       select new { 
-                            Selected = false,
-                            MovieId = movie.Id,
-                            MovieName = movie.Name,
-                            Views = movie.Views,
-                            Genre = movie.Genre,
-                            AddedDate = movie.AddedDate,
-                            Rents = (from rent in db.DBRents where rent.MovieId==movie.Id select rent).Count(),
-                            AvailableToRent = !(db.DBRents.AsEnumerable().Any(row => movie.Id == row.MovieId)) || (db.DBRents.AsEnumerable().Any(row => movie.Id == row.MovieId && row.Returned==1)),//(from ritem in db.DBRents where (ritem.MovieId == movie.Id && ritem.Returned == 1) select ritem).Count() + (from m in db.DBMovies where (db.DBRents.AsEnumerable().Any(row => m.Id == row.MovieId)) select m).Count(),
-                            ReservationsCount = (from rsitem in db.DBReservations where rsitem.MovieId==movie.Id && rsitem.Issued==0 select rsitem).Count(),
-                            Featured = (db.DBFeatureds.AsEnumerable().Any(row => movie.Id == row.MovieId)),//(from fitem in db.DBFeatureds where fitem.MovieId == movie.Id select fitem).Count()
-                            Favorites = (from fav in db.DBFavorites where fav.MovieID==movie.Id select fav).Count(),
-                            Rating = (from mv in db.DBMovies where mv.Id==movie.Id select mv).First().MovieClubRatings
-                       };
+                           join reserv in db.DBReservations.ToList() on movie.Id equals reserv.MovieId into movreserv
+                           from item in movreserv.DefaultIfEmpty()
+                           select new
+                           {
+                               Selected = false,
+                               MovieId = movie.Id,
+                               MovieName = movie.Name,
+                               Views = movie.Views,
+                               Genre = movie.Genre,
+                               AddedDate = movie.AddedDate,
+                               Rents = (from rent in db.DBRents where rent.MovieId == movie.Id select rent).Count(),
+                               AvailableToRent = !(db.DBRents.AsEnumerable().Any(row => movie.Id == row.MovieId)) || (db.DBRents.AsEnumerable().Any(row => movie.Id == row.MovieId && row.Returned == 1)),//(from ritem in db.DBRents where (ritem.MovieId == movie.Id && ritem.Returned == 1) select ritem).Count() + (from m in db.DBMovies where (db.DBRents.AsEnumerable().Any(row => m.Id == row.MovieId)) select m).Count(),
+                               ReservationsCount = (from rsitem in db.DBReservations where rsitem.MovieId == movie.Id && rsitem.Issued == 0 select rsitem).Count(),
+                               Featured = (db.DBFeatureds.AsEnumerable().Any(row => movie.Id == row.MovieId)),//(from fitem in db.DBFeatureds where fitem.MovieId == movie.Id select fitem).Count()
+                               Favorites = (from fav in db.DBFavorites where fav.MovieID == movie.Id select fav).Count(),
+                               Rating = (from mv in db.DBMovies where mv.Id == movie.Id select mv).First().MovieClubRatings
+                           };
 
             List<Models.AdminModels.ManageMoviesModel> movies = new List<Models.AdminModels.ManageMoviesModel>();
 
             foreach (var item in dbmovies)
             {
-                
+
                 movies.Add(new Models.AdminModels.ManageMoviesModel()
                 {
                     AddedDate = (DateTime)item.AddedDate,
@@ -83,7 +86,7 @@ namespace MovieClub.Controllers
                     RentsCount = item.Rents,
                     ReservationsCount = item.ReservationsCount,
                     Selected = false,
-                    ViewsCount = item.Views,     
+                    ViewsCount = item.Views,
                     Favorites = item.Favorites,
                     PearsonRating = (float)item.Rating,
                     Updated = false
@@ -98,8 +101,9 @@ namespace MovieClub.Controllers
         [HttpPost]
         public ActionResult ManageMovies(Models.AdminModels.ManageMoviesModel movieitem)
         {
-            return Json(new { 
-                result="ok"
+            return Json(new
+            {
+                result = "ok"
             });
         }
 
@@ -124,7 +128,7 @@ namespace MovieClub.Controllers
 
                 if (movieexists != 0)
                 {
-                    ModelState.AddModelError("","\""+movie.Name+"\" already exists!");
+                    ModelState.AddModelError("", "\"" + movie.Name + "\" already exists!");
                     return View(movie);
 
                     /*
@@ -205,7 +209,7 @@ namespace MovieClub.Controllers
         public ActionResult ReservedMovies()
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
-            var reservations = db.DBReservations.Where(rs=>rs.Issued==0).ToList();
+            var reservations = db.DBReservations.Where(rs => rs.Issued == 0).ToList();
             var reservs = reservations.Join(db.DBMovies,
                     l => l.MovieId,
                     r => r.Id,
@@ -213,21 +217,22 @@ namespace MovieClub.Controllers
                     {
                         MovieId = l.MovieId,
                         MovieName = r.Name,
-                        ReservationsCount = reservations.Count(rs=>rs.MovieId==l.MovieId),
+                        ReservationsCount = reservations.Count(rs => rs.MovieId == l.MovieId),
                     }
-                ).GroupBy(mv=>mv.MovieId).Select(grp=>grp.First());
+                ).GroupBy(mv => mv.MovieId).Select(grp => grp.First());
 
             List<Models.AdminModels.ReservedMovieModel> reservedmovies = new List<Models.AdminModels.ReservedMovieModel>();
 
             foreach (var movie in reservs)
             {
-                var firstreservation = reservations.Where(m => m.MovieId == movie.MovieId).OrderByDescending(m=>m.Timestamp).Last();
-                reservedmovies.Add(new Models.AdminModels.ReservedMovieModel() {
+                var firstreservation = reservations.Where(m => m.MovieId == movie.MovieId).OrderByDescending(m => m.Timestamp).Last();
+                reservedmovies.Add(new Models.AdminModels.ReservedMovieModel()
+                {
                     MovieId = movie.MovieId,
                     MovieName = movie.MovieName,
-                    ReservationsCount = reservations.Count(r=>r.MovieId==movie.MovieId),
+                    ReservationsCount = reservations.Count(r => r.MovieId == movie.MovieId),
                     UserId = firstreservation.UserId,
-                    Username = db.DBUsers.First(u=>u.UserId==firstreservation.UserId).UserName,
+                    Username = db.DBUsers.First(u => u.UserId == firstreservation.UserId).UserName,
                     DateReserved = firstreservation.Timestamp
                 });
             }
@@ -235,10 +240,12 @@ namespace MovieClub.Controllers
         }
 
         [HttpPost]
-        public ActionResult Issue(int movie, int u){
+        public ActionResult Issue(int movie, int u)
+        {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
-            var ures = db.DBReservations.Where(ur=>ur.UserId==u&&ur.MovieId==movie);
-            if(ures.Count()!=0){
+            var ures = db.DBReservations.Where(ur => ur.UserId == u && ur.MovieId == movie);
+            if (ures.Count() != 0)
+            {
 
                 var rents = db.DBRents.Where(rs => rs.MovieId == movie && rs.Returned == 0);
 
@@ -271,9 +278,11 @@ namespace MovieClub.Controllers
                 }
 
             }
-            else{
-                return Json(new {
-                    result="fail",
+            else
+            {
+                return Json(new
+                {
+                    result = "fail",
                     message = "Invalid operation"
                 });
             }
@@ -298,7 +307,7 @@ namespace MovieClub.Controllers
             dbmovie.Name = movie.Name;
             dbmovie.PlotFull = movie.PlotFull;
             dbmovie.PlotShort = movie.PlotShort;
-            dbmovie.PosterURL = System.Configuration.ConfigurationManager.AppSettings["PosterPath"]+"/"+movie.ImdbId+Path.GetExtension(movie.PosterURL);
+            dbmovie.PosterURL = System.Configuration.ConfigurationManager.AppSettings["PosterPath"] + "/" + movie.ImdbId + Path.GetExtension(movie.PosterURL);
             dbmovie.ReleaseDate = movie.ReleaseDate;
             dbmovie.Runtime = movie.Runtime;
             dbmovie.Writer = movie.Writer;
@@ -336,17 +345,18 @@ namespace MovieClub.Controllers
             db.SaveChanges();
 
             return true;
-            
+
         }
 
         [HttpGet]
         public ActionResult PendingReturns()
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
-            var pendings = db.DBRents.Where(r=>(r.DueDate<DateTime.Now && r.Returned==0)||(r.Returned==0)).Join(db.DBMovies,
-                    l=>l.MovieId,
-                    r=>r.Id,
-                    (r,l)=>new{
+            var pendings = db.DBRents.Where(r => (r.DueDate < DateTime.Now && r.Returned == 0) || (r.Returned == 0)).Join(db.DBMovies,
+                    l => l.MovieId,
+                    r => r.Id,
+                    (r, l) => new
+                    {
                         MovieId = l.Id,
                         MovieName = l.Name,
                         DateTaken = r.BorrowedDate,
@@ -354,8 +364,8 @@ namespace MovieClub.Controllers
                         UserId = r.UserId
                     }
                 ).Join(db.DBUsers,
-                    l=>l.UserId,
-                    r=>r.UserId,
+                    l => l.UserId,
+                    r => r.UserId,
                     (l, r) => new
                     {
                         MovieId = l.MovieId,
@@ -371,14 +381,15 @@ namespace MovieClub.Controllers
 
             foreach (var item in pendings)
             {
-                preturns.Add(new Models.AdminModels.PendingReturnsModel(){
+                preturns.Add(new Models.AdminModels.PendingReturnsModel()
+                {
                     MovieId = item.MovieId,
                     MovieName = item.MovieName,
                     UserId = (int)item.UserId,
                     UserName = item.Username,
                     Email = item.UserEmail,
                     DueDate = (DateTime)item.DueDate,
-                    DateTaken = (DateTime)item.DateTaken                    
+                    DateTaken = (DateTime)item.DateTaken
                 });
             }
 
@@ -392,7 +403,7 @@ namespace MovieClub.Controllers
             if (featured)
             {
                 var featuredcount = db.DBFeatureds.ToList().Count;
-                if ( featuredcount < 15)
+                if (featuredcount < 15)
                 {
                     db.DBFeatureds.Add(new MovieDB.DBFeatured()
                     {
@@ -433,7 +444,7 @@ namespace MovieClub.Controllers
             {
                 if (db.DBFeatureds.Count(m => m.MovieId == movieid) != 0)
                 {
-                    db.DBFeatureds.Remove(db.DBFeatureds.First(m=>m.MovieId==movieid));
+                    db.DBFeatureds.Remove(db.DBFeatureds.First(m => m.MovieId == movieid));
                     db.SaveChanges();
 
                     return Json(new
@@ -443,29 +454,43 @@ namespace MovieClub.Controllers
                     });
                 }
 
-                return Json(new {
+                return Json(new
+                {
                     result = "none"
                 });
-                
+
             }
-            
+
         }
 
         [HttpPost]
         public ActionResult MarkAsReturned(int movieid, int u)
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
-            db.DBRents.Where(r => r.UserId == u && r.MovieId == movieid).ToList().ForEach(m=>m.Returned=1);
-
+            db.DBRents.Where(r => r.UserId == u && r.MovieId == movieid).ToList().ForEach(m => m.Returned = 1);
+            var rents = db.DBRents.Where(r => r.UserId == u && r.MovieId == movieid).ToList();
             //now I need update the respective row in rents and update the returned date 
-            db.DBRents.Where(r => r.UserId == u && r.MovieId == movieid).ToList().OrderByDescending(m => m.BorrowedDate).First().ReturnedDate = DateTime.Now;
+            rents.OrderByDescending(m => m.BorrowedDate).First().ReturnedDate = DateTime.Now;
+
+            DateTime borroweddate = (DateTime)rents.OrderBy(m=>m.BorrowedDate).First().BorrowedDate;
+
+            var fine = MovieIssuesOperations.CalculatedFine(borroweddate, DateTime.Now);
+            var charge = MovieIssuesOperations.CalculateCharge(borroweddate,DateTime.Now);
+
+            db.DBPaymentsDues.Add(new MovieDB.DBPaymentsDue() {
+                Charge=charge,
+                Fine=fine,
+                MovieId=movieid,
+                UserId=u,
+                Paid=0,
+            });
 
             db.SaveChanges();
 
             return Json(new
             {
-                result="ok",
-                message="Movie marked as returned!"
+                result = "ok",
+                message = "Movie marked as returned!"
             });
         }
 
@@ -474,7 +499,7 @@ namespace MovieClub.Controllers
         {
             ViewBag.To = userid;
             return View();
-        } 
+        }
 
         [HttpPost]
         public ActionResult SendMessage()
@@ -484,7 +509,8 @@ namespace MovieClub.Controllers
 
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
 
-            db.DBInboxMessages.Add(new MovieDB.DBInboxMessage() {
+            db.DBInboxMessages.Add(new MovieDB.DBInboxMessage()
+            {
                 Date = DateTime.Now,
                 Message = comment,
                 Status = 1,
@@ -493,8 +519,9 @@ namespace MovieClub.Controllers
 
             db.SaveChanges();
 
-            return Json(new {
-                result="ok",
+            return Json(new
+            {
+                result = "ok",
                 message = "Message sent!"
             });
         }
@@ -503,11 +530,11 @@ namespace MovieClub.Controllers
         {
             string LocalPath = HttpContext.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["PosterDownloadPath"]) + "/" + ImdbId + Path.GetExtension(Url);
             WebClient client = new WebClient();
-            client.DownloadFile(Url,LocalPath);
+            client.DownloadFile(Url, LocalPath);
             return;
         }
     }
 
-    
+
 
 }

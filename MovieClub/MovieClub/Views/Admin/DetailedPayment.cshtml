@@ -1,0 +1,43 @@
+﻿@model List<MovieClub.Models.AdminModels.DetailedPaymentModel>
+
+@{
+    Layout = null;
+    var user = ViewBag.PaymentUser;
+    var paylist = Model;
+    var finetotal = ViewBag.FineTotal;
+    var chargetotal = ViewBag.ChargeTotal;
+}
+
+<div id="payment-sheet">
+    <div id="payment-header">
+        Outstanding payment details
+        <hr />
+    </div>
+    <div id="payment-details">
+        <table>
+            <thead>
+                <tr>
+                    <th>Movie name</th>
+                    <th>Charge</th>
+                    <th>Fine</th>
+                </tr>
+            </thead>
+            @foreach(var item in paylist)
+            {
+                <tr>
+                    <td>@item.MovieName</td>
+                    <td>@Math.Round((double)item.Charge,2)</td>
+                    <td>@Math.Round((double)item.Fine,2)</td>
+                </tr>
+            }
+        </table>
+        <table>
+            <tr>
+                <td>Total Amount (Rs.):</td>
+                <td>@Math.Round((double)(finetotal+chargetotal),2)</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+

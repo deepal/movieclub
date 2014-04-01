@@ -11,7 +11,11 @@
         <tr>
             <td>@item.Username</td>
             <td>@item.TotalPaymentDue</td>
-            <td><a href="">View Details</a></td>
+            <td>
+                <a href="/Admin/DetailedPayment/?userid=@item.UserId" data-reveal-id="myModal" data-reveal-ajax="true">
+                    View Details
+                </a>
+            </td>
         </tr>
     }
 }

@@ -576,6 +576,45 @@ namespace MovieClub.Controllers
 
             return PartialView("_PendingPaymentsPartial",ppay);
         }
+
+        [HttpGet]
+        public ActionResult DetailedPayment(int userid)
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            var userpayment = db.DBPaymentsDues.Where(up => up.UserId == userid).Join(db.DBMovies,
+                l=>l.MovieId,
+                r=>r.Id,
+                (l, r) => new
+                {
+                    MovieId = l.MovieId,
+                    MovieName = r.Name,
+                    Fine = l.Fine,
+                    Charge = l.Charge
+                }
+                );
+
+            List<Models.AdminModels.DetailedPaymentModel> paylist = new List<Models.AdminModels.DetailedPaymentModel>();
+            double fineTotal = 0;
+            double chargeTotal = 0;
+            foreach (var item in userpayment)
+            {
+                paylist.Add(new Models.AdminModels.DetailedPaymentModel() {
+                    Charge = (float)item.Charge,
+                    Fine = (float)item.Fine,
+                    MovieId = item.MovieId,
+                    MovieName = item.MovieName
+                });
+                fineTotal += item.Fine;
+                chargeTotal += item.Charge;
+            }
+            ViewBag.PaymentUser = userid;
+            ViewBag.FineTotal = fineTotal;
+            ViewBag.ChargeTotal = chargeTotal;
+
+            return View(userpayment);
+        }
+
+
     }
 
 

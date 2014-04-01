@@ -19,7 +19,12 @@
                 <td id="passedduedate">@item.DueDate</td>
                 <td>9.50</td>
                 <td>
-                    <a href="#" onclick="markAsReturned(@item.MovieId,@item.UserId)">Returned</a><a class="sendmessage-trigger" href="/Admin/SendMessage/?userid=@item.UserId">Send Message</a>
+                <td>
+                    <a href="#" onclick="markAsReturned(@item.MovieId,@item.UserId)">Returned</a>
+                    <!-- <a href="#" data-reveal-id="myModal" data-reveal>Click Me For A Modal</a> -->
+                    <a href="/Admin/SendMessage/?userid=@item.UserId" data-reveal-id="myModal" data-reveal-ajax="true">
+                        Send Message
+                    </a>
                 </td>
             </tr>
         }

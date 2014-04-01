@@ -196,6 +196,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AdminModels\DetailedPaymentModel.cs" />
     <Compile Include="Models\AdminModels\GetReservationModel.cs" />
     <Compile Include="Models\AdminModels\ManageMoviesModel.cs" />
     <Compile Include="Models\AdminModels\PendingPaymentsModel.cs" />
@@ -498,6 +499,7 @@
     <Content Include="Views\Admin\_ReservedMoviesPartial.cshtml" />
     <Content Include="Views\Admin\SendMessage.cshtml" />
     <Content Include="Views\Admin\_PendingPaymentsPartial.cshtml" />
+    <Content Include="Views\Admin\DetailedPayment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

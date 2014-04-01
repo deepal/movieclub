@@ -15,10 +15,10 @@ namespace MovieClub.MovieDB
     public partial class DBPaymentsDue
     {
         public int PaymentId { get; set; }
-        public Nullable<int> UserId { get; set; }
-        public Nullable<int> MovieId { get; set; }
-        public Nullable<double> Charge { get; set; }
-        public Nullable<double> Fine { get; set; }
-        public Nullable<int> Paid { get; set; }
+        public int UserId { get; set; }
+        public int MovieId { get; set; }
+        public double Charge { get; set; }
+        public double Fine { get; set; }
+        public int Paid { get; set; }
     }
 }

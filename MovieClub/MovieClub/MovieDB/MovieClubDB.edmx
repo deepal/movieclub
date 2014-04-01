@@ -122,11 +122,11 @@
             <PropertyRef Name="PaymentId" />
           </Key>
           <Property Name="PaymentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" />
-          <Property Name="MovieId" Type="int" />
-          <Property Name="Charge" Type="float" />
-          <Property Name="Fine" Type="float" />
-          <Property Name="Paid" Type="int" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="MovieId" Type="int" Nullable="false" />
+          <Property Name="Charge" Type="float" Nullable="false" />
+          <Property Name="Fine" Type="float" Nullable="false" />
+          <Property Name="Paid" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DBRatings">
           <Key>
@@ -409,11 +409,11 @@
             <PropertyRef Name="PaymentId" />
           </Key>
           <Property Name="PaymentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="MovieId" Type="Int32" />
-          <Property Name="Charge" Type="Double" />
-          <Property Name="Fine" Type="Double" />
-          <Property Name="Paid" Type="Int32" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <Property Name="Charge" Type="Double" Nullable="false" />
+          <Property Name="Fine" Type="Double" Nullable="false" />
+          <Property Name="Paid" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>

@@ -1,0 +1,23 @@
+﻿@model List<MovieClub.Models.AdminModels.PendingPaymentsModel>
+
+@{
+    var payments = Model;
+}
+
+@if (payments.Count > 0)
+{
+    foreach (var item in payments)
+    {
+        <tr>
+            <td>@item.Username</td>
+            <td>@item.TotalPaymentDue</td>
+            <td><a href="">View Details</a></td>
+        </tr>
+    }
+}
+else
+{
+    <td colspan="3">No pending payments</td>
+}
+
+

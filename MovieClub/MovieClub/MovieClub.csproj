@@ -303,6 +303,10 @@
     <Compile Include="WebServices\ImdbData.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\MovieClubDB.mdf" />
+    <Content Include="App_Data\MovieClubDB_log.ldf">
+      <DependentUpon>MovieClubDB.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\css\admin.css" />
     <Content Include="Content\css\categorypage.css" />
     <Content Include="Content\css\glyphicons.css" />
@@ -454,7 +458,9 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -502,7 +508,6 @@
     <Content Include="Views\Admin\DetailedPayment.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Content\images\posters\" />
     <Folder Include="Content\multimedia\" />
     <Folder Include="Images\" />

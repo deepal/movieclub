@@ -118,3 +118,13 @@ input[type=checkbox]{
     margin-top:8px;
     margin-bottom:8px;
 }
+
+.modal-custom{
+    width:510px !important;
+    margin-left:-20% !important;
+}
+
+.modal-custom-message{
+    width:300px !important;
+    margin-left:-10% !important;
+}

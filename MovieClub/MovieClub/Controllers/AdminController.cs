@@ -611,7 +611,7 @@ namespace MovieClub.Controllers
             ViewBag.FineTotal = fineTotal;
             ViewBag.ChargeTotal = chargeTotal;
 
-            return View(userpayment);
+            return View(paylist);
         }
 
 

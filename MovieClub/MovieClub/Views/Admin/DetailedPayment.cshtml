@@ -13,13 +13,13 @@
         Outstanding payment details
         <hr />
     </div>
-    <div id="payment-details">
+    <div id="payment-details" class="left">
         <table>
             <thead>
                 <tr>
-                    <th>Movie name</th>
-                    <th>Charge</th>
-                    <th>Fine</th>
+                    <th width="250">Movie name</th>
+                    <th width="100">Charge</th>
+                    <th width="100">Fine</th>
                 </tr>
             </thead>
             @foreach(var item in paylist)
@@ -33,10 +33,13 @@
         </table>
         <table>
             <tr>
-                <td>Total Amount (Rs.):</td>
-                <td>@Math.Round((double)(finetotal+chargetotal),2)</td>
+                <td width="350">Total Amount (Rs.):</td>
+                <td width="100">@Math.Round((double)(finetotal+chargetotal),2)</td>
             </tr>
         </table>
+        <div style="text-align:center">
+            <a href="/Admin/CheckoutPayment/?userid=@user" class="button tiny">Checkout</a>
+        </div>
     </div>
 </div>
 

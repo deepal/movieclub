@@ -22,14 +22,17 @@
                     <th width="100">Fine</th>
                 </tr>
             </thead>
-            @foreach(var item in paylist)
-            {
-                <tr>
-                    <td>@item.MovieName</td>
-                    <td>@Math.Round((double)item.Charge,2)</td>
-                    <td>@Math.Round((double)item.Fine,2)</td>
-                </tr>
-            }
+            <tbody>
+                @foreach (var item in paylist)
+                {
+                    <tr>
+                        <td width="250">@item.MovieName</td>
+                        <td width="100">@Math.Round((double)item.Charge, 2)</td>
+                        <td width="100">@Math.Round((double)item.Fine, 2)</td>
+                    </tr>
+                }
+            </tbody>
+            
         </table>
         <table>
             <tr>

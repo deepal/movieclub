@@ -125,6 +125,22 @@ input[type=checkbox]{
 }
 
 .modal-custom-message{
-    width:300px !important;
-    margin-left:-10% !important;
+    width:600px !important;
+    margin-left:-22% !important;
 }
+
+#payment-details table thead > tr{
+    
+}
+
+#payment-details table tbody{
+    display:block;
+    overflow-y: auto !important; 
+    max-height: 400px !important;
+    width:447px;
+}
+
+#payment-details table thead{
+    display:block;
+}
+

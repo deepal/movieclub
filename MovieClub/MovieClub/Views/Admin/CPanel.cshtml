@@ -1,0 +1,256 @@
+﻿@model MovieClub.Models.MovieDetails
+
+@{
+    ViewBag.Title = "Administrator | Control Panel";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var ImdbAPI = System.Configuration.ConfigurationManager.AppSettings["IMDbAPI"];
+}
+
+<dl class="tabs" data-tab>
+    <dd class="active"><a href="#panel-reservations">Reservations and Issues</a></dd>
+    <dd><a href="#panel-returns">Pending returns</a></dd>
+    <dd><a href="#panel-users">Users</a></dd>
+    <dd><a href="#panel-pending-payments">Pending Payments</a></dd>
+</dl>
+
+<div class="tabs-content tabs-content-custom">
+
+    <div id="panel-reservations" class="content active">
+        <table id="table-reservations">
+            <thead>
+                <tr>
+                    <th width="300">
+                        Movie name
+                    </th>
+                    <th>
+                        Reservations
+                    </th>
+                    <th width="200">
+                        Next reservation to
+                    </th>
+                    <th width="200">
+                        Timestamp
+                    </th>
+                    <th width="100">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div id="panel-returns" class="content">
+        <table id="table-returns">
+            <thead>
+                <tr>
+                    <th width="400">Movie</th>
+                    <th width="200">Username</th>
+                    <th width="200">Date taken</th>
+                    <th width="200">Due date</th>
+                    <th width="100">Fine</th>
+                    <th width="400">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div id="panel-users" class="content">
+        <table id="table-users">
+            <thead>
+                <tr>
+                    <th width="50">#</th>
+                    <th width="100">User ID</th>
+                    <th width="300">Username</th>
+                    <th width="150">Employee ID</th>
+                    <th width="600">Email</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div id="panel-pending-payments" class="content">
+        <table id="table-pending-payments">
+            <thead>
+                <tr>
+                    <th width="300">Username</th>
+                    <th width="200">Outstanding payment</th>
+                    <th width="200">Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+
+        </table>
+    </div>
+
+    <div id="myModal" class="reveal-modal modal-custom-message" data-reveal>
+    </div>
+
+    <div id="myModalpayment" class="reveal-modal modal-custom" data-reveal>
+    </div>
+
+    </div>
+
+
+
+@section customstyles{
+    @Styles.Render("~/Content/css/admin.css")
+    @Styles.Render("~/Content/css/toastr.css")
+}
+
+@section Scripts {
+    @Scripts.Render("~/Content/js/foundation/foundation.alert.js")
+    @Scripts.Render("~/Content/js/toastr.js")
+    
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            
+
+            //ajax calls on page load----------------------------------------------------------------------
+
+            $.ajax({
+                type: "GET",
+                url: "/Admin/ReservedMovies"
+            })
+            .success(function (data) {
+                $("#table-reservations tbody").html(data);
+            })
+            .error(function () {
+                $("#table-reservations tbody").html("<p>Error loading reservations. Try refreshing the page.</p>");
+            });
+
+
+            $.ajax({
+                url: "/Admin/PendingReturns",
+                type: "GET"
+            })
+            .success(function (data) {
+                $("#table-returns tbody").html(data);
+            })
+            .error(function () {
+                $("#table-returns tbody").html("<p>Error loading pending returns!</p>");
+            });
+
+
+
+            $.ajax({
+                url: "/Admin/GetPaymentDues",
+                type: "GET"
+            })
+            .success(function (data) {
+                $("#table-pending-payments tbody").html(data);
+            })
+            .error(function () {
+                $("#table-pending-payments tbody").html("<p>Error loading pending payments!</p>");
+            });
+
+
+            $.ajax({
+                url: "/Admin/Users",
+                type: "GET"
+            })
+            .success(function (data) {
+                $("#table-users tbody").html(data);
+            })
+            .error(function () {
+                $("#table-users tbody").html("<p>Error loading users!</p>");
+            });
+
+            /*---------------------------------------------------------------*/
+
+
+            
+            
+
+        });
+
+
+        
+
+
+        function issueMovie(movieid,userid) {
+            $.ajax({
+                url: "/Admin/Issue/?u="+userid+"&&movie="+movieid,
+                type: "POST",
+                dataType: "text"
+            })
+                .success(function (data) {
+                    var obj = $.parseJSON(data);
+                    if (obj.result == "ok") {
+
+                        $.ajax({
+                            type: "GET",
+                            url: "/Admin/ReservedMovies"
+                        })
+                        .success(function (data) {
+                            $("#table-reservations tbody").html(data);
+                        })
+                        .error(function () {
+                            $("#table-reservations tbody").html("<p>Error loading reservations. Try refreshing the page.</p>");
+                        });
+                        //refresh pending returns view
+                        $.ajax({
+                            url: "/Admin/PendingReturns",
+                            type: "GET"
+                        })
+                        .success(function (data) {
+                            $("#table-returns tbody").html(data);
+                        })
+                        .error(function () {
+                            $("#table-returns tbody").html("<p>Error loading pending returns!</p>");
+                        });
+
+                        toastr.success(obj.message);
+                    }
+                    else if (obj.result == "error") {
+                        toastr.warning(obj.message);
+                    }
+                    else {
+                        toastr.error("Unknown error occured!");
+                    }
+                })
+                .error(function () {
+                    toastr.error("Error occured! Check your connection.");
+                });
+        }
+
+        function markAsReturned(movieid,u) {
+            $.ajax({
+                url: "/Admin/MarkAsReturned/?movieid=" + movieid + "&&u=" + u,
+                type: "POST",
+                dataType: "text"
+            })
+            .success(function (data) {
+                var obj = $.parseJSON(data);
+                //update pending returns table
+                $.ajax({
+                    url: "/Admin/PendingReturns",
+                    type: "GET"
+                })
+                .success(function (data) {
+                    $("#table-returns tbody").html(data);
+                })
+                .error(function () {
+                    $("#table-returns tbody").html("<p>Error loading pending returns!</p>");
+                });
+
+
+                if (obj.result == "ok") {
+                    toastr.success(obj.message);
+                }
+            })
+            .error(function () {
+                toastr.error("Error occured! Check your connection.");
+            });
+        }
+
+    </script>
+
+    
+}
+

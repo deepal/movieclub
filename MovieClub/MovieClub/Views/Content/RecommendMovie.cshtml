@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+    var moviename = ViewBag.MovieName;
+    var movieid = ViewBag.MovieId;
+}
+
+<fieldset>
+    <legend>Recommend</legend>
+
+    <label>
+        Comment
+        <textarea placeholder="What do you think about ''@moviename'" id="comment-text" cols="100" rows="4"></textarea>
+    </label>
+    <div class="right">
+        <a id="recommend-button" href="#" class="button tiny" data-movieid="@movieid" data-reveal-id="myModal-recommend" data-reveal-ajax="true">
+            Recommend
+        </a>
+    </div>
+</fieldset>
+
+<script>
+    $("#recommend-button").click(function (e) {
+        var mid = "@movieid"
+        $('#myModal-recommend').foundation('reveal', 'close');
+        $.ajax({
+            url: "/User/Recommend",
+            type: "POST",
+            data: { movieid: mid, comment: $("#comment-text").val() },
+            dataType: "text"
+        })
+        .success(function (data) {
+            var obj = $.parseJSON(data);
+            if (obj.result == "ok") {
+                toastr.success("You recommended '@moviename'!");
+            }
+            else if (obj.result == "error") {
+                toastr.info(obj.reason);
+            }
+            else {
+                toastr.error("Failed! Check your connection.");
+            }
+        })
+        .error(function () {
+            toastr.error("Failed! Check your connection.");
+        });
+
+        e.preventDefault();
+    });
+
+</script>

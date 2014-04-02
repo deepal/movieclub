@@ -34,28 +34,38 @@
                         </li>
                     </ul>
                     <ul id="dropd" data-dropdown-content class="f-dropdown">
-                        <li><a href="#recommend-popup" class="small" id="recommend-movie" data-options="align:left">Recommend</a></li>
+                        <li>
+                            <a href="/Content/RecommendMovie/?movieid=@movie.Id" data-reveal-id="myModal-recommend" data-reveal-ajax="true">
+                                Recommend
+                            </a>
+                        </li>
                         <li><a href="#" id="add-to-favorites" class="small">+ Add to favorites</a></li>
                         <li><a href="#" id="add-to-watchlist" class="small">+ Add to watchlist</a></li>
                     </ul>
                 </div>
-                <div id="recommend-popup">
-                    <div id="recommend-popup-inner">
-                        @using (Html.BeginForm())
-                        {
-                            <fieldset>
-                                <legend>Recommend</legend>
 
-                                <label>Comment
-                                    <textarea placeholder="What do you think about ''@movie.Name'" id="comment-text" cols="100" rows="4"></textarea>
-                                </label>
-                                <div class="right">
-                                    <button class="button tiny" id="recommend-button">Recommend</button>
-                                </div>
-                            </fieldset>
-                        }
-                    </div>
+                <div id="myModal-recommend" class="reveal-modal modal-recommend-msg" data-reveal>
                 </div>
+
+                <!--
+                    <div id="recommend-popup" class="reveal-modal">
+                        <div id="recommend-popup-inner">
+                            @@using (Html.BeginForm())
+                            {
+                                <fieldset>
+                                    <legend>Recommend</legend>
+
+                                    <label>Comment
+                                        <textarea placeholder="What do you think about ''movie.Name'" id="comment-text" cols="100" rows="4"></textarea>
+                                    </label>
+                                    <div class="right">
+                                        <button class="button tiny" id="recommend-button">Recommend</button>
+                                    </div>
+                                </fieldset>
+                            }
+                        </div>
+                    </div>
+                -->
 
             }
             <div id="movieclub-stats">
@@ -248,35 +258,9 @@
                 $("#lean_overlay").attr({ style: "display:none" });
             }
 
-            $("#recommend-movie").leanModal({ closeButton: ".modal_close" });
+            //$("#recommend-movie").leanModal({ closeButton: ".modal_close" });
 
-            $("#recommend-button").click(function (e) {
-                var mid = "@movie.Id"
-                closeModal();
-                $.ajax({
-                    url: "/User/Recommend",
-                    type: "POST",
-                    data: { movieid: mid, comment: $("#comment-text").val() },
-                    dataType: "text"
-                })
-                .success(function (data) {
-                    var obj = $.parseJSON(data);
-                    if (obj.result == "ok") {
-                        toastr.success("You recommended '@movie.Name'!");
-                    }
-                    else if (obj.result == "error") {
-                        toastr.info(obj.reason);
-                    }
-                    else {
-                        toastr.error("Failed! Check your connection.");
-                    }
-                })
-                .error(function () {
-                    toastr.error("Failed! Check your connection.");
-                });
-
-                e.preventDefault();
-            });
+            
 
             $("#add-to-favorites").click(function (e) {
                 var mid = "@movie.Id";

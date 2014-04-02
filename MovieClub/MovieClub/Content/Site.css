@@ -391,6 +391,16 @@ footer{
     z-index:-100
 }
 
+.modal-recommend-msg{
+    font-size:12px !important;
+    width:500px;
+    margin-left:-20%;
+}
+
+.modal-recommend-msg *{
+    font-size:12px !important;
+}
+
 footer *{
     color:white;
 }

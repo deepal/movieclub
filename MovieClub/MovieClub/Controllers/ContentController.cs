@@ -494,5 +494,17 @@ namespace MovieClub.Controllers
             }
         }
 
+
+        [HttpGet]
+        [RequireMembership]
+        public ActionResult RecommendMovie(int movieid)
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            var moviename = db.DBMovies.First(m => m.Id == movieid).Name;
+
+            ViewBag.MovieName = moviename;
+            ViewBag.MovieId = movieid;
+            return View();
+        }
     }
 }

@@ -144,3 +144,8 @@ input[type=checkbox]{
     display:block;
 }
 
+#payment-details table tbody tr td input{
+    margin-bottom:0 !important;
+    font-size:12px;
+}
+

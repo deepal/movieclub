@@ -95,7 +95,7 @@ namespace MovieClub.Controllers
             }
 
 
-            return View(movies);
+            return View(movies.GroupBy(m=>m.MovieId).Select(grp=>grp.First()).ToList());
         }
 
         [HttpPost]

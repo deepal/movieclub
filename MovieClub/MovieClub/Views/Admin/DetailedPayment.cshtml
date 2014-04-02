@@ -37,13 +37,18 @@
         <table>
             <tr>
                 <td width="350">Total Amount (Rs.):</td>
-                <td width="100">@Math.Round((double)(finetotal+chargetotal),2)</td>
+                <td width="100"><input type="text" value="@Math.Round((double)(finetotal+chargetotal),2)" name="totalamount" id="total-text" /></td>
             </tr>
         </table>
         <div style="text-align:center">
-            <a href="/Admin/CheckoutPayment/?userid=@user" class="button tiny">Checkout</a>
+            <a href="/Admin/CheckoutPayment/?userid=@user" class="button tiny" id="checkout-button">Checkout</a>
         </div>
     </div>
 </div>
 
+<script>
+    $("#checkout-button").click(function (e) {
 
+        e.preventDefault();
+    });
+</script>

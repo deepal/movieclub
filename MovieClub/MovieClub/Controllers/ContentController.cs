@@ -447,6 +447,7 @@ namespace MovieClub.Controllers
 
         [HttpPost]
         [RequireMembership]  //remove this attribute after testing
+        [ValidateAntiForgeryToken]
         public ActionResult RateMovie()
         {
             int mid = int.Parse(Request.Form["movieid"]);

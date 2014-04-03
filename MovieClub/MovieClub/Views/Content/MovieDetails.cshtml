@@ -248,7 +248,7 @@
     @Scripts.Render("~/Content/js/jquery.rateit.js")
     @Scripts.Render("~/Content/js/toastr.js")
     @Scripts.Render("~/Content/js/jquery.leanModal.min.js")
-    
+    @Scripts.Render("~/Content/js/AjaxAntiForgeryTokens.js")
     <script>
 
         $(document).ready(function () {
@@ -258,16 +258,12 @@
                 $("#lean_overlay").attr({ style: "display:none" });
             }
 
-            //$("#recommend-movie").leanModal({ closeButton: ".modal_close" });
-
-            
-
             $("#add-to-favorites").click(function (e) {
                 var mid = "@movie.Id";
                 $.ajax({
                     url: "/User/AddToFavorites",
                     type: "POST",
-                    data:{movieid:mid},
+                    data:AddAntiForgeryToken({movieid:mid}),
                     dataType:"text"
                 })
                 .success(function (data) {
@@ -290,7 +286,7 @@
                 $.ajax({
                     url: "/User/AddToWatchList",
                     type: "POST",
-                    data: { movieid: mid },
+                    data: AddAntiForgeryToken({ movieid: mid }),
                     dataType: "text"
                 })
                 .success(function (data) {
@@ -315,7 +311,7 @@
                 $.ajax({
                     url: "/User/Reserve",
                     type: "POST",
-                    data: {id:"@movie.Id"},
+                    data: AddAntiForgeryToken({id:"@movie.Id"}),
                     dataType: "text"
                 })
                 .success(function (data) {
@@ -344,7 +340,7 @@
 
                 $.ajax({
                     url: "/Content/RateMovie", 
-                    data: { movieid: "@movie.Id", rating: value },
+                    data: AddAntiForgeryToken({ movieid: "@movie.Id", rating: value }),
                     type: "POST",
                     dataType: "text"
                 })

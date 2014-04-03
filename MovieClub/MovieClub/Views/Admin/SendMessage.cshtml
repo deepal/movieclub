@@ -24,10 +24,10 @@
             type: "POST",
             url: "/Admin/SendMessage",
             dataType: "text",
-            data: {
+            data: AddAntiForgeryToken({
                 To: to,
                 Comment: comment
-            }
+            })
         })
         .success(function (data) {
             var obj = $.parseJSON(data);

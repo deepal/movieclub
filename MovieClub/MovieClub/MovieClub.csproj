@@ -331,6 +331,7 @@
     <Content Include="Content\images\poster-na.jpg" />
     <Content Include="Content\images\star.gif" />
     <Content Include="Content\images\stars.png" />
+    <Content Include="Content\js\AjaxAntiForgeryTokens.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery-ias.min.js" />
     <Content Include="Content\js\jquery.leanModal.min.js" />

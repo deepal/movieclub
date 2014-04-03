@@ -105,7 +105,8 @@
 @section Scripts {
     @Scripts.Render("~/Content/js/foundation/foundation.alert.js")
     @Scripts.Render("~/Content/js/toastr.js")
-    
+    @Scripts.Render("~/Content/js/AjaxAntiForgeryTokens.js")
+
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -175,7 +176,8 @@
 
         function issueMovie(movieid,userid) {
             $.ajax({
-                url: "/Admin/Issue/?u="+userid+"&&movie="+movieid,
+                url: "/Admin/Issue/?u=" + userid + "&&movie=" + movieid,
+                data:AddAntiForgeryToken({}),
                 type: "POST",
                 dataType: "text"
             })
@@ -222,6 +224,7 @@
         function markAsReturned(movieid,u) {
             $.ajax({
                 url: "/Admin/MarkAsReturned/?movieid=" + movieid + "&&u=" + u,
+                data: AddAntiForgeryToken({}),
                 type: "POST",
                 dataType: "text"
             })

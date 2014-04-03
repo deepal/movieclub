@@ -23,6 +23,7 @@ namespace MovieClub.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddToFavorites()
         {
 
@@ -53,6 +54,7 @@ namespace MovieClub.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddToWatchList()
         {
             var movieid = int.Parse(Request.Form["movieid"]);
@@ -84,6 +86,7 @@ namespace MovieClub.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Recommend()
         {
             var movieid = int.Parse(Request.Form["movieid"]);
@@ -148,6 +151,7 @@ namespace MovieClub.Controllers
         //end of helper methods--------------------------------------------------------------------------------------
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Reserve(int id)
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
@@ -436,6 +440,7 @@ namespace MovieClub.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult MarkMessagesRead(int uid)
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();

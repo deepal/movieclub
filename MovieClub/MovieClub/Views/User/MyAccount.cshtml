@@ -153,6 +153,7 @@
             $.ajax({
                 url: "/User/MarkMessagesRead/?uid=" + uid,
                 type: "POST",
+                data:AddAntiForgeryToken({}),
                 dataType: "text"
             })
             .success(function (data) {

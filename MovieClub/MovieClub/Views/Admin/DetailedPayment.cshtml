@@ -6,6 +6,7 @@
     var paylist = Model;
     var finetotal = ViewBag.FineTotal;
     var chargetotal = ViewBag.ChargeTotal;
+    List<int> movieids = new List<int>();
 }
 
 <div id="payment-sheet">
@@ -30,6 +31,7 @@
                         <td width="100">@Math.Round((double)item.Charge, 2)</td>
                         <td width="100">@Math.Round((double)item.Fine, 2)</td>
                     </tr>
+                    movieids.Add(item.MovieId);
                 }
             </tbody>
             
@@ -48,7 +50,25 @@
 
 <script>
     $("#checkout-button").click(function (e) {
-
+        $.ajax({
+            url: "/Admin/PerformTransaction",
+            type: "POST",
+            data: AddAntiForgeryToken({
+                userid: "@user",
+                payment: $("#total-text").val(),
+                movies: JSON.stringify(@movieids),
+            }),
+            dataType: "text"
+        })
+        .success(function (data) {
+            var obj = $.parseJSON(data);
+            if (obj.result == "ok") {
+                toastr.success(obj.message);
+            }
+        })
+        .error(function () {
+            toastr.error("Payment Failed! Check your connection.");
+        });
         e.preventDefault();
     });
 </script>

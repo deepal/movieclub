@@ -240,6 +240,7 @@ namespace MovieClub.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Issue(int movie, int u)
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
@@ -397,6 +398,7 @@ namespace MovieClub.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult FeatureMovie(int movieid, bool featured)
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
@@ -464,6 +466,7 @@ namespace MovieClub.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult MarkAsReturned(int movieid, int u)
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
@@ -502,6 +505,7 @@ namespace MovieClub.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SendMessage()
         {
             var to = int.Parse((string)Request.Form["To"]);
@@ -612,6 +616,26 @@ namespace MovieClub.Controllers
             ViewBag.ChargeTotal = chargeTotal;
 
             return View(paylist);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PerformTransaction(int userid, List<int> movieids, float payment){
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            var userpaymentdues = db.DBPaymentsDues.Where(p => p.UserId == userid);
+
+            foreach (int mid in movieids)
+            {
+                userpaymentdues.Where(m => m.MovieId == mid).ToList().ForEach(m => m.Paid = 1);
+            }
+
+            db.SaveChanges();
+
+            return Json(new
+            {
+                result = "ok",
+                message = "Payment complete!"
+            });
         }
 
 

@@ -118,10 +118,10 @@
                 $.ajax({
                     url: "/Admin/FeatureMovie/?",
                     type: "post",
-                    data: {
+                    data: AddAntiForgeryToken({
                         movieid: $(this).attr("data-movieid"),
                         featured: $(this).is(":checked")
-                    },
+                    }),
                     dataType: "text"
                 })
                 .success(function (data) {

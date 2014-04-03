@@ -25,7 +25,7 @@
         $.ajax({
             url: "/User/Recommend",
             type: "POST",
-            data: { movieid: mid, comment: $("#comment-text").val() },
+            data: AddAntiForgeryToken({ movieid: mid, comment: $("#comment-text").val() }),
             dataType: "text"
         })
         .success(function (data) {

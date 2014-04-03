@@ -440,7 +440,6 @@ namespace MovieClub.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult MarkMessagesRead(int uid)
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();

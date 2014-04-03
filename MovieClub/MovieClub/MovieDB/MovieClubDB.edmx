@@ -114,7 +114,7 @@
           </Key>
           <Property Name="PaymentHistoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="PayAmount" Type="int" Nullable="false" />
+          <Property Name="PayAmount" Type="float" Nullable="false" />
           <Property Name="Timestamp" Type="datetime" />
         </EntityType>
         <EntityType Name="DBPaymentsDue">
@@ -229,8 +229,8 @@
           <EntitySet Name="DBRents" EntityType="MovieClubDBModel.DBRent" />
           <EntitySet Name="DBFeatureds" EntityType="MovieClubDBModel.DBFeatured" />
           <EntitySet Name="DBEmployeePendingPayments" EntityType="MovieClubDBModel.DBEmployeePendingPayment" />
-          <EntitySet Name="DBPaymentHistories" EntityType="MovieClubDBModel.DBPaymentHistory" />
           <EntitySet Name="DBPaymentsDues" EntityType="MovieClubDBModel.DBPaymentsDue" />
+          <EntitySet Name="DBPaymentHistories" EntityType="MovieClubDBModel.DBPaymentHistory" />
         </EntityContainer>
         <EntityType Name="DBCategory">
           <Key>
@@ -395,15 +395,6 @@
           <Property Name="PayAmount" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="DBPaymentHistory">
-          <Key>
-            <PropertyRef Name="PaymentHistoryId" />
-          </Key>
-          <Property Name="PaymentHistoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="PayAmount" Type="Int32" Nullable="false" />
-          <Property Name="Timestamp" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="DBPaymentsDue">
           <Key>
             <PropertyRef Name="PaymentId" />
@@ -414,6 +405,15 @@
           <Property Name="Charge" Type="Double" Nullable="false" />
           <Property Name="Fine" Type="Double" Nullable="false" />
           <Property Name="Paid" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DBPaymentHistory">
+          <Key>
+            <PropertyRef Name="PaymentHistoryId" />
+          </Key>
+          <Property Name="PaymentHistoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="PayAmount" Type="Double" Nullable="false" />
+          <Property Name="Timestamp" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -600,16 +600,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DBPaymentHistories">
-            <EntityTypeMapping TypeName="MovieClubDBModel.DBPaymentHistory">
-              <MappingFragment StoreEntitySet="DBPaymentHistory">
-                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
-                <ScalarProperty Name="PayAmount" ColumnName="PayAmount" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="PaymentHistoryId" ColumnName="PaymentHistoryId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DBPaymentsDues">
             <EntityTypeMapping TypeName="MovieClubDBModel.DBPaymentsDue">
               <MappingFragment StoreEntitySet="DBPaymentsDue">
@@ -619,6 +609,16 @@
                 <ScalarProperty Name="MovieId" ColumnName="MovieId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBPaymentHistories">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBPaymentHistory">
+              <MappingFragment StoreEntitySet="DBPaymentHistory">
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="PayAmount" ColumnName="PayAmount" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PaymentHistoryId" ColumnName="PaymentHistoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

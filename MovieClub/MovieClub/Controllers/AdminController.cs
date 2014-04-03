@@ -620,14 +620,15 @@ namespace MovieClub.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult PerformTransaction(int userid, List<int> movieids, float payment){
+        public ActionResult PerformTransaction(int userid, float payment){
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
-            var userpaymentdues = db.DBPaymentsDues.Where(p => p.UserId == userid);
+            db.DBPaymentsDues.Where(p => p.UserId == userid && p.Paid==0).ToList().ForEach(m => m.Paid = 1);;
 
-            foreach (int mid in movieids)
-            {
-                userpaymentdues.Where(m => m.MovieId == mid).ToList().ForEach(m => m.Paid = 1);
-            }
+            db.DBPaymentHistories.Add(new MovieDB.DBPaymentHistory() {
+                PayAmount = payment,
+                Timestamp = DateTime.Now,
+                UserId = userid
+            });
 
             db.SaveChanges();
 

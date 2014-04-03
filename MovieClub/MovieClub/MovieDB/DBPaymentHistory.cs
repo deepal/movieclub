@@ -16,7 +16,7 @@ namespace MovieClub.MovieDB
     {
         public int PaymentHistoryId { get; set; }
         public int UserId { get; set; }
-        public int PayAmount { get; set; }
+        public double PayAmount { get; set; }
         public Nullable<System.DateTime> Timestamp { get; set; }
     }
 }

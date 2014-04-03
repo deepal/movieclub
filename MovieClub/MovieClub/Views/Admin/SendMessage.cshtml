@@ -18,6 +18,7 @@
 
 <script>
     $("#recommend-button").click(function (e) {
+        $('#myModal').foundation('reveal', 'close');
         var comment = $("#comment-text").val();
         var to = "@sendto";
         $.ajax({
@@ -32,7 +33,6 @@
         .success(function (data) {
             var obj = $.parseJSON(data);
             if (obj.result == "ok") {
-                $('#myModal').foundation('reveal', 'close');
                 toastr.success(obj.message);
             }
         })

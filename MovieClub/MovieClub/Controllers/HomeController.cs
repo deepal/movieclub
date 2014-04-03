@@ -1,4 +1,5 @@
 ﻿using MovieClub.Models;
+using MovieClub.Models.HomePageModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace MovieClub.Controllers
         public ActionResult Index()
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            HomePageFeaturedsModel homepagemodel = new HomePageFeaturedsModel();
 
             var featureds = db.DBFeatureds.ToList().Join(db.DBMovies,
                 l => l.MovieId,
@@ -42,7 +44,9 @@ namespace MovieClub.Controllers
                 });
             }
 
-            return View(movies);
+            homepagemodel.Featureds = movies;
+
+            return View(homepagemodel);
         }
 
     }

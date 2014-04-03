@@ -17,8 +17,6 @@
                 <td>@item.UserName</td>
                 <td>@item.DateTaken</td>
                 <td id="passedduedate">@item.DueDate</td>
-                <td>9.50</td>
-                <td>
                 <td>
                     <a href="#" onclick="markAsReturned(@item.MovieId,@item.UserId)">Returned</a>
                     <!-- <a href="#" data-reveal-id="myModal" data-reveal>Click Me For A Modal</a> -->
@@ -41,7 +39,6 @@
                 <td>@item.UserName</td>
                 <td>@item.DateTaken</td>
                 <td>@item.DueDate</td>
-                <td>-</td>
                 <td><a href="#" onclick="markAsReturned(@item.MovieId,@item.UserId)">Returned</a>
                     <!-- <a href="#" data-reveal-id="myModal" data-reveal>Click Me For A Modal</a> -->
                     <a href="/Admin/SendMessage/?userid=@item.UserId" data-reveal-id="myModal" data-reveal-ajax="true">
@@ -55,7 +52,7 @@
 else
 {
     <tr>
-        <td colspan="5">No Pending returns</td>
+        <td colspan="5" style="padding:10px;text-align:center">No Pending returns</td>
     </tr>
 }
 

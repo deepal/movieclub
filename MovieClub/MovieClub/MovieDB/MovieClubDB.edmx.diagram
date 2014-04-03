@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="MovieClubDBModel.DBCategory" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBFavorite" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBMovieSuggestion" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="MovieClubDBModel.DBMovieToCategory" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MovieClubDBModel.DBMovieToCategory" Width="1.5" PointX="4.875" PointY="0.75" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBReservation" Width="1.5" PointX="2.75" PointY="6.75" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBAdmin" Width="1.5" PointX="5.375" PointY="6.75" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBMovie" Width="1.5" PointX="0.75" PointY="2.5" />
@@ -21,8 +21,8 @@
         <EntityTypeShape EntityType="MovieClubDBModel.DBRent" Width="1.5" PointX="3.375" PointY="9.75" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBFeatured" Width="1.5" PointX="5.375" PointY="9.75" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBEmployeePendingPayment" Width="1.5" PointX="9.375" PointY="6.75" />
-        <EntityTypeShape EntityType="MovieClubDBModel.DBPaymentHistory" Width="1.75" PointX="7.375" PointY="9.75" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBPaymentsDue" Width="1.5" PointX="9.625" PointY="9" />
+        <EntityTypeShape EntityType="MovieClubDBModel.DBPaymentHistory" Width="1.5" PointX="11.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

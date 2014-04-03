@@ -1,19 +1,25 @@
-﻿@model IEnumerable<MovieClub.Models.FeaturedMovieDetails>
+﻿@model MovieClub.Models.HomePageModels.HomePageFeaturedsModel
 @{
     ViewBag.Title = "Home Page";
-    var movies = Model;
+    var homepage = Model;
 }
 
 
 @section featured{
-    @Html.Partial("_FeaturedPartial")
+    @Html.Partial("_FeaturedPartial",homepage.Featureds)
 }
 
-@section actioncatagory{
-}
+<div class="row">
 
-@section thrillercatagory{
-}
+    <div class="large-50 medium-50 small-100 columns">
+
+    </div>
+
+    <div class="large-50 medium-50 small-100 columns">
+
+    </div>
+
+</div>
 
 @section customstyles{
     <link type='text/css' rel='stylesheet' href='~/Content/css/bootstrap.min.css' />
@@ -21,7 +27,6 @@
 }
 
 @section customscripts{
-    
     <script type="text/javascript" src="~/Content/js/bootstrap.min.js"></script>
 }
 
@@ -34,3 +39,7 @@
         });
     </script>
 }
+
+<footer>
+
+</footer>

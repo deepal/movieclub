@@ -14,11 +14,6 @@
       
 </head>
 <body>
-    <!--
-        <div id="header" class="movieclub-header">
-            <img src="~/Content/images/210.jpg" />
-        </div>
-    -->
     <form id="__AjaxAntiForgeryForm" action="#" method="post">
         @Html.AntiForgeryToken()
     </form>  
@@ -45,20 +40,24 @@
                                 </div>
                             }
                     </li>
-                    @if (Request.IsAuthenticated)
-                    {
-                        <li class="divider"></li>
-                        <li>
-                            <ul class="left">
-                                <li class="has-dropdown">
-                                    <a href="#">Quick Links</a>
-                                    <ul class="dropdown">
-                                        <li><a href="">Watchlist</a></li>
-                                        <li><a href="">My Favorites</a></li>
-                                    </ul>
-                            </ul>
-                        </li>
-                    }
+                    <!--
+                        
+                        @@if (Request.IsAuthenticated)
+                        {
+                            <li class="divider"></li>
+                            <li>
+                                <ul class="left">
+                                    <li class="has-dropdown">
+                                        <a href="#">Quick Links</a>
+                                        <ul class="dropdown">
+                                            <li><a href="">Watchlist</a></li>
+                                            <li><a href="">My Favorites</a></li>
+                                        </ul>
+                                </ul>
+                            </li>
+                        }
+
+                    -->
 
                 </ul>
             </section>
@@ -116,21 +115,19 @@
     </script>
     @RenderSection("scripts", required: false)
 
-    <!--
-        <footer>
-            <div id="recommendations">
-                <h5>Recommended for you</h5>
-                <div id="recommended-movie-tile">
-                    <div id="recommended-movie-poster" class="left">
+    <footer>
+        <div id="recommendations">
+            <h5>Recommended for you</h5>
+            <div id="recommended-movie-tile">
+                <div id="recommended-movie-poster" class="left">
 
-                    </div>
-                    <div id="recommended-movie-caption" class="right">
-                        <h6>A movie</h6>
-                        <p>This movie is really nice</p>
-                    </div>
+                </div>
+                <div id="recommended-movie-caption" class="right">
+                    <h6>A movie</h6>
+                    <p>This movie is really nice</p>
                 </div>
             </div>
-        </footer>
-    -->
+        </div>
+    </footer>
 </body>
 </html>

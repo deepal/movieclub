@@ -1,5 +1,6 @@
 ﻿using MovieClub.Models;
 using MovieClub.Models.HomePageModels;
+using MovieClub.Operations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +47,42 @@ namespace MovieClub.Controllers
 
             homepagemodel.Featureds = movies;
 
+            List<List<SimpleMovieDetails>> topcats = new List<List<SimpleMovieDetails>>();
+
+            List<string> topcatnames = new List<string>();
+            var topcatids = HomePageOperations.GetTopCategories();
+            ViewBag.TopCatIds = topcatids;
+            foreach (int i in topcatids)
+            {
+                string catname = db.DBCategories.Where(c => c.CategoryId == i).First().CategoryName;
+                topcatnames.Add(catname);
+                var mvs = db.DBMovies.Where(
+                    mv => mv.Genre.Contains(catname)
+                    ).ToList();
+                mvs.Sort((x, y) => y.Views.CompareTo(x.Views));
+                mvs = mvs.GetRange(0, 5);
+                List<SimpleMovieDetails> templist = new List<SimpleMovieDetails>();
+                foreach (var movie in mvs)
+                {
+                    templist.Add(new SimpleMovieDetails()
+                    {
+                        AddedDate = (DateTime)movie.AddedDate,
+                        Category = movie.Genre,
+                        Id = movie.Id,
+                        ImdbId = movie.ImdbId,
+                        ImdbRating = (float)movie.ImdbRatings,
+                        MovieClubRating = (float)movie.MovieClubRatings,
+                        MovieClubRentCount = movie.MovieClubRentCount,
+                        Name = movie.Name,
+                        PosterURL = movie.PosterURL,
+                        ViewsCount = movie.Views,
+                        Year = movie.Year
+                    });
+                }
+                topcats.Add(templist);
+            }
+            homepagemodel.TopCats = topcats;
+            ViewBag.TopCatNames = topcatnames;
             return View(homepagemodel);
         }
 

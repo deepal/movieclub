@@ -1,0 +1,77 @@
+﻿.topcategories{
+    margin:10px;
+    margin-top:0;
+    padding-top:0;
+    padding:10px;
+}
+
+.topcategories-title{
+    text-align:center;
+    padding:10px;
+    padding-top:0;
+    margin-top:0;
+    margin-bottom:10px;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.topcategories-title h4{
+    color:#c2c2c2 !important;
+}
+
+.home-catcontainer{
+    background:#f8f8f8;
+    padding-top:20px;
+}
+
+.home-catname{
+    border-bottom:1px solid #c2c2c2;
+    padding-bottom:10px;
+}
+
+.home-catname .left{
+}
+
+.home-catname .right{
+    font-size:12px;
+    font-style:italic;
+    margin-right:30px;
+}
+
+.home-catmovies{
+    margin-top:10px;
+}
+
+.home-catmovies a{
+    color:#222222;
+}
+
+.home-catmovie{
+    padding:10px;
+    margin-bottom:10px;
+}
+
+.home-catmovie:hover{
+    background-color:white;
+    transition-property:all;
+    -webkit-transition-property:all;
+    -moz-transition-property:all;
+    transition-duration:300ms;
+    -webkit-transition-duration:300ms;
+    -moz-transition-duration:300ms;
+}
+
+.home-catmovie-poster{
+    
+}
+
+.home-catmovie-title{
+    font-size:12px;
+    padding-bottom:8px;
+    color:#0094ff;
+}
+
+.home-catmovie-cat, .home-catmovie-imdb, .home-catmovie-movieclub, .home-catmovie-views{
+    font-size:11px;
+    padding-bottom:5px;
+}

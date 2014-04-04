@@ -330,6 +330,7 @@
     <Content Include="Content\css\simplePagination.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\toastr.css" />
+    <Content Include="Content\css\topcat.css" />
     <Content Include="Content\css\video-js.css" />
     <Content Include="Content\images\ajax-loader-circle.gif" />
     <Content Include="Content\images\ajax-loader.gif" />

@@ -88,7 +88,7 @@ namespace MovieClub.Controllers
                     Selected = false,
                     ViewsCount = item.Views,
                     Favorites = item.Favorites,
-                    PearsonRating = (float)item.Rating,
+                    MovieClubRating = (float)item.Rating,
                     Updated = false
                 });
 

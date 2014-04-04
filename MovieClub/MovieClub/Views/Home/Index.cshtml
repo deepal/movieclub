@@ -40,7 +40,7 @@
                                 <div class="home-catmovie-title" style="clear:both">@catmovie.Name (@catmovie.Year)</div>
                                 <div class="home-catmovie-cat" style="clear:both">@catmovie.Category</div>
                                 <div class="home-catmovie-imdb" style="clear:both">IMDb Rating: @Math.Round(catmovie.ImdbRating,1)</div>
-                                <div class="home-catmovie-movieclub" style="clear:both">Pearson Rating: @Math.Round(catmovie.MovieClubRating,1)</div>
+                                <div class="home-catmovie-movieclub" style="clear:both">@System.Configuration.ConfigurationManager.AppSettings["OrganizationName"] Rating: @Math.Round(catmovie.MovieClubRating,1)</div>
                                 <div class="home-catmovie-views" style="clear:both">Views: @catmovie.ViewsCount</div>
                             </div>
                         </div>

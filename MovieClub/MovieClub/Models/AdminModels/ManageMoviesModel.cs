@@ -18,7 +18,7 @@ namespace MovieClub.Models.AdminModels
         public bool AvailableToRent { get; set; }
         public DateTime AddedDate { get; set; }
         public int Favorites { get; set; }
-        public float PearsonRating { get; set; }
+        public float MovieClubRating { get; set; }
         public bool Updated { get; set; }
     }
 }

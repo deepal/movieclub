@@ -42,7 +42,7 @@
                         Views
                     </th>
                     <th width="50">
-                        Pearson Ratings
+                        @System.Configuration.ConfigurationManager.AppSettings["OrganizationName"] Ratings
                     </th>
                     <th>
                         Favorites
@@ -82,7 +82,7 @@
                             @Html.DisplayFor(modelItem => item.ViewsCount)
                         </td>
                         <td>
-                            @Math.Round(item.PearsonRating,1)
+                            @Math.Round(item.MovieClubRating,1)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Favorites)

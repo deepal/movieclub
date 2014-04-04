@@ -52,7 +52,7 @@
 }
 
 .home-catmovie:hover{
-    background-color:white;
+    background-color:#dddddd;
     transition-property:all;
     -webkit-transition-property:all;
     -moz-transition-property:all;

@@ -75,7 +75,7 @@
                         <tr>
                             <td colspan="2">
                                 <div id="movie-pearson">
-                                    <p>Pearson Star Rating</p>
+                                    <p>@System.Configuration.ConfigurationManager.AppSettings["OrganizationName"] Star Rating</p>
                                     <div id="rating-pearson"><img src="/Content/images/stars.png" width="16" height="16" /><span>@Math.Round(movie.MovieClubRatings, 1)</span><img src="/Content/images/stars.png" width="16" height="16" /> </div>
                                 </div>
                             </td>

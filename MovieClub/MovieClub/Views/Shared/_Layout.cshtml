@@ -11,7 +11,7 @@
     @Scripts.Render("~/Content/js/vendor/modernizr.js")
     @RenderSection("customstyles",required:false)
     @RenderSection("customscripts",required:false)
-      
+     
 </head>
 <body>
 
@@ -19,7 +19,7 @@
         <nav class="top-bar sticky" data-topbar>
             <ul class="title-area">
                 <li class="name">
-                    <h1 id="header-text"><a href="/">Pearson Movie Club</a></h1>
+                    <h1 id="header-text"><a href="/">@System.Configuration.ConfigurationManager.AppSettings["OrganizationName"] @System.Configuration.ConfigurationManager.AppSettings["ClubName"]</a></h1>
                 </li>
             </ul>
             <section class="top-bar-section">

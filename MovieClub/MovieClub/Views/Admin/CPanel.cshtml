@@ -16,28 +16,37 @@
 <div class="tabs-content tabs-content-custom">
 
     <div id="panel-reservations" class="content active">
-        <table id="table-reservations">
-            <thead>
-                <tr>
-                    <th width="300">
-                        Movie name
-                    </th>
-                    <th>
-                        Reservations
-                    </th>
-                    <th width="200">
-                        Next reservation to
-                    </th>
-                    <th width="200">
-                        Timestamp
-                    </th>
-                    <th width="100">
-                        Action
-                    </th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <div style="clear:both">
+            <a href="/Admin/IssueUnreserved" class="button secondary tiny" data-reveal-id="myModalIssueUnreserved" data-reveal-ajax="true">
+                Issue a movie without previous reservation?
+            </a>
+        </div>
+        <div>
+            <table id="table-reservations">
+                <thead>
+                    <tr>
+                        <th width="300">
+                            Movie name
+                        </th>
+                        <th>
+                            Reservations
+                        </th>
+                        <th width="200">
+                            Next reservation to
+                        </th>
+                        <th width="200">
+                            Timestamp
+                        </th>
+                        <th width="100">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            
+        </div>
+        
     </div>
 
     <div id="panel-returns" class="content">
@@ -92,6 +101,9 @@
     <div id="myModalpayment" class="reveal-modal modal-custom" data-reveal>
     </div>
 
+    <div id="myModalIssueUnreserved" class="reveal-modal modal-isu" data-reveal>
+    </div>
+
     </div>
 
 
@@ -101,13 +113,12 @@
     @Styles.Render("~/Content/css/toastr.css")
 }
 
+
 @section Scripts {
     @Scripts.Render("~/Content/js/foundation/foundation.alert.js")
     @Scripts.Render("~/Content/js/toastr.js")
     @Scripts.Render("~/Content/js/AjaxAntiForgeryTokens.js")
-
     <script type="text/javascript">
-
         $(document).ready(function () {
             
 

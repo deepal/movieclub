@@ -210,6 +210,7 @@ namespace MovieClub.Controllers
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
             var reservations = db.DBReservations.Where(rs => rs.Issued == 0).ToList();
+            //reservations.Sort((x, y) => y.Timestamp.CompareTo(x.Timestamp));
             var reservs = reservations.Join(db.DBMovies,
                     l => l.MovieId,
                     r => r.Id,
@@ -241,9 +242,68 @@ namespace MovieClub.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Issue(int movie, int u)
+        public ActionResult Issue(int movie, int u, bool? unreserved)
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+
+            if (unreserved != null)
+            {
+                if ((bool)unreserved)
+                {
+
+                    var isreserved = db.DBMovies.Where(m => db.DBReservations.Any(mv => mv.MovieId == movie && mv.Issued==0)).Count();
+                    var isrented = db.DBRents.Where(mv=>db.DBRents.Any(mr=>mr.MovieId==movie && mv.Returned==0)).Count();
+                    if (isreserved > 0)
+                    {
+                        return Json(new {
+                            result="error",
+                            message = "Movie has reservations! Cannot be issued."
+                        });
+                    }
+                    else if(isrented > 0)
+                    {
+                        return Json(new
+                        {
+                            result = "error",
+                            message = "Movie is not available yet!"
+                        });
+                    }
+                    else
+                    {
+                        db.DBRents.Add(new MovieDB.DBRent()
+                        {
+                            MovieId = movie,
+                            Returned = 0,
+                            UserId = u,
+                            BorrowedDate = DateTime.Now,
+                            DueDate = DateTime.Now.AddDays(double.Parse(System.Configuration.ConfigurationManager.AppSettings["DefaultRentDuration"]))
+                        });
+                        db.SaveChanges();
+
+                        return Json(new
+                        {
+                            result = "ok",
+                            message = "Movie issued!"
+                        });
+                    }
+
+                    /*
+                    var unresmovies = db.DBMovies.Where(m => !db.DBReservations.Any(mv => mv.MovieId == movie)).Select(m => new SimpleMovieDetails() {
+                        Id = m.Id,
+                        AddedDate = (DateTime)m.AddedDate,
+                        Category = m.Genre,
+                        ImdbId = m.ImdbId,
+                        ImdbRating = (float)m.ImdbRatings,
+                        MovieClubRating = (float)m.MovieClubRatings,
+                        MovieClubRentCount = m.MovieClubRentCount,
+                        Name = m.Name,
+                        PosterURL = m.PosterURL,
+                        ViewsCount = m.Views,
+                        Year = m.Year
+                    });*/
+                }
+            }
+
             var ures = db.DBReservations.Where(ur => ur.UserId == u && ur.MovieId == movie);
             if (ures.Count() != 0)
             {
@@ -377,9 +437,8 @@ namespace MovieClub.Controllers
                         Username = r.UserName,
                         UserEmail = r.Email
                     }
-                );
+                ).ToList();
             List<Models.AdminModels.PendingReturnsModel> preturns = new List<Models.AdminModels.PendingReturnsModel>();
-
             foreach (var item in pendings)
             {
                 preturns.Add(new Models.AdminModels.PendingReturnsModel()
@@ -401,11 +460,12 @@ namespace MovieClub.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult FeatureMovie(int movieid, bool featured)
         {
+            var maxfeats = int.Parse(System.Configuration.ConfigurationManager.AppSettings["MaxFeaturedsCount"]);
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
             if (featured)
             {
                 var featuredcount = db.DBFeatureds.ToList().Count;
-                if (featuredcount < 15)
+                if (featuredcount < maxfeats )
                 {
                     db.DBFeatureds.Add(new MovieDB.DBFeatured()
                     {
@@ -414,31 +474,18 @@ namespace MovieClub.Controllers
                     });
                     db.SaveChanges();
 
-
-                    if (featuredcount == 9)
+                    return Json(new
                     {
-                        return Json(new
-                        {
-                            result = "ok",
-                            message = "Movie added to featured list",
-                            full = "true"
-                        });
-                    }
-                    else
-                    {
-                        return Json(new
-                        {
-                            result = "ok",
-                            message = "Movie added to featured list"
-                        });
-                    }
+                        result = "ok",
+                        message = "Movie added to featured list"
+                    });
                 }
                 else
                 {
                     return Json(new
                     {
                         result = "error",
-                        message = "You can add upto 10 featured movies"
+                        message = "You can add upto "+maxfeats+" featured movies"
                     });
                 }
             }
@@ -544,7 +591,6 @@ namespace MovieClub.Controllers
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
 
             var pays = db.DBPaymentsDues.Where(p=>p.Paid==0).ToList();
-
             var paybyuser = pays.GroupBy(p => p.UserId).Select(pu => new
             {
                 UserId = pu.Key,
@@ -639,6 +685,55 @@ namespace MovieClub.Controllers
             });
         }
 
+        [HttpGet]
+        public ActionResult IssueUnreserved()
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+
+            var movies = db.DBMovies.ToList();
+            movies.Sort((x, y) => x.Name.CompareTo(y.Name));
+
+            movies = movies.Where(m => !db.DBReservations.Any(r => r.MovieId == m.Id && r.Issued==0)).ToList();
+            movies = movies.Where(m => !db.DBRents.Any(rn => rn.MovieId == m.Id && rn.Returned == 0)).ToList();
+
+            var users = db.DBUsers.ToList();
+            users.Sort((x, y) => x.UserName.CompareTo(y.UserName));
+
+            List<SimpleMovieDetails> mv = new List<SimpleMovieDetails>();
+            List<UserDetails> usr = new List<UserDetails>();
+
+            foreach (var movie in movies)
+            {
+                mv.Add(new SimpleMovieDetails() {
+                    AddedDate = (DateTime)movie.AddedDate,
+                    Category = movie.Genre,
+                    Id = movie.Id,
+                    ImdbId = movie.ImdbId,
+                    ImdbRating = (float)movie.ImdbRatings,
+                    MovieClubRating = (float)movie.MovieClubRatings,
+                    MovieClubRentCount = movie.MovieClubRentCount,
+                    Name = movie.Name,
+                    PosterURL = movie.PosterURL,
+                    ViewsCount = movie.Views,
+                    Year = movie.Year
+                });
+            }
+
+            foreach (var user in users)
+            {
+                usr.Add(new UserDetails() {
+                    UserName = user.UserName,
+                    UserId = user.UserId,
+                    IsAdmin = false,
+                    PhotoURL = user.PhotoURL
+                });
+            }
+
+            return View(new Models.AdminModels.IssueUnreservedModel() {
+                users = usr,
+                movies = mv
+            });
+        }
 
     }
 

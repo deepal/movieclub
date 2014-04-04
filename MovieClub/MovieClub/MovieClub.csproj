@@ -198,6 +198,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AdminModels\DetailedPaymentModel.cs" />
     <Compile Include="Models\AdminModels\GetReservationModel.cs" />
+    <Compile Include="Models\AdminModels\IssueUnreservedModel.cs" />
     <Compile Include="Models\AdminModels\ManageMoviesModel.cs" />
     <Compile Include="Models\AdminModels\PendingPaymentsModel.cs" />
     <Compile Include="Models\AdminModels\PendingReturnsModel.cs" />
@@ -298,6 +299,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MovieClubDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Operations\HomePageOperations.cs" />
     <Compile Include="Operations\MovieIssuesOperations.cs" />
     <Compile Include="Operations\UserOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -308,6 +310,11 @@
     <Content Include="App_Data\MovieClubDB_log.ldf">
       <DependentUpon>MovieClubDB.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\chosen\chosen-sprite%402x.png" />
+    <Content Include="Content\chosen\chosen-sprite.png" />
+    <Content Include="Content\chosen\chosen.jquery.min.js" />
+    <Content Include="Content\chosen\chosen.min.css" />
+    <Content Include="Content\chosen\chosen.proto.min.js" />
     <Content Include="Content\css\admin.css" />
     <Content Include="Content\css\categorypage.css" />
     <Content Include="Content\css\glyphicons.css" />
@@ -509,6 +516,7 @@
     <Content Include="Views\Admin\_PendingPaymentsPartial.cshtml" />
     <Content Include="Views\Admin\DetailedPayment.cshtml" />
     <Content Include="Views\Content\RecommendMovie.cshtml" />
+    <Content Include="Views\Admin\IssueUnreserved.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\posters\" />

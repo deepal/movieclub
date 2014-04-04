@@ -1,0 +1,92 @@
+﻿@model MovieClub.Models.AdminModels.IssueUnreservedModel
+
+@{
+    Layout = null;
+    var model = Model;
+}
+<fieldset>
+    <legend>Select Movie</legend>
+    <div id="issuenote">*Note: Movies that have reservations or rented are not listed</div>
+    <select id="movieslist">
+        <option value="" selected disabled>Select Movie</option>
+        @foreach (var movie in model.movies)
+        {
+            <option value="@movie.Id" data-poster="@movie.ImdbId" data-category="@movie.Category" data-movieclub="@Math.Round(movie.MovieClubRating,1)" data-imdb="@Math.Round(movie.ImdbRating,1)">@movie.Name (@movie.Year)</option>
+        }
+    </select>
+    <div id="issue-movie-details">
+        <div class="row">
+            <div class="large-20 small-20 medium-20 columns">
+                <div id="tinymovie">
+                    No poster
+                </div>
+            </div>
+            <div class="large-80 small-80 medium-80 columns">
+                <div style="clear:both">
+                    <span id="mname"></span>
+                </div>
+                <span id="mcat"></span>
+                <div style="clear:both">
+                    <span id="mimdb"></span>
+                </div>
+                <div style="clear:both">
+                    <span id="mmc"></span>
+                </div>
+            </div>   
+        </div>
+    </div>
+</fieldset>
+
+<fieldset>
+    <legend>Select user</legend>
+    <select id="userslist">
+        <option value="" selected disabled>Select User to issue</option>
+        @foreach (var user in model.users)
+        {
+            <option value="@user.UserId">@user.UserName</option>
+        }
+    </select>
+</fieldset>
+
+<div style="text-align:center">
+    <a href="#" id="issueUnres" class="button tiny">Issue movie</a>
+</div>
+
+<script>
+    $("#movieslist").change(function () {
+        //$("#poster-stamp").attr("src", );
+        $("#mname").html("<a href='/Content/MovieDetails/" + $("option:selected", this).val() + "'>" + $("option:selected", this).html() + "</a>");
+        $("#mcat").html($("option:selected", this).attr("data-category"));
+        $("#mimdb").html("IMDb Rating : " + $("option:selected", this).attr("data-imdb"));
+        $("#mmc").html("Pearson Rating: " + $("option:selected", this).attr("data-movieclub"));
+        $("#tinymovie").html("<img id='poster-stamp' src='/Content/images/posters/" + $("option:selected", this).attr("data-poster") + ".jpg' alt='No Poster' />");
+    });
+
+    $("#issueUnres").click(function (e) {
+        $('#myModalIssueUnreserved').foundation('reveal', 'close');
+        $.ajax({
+            url: "/Admin/Issue",
+            data: AddAntiForgeryToken({
+                u: $("#userslist").val(),//$("#userlist option:selected", this).val(),
+                movie: $("#movieslist").val(),//$("#movieslist option:selected", this).val()
+                unreserved: true
+            }),
+            type: "POST",
+            dataType: "text"
+        })
+        .success(function (data) {
+            var obj = $.parseJSON(data);
+            if (obj.result == "ok") {
+                toastr.success(obj.message);
+            }
+            else {
+                toastr.warning(obj.message);
+            }
+        })
+        .error(function () {
+            toastr.error("Failed! Check your connection.");
+        });
+        e.preventDefault();
+    });
+</script>
+

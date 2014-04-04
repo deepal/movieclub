@@ -119,7 +119,7 @@ input[type=checkbox]{
     margin-bottom:8px;
 }
 
-.modal-custom{
+.modal-custom, #myModalIssueUnreserved{
     width:510px !important;
     margin-left:-20% !important;
 }
@@ -128,6 +128,7 @@ input[type=checkbox]{
     width:600px !important;
     margin-left:-22% !important;
 }
+
 
 #payment-details table thead > tr{
     
@@ -149,3 +150,16 @@ input[type=checkbox]{
     font-size:12px;
 }
 
+#mname{
+    font-size:13px !important;
+}
+
+#mcat, #mimdb, #mmc{
+    font-size:11px !important;
+}
+
+#issuenote{
+    font-size:11px !important;
+    color:red;
+    padding-bottom:5px !important;
+}

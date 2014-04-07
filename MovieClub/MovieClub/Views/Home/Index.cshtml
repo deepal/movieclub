@@ -13,7 +13,8 @@
     @Html.Partial("_FeaturedPartial",homepage.Featureds)
 }
 
-<div class="row topcategories">
+@if(homepage.TopCats!=null){
+    <div class="row topcategories">
     <div class="topcategories-title">
         <h4>Most viewed categories</h4>
     </div>
@@ -51,6 +52,7 @@
     }
 
 </div>
+}
 
 @section customstyles{
     <link type='text/css' rel='stylesheet' href='~/Content/css/bootstrap.min.css' />

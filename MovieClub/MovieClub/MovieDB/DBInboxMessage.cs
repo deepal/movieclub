@@ -19,5 +19,7 @@ namespace MovieClub.MovieDB
         public string Message { get; set; }
         public int Status { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
+    
+        public virtual DBUser DBUser { get; set; }
     }
 }

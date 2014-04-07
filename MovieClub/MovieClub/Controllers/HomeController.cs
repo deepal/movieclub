@@ -51,6 +51,12 @@ namespace MovieClub.Controllers
 
             List<string> topcatnames = new List<string>();
             var topcatids = HomePageOperations.GetTopCategories();
+
+            if (topcatids.Count == 0)
+            {
+                return View(homepagemodel);
+            }
+
             ViewBag.TopCatIds = topcatids;
             foreach (int i in topcatids)
             {
@@ -60,7 +66,7 @@ namespace MovieClub.Controllers
                     mv => mv.Genre.Contains(catname)
                     ).ToList();
                 mvs.Sort((x, y) => y.Views.CompareTo(x.Views));
-                mvs = mvs.GetRange(0, 5);
+                mvs = mvs.GetRange(0, Math.Min(5,mvs.Count));
                 List<SimpleMovieDetails> templist = new List<SimpleMovieDetails>();
                 foreach (var movie in mvs)
                 {

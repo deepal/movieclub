@@ -188,6 +188,324 @@
           <Property Name="MovieId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_DBAdmins_DBUsers">
+          <End Role="DBUsers" Type="Self.DBUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBAdmins" Type="Self.DBAdmins" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DBUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBAdmins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBEmployeePendingPayments_DBUsers">
+          <End Role="DBUsers" Type="Self.DBUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBEmployeePendingPayments" Type="Self.DBEmployeePendingPayments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBEmployeePendingPayments">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBFavorites_DBMovies">
+          <End Role="DBMovies" Type="Self.DBMovies" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBFavorites" Type="Self.DBFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBFavorites">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBFavorites_DBUsers">
+          <End Role="DBUsers" Type="Self.DBUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBFavorites" Type="Self.DBFavorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBFavorites">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBFeatured_DBMovies">
+          <End Role="DBMovies" Type="Self.DBMovies" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBFeatured" Type="Self.DBFeatured" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBFeatured">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBInboxMessages_DBUsers">
+          <End Role="DBUsers" Type="Self.DBUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBInboxMessages" Type="Self.DBInboxMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBInboxMessages">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBMovies_DBMovies">
+          <End Role="DBMovies" Type="Self.DBMovies" Multiplicity="1" />
+          <End Role="DBMovies1" Type="Self.DBMovies" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBMovies1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBMovieSuggestions_DBUsers">
+          <End Role="DBUsers" Type="Self.DBUsers" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBMovieSuggestions" Type="Self.DBMovieSuggestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBMovieSuggestions">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBMovieToCategory_DBCategories">
+          <End Role="DBCategories" Type="Self.DBCategories" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBMovieToCategory" Type="Self.DBMovieToCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBCategories">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="DBMovieToCategory">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBMovieToCategory_DBMovies">
+          <End Role="DBMovies" Type="Self.DBMovies" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBMovieToCategory" Type="Self.DBMovieToCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBMovieToCategory">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBPaymentHistory_DBUsers">
+          <End Role="DBUsers" Type="Self.DBUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBPaymentHistory" Type="Self.DBPaymentHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBPaymentHistory">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBPaymentsDue_DBMovies">
+          <End Role="DBMovies" Type="Self.DBMovies" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBPaymentsDue" Type="Self.DBPaymentsDue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBPaymentsDue">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBPaymentsDue_DBUsers">
+          <End Role="DBUsers" Type="Self.DBUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBPaymentsDue" Type="Self.DBPaymentsDue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBPaymentsDue">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBRatings_DBMovies">
+          <End Role="DBMovies" Type="Self.DBMovies" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBRatings" Type="Self.DBRatings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBRatings">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBRatings_DBUsers">
+          <End Role="DBUsers" Type="Self.DBUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBRatings" Type="Self.DBRatings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBRatings">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBRecommendations_DBMovies">
+          <End Role="DBMovies" Type="Self.DBMovies" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBRecommendations" Type="Self.DBRecommendations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBRecommendations">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBRents_DBMovies">
+          <End Role="DBMovies" Type="Self.DBMovies" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBRents" Type="Self.DBRents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBRents">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBRents_DBUsers">
+          <End Role="DBUsers" Type="Self.DBUsers" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBRents" Type="Self.DBRents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBRents">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBReservations_DBMovies">
+          <End Role="DBMovies" Type="Self.DBMovies" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBReservations" Type="Self.DBReservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBReservations">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBReservations_DBUsers">
+          <End Role="DBUsers" Type="Self.DBUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBReservations" Type="Self.DBReservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBReservations">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBUsers_DBUsers">
+          <End Role="DBUsers" Type="Self.DBUsers" Multiplicity="1" />
+          <End Role="DBUsers1" Type="Self.DBUsers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DBUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBUsers1">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBWatchLists_DBMovies">
+          <End Role="DBMovies" Type="Self.DBMovies" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBWatchLists" Type="Self.DBWatchLists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBWatchLists">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBWatchLists_DBUsers">
+          <End Role="DBUsers" Type="Self.DBUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DBWatchLists" Type="Self.DBWatchLists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBWatchLists">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MovieClubDBModelStoreContainer">
           <EntitySet Name="DBActivityLogs" EntityType="Self.DBActivityLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBAdmins" EntityType="Self.DBAdmins" Schema="dbo" store:Type="Tables" />
@@ -207,6 +525,98 @@
           <EntitySet Name="DBReservations" EntityType="Self.DBReservations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBUsers" EntityType="Self.DBUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBWatchLists" EntityType="Self.DBWatchLists" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DBAdmins_DBUsers" Association="Self.FK_DBAdmins_DBUsers">
+            <End Role="DBUsers" EntitySet="DBUsers" />
+            <End Role="DBAdmins" EntitySet="DBAdmins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBEmployeePendingPayments_DBUsers" Association="Self.FK_DBEmployeePendingPayments_DBUsers">
+            <End Role="DBUsers" EntitySet="DBUsers" />
+            <End Role="DBEmployeePendingPayments" EntitySet="DBEmployeePendingPayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBFavorites_DBMovies" Association="Self.FK_DBFavorites_DBMovies">
+            <End Role="DBMovies" EntitySet="DBMovies" />
+            <End Role="DBFavorites" EntitySet="DBFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBFavorites_DBUsers" Association="Self.FK_DBFavorites_DBUsers">
+            <End Role="DBUsers" EntitySet="DBUsers" />
+            <End Role="DBFavorites" EntitySet="DBFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBFeatured_DBMovies" Association="Self.FK_DBFeatured_DBMovies">
+            <End Role="DBMovies" EntitySet="DBMovies" />
+            <End Role="DBFeatured" EntitySet="DBFeatured" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBInboxMessages_DBUsers" Association="Self.FK_DBInboxMessages_DBUsers">
+            <End Role="DBUsers" EntitySet="DBUsers" />
+            <End Role="DBInboxMessages" EntitySet="DBInboxMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBMovies_DBMovies" Association="Self.FK_DBMovies_DBMovies">
+            <End Role="DBMovies" EntitySet="DBMovies" />
+            <End Role="DBMovies1" EntitySet="DBMovies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBMovieSuggestions_DBUsers" Association="Self.FK_DBMovieSuggestions_DBUsers">
+            <End Role="DBUsers" EntitySet="DBUsers" />
+            <End Role="DBMovieSuggestions" EntitySet="DBMovieSuggestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBMovieToCategory_DBCategories" Association="Self.FK_DBMovieToCategory_DBCategories">
+            <End Role="DBCategories" EntitySet="DBCategories" />
+            <End Role="DBMovieToCategory" EntitySet="DBMovieToCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBMovieToCategory_DBMovies" Association="Self.FK_DBMovieToCategory_DBMovies">
+            <End Role="DBMovies" EntitySet="DBMovies" />
+            <End Role="DBMovieToCategory" EntitySet="DBMovieToCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBPaymentHistory_DBUsers" Association="Self.FK_DBPaymentHistory_DBUsers">
+            <End Role="DBUsers" EntitySet="DBUsers" />
+            <End Role="DBPaymentHistory" EntitySet="DBPaymentHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBPaymentsDue_DBMovies" Association="Self.FK_DBPaymentsDue_DBMovies">
+            <End Role="DBMovies" EntitySet="DBMovies" />
+            <End Role="DBPaymentsDue" EntitySet="DBPaymentsDue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBPaymentsDue_DBUsers" Association="Self.FK_DBPaymentsDue_DBUsers">
+            <End Role="DBUsers" EntitySet="DBUsers" />
+            <End Role="DBPaymentsDue" EntitySet="DBPaymentsDue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBRatings_DBMovies" Association="Self.FK_DBRatings_DBMovies">
+            <End Role="DBMovies" EntitySet="DBMovies" />
+            <End Role="DBRatings" EntitySet="DBRatings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBRatings_DBUsers" Association="Self.FK_DBRatings_DBUsers">
+            <End Role="DBUsers" EntitySet="DBUsers" />
+            <End Role="DBRatings" EntitySet="DBRatings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBRecommendations_DBMovies" Association="Self.FK_DBRecommendations_DBMovies">
+            <End Role="DBMovies" EntitySet="DBMovies" />
+            <End Role="DBRecommendations" EntitySet="DBRecommendations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBRents_DBMovies" Association="Self.FK_DBRents_DBMovies">
+            <End Role="DBMovies" EntitySet="DBMovies" />
+            <End Role="DBRents" EntitySet="DBRents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBRents_DBUsers" Association="Self.FK_DBRents_DBUsers">
+            <End Role="DBUsers" EntitySet="DBUsers" />
+            <End Role="DBRents" EntitySet="DBRents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBReservations_DBMovies" Association="Self.FK_DBReservations_DBMovies">
+            <End Role="DBMovies" EntitySet="DBMovies" />
+            <End Role="DBReservations" EntitySet="DBReservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBReservations_DBUsers" Association="Self.FK_DBReservations_DBUsers">
+            <End Role="DBUsers" EntitySet="DBUsers" />
+            <End Role="DBReservations" EntitySet="DBReservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBUsers_DBUsers" Association="Self.FK_DBUsers_DBUsers">
+            <End Role="DBUsers" EntitySet="DBUsers" />
+            <End Role="DBUsers1" EntitySet="DBUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBWatchLists_DBMovies" Association="Self.FK_DBWatchLists_DBMovies">
+            <End Role="DBMovies" EntitySet="DBMovies" />
+            <End Role="DBWatchLists" EntitySet="DBWatchLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBWatchLists_DBUsers" Association="Self.FK_DBWatchLists_DBUsers">
+            <End Role="DBUsers" EntitySet="DBUsers" />
+            <End Role="DBWatchLists" EntitySet="DBWatchLists" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -231,6 +641,98 @@
           <EntitySet Name="DBEmployeePendingPayments" EntityType="MovieClubDBModel.DBEmployeePendingPayment" />
           <EntitySet Name="DBPaymentsDues" EntityType="MovieClubDBModel.DBPaymentsDue" />
           <EntitySet Name="DBPaymentHistories" EntityType="MovieClubDBModel.DBPaymentHistory" />
+          <AssociationSet Name="FK_DBAdmins_DBUsers" Association="MovieClubDBModel.FK_DBAdmins_DBUsers">
+            <End Role="DBUser" EntitySet="DBUsers" />
+            <End Role="DBAdmin" EntitySet="DBAdmins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBMovieToCategory_DBCategories" Association="MovieClubDBModel.FK_DBMovieToCategory_DBCategories">
+            <End Role="DBCategory" EntitySet="DBCategories" />
+            <End Role="DBMovieToCategory" EntitySet="DBMovieToCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBEmployeePendingPayments_DBUsers" Association="MovieClubDBModel.FK_DBEmployeePendingPayments_DBUsers">
+            <End Role="DBUser" EntitySet="DBUsers" />
+            <End Role="DBEmployeePendingPayment" EntitySet="DBEmployeePendingPayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBFavorites_DBMovies" Association="MovieClubDBModel.FK_DBFavorites_DBMovies">
+            <End Role="DBMovie" EntitySet="DBMovies1" />
+            <End Role="DBFavorite" EntitySet="DBFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBFavorites_DBUsers" Association="MovieClubDBModel.FK_DBFavorites_DBUsers">
+            <End Role="DBUser" EntitySet="DBUsers" />
+            <End Role="DBFavorite" EntitySet="DBFavorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBFeatured_DBMovies" Association="MovieClubDBModel.FK_DBFeatured_DBMovies">
+            <End Role="DBMovie" EntitySet="DBMovies1" />
+            <End Role="DBFeatured" EntitySet="DBFeatureds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBInboxMessages_DBUsers" Association="MovieClubDBModel.FK_DBInboxMessages_DBUsers">
+            <End Role="DBUser" EntitySet="DBUsers" />
+            <End Role="DBInboxMessage" EntitySet="DBInboxMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBMovies_DBMovies" Association="MovieClubDBModel.FK_DBMovies_DBMovies">
+            <End Role="DBMovie" EntitySet="DBMovies1" />
+            <End Role="DBMovie1" EntitySet="DBMovies1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBMovieToCategory_DBMovies" Association="MovieClubDBModel.FK_DBMovieToCategory_DBMovies">
+            <End Role="DBMovie" EntitySet="DBMovies1" />
+            <End Role="DBMovieToCategory" EntitySet="DBMovieToCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBPaymentsDue_DBMovies" Association="MovieClubDBModel.FK_DBPaymentsDue_DBMovies">
+            <End Role="DBMovie" EntitySet="DBMovies1" />
+            <End Role="DBPaymentsDue" EntitySet="DBPaymentsDues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBRatings_DBMovies" Association="MovieClubDBModel.FK_DBRatings_DBMovies">
+            <End Role="DBMovie" EntitySet="DBMovies1" />
+            <End Role="DBRating" EntitySet="DBRatings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBRecommendations_DBMovies" Association="MovieClubDBModel.FK_DBRecommendations_DBMovies">
+            <End Role="DBMovie" EntitySet="DBMovies1" />
+            <End Role="DBRecommendation" EntitySet="DBRecommendations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBRents_DBMovies" Association="MovieClubDBModel.FK_DBRents_DBMovies">
+            <End Role="DBMovie" EntitySet="DBMovies1" />
+            <End Role="DBRent" EntitySet="DBRents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBReservations_DBMovies" Association="MovieClubDBModel.FK_DBReservations_DBMovies">
+            <End Role="DBMovie" EntitySet="DBMovies1" />
+            <End Role="DBReservation" EntitySet="DBReservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBWatchLists_DBMovies" Association="MovieClubDBModel.FK_DBWatchLists_DBMovies">
+            <End Role="DBMovie" EntitySet="DBMovies1" />
+            <End Role="DBWatchList" EntitySet="DBWatchLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBMovieSuggestions_DBUsers" Association="MovieClubDBModel.FK_DBMovieSuggestions_DBUsers">
+            <End Role="DBUser" EntitySet="DBUsers" />
+            <End Role="DBMovieSuggestion" EntitySet="DBMovieSuggestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBPaymentHistory_DBUsers" Association="MovieClubDBModel.FK_DBPaymentHistory_DBUsers">
+            <End Role="DBUser" EntitySet="DBUsers" />
+            <End Role="DBPaymentHistory" EntitySet="DBPaymentHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBPaymentsDue_DBUsers" Association="MovieClubDBModel.FK_DBPaymentsDue_DBUsers">
+            <End Role="DBUser" EntitySet="DBUsers" />
+            <End Role="DBPaymentsDue" EntitySet="DBPaymentsDues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBRatings_DBUsers" Association="MovieClubDBModel.FK_DBRatings_DBUsers">
+            <End Role="DBUser" EntitySet="DBUsers" />
+            <End Role="DBRating" EntitySet="DBRatings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBRents_DBUsers" Association="MovieClubDBModel.FK_DBRents_DBUsers">
+            <End Role="DBUser" EntitySet="DBUsers" />
+            <End Role="DBRent" EntitySet="DBRents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBReservations_DBUsers" Association="MovieClubDBModel.FK_DBReservations_DBUsers">
+            <End Role="DBUser" EntitySet="DBUsers" />
+            <End Role="DBReservation" EntitySet="DBReservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBUsers_DBUsers" Association="MovieClubDBModel.FK_DBUsers_DBUsers">
+            <End Role="DBUser" EntitySet="DBUsers" />
+            <End Role="DBUser1" EntitySet="DBUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBWatchLists_DBUsers" Association="MovieClubDBModel.FK_DBWatchLists_DBUsers">
+            <End Role="DBUser" EntitySet="DBUsers" />
+            <End Role="DBWatchList" EntitySet="DBWatchLists" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="DBCategory">
           <Key>
@@ -238,6 +740,7 @@
           </Key>
           <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CategoryName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DBMovieToCategories" Relationship="MovieClubDBModel.FK_DBMovieToCategory_DBCategories" FromRole="DBCategory" ToRole="DBMovieToCategory" />
         </EntityType>
         <EntityType Name="DBFavorite">
           <Key>
@@ -246,6 +749,8 @@
           <Property Name="FavoritesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MovieID" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DBMovy" Relationship="MovieClubDBModel.FK_DBFavorites_DBMovies" FromRole="DBFavorite" ToRole="DBMovie" />
+          <NavigationProperty Name="DBUser" Relationship="MovieClubDBModel.FK_DBFavorites_DBUsers" FromRole="DBFavorite" ToRole="DBUser" />
         </EntityType>
         <EntityType Name="DBMovieSuggestion">
           <Key>
@@ -255,6 +760,7 @@
           <Property Name="UserId" Type="Int32" />
           <Property Name="ImdbId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="DBUser" Relationship="MovieClubDBModel.FK_DBMovieSuggestions_DBUsers" FromRole="DBMovieSuggestion" ToRole="DBUser" />
         </EntityType>
         <EntityType Name="DBMovieToCategory">
           <Key>
@@ -263,6 +769,8 @@
           <Property Name="RelationshipId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MovieId" Type="Int32" />
           <Property Name="CategoryId" Type="Int32" />
+          <NavigationProperty Name="DBCategory" Relationship="MovieClubDBModel.FK_DBMovieToCategory_DBCategories" FromRole="DBMovieToCategory" ToRole="DBCategory" />
+          <NavigationProperty Name="DBMovy" Relationship="MovieClubDBModel.FK_DBMovieToCategory_DBMovies" FromRole="DBMovieToCategory" ToRole="DBMovie" />
         </EntityType>
         <EntityType Name="DBReservation">
           <Key>
@@ -273,6 +781,8 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Issued" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DBMovy" Relationship="MovieClubDBModel.FK_DBReservations_DBMovies" FromRole="DBReservation" ToRole="DBMovie" />
+          <NavigationProperty Name="DBUser" Relationship="MovieClubDBModel.FK_DBReservations_DBUsers" FromRole="DBReservation" ToRole="DBUser" />
         </EntityType>
         <EntityType Name="DBAdmin">
           <Key>
@@ -280,6 +790,7 @@
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="DBUser" Relationship="MovieClubDBModel.FK_DBAdmins_DBUsers" FromRole="DBAdmin" ToRole="DBUser" />
         </EntityType>
         <EntityType Name="DBMovie">
           <Key>
@@ -309,6 +820,17 @@
           <Property Name="Views" Type="Int32" Nullable="false" />
           <Property Name="TrailerURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="MovieClubVotes" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DBFavorites" Relationship="MovieClubDBModel.FK_DBFavorites_DBMovies" FromRole="DBMovie" ToRole="DBFavorite" />
+          <NavigationProperty Name="DBFeatureds" Relationship="MovieClubDBModel.FK_DBFeatured_DBMovies" FromRole="DBMovie" ToRole="DBFeatured" />
+          <NavigationProperty Name="DBMovies1" Relationship="MovieClubDBModel.FK_DBMovies_DBMovies" FromRole="DBMovie" ToRole="DBMovie1" />
+          <NavigationProperty Name="DBMovy1" Relationship="MovieClubDBModel.FK_DBMovies_DBMovies" FromRole="DBMovie1" ToRole="DBMovie" />
+          <NavigationProperty Name="DBMovieToCategories" Relationship="MovieClubDBModel.FK_DBMovieToCategory_DBMovies" FromRole="DBMovie" ToRole="DBMovieToCategory" />
+          <NavigationProperty Name="DBPaymentsDues" Relationship="MovieClubDBModel.FK_DBPaymentsDue_DBMovies" FromRole="DBMovie" ToRole="DBPaymentsDue" />
+          <NavigationProperty Name="DBRatings" Relationship="MovieClubDBModel.FK_DBRatings_DBMovies" FromRole="DBMovie" ToRole="DBRating" />
+          <NavigationProperty Name="DBRecommendations" Relationship="MovieClubDBModel.FK_DBRecommendations_DBMovies" FromRole="DBMovie" ToRole="DBRecommendation" />
+          <NavigationProperty Name="DBRents" Relationship="MovieClubDBModel.FK_DBRents_DBMovies" FromRole="DBMovie" ToRole="DBRent" />
+          <NavigationProperty Name="DBReservations" Relationship="MovieClubDBModel.FK_DBReservations_DBMovies" FromRole="DBMovie" ToRole="DBReservation" />
+          <NavigationProperty Name="DBWatchLists" Relationship="MovieClubDBModel.FK_DBWatchLists_DBMovies" FromRole="DBMovie" ToRole="DBWatchList" />
         </EntityType>
         <EntityType Name="DBUser">
           <Key>
@@ -320,6 +842,19 @@
           <Property Name="AccountCreatedDate" Type="DateTime" Precision="3" />
           <Property Name="EmpId" Type="Int32" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DBAdmin" Relationship="MovieClubDBModel.FK_DBAdmins_DBUsers" FromRole="DBUser" ToRole="DBAdmin" />
+          <NavigationProperty Name="DBEmployeePendingPayments" Relationship="MovieClubDBModel.FK_DBEmployeePendingPayments_DBUsers" FromRole="DBUser" ToRole="DBEmployeePendingPayment" />
+          <NavigationProperty Name="DBFavorites" Relationship="MovieClubDBModel.FK_DBFavorites_DBUsers" FromRole="DBUser" ToRole="DBFavorite" />
+          <NavigationProperty Name="DBInboxMessages" Relationship="MovieClubDBModel.FK_DBInboxMessages_DBUsers" FromRole="DBUser" ToRole="DBInboxMessage" />
+          <NavigationProperty Name="DBMovieSuggestions" Relationship="MovieClubDBModel.FK_DBMovieSuggestions_DBUsers" FromRole="DBUser" ToRole="DBMovieSuggestion" />
+          <NavigationProperty Name="DBPaymentHistories" Relationship="MovieClubDBModel.FK_DBPaymentHistory_DBUsers" FromRole="DBUser" ToRole="DBPaymentHistory" />
+          <NavigationProperty Name="DBPaymentsDues" Relationship="MovieClubDBModel.FK_DBPaymentsDue_DBUsers" FromRole="DBUser" ToRole="DBPaymentsDue" />
+          <NavigationProperty Name="DBRatings" Relationship="MovieClubDBModel.FK_DBRatings_DBUsers" FromRole="DBUser" ToRole="DBRating" />
+          <NavigationProperty Name="DBRents" Relationship="MovieClubDBModel.FK_DBRents_DBUsers" FromRole="DBUser" ToRole="DBRent" />
+          <NavigationProperty Name="DBReservations" Relationship="MovieClubDBModel.FK_DBReservations_DBUsers" FromRole="DBUser" ToRole="DBReservation" />
+          <NavigationProperty Name="DBUsers1" Relationship="MovieClubDBModel.FK_DBUsers_DBUsers" FromRole="DBUser" ToRole="DBUser1" />
+          <NavigationProperty Name="DBUser1" Relationship="MovieClubDBModel.FK_DBUsers_DBUsers" FromRole="DBUser1" ToRole="DBUser" />
+          <NavigationProperty Name="DBWatchLists" Relationship="MovieClubDBModel.FK_DBWatchLists_DBUsers" FromRole="DBUser" ToRole="DBWatchList" />
         </EntityType>
         <EntityType Name="DBRating">
           <Key>
@@ -329,6 +864,8 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="MovieId" Type="Int32" Nullable="false" />
           <Property Name="Rating" Type="Double" Nullable="false" />
+          <NavigationProperty Name="DBMovy" Relationship="MovieClubDBModel.FK_DBRatings_DBMovies" FromRole="DBRating" ToRole="DBMovie" />
+          <NavigationProperty Name="DBUser" Relationship="MovieClubDBModel.FK_DBRatings_DBUsers" FromRole="DBRating" ToRole="DBUser" />
         </EntityType>
         <EntityType Name="DBWatchList">
           <Key>
@@ -337,6 +874,8 @@
           <Property Name="WatchId" Type="Int32" Nullable="false" />
           <Property Name="MovieId" Type="Int32" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DBMovy" Relationship="MovieClubDBModel.FK_DBWatchLists_DBMovies" FromRole="DBWatchList" ToRole="DBMovie" />
+          <NavigationProperty Name="DBUser" Relationship="MovieClubDBModel.FK_DBWatchLists_DBUsers" FromRole="DBWatchList" ToRole="DBUser" />
         </EntityType>
         <EntityType Name="DBRecommendation">
           <Key>
@@ -347,6 +886,7 @@
           <Property Name="Username" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
           <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="DBMovy" Relationship="MovieClubDBModel.FK_DBRecommendations_DBMovies" FromRole="DBRecommendation" ToRole="DBMovie" />
         </EntityType>
         <EntityType Name="DBActivityLog">
           <Key>
@@ -365,6 +905,7 @@
           <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DBUser" Relationship="MovieClubDBModel.FK_DBInboxMessages_DBUsers" FromRole="DBInboxMessage" ToRole="DBUser" />
         </EntityType>
         <EntityType Name="DBRent">
           <Key>
@@ -377,6 +918,8 @@
           <Property Name="DueDate" Type="DateTime" Precision="3" />
           <Property Name="Returned" Type="Int32" Nullable="false" />
           <Property Name="ReturnedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DBMovy" Relationship="MovieClubDBModel.FK_DBRents_DBMovies" FromRole="DBRent" ToRole="DBMovie" />
+          <NavigationProperty Name="DBUser" Relationship="MovieClubDBModel.FK_DBRents_DBUsers" FromRole="DBRent" ToRole="DBUser" />
         </EntityType>
         <EntityType Name="DBFeatured">
           <Key>
@@ -385,6 +928,7 @@
           <Property Name="FeaturedId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MovieId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DBMovy" Relationship="MovieClubDBModel.FK_DBFeatured_DBMovies" FromRole="DBFeatured" ToRole="DBMovie" />
         </EntityType>
         <EntityType Name="DBEmployeePendingPayment">
           <Key>
@@ -394,6 +938,7 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="PayAmount" Type="Int32" Nullable="false" />
           <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DBUser" Relationship="MovieClubDBModel.FK_DBEmployeePendingPayments_DBUsers" FromRole="DBEmployeePendingPayment" ToRole="DBUser" />
         </EntityType>
         <EntityType Name="DBPaymentsDue">
           <Key>
@@ -405,6 +950,8 @@
           <Property Name="Charge" Type="Double" Nullable="false" />
           <Property Name="Fine" Type="Double" Nullable="false" />
           <Property Name="Paid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DBMovy" Relationship="MovieClubDBModel.FK_DBPaymentsDue_DBMovies" FromRole="DBPaymentsDue" ToRole="DBMovie" />
+          <NavigationProperty Name="DBUser" Relationship="MovieClubDBModel.FK_DBPaymentsDue_DBUsers" FromRole="DBPaymentsDue" ToRole="DBUser" />
         </EntityType>
         <EntityType Name="DBPaymentHistory">
           <Key>
@@ -414,7 +961,326 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="PayAmount" Type="Double" Nullable="false" />
           <Property Name="Timestamp" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DBUser" Relationship="MovieClubDBModel.FK_DBPaymentHistory_DBUsers" FromRole="DBPaymentHistory" ToRole="DBUser" />
         </EntityType>
+        <Association Name="FK_DBAdmins_DBUsers">
+          <End Type="MovieClubDBModel.DBUser" Role="DBUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBAdmin" Role="DBAdmin" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DBUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBAdmin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBMovieToCategory_DBCategories">
+          <End Type="MovieClubDBModel.DBCategory" Role="DBCategory" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBMovieToCategory" Role="DBMovieToCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="DBMovieToCategory">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBEmployeePendingPayments_DBUsers">
+          <End Type="MovieClubDBModel.DBUser" Role="DBUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBEmployeePendingPayment" Role="DBEmployeePendingPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBEmployeePendingPayment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBFavorites_DBMovies">
+          <End Type="MovieClubDBModel.DBMovie" Role="DBMovie" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBFavorite" Role="DBFavorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBFavorite">
+              <PropertyRef Name="MovieID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBFavorites_DBUsers">
+          <End Type="MovieClubDBModel.DBUser" Role="DBUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBFavorite" Role="DBFavorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBFavorite">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBFeatured_DBMovies">
+          <End Type="MovieClubDBModel.DBMovie" Role="DBMovie" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBFeatured" Role="DBFeatured" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBFeatured">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBInboxMessages_DBUsers">
+          <End Type="MovieClubDBModel.DBUser" Role="DBUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBInboxMessage" Role="DBInboxMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBInboxMessage">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBMovies_DBMovies">
+          <End Type="MovieClubDBModel.DBMovie" Role="DBMovie" Multiplicity="1" />
+          <End Type="MovieClubDBModel.DBMovie" Role="DBMovie1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBMovie1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBMovieToCategory_DBMovies">
+          <End Type="MovieClubDBModel.DBMovie" Role="DBMovie" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBMovieToCategory" Role="DBMovieToCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBMovieToCategory">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBPaymentsDue_DBMovies">
+          <End Type="MovieClubDBModel.DBMovie" Role="DBMovie" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBPaymentsDue" Role="DBPaymentsDue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBPaymentsDue">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBRatings_DBMovies">
+          <End Type="MovieClubDBModel.DBMovie" Role="DBMovie" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBRating" Role="DBRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBRating">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBRecommendations_DBMovies">
+          <End Type="MovieClubDBModel.DBMovie" Role="DBMovie" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBRecommendation" Role="DBRecommendation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBRecommendation">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBRents_DBMovies">
+          <End Type="MovieClubDBModel.DBMovie" Role="DBMovie" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBRent" Role="DBRent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBRent">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBReservations_DBMovies">
+          <End Type="MovieClubDBModel.DBMovie" Role="DBMovie" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBReservation" Role="DBReservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBReservation">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBWatchLists_DBMovies">
+          <End Type="MovieClubDBModel.DBMovie" Role="DBMovie" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBWatchList" Role="DBWatchList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBWatchList">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBMovieSuggestions_DBUsers">
+          <End Type="MovieClubDBModel.DBUser" Role="DBUser" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBMovieSuggestion" Role="DBMovieSuggestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBMovieSuggestion">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBPaymentHistory_DBUsers">
+          <End Type="MovieClubDBModel.DBUser" Role="DBUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBPaymentHistory" Role="DBPaymentHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBPaymentHistory">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBPaymentsDue_DBUsers">
+          <End Type="MovieClubDBModel.DBUser" Role="DBUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBPaymentsDue" Role="DBPaymentsDue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBPaymentsDue">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBRatings_DBUsers">
+          <End Type="MovieClubDBModel.DBUser" Role="DBUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBRating" Role="DBRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBRating">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBRents_DBUsers">
+          <End Type="MovieClubDBModel.DBUser" Role="DBUser" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBRent" Role="DBRent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBRent">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBReservations_DBUsers">
+          <End Type="MovieClubDBModel.DBUser" Role="DBUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBReservation" Role="DBReservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBReservation">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBUsers_DBUsers">
+          <End Type="MovieClubDBModel.DBUser" Role="DBUser" Multiplicity="1" />
+          <End Type="MovieClubDBModel.DBUser" Role="DBUser1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DBUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBUser1">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBWatchLists_DBUsers">
+          <End Type="MovieClubDBModel.DBUser" Role="DBUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MovieClubDBModel.DBWatchList" Role="DBWatchList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBWatchList">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

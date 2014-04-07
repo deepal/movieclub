@@ -20,5 +20,8 @@ namespace MovieClub.MovieDB
         public double Charge { get; set; }
         public double Fine { get; set; }
         public int Paid { get; set; }
+    
+        public virtual DBMovie DBMovy { get; set; }
+        public virtual DBUser DBUser { get; set; }
     }
 }

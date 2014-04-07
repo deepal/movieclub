@@ -17,5 +17,7 @@ namespace MovieClub.MovieDB
         public int FeaturedId { get; set; }
         public int MovieId { get; set; }
         public System.DateTime Date { get; set; }
+    
+        public virtual DBMovie DBMovy { get; set; }
     }
 }

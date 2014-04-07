@@ -21,5 +21,8 @@ namespace MovieClub.MovieDB
         public Nullable<System.DateTime> DueDate { get; set; }
         public int Returned { get; set; }
         public Nullable<System.DateTime> ReturnedDate { get; set; }
+    
+        public virtual DBMovie DBMovy { get; set; }
+        public virtual DBUser DBUser { get; set; }
     }
 }

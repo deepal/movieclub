@@ -17,5 +17,8 @@ namespace MovieClub.MovieDB
         public int RelationshipId { get; set; }
         public Nullable<int> MovieId { get; set; }
         public Nullable<int> CategoryId { get; set; }
+    
+        public virtual DBCategory DBCategory { get; set; }
+        public virtual DBMovie DBMovy { get; set; }
     }
 }

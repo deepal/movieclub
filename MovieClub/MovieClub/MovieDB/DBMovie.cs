@@ -14,6 +14,19 @@ namespace MovieClub.MovieDB
     
     public partial class DBMovie
     {
+        public DBMovie()
+        {
+            this.DBFavorites = new HashSet<DBFavorite>();
+            this.DBFeatureds = new HashSet<DBFeatured>();
+            this.DBMovieToCategories = new HashSet<DBMovieToCategory>();
+            this.DBPaymentsDues = new HashSet<DBPaymentsDue>();
+            this.DBRatings = new HashSet<DBRating>();
+            this.DBRecommendations = new HashSet<DBRecommendation>();
+            this.DBRents = new HashSet<DBRent>();
+            this.DBReservations = new HashSet<DBReservation>();
+            this.DBWatchLists = new HashSet<DBWatchList>();
+        }
+    
         public int Id { get; set; }
         public string ImdbId { get; set; }
         public string Name { get; set; }
@@ -38,5 +51,17 @@ namespace MovieClub.MovieDB
         public int Views { get; set; }
         public string TrailerURL { get; set; }
         public int MovieClubVotes { get; set; }
+    
+        public virtual ICollection<DBFavorite> DBFavorites { get; set; }
+        public virtual ICollection<DBFeatured> DBFeatureds { get; set; }
+        public virtual DBMovie DBMovies1 { get; set; }
+        public virtual DBMovie DBMovy1 { get; set; }
+        public virtual ICollection<DBMovieToCategory> DBMovieToCategories { get; set; }
+        public virtual ICollection<DBPaymentsDue> DBPaymentsDues { get; set; }
+        public virtual ICollection<DBRating> DBRatings { get; set; }
+        public virtual ICollection<DBRecommendation> DBRecommendations { get; set; }
+        public virtual ICollection<DBRent> DBRents { get; set; }
+        public virtual ICollection<DBReservation> DBReservations { get; set; }
+        public virtual ICollection<DBWatchList> DBWatchLists { get; set; }
     }
 }

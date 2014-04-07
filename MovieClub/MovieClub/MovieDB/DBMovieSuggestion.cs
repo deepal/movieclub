@@ -18,5 +18,7 @@ namespace MovieClub.MovieDB
         public Nullable<int> UserId { get; set; }
         public string ImdbId { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
+    
+        public virtual DBUser DBUser { get; set; }
     }
 }

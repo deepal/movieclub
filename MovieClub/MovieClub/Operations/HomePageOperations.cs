@@ -26,13 +26,17 @@ namespace MovieClub.Operations
                 Count = grps.Count()
             }).ToList();
             grp.Sort((x,y)=>y.Count.CompareTo(x.Count));
-            grp = grp.GetRange(0, 3);
+
+            grp = grp.GetRange(0, Math.Min(3,grp.Count));
 
             List<int> catlist = new List<int>();
 
-            foreach (var item in grp)
+            if (grp.Count != 0)
             {
-                catlist.Add(db.DBCategories.Where(c => c.CategoryName.Contains(item.Tag)).First().CategoryId);
+                foreach (var item in grp)
+                {
+                    catlist.Add(db.DBCategories.Where(c => c.CategoryName.Contains(item.Tag)).First().CategoryId);
+                }
             }
 
             return catlist;

@@ -18,5 +18,7 @@ namespace MovieClub.MovieDB
         public int UserId { get; set; }
         public int PayAmount { get; set; }
         public string Type { get; set; }
+    
+        public virtual DBUser DBUser { get; set; }
     }
 }

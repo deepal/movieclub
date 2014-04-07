@@ -105,7 +105,7 @@ namespace MovieClub.Controllers
                     case LATEST:
                         var querylatest = db.DBMovies.ToList();
                         querylatest.Sort((x, y) => ((DateTime)y.AddedDate).CompareTo((DateTime)x.AddedDate));
-                        querylatest = querylatest.GetRange(0, 30);
+                        querylatest = querylatest.GetRange(0, Math.Min(30,querylatest.Count));
                         foreach (var movie in querylatest)
                         {
                             SimpleMovieDetails item =

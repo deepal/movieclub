@@ -14,7 +14,14 @@ namespace MovieClub.MovieDB
     
     public partial class DBCategory
     {
+        public DBCategory()
+        {
+            this.DBMovieToCategories = new HashSet<DBMovieToCategory>();
+        }
+    
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
+    
+        public virtual ICollection<DBMovieToCategory> DBMovieToCategories { get; set; }
     }
 }

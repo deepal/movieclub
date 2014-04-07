@@ -19,5 +19,8 @@ namespace MovieClub.MovieDB
         public int UserId { get; set; }
         public System.DateTime Timestamp { get; set; }
         public int Issued { get; set; }
+    
+        public virtual DBMovie DBMovy { get; set; }
+        public virtual DBUser DBUser { get; set; }
     }
 }

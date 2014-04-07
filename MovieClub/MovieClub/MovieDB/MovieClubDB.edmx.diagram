@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="MovieClubDBModel.DBCategory" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBFavorite" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBMovieSuggestion" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="MovieClubDBModel.DBMovieToCategory" Width="1.5" PointX="4.875" PointY="0.75" />
+        <EntityTypeShape EntityType="MovieClubDBModel.DBMovieToCategory" Width="1.5" PointX="5.75" PointY="0.5" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBReservation" Width="1.5" PointX="2.75" PointY="6.75" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBAdmin" Width="1.5" PointX="5.375" PointY="6.75" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBMovie" Width="1.5" PointX="0.75" PointY="2.5" />
@@ -23,6 +23,29 @@
         <EntityTypeShape EntityType="MovieClubDBModel.DBEmployeePendingPayment" Width="1.5" PointX="9.375" PointY="6.75" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBPaymentsDue" Width="1.5" PointX="9.625" PointY="9" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBPaymentHistory" Width="1.5" PointX="11.375" PointY="0.75" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBAdmins_DBUsers" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBMovieToCategory_DBCategories" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBEmployeePendingPayments_DBUsers" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBFavorites_DBMovies" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBFavorites_DBUsers" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBFeatured_DBMovies" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBInboxMessages_DBUsers" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBMovies_DBMovies" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBMovieToCategory_DBMovies" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBPaymentsDue_DBMovies" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBRatings_DBMovies" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBRecommendations_DBMovies" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBRents_DBMovies" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBReservations_DBMovies" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBWatchLists_DBMovies" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBMovieSuggestions_DBUsers" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBPaymentHistory_DBUsers" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBPaymentsDue_DBUsers" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBRatings_DBUsers" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBRents_DBUsers" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBReservations_DBUsers" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBUsers_DBUsers" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBWatchLists_DBUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -18,5 +18,8 @@ namespace MovieClub.MovieDB
         public int UserId { get; set; }
         public int MovieId { get; set; }
         public double Rating { get; set; }
+    
+        public virtual DBMovie DBMovy { get; set; }
+        public virtual DBUser DBUser { get; set; }
     }
 }

@@ -354,7 +354,6 @@ namespace MovieClub.Controllers
         public bool AddMovieToDB(MovieDB.MovieClubDBE db, MovieDetails movie)
         {
             MovieDB.DBMovie dbmovie = new MovieDB.DBMovie();
-            MovieDB.DBCategory dbcat = new MovieDB.DBCategory();
             dbmovie.Actors = movie.Actors;
             dbmovie.Awards = movie.Awards;
             dbmovie.Country = movie.Country;
@@ -385,6 +384,7 @@ namespace MovieClub.Controllers
             List<MovieDB.DBCategory> currentlist = db.DBCategories.ToList<MovieDB.DBCategory>();
             foreach (string cat in categories)
             {
+                MovieDB.DBCategory dbcat = new MovieDB.DBCategory();
                 var tag = cat.Trim();
                 tag.Replace(" ", string.Empty);
                 if ((currentlist.FindAll(c => c.CategoryName == tag)).Count == 0)

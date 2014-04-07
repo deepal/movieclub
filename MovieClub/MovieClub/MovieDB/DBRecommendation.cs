@@ -19,5 +19,7 @@ namespace MovieClub.MovieDB
         public string Username { get; set; }
         public string Comment { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
+    
+        public virtual DBMovie DBMovy { get; set; }
     }
 }

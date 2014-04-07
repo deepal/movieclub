@@ -86,5 +86,11 @@ namespace MovieClub.Controllers
             return View(homepagemodel);
         }
 
+        [HttpGet]
+        [NonAction]
+        public ActionResult Error()
+        {
+            return View();
+        }
     }
 }

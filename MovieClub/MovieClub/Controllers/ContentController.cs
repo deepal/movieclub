@@ -52,8 +52,15 @@ namespace MovieClub.Controllers
 
             if (list == null)
             {
-                //ViewBag.ListName
-                var catname = db.DBCategories.First(c => c.CategoryId == Id).CategoryName;
+                string catname = null;
+                try
+                {
+                   catname = db.DBCategories.First(c => c.CategoryId == Id).CategoryName;
+                }
+                catch (Exception)
+                {
+                    return HttpNotFound();
+                }
                 var query = db.DBMovieToCategories.Where(ent => ent.CategoryId == Id).Join(db.DBMovies,
                 r => r.MovieId,
                 l => l.Id,
@@ -280,9 +287,19 @@ namespace MovieClub.Controllers
         [HttpGet]
         [AllowAnonymous]
         public ActionResult MovieDetails(int Id)
-        {
+        { 
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
-            MovieDB.DBMovie dbmovieitem = db.DBMovies.First(mv => mv.Id == Id);
+            MovieDB.DBMovie dbmovieitem = null;
+            try
+            {
+                dbmovieitem = db.DBMovies.First(mv => mv.Id == Id);
+            }
+            catch (Exception)
+            {
+                return HttpNotFound();
+                //return RedirectToAction("Error", "Home");
+            }
+
             dbmovieitem.Views += 1;
             db.SaveChanges();
             ViewBag.HasVoted = false;

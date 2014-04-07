@@ -23,7 +23,7 @@ namespace MovieClub.Controllers
         [AllowAnonymous]
         public string GetSolUserName()
         {
-            return "johnnydepp";
+            return "deepal";
             //return HttpContext.User.Identity.Name;
         }
 
@@ -36,7 +36,14 @@ namespace MovieClub.Controllers
                 if (UserOperations.IsAuthenticated(GetSolUserName()))
                 {
                     System.Web.Security.FormsAuthentication.SetAuthCookie(GetSolUserName(), false);
-                    Session["LoggedIn"] = "true";
+                    if (UserOperations.IsAdmin())
+                    {
+                        Session["Admin"] = "true";
+                    }
+                    else
+                    {
+                        Session["Admin"] = "false";
+                    }
                     return RedirectToAction("Index", "Home");
                 }
             }

@@ -149,6 +149,7 @@ namespace MovieClub.Controllers
                         {
                             string filePath = Path.Combine(HttpContext.Server.MapPath("/Content/multimedia"), Path.GetFileName(movie.ImdbId + ".mp4"));
                             uploadFile.SaveAs(filePath);
+                            movie.TrailerURL = System.Configuration.ConfigurationManager.AppSettings["VideoSavePath"] + "/" + movie.ImdbId + ".mp4";
                         }
                         else
                         {
@@ -374,7 +375,7 @@ namespace MovieClub.Controllers
             dbmovie.Writer = movie.Writer;
             dbmovie.Year = movie.Year;
             dbmovie.AddedDate = DateTime.Now;
-            dbmovie.TrailerURL = System.Configuration.ConfigurationManager.AppSettings["VideoSavePath"] + "/" + movie.ImdbId + ".mp4";
+            dbmovie.TrailerURL = movie.TrailerURL;
             db.DBMovies.Add(dbmovie);
             db.SaveChanges();
             string[] categories = (movie.Genre).Split(',');
@@ -579,7 +580,8 @@ namespace MovieClub.Controllers
 
         public string SavePoster(string Url, string ImdbId)
         {
-            string LocalPath = HttpContext.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["PosterDownloadPath"]) + "/" + ImdbId + Path.GetExtension(Url);
+            string RelativePath = System.Configuration.ConfigurationManager.AppSettings["PosterDownloadPath"] + "/" + ImdbId + Path.GetExtension(Url);
+            string LocalPath = HttpContext.Server.MapPath(RelativePath);
             WebClient client = new WebClient();
             try
             {
@@ -589,7 +591,7 @@ namespace MovieClub.Controllers
             {
                 return "/Content/images/poster-na.jpg" ;
             }
-            return LocalPath;
+            return RelativePath.Replace("~",string.Empty);
         }
 
         [HttpGet]

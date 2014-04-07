@@ -65,7 +65,7 @@
                 </ul>
             </section>
             <section class="top-bar-section">
-                @if (Request.IsAuthenticated)
+                @if (MovieClub.Operations.UserOperations.IsAdmin())
                 {
                     @Html.Partial("_AdminToolsPartial")
                 }

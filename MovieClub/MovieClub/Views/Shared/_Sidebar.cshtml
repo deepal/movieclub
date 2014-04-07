@@ -21,7 +21,10 @@
 
         @foreach (var cat in model.categorylist)
         {
-            <li><a href="/Content/Collection/@cat.Id">@cat.Name<span class="label right">@cat.TaggedMovieCount</span></a></li>
+            if (cat.TaggedMovieCount > 0)
+            {
+                <li><a href="/Content/Collection/@cat.Id">@cat.Name<span class="label right">@cat.TaggedMovieCount</span></a></li>
+            }
         }
 
         <li class="divider"></li>

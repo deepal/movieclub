@@ -245,7 +245,7 @@ namespace MovieClub.Controllers
                 });
 
             List<Models.MyAccountModels.MyAccountMovieModel> favmovies = new List<Models.MyAccountModels.MyAccountMovieModel>();
-
+            favorites.Reverse();
             foreach (var item in favorites)
             {
                 favmovies.Add(new Models.MyAccountModels.MyAccountMovieModel()
@@ -281,7 +281,7 @@ namespace MovieClub.Controllers
                         ImdbRatings = r.ImdbRatings
                     });
             List<Models.MyAccountModels.MyAccountMovieModel> watchlistmovies = new List<Models.MyAccountModels.MyAccountMovieModel>();
-
+            //watchlist.Reverse();
             foreach (var item in watchlist)
             {
                 watchlistmovies.Add(new Models.MyAccountModels.MyAccountMovieModel() {
@@ -312,6 +312,9 @@ namespace MovieClub.Controllers
                         Comment = l.Comment,
                         Date = l.Date
                     });
+
+            recommendations.Reverse();
+
             List<Models.MyAccountModels.RecommendationModel> recomList = new List<Models.MyAccountModels.RecommendationModel>();
             foreach (var recom in recommendations)
             {
@@ -340,9 +343,9 @@ namespace MovieClub.Controllers
                     MovieId = r.Id,
                     MovieName = r.Name,
                     ReservedDate = l.Timestamp
-                });
+                }).ToList();
             List<Models.MyAccountModels.ReservationModel> reservlist = new List<Models.MyAccountModels.ReservationModel>();
-
+            reservations.Sort((x, y) => ((DateTime)y.ReservedDate).CompareTo((DateTime)x.ReservedDate));
             foreach (var reserv in reservations)
             {
                 reservlist.Add(new Models.MyAccountModels.ReservationModel() {
@@ -369,10 +372,10 @@ namespace MovieClub.Controllers
                     MovieName = r.Name,
                     DateBorrowed = l.BorrowedDate,
                     DueDate = l.DueDate
-                });
+                }).ToList();
 
             List<Models.MyAccountModels.CurrentRentModel> currentrents = new List<Models.MyAccountModels.CurrentRentModel>();
-
+            rents.Sort((x, y) => ((DateTime)y.DateBorrowed).CompareTo((DateTime)x.DateBorrowed));
             foreach (var item in rents)
             {
                 currentrents.Add(new Models.MyAccountModels.CurrentRentModel()
@@ -400,9 +403,11 @@ namespace MovieClub.Controllers
                     MovieName= r.Name,
                     DateBorrowed = l.BorrowedDate,
                     DateReturned = l.ReturnedDate
-                });
+                }).ToList();
 
             List<Models.MyAccountModels.RentsHistoryModel> rentshistory = new List<Models.MyAccountModels.RentsHistoryModel>();
+
+            history.Sort((x,y)=>((DateTime)y.DateReturned).CompareTo((DateTime)x.DateReturned));
 
             foreach (var item in history)
             {

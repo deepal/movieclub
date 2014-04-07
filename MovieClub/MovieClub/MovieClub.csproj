@@ -326,6 +326,7 @@
     <Content Include="Content\css\myaccount.css" />
     <Content Include="Content\css\normalize.css" />
     <Content Include="Content\css\rateit.css" />
+    <Content Include="Content\css\register.css" />
     <Content Include="Content\css\searchpage.css" />
     <Content Include="Content\css\simplePagination.css" />
     <Content Include="Content\css\style.css" />

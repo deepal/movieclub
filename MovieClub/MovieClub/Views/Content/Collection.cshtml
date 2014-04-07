@@ -1,7 +1,7 @@
 ﻿@model MovieClub.Models.CategoryModel
 
 @{
-    ViewBag.Title = "Catagory";
+    ViewBag.Title = ViewBag.ListName;
     var catmodel = Model;
     if (catmodel.CurrentPage == 0 || catmodel.CurrentPage == null) 
     {

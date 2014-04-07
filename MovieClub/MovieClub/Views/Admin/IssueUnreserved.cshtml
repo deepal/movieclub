@@ -58,7 +58,7 @@
         $("#mname").html("<a href='/Content/MovieDetails/" + $("option:selected", this).val() + "'>" + $("option:selected", this).html() + "</a>");
         $("#mcat").html($("option:selected", this).attr("data-category"));
         $("#mimdb").html("IMDb Rating : " + $("option:selected", this).attr("data-imdb"));
-        $("#mmc").html("Pearson Rating: " + $("option:selected", this).attr("data-movieclub"));
+        $("#mmc").html("@System.Configuration.ConfigurationManager.AppSettings["OrganizationName"]"+" Rating: " + $("option:selected", this).attr("data-movieclub"));
         $("#tinymovie").html("<img id='poster-stamp' src='/Content/images/posters/" + $("option:selected", this).attr("data-poster") + ".jpg' alt='No Poster' />");
     });
 

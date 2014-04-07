@@ -5,38 +5,47 @@
 }
 
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+<div class="row">
+    <div class="large-50 large-centered medium-70 medium-centered small-100 columns">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
 
-    <h4>Welcome @ViewBag.SolUserName to Movie Club!</h4>
-    
-    <fieldset>
-        <legend>Register</legend>
-        
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Email)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </div>
+            <h4 class="h4">Welcome @ViewBag.SolUserName to Movie Club!</h4>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.EmployeeId)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.EmployeeId)
-            @Html.ValidationMessageFor(model => model.EmployeeId)
-        </div>
+            <fieldset>
+                <legend>Register</legend>
 
-        <p>
-            <input type="submit" value="Register" />
-        </p>
-    </fieldset>
-}
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.Email)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.Email)
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+
+                <div class="editor-label">
+                    @Html.Label("Employee ID")
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(model => model.EmployeeId)
+                    @Html.ValidationMessageFor(model => model.EmployeeId)
+                </div>
+
+                <p>
+                    <input id="register-button" class="button tiny" type="submit" value="Register" />
+                </p>
+            </fieldset>
+        }
+    </div>
+</div>
 
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+}
+
+@section customstyles{
+    @Styles.Render("~/Content/css/register.css")
 }

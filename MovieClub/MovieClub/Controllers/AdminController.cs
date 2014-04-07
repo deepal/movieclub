@@ -145,7 +145,7 @@ namespace MovieClub.Controllers
                 {
                     if (uploadFile.ContentLength > 0)
                     {
-                        if (Path.GetExtension(uploadFile.FileName) == ".mp4")
+                        if ((Path.GetExtension(uploadFile.FileName)).ToLower() == ".mp4")
                         {
                             string filePath = Path.Combine(HttpContext.Server.MapPath("/Content/multimedia"), Path.GetFileName(movie.ImdbId + ".mp4"));
                             uploadFile.SaveAs(filePath);
@@ -167,7 +167,7 @@ namespace MovieClub.Controllers
                 }
 
                 //if video was uploaded successfully, then save the movie poster
-                SavePoster(movie.PosterURL, movie.ImdbId);
+                movie.PosterURL = SavePoster(movie.PosterURL, movie.ImdbId);
                 //save movie to db
                 if (AddMovieToDB(db, movie))
                 {
@@ -368,7 +368,7 @@ namespace MovieClub.Controllers
             dbmovie.Name = movie.Name;
             dbmovie.PlotFull = movie.PlotFull;
             dbmovie.PlotShort = movie.PlotShort;
-            dbmovie.PosterURL = System.Configuration.ConfigurationManager.AppSettings["PosterPath"] + "/" + movie.ImdbId + Path.GetExtension(movie.PosterURL);
+            dbmovie.PosterURL = movie.PosterURL; //System.Configuration.ConfigurationManager.AppSettings["PosterPath"] + "/" + movie.ImdbId + Path.GetExtension(movie.PosterURL);
             dbmovie.ReleaseDate = movie.ReleaseDate;
             dbmovie.Runtime = movie.Runtime;
             dbmovie.Writer = movie.Writer;
@@ -577,12 +577,19 @@ namespace MovieClub.Controllers
             });
         }
 
-        public void SavePoster(string Url, string ImdbId)
+        public string SavePoster(string Url, string ImdbId)
         {
             string LocalPath = HttpContext.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["PosterDownloadPath"]) + "/" + ImdbId + Path.GetExtension(Url);
             WebClient client = new WebClient();
-            client.DownloadFile(Url, LocalPath);
-            return;
+            try
+            {
+                client.DownloadFile(Url, LocalPath);
+            }
+            catch (Exception)
+            {
+                return "/Content/images/poster-na.jpg" ;
+            }
+            return LocalPath;
         }
 
         [HttpGet]

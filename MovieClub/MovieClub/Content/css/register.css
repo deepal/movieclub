@@ -1,0 +1,19 @@
+﻿.h4{
+    margin-top:20px;
+    margin-bottom:20px;
+    text-align:center;
+    font-size:18px;
+}
+
+fieldset legend{
+    color:#808080
+}
+
+p{
+    text-align:center;
+    margin-bottom:0;
+}
+
+#register-button{
+    margin-bottom:0;
+}

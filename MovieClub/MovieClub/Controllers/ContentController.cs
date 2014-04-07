@@ -12,6 +12,7 @@ using System.Text;
 using MovieClub.WebServices;
 using MovieClub.Operations;
 using MovieClub.CustomAttributes;
+using System.Text.RegularExpressions;
 
 namespace MovieClub.Controllers
 {
@@ -340,7 +341,8 @@ namespace MovieClub.Controllers
                 AddedDate = (DateTime)dbmovieitem.AddedDate,
                 ActorsList = stringToTagList(dbmovieitem.Actors,','),
                 WritersList = stringToTagList(dbmovieitem.Writer,','),
-                DirectorsList = stringToTagList(dbmovieitem.Director,',')
+                DirectorsList = stringToTagList(dbmovieitem.Director,','),
+                TrailerURL = dbmovieitem.TrailerURL
             });
         }
 
@@ -418,6 +420,12 @@ namespace MovieClub.Controllers
             }
             ViewBag.SearchQuery = q;
             return View(resultslist);
+        }
+
+        public string StripHTML(string htmlString)
+        {
+            string pattern = @"<(.|\n)*?>";
+            return Regex.Replace(htmlString, pattern, string.Empty);
         }
 
         public bool hasRated(int userid, int movieid)

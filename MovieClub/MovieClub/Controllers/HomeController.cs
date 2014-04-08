@@ -93,9 +93,26 @@ namespace MovieClub.Controllers
         }
 
         [HttpGet]
-        [NonAction]
-        public ActionResult Error()
+
+        public ActionResult Error(int status)
         {
+
+            switch ((int)status)
+            {
+                case 404:
+                    ViewBag.Error = "Sorry! The page your are looking for is not here.";
+                    break;
+                case 403:
+                    ViewBag.Error = "Sorry! You are not authorized to access this content.";
+                    break;
+                case 500:
+                    ViewBag.Error = "Error occured in the server and cannot process your request right now!";
+                    break;
+                default:
+                    ViewBag.Error = "Unknown Error occured!";
+                    break;
+            }
+
             return View();
         }
     }

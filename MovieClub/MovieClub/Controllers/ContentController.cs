@@ -59,7 +59,8 @@ namespace MovieClub.Controllers
                 }
                 catch (Exception)
                 {
-                    return HttpNotFound();
+                    return RedirectToAction("Error", "Home", new { status = "404" });
+                    //return HttpNotFound();
                 }
                 var query = db.DBMovieToCategories.Where(ent => ent.CategoryId == Id).Join(db.DBMovies,
                 r => r.MovieId,
@@ -296,8 +297,8 @@ namespace MovieClub.Controllers
             }
             catch (Exception)
             {
-                return HttpNotFound();
-                //return RedirectToAction("Error", "Home");
+                //return HttpNotFound();
+                return RedirectToAction("Error", "Home", new { status = "404" });
             }
 
             dbmovieitem.Views += 1;

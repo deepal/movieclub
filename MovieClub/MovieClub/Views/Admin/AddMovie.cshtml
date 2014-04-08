@@ -354,13 +354,13 @@
                         $("#notice span").html(displaytext + " :")
                     }
                     for (var i = 0, len = obj.Search.length; i < len; i++) {
-                        $("#notice ul").append("<li><a class=\"suggestion\" href=\"" + obj.Search[i].Title + "\">" + obj.Search[i].Title + "(" + obj.Search[i].Year + ")</a></li>");
+                        $("#notice ul").append("<li><a class=\"suggestion\" href=\"" + obj.Search[i].imdbID + "\">" + obj.Search[i].Title + "(" + obj.Search[i].Year + ")</a></li>");
                     }
 
                     $("#notice").removeAttr("style");
 
                     $(".suggestion").click(function (e) {
-                        fetchImdbData($(this).attr("href"));
+                        fetchImdbDataByID($(this).attr("href"));
                         e.preventDefault();
                     });
 
@@ -432,6 +432,38 @@
                 resetNotice(classname);
                 $("#notice span").html(message);
                 $("#notice").removeAttr("style");
+            }
+
+            function fetchImdbDataByID(imdbid) {
+                $.ajax({
+                    type: "GET",
+                    url: "http://www.omdbapi.com/?",
+                    data: {
+                        i: imdbid,
+                        plot: "short",
+                        r: "json",
+                        dataType: "text"
+                    }
+                })
+                .success(function (data) {
+                    $("#btn-fetch-imdb").html("Fetch IMDb data");
+                    $("#btn-fetch-imdb").removeClass("disabled");
+                    var movieobj = jQuery.parseJSON(data);
+                    if (movieobj.Response == "False") {
+                        clearform();
+                        showMessage(movieobj.Error, "warning");
+                    }
+                    else {
+                        showSuggestions("More suggestions", movieobj.Title);
+                        fillImdbData(movieobj);
+                    }
+                })
+                .error(function () {
+                    $("#btn-fetch-imdb").html("Fetch IMDb data");
+                    $("#btn-fetch-imdb").removeClass("disabled");
+                    $("#notice span").html("Cannot connect to IMDb right now !");
+                    $("#notice").removeAttr("style");
+                });
             }
 
             function fetchImdbData(moviename) {

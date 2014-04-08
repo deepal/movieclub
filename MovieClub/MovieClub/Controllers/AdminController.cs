@@ -640,7 +640,7 @@ namespace MovieClub.Controllers
         public ActionResult DetailedPayment(int userid)
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
-            var userpayment = db.DBPaymentsDues.Where(up => up.UserId == userid).Join(db.DBMovies,
+            var userpayment = db.DBPaymentsDues.Where(up => up.UserId == userid && up.Paid==0).Join(db.DBMovies,
                 l=>l.MovieId,
                 r=>r.Id,
                 (l, r) => new

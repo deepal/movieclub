@@ -512,13 +512,14 @@
     <Content Include="Views\Admin\_PendingReturnsPartial.cshtml" />
     <Content Include="Views\Admin\AddMovie.cshtml" />
     <Content Include="Views\Shared\_AdminToolsPartial.cshtml" />
-    <Content Include="Views\Admin\ManageMovies.cshtml" />
+    <Content Include="Views\Admin\Movies.cshtml" />
     <Content Include="Views\Admin\_ReservedMoviesPartial.cshtml" />
     <Content Include="Views\Admin\SendMessage.cshtml" />
     <Content Include="Views\Admin\_PendingPaymentsPartial.cshtml" />
     <Content Include="Views\Admin\DetailedPayment.cshtml" />
     <Content Include="Views\Content\RecommendMovie.cshtml" />
     <Content Include="Views\Admin\IssueUnreserved.cshtml" />
+    <Content Include="Views\Admin\_ManageMoviesPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\posters\" />

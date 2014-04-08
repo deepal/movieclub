@@ -46,12 +46,29 @@ namespace MovieClub.Controllers
         }
 
         [HttpGet]
-        public ActionResult ManageMovies()
+        public ActionResult Movies()
+        {
+            return View();
+        }
+
+
+
+        [HttpGet]
+        public ActionResult ManageMovies(string q)
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            List<MovieDB.DBMovie> mlist;
 
+            if (q != null && q != "")
+            {
+                mlist = db.DBMovies.Where(m => m.Name.Contains(q.ToLower())).ToList();
+            }
+            else
+            {
+                mlist = db.DBMovies.ToList();
+            }
 
-            var dbmovies = from movie in db.DBMovies.ToList()
+            var dbmovies = from movie in mlist
                            join reserv in db.DBReservations.ToList() on movie.Id equals reserv.MovieId into movreserv
                            from item in movreserv.DefaultIfEmpty()
                            select new
@@ -95,7 +112,7 @@ namespace MovieClub.Controllers
             }
 
 
-            return View(movies.GroupBy(m=>m.MovieId).Select(grp=>grp.First()).ToList());
+            return PartialView("_ManageMoviesPartial",movies.GroupBy(m=>m.MovieId).Select(grp=>grp.First()).ToList());
         }
 
         [HttpPost]
@@ -576,6 +593,36 @@ namespace MovieClub.Controllers
                 result = "ok",
                 message = "Message sent!"
             });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteMovie(int movieid)
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+
+            try
+            {
+                var movie = db.DBMovies.Where(m => m.Id == movieid).SingleOrDefault();
+
+                db.DBMovies.Remove(movie);
+
+                db.SaveChanges();
+
+                return Json(new
+                {
+                    result = "ok",
+                    message = "Movie Deleted"
+                });
+            }
+            catch (Exception)
+            {
+                return Json(new
+                {
+                    result = "error",
+                    message = "Error occured. Check your connection."
+                });
+            }
         }
 
         public string SavePoster(string Url, string ImdbId)

@@ -10,7 +10,7 @@
     </div>
     <div class="small-100 large-100 medium-100 columns">
         <div id="movies-list">
-
+            <img style="margin-top:20px" src="/Content/images/ajax-loader-bar.gif" />
         </div>
     </div>
     
@@ -61,60 +61,28 @@
             });
         }
 
-        $(document).ready(function () {
-
-            $("#search-movie-admin").keyup(function (event) {
-                $.ajax({
-                    url: "/Admin/ManageMovies/?q=" + $("#search-movie-admin").val(),
-                    type: "GET"
-                })
-                .success(function (data) {
-                    $("#movies-list").html(data);
-                })
-                .error(function () {
-                    $("#movies-list").html("Error loading movies list. Try refreshing the page.");
-                });;
-            });
-
+        $("#search-movie-admin").keyup(function (event) {
             $.ajax({
-                url: "/Admin/ManageMovies",
+                url: "/Admin/ManageMovies/?q=" + $("#search-movie-admin").val(),
                 type: "GET"
             })
             .success(function (data) {
                 $("#movies-list").html(data);
             })
             .error(function () {
+                $("#movies-list").html("Error loading movies list. Try refreshing the page.");
+            });;
+        });
+
+        $.ajax({
+            url: "/Admin/ManageMovies",
+            type: "GET"
+        })
+            .success(function (data) {
+                $("#movies-list").html(data);
+            })
+            .error(function () {
                 $("#movies-list").html("Error loading movies list");
             });
-
-
-            $(".featuredcheckbox").change(function (e) {
-                
-                $.ajax({
-                    url: "/Admin/FeatureMovie/?",
-                    type: "post",
-                    data: AddAntiForgeryToken({
-                        movieid: $(this).attr("data-movieid"),
-                        featured: $(this).is(":checked")
-                    }),
-                    dataType: "text"
-                })
-                .success(function (data) {
-                    var obj = $.parseJSON(data);
-                    if (obj.result == "ok") {
-                        toastr.success(obj.message);
-                    }
-                    else if (obj.result == "error") {
-                        $(this).removeAttr("checked");
-                        toastr.warning(obj.message);
-                    }
-                })
-                .error(function () {
-                    toastr.error("Error occured! Check your connection.");
-                });
-            });
-
-
-        });
     </script>
 }

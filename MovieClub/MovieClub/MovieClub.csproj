@@ -317,6 +317,8 @@
     <Content Include="Content\chosen\chosen.proto.min.js" />
     <Content Include="Content\css\admin.css" />
     <Content Include="Content\css\categorypage.css" />
+    <Content Include="Content\css\foundation-icons.css" />
+    <Content Include="Content\css\foundation-icons.svg" />
     <Content Include="Content\css\glyphicons.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\carousal.css" />
@@ -453,6 +455,9 @@
       <DependentUpon>MovieClubDB.edmx</DependentUpon>
       <LastGenOutput>MovieClubDB1.cs</LastGenOutput>
     </Content>
+    <Content Include="Content\css\foundation-icons.eot" />
+    <Content Include="Content\css\foundation-icons.ttf" />
+    <Content Include="Content\css\foundation-icons.woff" />
     <None Include="Properties\PublishProfiles\Deepal.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Content\images\poster.jpg" />

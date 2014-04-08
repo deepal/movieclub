@@ -21,26 +21,26 @@
                             <button @if (ViewBag.ReservationDisabled){ <text> class="button expand small disabled" </text>  }else{ <text> class="button expand small" </text>} id="reserve-movie">
                                 @if (ViewBag.HasReservations)
                                 {
-                                    @:Place a request
+                                    @:<i class="fi-flag"></i>Place a request
                                 }
                                 else
                                 {
-                                    @:Reserve
+                                    @:<i class="fi-checkbox"></i>Reserve
                                 }
                             </button>
                         </li>
                         <li>
-                            <button data-dropdown="dropd" data-options="align:right" class="button dropdown small expand">More Options</button><br>
+                            <button data-dropdown="dropd" data-options="align:right" class="button dropdown small expand"><i class="fi-widget"></i>More Options</button><br>
                         </li>
                     </ul>
                     <ul id="dropd" data-dropdown-content class="f-dropdown">
                         <li>
                             <a href="/Content/RecommendMovie/?movieid=@movie.Id" data-reveal-id="myModal-recommend" data-reveal-ajax="true">
-                                Recommend
+                                <i class="fi-like"></i>Recommend
                             </a>
                         </li>
-                        <li><a href="#" id="add-to-favorites" class="small">+ Add to favorites</a></li>
-                        <li><a href="#" id="add-to-watchlist" class="small">+ Add to watchlist</a></li>
+                        <li><a href="#" id="add-to-favorites" class="small"><i class="fi-heart"></i>Add to favorites</a></li>
+                        <li><a href="#" id="add-to-watchlist" class="small"><i class="fi-list-thumbnails"></i>Add to watchlist</a></li>
                     </ul>
                 </div>
 

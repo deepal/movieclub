@@ -5,14 +5,14 @@
 
 <div id="myaccount">
     <dl class="tabs" data-tab>
-        <dd class="active"><a href="#panel-favorites">My Favorites</a></dd>
-        <dd><a href="#panel-watchlist">Watchlist</a></dd>
-        <dd><a href="#panel-recommendations">Recommendations</a></dd>
-        <dd><a href="#panel-reservations">Reservations</a></dd>
-        <dd><a href="#panel-rents-pending">Pending to return</a></dd>
-        <dd><a href="#panel-rents">History</a></dd>
+        <dd class="active"><a href="#panel-favorites"><i class="fi-heart"></i>My Favorites</a></dd>
+        <dd><a href="#panel-watchlist"><i class="fi-list"></i>Watchlist</a></dd>
+        <dd><a href="#panel-recommendations"><i class="fi-like"></i>Recommendations</a></dd>
+        <dd><a href="#panel-reservations"><i class="fi-shopping-cart"></i>Reservations</a></dd>
+        <dd><a href="#panel-rents-pending"><i class="fi-price-tag"></i>Pending to return</a></dd>
+        <dd><a href="#panel-rents"><i class="fi-book"></i>History</a></dd>
         <dd>
-            <a href="#panel-inbox" id="inbox-tab" onclick="readMessages(@uid)">Inbox Messages
+            <a href="#panel-inbox" id="inbox-tab" onclick="readMessages(@uid)"><i class="fi-mail"></i>Inbox Messages
                 @if(ViewBag.NewMessageCount>0){
                     <span id="notif-count" class="success label tiny round">@ViewBag.NewMessageCount</span>
                 }

@@ -11103,3 +11103,7 @@ th.hide-for-touch {
 
 .touch th.show-for-touch {
   display: table-cell !important; }
+
+i{
+    margin-right:10px;
+}

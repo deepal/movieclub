@@ -70,7 +70,14 @@ namespace MovieClub.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.SolUserName = GetSolUserName();
+            var soluname = GetSolUserName();
+            ViewBag.SolUserName = soluname;
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            if (db.DBUsers.Where(u => u.UserName == soluname ).Count() != 0)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             return View();
         }
 
@@ -85,16 +92,30 @@ namespace MovieClub.Controllers
             if (ModelState.IsValid)
             {
                 MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+
+                if (db.DBUsers.Where(u => u.Email.ToLower() == model.Email.ToLower()).Count() != 0)
+                {
+                    ModelState.AddModelError("", "An account already exists with given email. Check your email address.");
+                    return View(model);
+                }
+
+                if (db.DBUsers.Where(u => u.EmpId == model.EmployeeId).Count() != 0)
+                {
+                    ModelState.AddModelError("","Employee ID you entered is currently assigned to an account!");
+                    return View();
+                }
+
+
                 db.DBUsers.Add(new MovieDB.DBUser()
                 {
                     UserName = GetSolUserName(),//System.Web.HttpContext.Current.User.Identity.Name,
                     EmpId = model.EmployeeId,
                     Email = model.Email,
-                    PhotoURL="http://localhost/none.jpg",
+                    PhotoURL = "http://localhost/none.jpg",
                     AccountCreatedDate = DateTime.Now
                 });
                 db.SaveChanges();
-                return RedirectToAction("Login","Account");
+                return RedirectToAction("Login", "Account");
             }
 
             // If we got this far, something failed, redisplay form

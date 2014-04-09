@@ -11,5 +11,6 @@ namespace MovieClub.Models.AdminModels
         public string Username { get; set; }
         public int EmployeeId { get; set; }
         public string Email { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

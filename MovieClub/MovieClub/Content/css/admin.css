@@ -168,4 +168,10 @@ input[type=checkbox]{
     font-size:12px;
 }
 
+.remove-admin{
+    color:#ce0000;
+}
 
+.remove-admin:hover{
+    color:#e45a5a;
+}

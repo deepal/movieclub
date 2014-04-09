@@ -15,7 +15,20 @@
             <td>@user.Username</td>
             <td>@user.EmployeeId</td>
             <td><a href="mailto:@user.Email">@user.Email</a></td>
-            <td><a href="/Admin/MakeAdmin/?u=@user.UserID">Make Admin</a></td>
+            @if(user.UserID != MovieClub.Operations.UserOperations.GetCurrentUser().UserId){
+                if (user.IsAdmin)
+                {
+                    <td><a onclick="removeadmin(@user.UserID)" class="remove-admin">Remove Admin</a></td>
+                }
+                else
+                {
+                    <td><a onclick="makeadmin(@user.UserID)">Make Admin</a></td>
+                }
+            }
+            else
+            {
+                <td>-</td>
+            }
         </tr>
         i++;
     }
@@ -25,3 +38,65 @@ else
     <td colspan="5" style="padding:10px;text-align:center">No users</td>
 }
 
+@Scripts.Render("~/Content/js/AjaxAntiForgeryTokens.js")
+
+<script>
+
+    function reloadUsersTable() {
+        $.ajax({
+            url: "/Admin/Users",
+            type: "GET"
+        })
+        .success(function (data) {
+            $("#table-users tbody").html(data);
+        })
+        .error(function () {
+            $("#table-users tbody").html("<p>Error loading users!</p>");
+        });
+    }
+
+    function removeadmin(userid) {
+        $.ajax({
+            url: "/Admin/RemoveAdmin/?u=" + userid,
+            type: "POST",
+            data: AddAntiForgeryToken({}),
+            dataType: "text"
+        })
+        .success(function (data) {
+            var obj = $.parseJSON(data);
+            if (obj.result == "ok") {
+                toastr.success(obj.message);
+                reloadUsersTable();
+            }
+            else if (obj.result == "error") {
+                toastr.warning(obj.message);
+            }
+        })
+        .error(function () {
+            toastr.error("Could not connect! Check your connection.");
+        });
+    }
+
+    function makeadmin(userid) {
+        $.ajax({
+            url: "/Admin/MakeAdmin/?u=" + userid,
+            type: "POST",
+            data: AddAntiForgeryToken({}),
+            dataType: "text"
+        })
+        .success(function (data) {
+            var obj = $.parseJSON(data);
+            if (obj.result == "ok") {
+                toastr.success(obj.message);
+                reloadUsersTable();
+            }
+            else if (obj.result == "error") {
+                toastr.warning(obj.message);
+            }
+        })
+        .error(function () {
+            toastr.error("Could not connect! Check your connection.");
+        });
+    }
+
+</script>

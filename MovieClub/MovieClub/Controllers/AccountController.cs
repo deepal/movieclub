@@ -23,7 +23,7 @@ namespace MovieClub.Controllers
         [AllowAnonymous]
         public string GetSolUserName()
         {
-            return "robinhood";
+            return "deepal";
             //return HttpContext.User.Identity.Name;
         }
 

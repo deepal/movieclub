@@ -33,12 +33,20 @@ namespace MovieClub.Controllers
 
             foreach (var user in users)
             {
+                bool admin = false;
+
+                if (db.DBAdmins.Count(ad => ad.UserId == user.UserId) > 0)
+                {
+                    admin = true;
+                }
+
                 userlist.Add(new Models.AdminModels.UserModel()
                 {
                     UserID = user.UserId,
                     Username = user.UserName,
                     Email = user.Email,
-                    EmployeeId = user.EmpId
+                    EmployeeId = user.EmpId,
+                    IsAdmin = admin
                 });
             }
 
@@ -789,6 +797,93 @@ namespace MovieClub.Controllers
                 users = usr,
                 movies = mv
             });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult MakeAdmin(int u)
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            var currentuserid = Operations.UserOperations.GetCurrentUser().UserId;
+            var dbadmins = db.DBAdmins.ToList();
+
+            if (u != currentuserid)
+            {
+                if (dbadmins.Count(a => a.UserId == u) > 0)
+                {
+                    return Json(new
+                    {
+                        result = "error",
+                        message = "User already an admin!"
+                    });
+                }
+                else
+                {
+                    db.DBAdmins.Add(new MovieDB.DBAdmin()
+                    {
+                        UserId = u
+                    });
+                    db.SaveChanges();
+                    return Json(new
+                    {
+                        result = "ok",
+                        message = "User promoted as an admin"
+                    });
+                }
+            }
+            else
+            {
+                return Json(new
+                {
+                    result = "error",
+                    message = "You are not authorized to perform this operation!"
+                });
+            }
+
+            
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveAdmin(int u)
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            var currentuserid = Operations.UserOperations.GetCurrentUser().UserId;
+            var dbadmins = db.DBAdmins.Where(a => a.UserId == u);
+
+            if (u != currentuserid)
+            {
+                if (dbadmins.ToList().Count > 0)
+                {
+                    db.DBAdmins.Remove(dbadmins.SingleOrDefault());
+                    db.SaveChanges();
+
+                    return Json(new
+                    {
+                        result = "ok",
+                        message = "User removed from admins list"
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        result = "error",
+                        message = "User is not an admin"
+                    });
+                }
+            }
+            else
+            {
+                return Json(new
+                {
+                    result = "error",
+                    message = "User cannot remove yourself from admins!"
+                });
+            }
+
+            
+
         }
 
     }

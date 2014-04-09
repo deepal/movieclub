@@ -8,9 +8,9 @@
     var j = 0;
 }
 
-
 @section featured{
-    @Html.Partial("_FeaturedPartial",homepage.Featureds)
+    @Html.Partial("_FeaturedPartial", homepage.Featureds)
+    @Html.Partial("_WhatsNewPartial", homepage.NewlyAdded)
 }
 
 @if(homepage.TopCats!=null){
@@ -34,15 +34,18 @@
                 @foreach (var catmovie in category)
                 {   <a href="/Content/MovieDetails/@catmovie.Id">
                         <div class="home-catmovie row">
-                            <div class="large-25 small-25 medium-25 columns">
+                            <div class="large-25 small-25 medium-25 columns" style="padding:0">
                                 <img class="home-catmovie-poster" src="@catmovie.PosterURL" alt="No Poster" />
                             </div>
                             <div class="large-75 small-75 medium-75 columns">
                                 <div class="home-catmovie-title" style="clear:both">@catmovie.Name (@catmovie.Year)</div>
-                                <div class="home-catmovie-cat" style="clear:both">@catmovie.Category</div>
-                                <div class="home-catmovie-imdb" style="clear:both">IMDb Rating: @Math.Round(catmovie.ImdbRating,1)</div>
-                                <div class="home-catmovie-movieclub" style="clear:both">@System.Configuration.ConfigurationManager.AppSettings["OrganizationName"] Rating: @Math.Round(catmovie.MovieClubRating,1)</div>
-                                <div class="home-catmovie-views" style="clear:both">Views: @catmovie.ViewsCount</div>
+                                
+                                <div class="home-catmovie-details">
+                                    <div class="home-catmovie-cat" style="clear:both">@catmovie.Category</div>
+                                    <div class="home-catmovie-imdb" style="clear:both">IMDb Rating: @Math.Round(catmovie.ImdbRating, 1)</div>
+                                    <div class="home-catmovie-movieclub" style="clear:both">@System.Configuration.ConfigurationManager.AppSettings["OrganizationName"] Rating: @Math.Round(catmovie.MovieClubRating, 1)</div>
+                                    <div class="home-catmovie-views" style="clear:both">Views: @catmovie.ViewsCount</div>
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -58,6 +61,7 @@
     <link type='text/css' rel='stylesheet' href='~/Content/css/bootstrap.min.css' />
     <link type='text/css' rel='stylesheet' href='~/Content/css/carousal.css' />
     <link type='text/css' rel='stylesheet' href='~/Content/css/topcat.css' />
+    <link type='text/css' rel='stylesheet' href='~/Content/css/whatsnew.css' />
 }
 
 @section customscripts{

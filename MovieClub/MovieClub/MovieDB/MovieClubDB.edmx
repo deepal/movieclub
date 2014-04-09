@@ -68,18 +68,18 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ImdbId" Type="varchar" MaxLength="20" />
-          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="1000" />
           <Property Name="Year" Type="varchar" MaxLength="6" />
           <Property Name="ReleaseDate" Type="varchar" MaxLength="20" />
           <Property Name="Runtime" Type="int" Nullable="false" />
           <Property Name="Genre" Type="text" />
           <Property Name="Director" Type="varchar" MaxLength="300" />
-          <Property Name="Actors" Type="varchar" MaxLength="300" />
-          <Property Name="Writer" Type="varchar" MaxLength="300" />
+          <Property Name="Actors" Type="varchar" MaxLength="1000" />
+          <Property Name="Writer" Type="varchar" MaxLength="1000" />
           <Property Name="PlotShort" Type="text" />
           <Property Name="PlotFull" Type="text" />
-          <Property Name="Language" Type="varchar" MaxLength="300" />
-          <Property Name="Country" Type="varchar" MaxLength="300" />
+          <Property Name="Language" Type="varchar" MaxLength="1000" />
+          <Property Name="Country" Type="varchar" MaxLength="1000" />
           <Property Name="Awards" Type="text" />
           <Property Name="PosterURL" Type="text" />
           <Property Name="ImdbRatings" Type="float" Nullable="false" />
@@ -798,18 +798,18 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ImdbId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Year" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Name="ReleaseDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Runtime" Type="Int32" Nullable="false" />
           <Property Name="Genre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Director" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="Actors" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="Writer" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Actors" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Writer" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="PlotShort" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="PlotFull" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Language" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="Country" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Language" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Awards" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="PosterURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ImdbRatings" Type="Double" Nullable="false" />

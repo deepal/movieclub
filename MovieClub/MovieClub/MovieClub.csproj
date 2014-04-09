@@ -335,6 +335,7 @@
     <Content Include="Content\css\toastr.css" />
     <Content Include="Content\css\topcat.css" />
     <Content Include="Content\css\video-js.css" />
+    <Content Include="Content\css\whatsnew.css" />
     <Content Include="Content\images\ajax-loader-bar.gif" />
     <Content Include="Content\images\ajax-loader-circle.gif" />
     <Content Include="Content\images\ajax-loader.gif" />
@@ -526,6 +527,7 @@
     <Content Include="Views\Content\RecommendMovie.cshtml" />
     <Content Include="Views\Admin\IssueUnreserved.cshtml" />
     <Content Include="Views\Admin\_ManageMoviesPartial.cshtml" />
+    <Content Include="Views\Home\_WhatsNewPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\posters\" />

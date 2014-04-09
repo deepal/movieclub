@@ -89,6 +89,35 @@ namespace MovieClub.Controllers
             }
             homepagemodel.TopCats = topcats;
             ViewBag.TopCatNames = topcatnames;
+
+
+            //find what's new
+
+            var newlist = db.DBMovies.ToList();
+            newlist.Sort((x,y)=>((DateTime)y.AddedDate).CompareTo((DateTime)x.AddedDate));
+            var newmovies = newlist.GetRange(0, Math.Min(5, newlist.Count));
+
+            List<SimpleMovieDetails> newmovielist = new List<SimpleMovieDetails>();
+
+            foreach (var item in newmovies)
+            {
+                newmovielist.Add(new SimpleMovieDetails() {
+                    AddedDate = (DateTime)item.AddedDate,
+                    Category = item.Genre,
+                    Id = item.Id,
+                    ImdbId = item.ImdbId,
+                    ImdbRating = (float)item.ImdbRatings,
+                    MovieClubRating = (float)item.MovieClubRatings,
+                    MovieClubRentCount = item.MovieClubRentCount,
+                    Name = item.Name,
+                    PosterURL = item.PosterURL,
+                    ViewsCount = item.Views,
+                    Year = item.Year
+                });
+            }
+
+            homepagemodel.NewlyAdded = newmovielist;
+
             return View(homepagemodel);
         }
 

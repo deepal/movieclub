@@ -1,0 +1,56 @@
+﻿.new-mov-title{
+    font-size:32px;
+    font-weight:bold;
+    color:#bababa;
+    padding-left:10px;
+    font-family:'Baskerville Old Face'
+}
+
+.new-movie-container{
+    margin:10px 10px !important;
+    padding:10px;
+    padding-bottom:20px;
+    background:#f3f3f3
+}
+
+.new-movie-item{
+    padding-top:10px;
+}
+
+.new-movie-thumbnail{
+    padding:0;
+    
+    padding:5px 20px;
+}
+
+.new-movie-poster{
+    height:250px;
+}
+
+.new-movie-details{
+    font-size:12px;
+    line-height:120%;
+    padding:5px 20px;
+    text-align:center;
+}
+
+.new-movie-data{
+}
+
+.new-movie-name{
+    font-size:14px;
+    padding-bottom:5px;
+    font-weight:bold;
+}
+
+.new-movie-category{
+    font-size:11px;
+}
+
+.new-movie-imdb{
+
+}
+
+.new-movie-plotshort{
+
+}

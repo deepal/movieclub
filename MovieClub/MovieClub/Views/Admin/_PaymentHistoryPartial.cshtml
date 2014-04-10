@@ -1,0 +1,26 @@
+﻿@model List<MovieClub.Models.AdminModels.PaymentHistoryModel>
+
+
+@{
+    var pays = Model;
+}
+
+@if (pays.Count > 0)
+{
+    foreach (var item in pays)
+    {
+        <tr>
+            <td>@item.UserId</td>
+            <td>@item.Username</td>
+            <td>@item.PayAmount</td>
+            <td>@item.Timestamp</td>
+        </tr>
+    }
+}
+else
+{
+    <tr>
+        <td colspan="4" style="text-align:center">No history</td>
+    </tr>
+}
+

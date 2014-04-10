@@ -175,3 +175,7 @@ input[type=checkbox]{
 .remove-admin:hover{
     color:#e45a5a;
 }
+
+.dialog-confirm{
+    font-size:12px;
+}

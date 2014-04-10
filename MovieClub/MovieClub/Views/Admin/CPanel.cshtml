@@ -11,6 +11,8 @@
     <dd><a href="#panel-returns"><i class="fi-marker"></i>Pending returns</a></dd>
     <dd><a href="#panel-users"><i class="fi-torsos-all"></i>Users</a></dd>
     <dd><a href="#panel-pending-payments"><i class="fi-shopping-bag"></i>Pending Payments</a></dd>
+    <dd><a href="#panel-payments-history"><i class="fi-list-number"></i>Payment History</a></dd>
+    @*<dd><a href="#panel-rents-history"><i class="fi-shopping-bag"></i>Rents History</a></dd>*@
 </dl>
 
 <div class="tabs-content tabs-content-custom">
@@ -96,6 +98,34 @@
         </table>
     </div>
 
+    <div id="panel-payments-history" class="content">
+        <table id="table-payments-history">
+            <thead>
+                <tr>
+                    <th width="100">UserID</th>
+                    <th width="300">Username</th>
+                    <th width="200">Payment Amount</th>
+                    <th width="200">Date</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    @*<div id="panel-rents-history" class="content">
+        <table id="table-rents-history">
+            <thead>
+                <tr>
+                    <th>UserID</th>
+                    <th>Username</th>
+                    <th>Payment Amount</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>*@
+
     <div id="myModal" class="reveal-modal modal-custom-message" data-reveal>
     </div>
 
@@ -119,70 +149,28 @@
     @Scripts.Render("~/Content/js/foundation/foundation.alert.js")
     @Scripts.Render("~/Content/js/toastr.js")
     @Scripts.Render("~/Content/js/AjaxAntiForgeryTokens.js")
+
+    <script type="text/javascript" src="/Content/js/adminfunctions.js"></script>
+
     <script type="text/javascript">
+
         $(document).ready(function () {
             
-
             //ajax calls on page load----------------------------------------------------------------------
 
-            $.ajax({
-                type: "GET",
-                url: "/Admin/ReservedMovies"
-            })
-            .success(function (data) {
-                $("#table-reservations tbody").html(data);
-            })
-            .error(function () {
-                $("#table-reservations tbody").html("<p>Error loading reservations. Try refreshing the page.</p>");
-            });
+            updateReservations();
 
+            updatePendingReturns();
 
-            $.ajax({
-                url: "/Admin/PendingReturns",
-                type: "GET"
-            })
-            .success(function (data) {
-                $("#table-returns tbody").html(data);
-            })
-            .error(function () {
-                $("#table-returns tbody").html("<p>Error loading pending returns!</p>");
-            });
+            updatePaymentDues();
 
+            updateUsers();
 
-
-            $.ajax({
-                url: "/Admin/GetPaymentDues",
-                type: "GET"
-            })
-            .success(function (data) {
-                $("#table-pending-payments tbody").html(data);
-            })
-            .error(function () {
-                $("#table-pending-payments tbody").html("<p>Error loading pending payments!</p>");
-            });
-
-
-            $.ajax({
-                url: "/Admin/Users",
-                type: "GET"
-            })
-            .success(function (data) {
-                $("#table-users tbody").html(data);
-            })
-            .error(function () {
-                $("#table-users tbody").html("<p>Error loading users!</p>");
-            });
+            updatePaymentHistory();
 
             /*---------------------------------------------------------------*/
 
-
-            
-            
-
         });
-
-
-        
 
 
         function issueMovie(movieid,userid) {
@@ -206,17 +194,20 @@
                         .error(function () {
                             $("#table-reservations tbody").html("<p>Error loading reservations. Try refreshing the page.</p>");
                         });
+
                         //refresh pending returns view
-                        $.ajax({
-                            url: "/Admin/PendingReturns",
-                            type: "GET"
-                        })
-                        .success(function (data) {
-                            $("#table-returns tbody").html(data);
-                        })
-                        .error(function () {
-                            $("#table-returns tbody").html("<p>Error loading pending returns!</p>");
-                        });
+                        updatePendingReturns();
+
+                        //$.ajax({
+                        //    url: "/Admin/PendingReturns",
+                        //    type: "GET"
+                        //})
+                        //.success(function (data) {
+                        //    $("#table-returns tbody").html(data);
+                        //})
+                        //.error(function () {
+                        //    $("#table-returns tbody").html("<p>Error loading pending returns!</p>");
+                        //});
 
                         toastr.success(obj.message);
                     }
@@ -241,17 +232,20 @@
             })
             .success(function (data) {
                 var obj = $.parseJSON(data);
-                //update pending returns table
-                $.ajax({
-                    url: "/Admin/PendingReturns",
-                    type: "GET"
-                })
-                .success(function (data) {
-                    $("#table-returns tbody").html(data);
-                })
-                .error(function () {
-                    $("#table-returns tbody").html("<p>Error loading pending returns!</p>");
-                });
+
+                updatePendingReturns();
+                updatePaymentDues();
+
+                //$.ajax({
+                //    url: "/Admin/PendingReturns",
+                //    type: "GET"
+                //})
+                //.success(function (data) {
+                //    $("#table-returns tbody").html(data);
+                //})
+                //.error(function () {
+                //    $("#table-returns tbody").html("<p>Error loading pending returns!</p>");
+                //});
 
 
                 if (obj.result == "ok") {

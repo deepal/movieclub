@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Performance1.psess = Performance1.psess
 	EndProjectSection
 EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "Architecture", "Architecture\Architecture.modelproj", "{4F66A06C-D6F9-423B-AC29-54244D88A1DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{F4CE167B-3456-43A0-A6F6-FB03A1D323E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4CE167B-3456-43A0-A6F6-FB03A1D323E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4CE167B-3456-43A0-A6F6-FB03A1D323E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F66A06C-D6F9-423B-AC29-54244D88A1DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F66A06C-D6F9-423B-AC29-54244D88A1DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F66A06C-D6F9-423B-AC29-54244D88A1DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F66A06C-D6F9-423B-AC29-54244D88A1DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

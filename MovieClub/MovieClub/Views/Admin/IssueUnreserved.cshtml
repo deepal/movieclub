@@ -52,6 +52,8 @@
     <a href="#" id="issueUnres" class="button tiny">Issue movie</a>
 </div>
 
+<script type="text/javascript" src="/Content/js/adminfunctions.js"></script>
+
 <script>
     $("#movieslist").change(function () {
         //$("#poster-stamp").attr("src", );
@@ -78,6 +80,7 @@
             var obj = $.parseJSON(data);
             if (obj.result == "ok") {
                 toastr.success(obj.message);
+                updatePendingReturns();
             }
             else {
                 toastr.warning(obj.message);

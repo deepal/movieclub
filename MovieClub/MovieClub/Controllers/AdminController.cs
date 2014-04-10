@@ -886,6 +886,43 @@ namespace MovieClub.Controllers
 
         }
 
+        [HttpGet]
+        public ActionResult GetPaymentHistory()
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+
+            var payments = db.DBPaymentHistories.Where(p=>p.PayAmount!=0).Join(db.DBUsers,
+                l=>l.UserId,
+                r=>r.UserId,
+                (l, r) => new
+                {
+                    UserId = l.UserId,
+                    Username = r.UserName,
+                    PayAmount = l.PayAmount,
+                    Timestamp = l.Timestamp
+                });
+
+            List<Models.AdminModels.PaymentHistoryModel> historylist = new List<Models.AdminModels.PaymentHistoryModel>();
+
+            foreach (var item in payments)
+            {
+                historylist.Add(new Models.AdminModels.PaymentHistoryModel() {
+                    UserId = item.UserId,
+                    Username = item.Username,
+                    PayAmount = (float)item.PayAmount,
+                    Timestamp = item.Timestamp
+                });
+            }
+            historylist.Sort((x, y) => ((DateTime)y.Timestamp).CompareTo((DateTime)x.Timestamp));
+            return PartialView("_PaymentHistoryPartial",historylist);
+
+        }
+
+        //[HttpGet]
+        //public ActionResult GetRentsHistory()
+        //{
+            
+        //}
     }
 
 

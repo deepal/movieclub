@@ -46,6 +46,7 @@
     </div>
 </div>
 
+<script type="text/javascript" src="/Content/js/adminfunctions.js"></script>
 <script>
     var moviesjs = {};
 
@@ -63,6 +64,8 @@
             var obj = $.parseJSON(data);
             if (obj.result == "ok") {
                 $('#myModalpayment').foundation('reveal', 'close');
+                updatePaymentDues();
+                updatePaymentHistory();
                 toastr.success(obj.message);
             }
         })

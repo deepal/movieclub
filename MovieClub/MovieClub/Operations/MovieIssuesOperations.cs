@@ -30,11 +30,11 @@ namespace MovieClub.Operations
 
         public static double CalculateCharge(DateTime issuedDate, DateTime returnedDate)
         {
-            double defaultcharge = double.Parse(System.Configuration.ConfigurationManager.AppSettings["DefaultCharge"]);        
-            TimeSpan duration = returnedDate-issuedDate;
-            double dayscount = Math.Floor(duration.TotalDays);
+            double defaultcharge = double.Parse(System.Configuration.ConfigurationManager.AppSettings["DefaultCharge"]);
+            /* TimeSpan duration = returnedDate-issuedDate;
+             double dayscount = Math.Floor(duration.TotalDays);*/
 
-            return defaultcharge * dayscount;
+            return defaultcharge;// *dayscount;
         }
 
         public static void UpdateUserCharge(int userid, int movieid, double charge, double fine)

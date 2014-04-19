@@ -278,7 +278,7 @@ namespace MovieClub.Controllers
                 {
 
                     var isreserved = db.DBMovies.Where(m => db.DBReservations.Any(mv => mv.MovieId == movie && mv.Issued==0)).Count();
-                    var isrented = db.DBRents.Where(mv=>db.DBRents.Any(mr=>mr.MovieId==movie && mv.Returned==0)).Count();
+                    var isrented = db.DBRents.Where(mv=>db.DBRents.Any(mr=>mr.MovieId==movie && mr.Returned==0)).Count();
                     if (isreserved > 0)
                     {
                         return Json(new {

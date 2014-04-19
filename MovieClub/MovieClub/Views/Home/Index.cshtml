@@ -8,6 +8,9 @@
     var j = 0;
 }
 
+@section news{
+}
+
 @section featured{
     @Html.Partial("_FeaturedPartial", homepage.Featureds)
     @Html.Partial("_WhatsNewPartial", homepage.NewlyAdded)
@@ -74,6 +77,9 @@
             $('.carousel').carousel({
                 interval: 6000
             })
+            
         });
     </script>
+
+
 }

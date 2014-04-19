@@ -23,6 +23,22 @@ namespace MovieClub
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+
+            MvcHandler.DisableMvcResponseHeader = true;
         }
+
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+            var application = sender as HttpApplication;
+            if (application != null && application.Context != null)
+            {
+                application.Context.Response.Headers.Remove("Server");
+            }
+        }
+
+        protected void OnPreSendRequestHeaders(Object sender, EventArgs e) {
+
+        }
+
     }
 }

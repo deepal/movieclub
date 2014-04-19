@@ -160,9 +160,12 @@
                     @Html.LabelFor(model => model.PlotFull, "Plot (Full)")
                 </div>
                 <div class="editor-field">
-                    @Html.TextAreaFor(model => model.PlotFull, new { @rows = "5" })
+                    <div style="clear:both;padding-bottom:10px;">
+                        @Html.TextAreaFor(model => model.PlotFull, new { @rows = "5", @id = "fullplottxt" })
+                    </div>
                     @Html.ValidationMessageFor(model => model.PlotFull)
                 </div>
+                
             </div>
         </div>
 
@@ -288,6 +291,12 @@
 @section customscripts{
     @Scripts.Render("~/Content/js/toastr.js")
     @Scripts.Render("~/Content/js/jquery.leanModal.min.js")
+    @Scripts.Render("~/Content/js/tinymce/tinymce.min.js")
+    <script>
+        tinymce.init({
+            selector: "#fullplottxt"
+        });
+    </script>
 }
 
 @section scripts{

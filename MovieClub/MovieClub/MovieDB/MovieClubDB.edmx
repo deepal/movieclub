@@ -169,6 +169,14 @@
           <Property Name="Timestamp" Type="datetime" Nullable="false" />
           <Property Name="Issued" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="DBReviews">
+          <Key>
+            <PropertyRef Name="ReviewId" />
+          </Key>
+          <Property Name="ReviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovieId" Type="int" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="200" />
+        </EntityType>
         <EntityType Name="DBUsers">
           <Key>
             <PropertyRef Name="UserId" />
@@ -466,6 +474,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DBReviews_DBMovies">
+          <End Role="DBMovies" Type="Self.DBMovies" Multiplicity="1" />
+          <End Role="DBReviews" Type="Self.DBReviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovies">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBReviews">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DBUsers_DBUsers">
           <End Role="DBUsers" Type="Self.DBUsers" Multiplicity="1" />
           <End Role="DBUsers1" Type="Self.DBUsers" Multiplicity="0..1" />
@@ -523,6 +543,7 @@
           <EntitySet Name="DBRecommendations" EntityType="Self.DBRecommendations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBRents" EntityType="Self.DBRents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBReservations" EntityType="Self.DBReservations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DBReviews" EntityType="Self.DBReviews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBUsers" EntityType="Self.DBUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBWatchLists" EntityType="Self.DBWatchLists" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_DBAdmins_DBUsers" Association="Self.FK_DBAdmins_DBUsers">
@@ -604,6 +625,10 @@
           <AssociationSet Name="FK_DBReservations_DBUsers" Association="Self.FK_DBReservations_DBUsers">
             <End Role="DBUsers" EntitySet="DBUsers" />
             <End Role="DBReservations" EntitySet="DBReservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBReviews_DBMovies" Association="Self.FK_DBReviews_DBMovies">
+            <End Role="DBMovies" EntitySet="DBMovies" />
+            <End Role="DBReviews" EntitySet="DBReviews" />
           </AssociationSet>
           <AssociationSet Name="FK_DBUsers_DBUsers" Association="Self.FK_DBUsers_DBUsers">
             <End Role="DBUsers" EntitySet="DBUsers" />
@@ -733,6 +758,11 @@
             <End Role="DBUser" EntitySet="DBUsers" />
             <End Role="DBWatchList" EntitySet="DBWatchLists" />
           </AssociationSet>
+          <EntitySet Name="DBReviews" EntityType="MovieClubDBModel.DBReview" />
+          <AssociationSet Name="FK_DBReviews_DBMovies" Association="MovieClubDBModel.FK_DBReviews_DBMovies">
+            <End Role="DBMovie" EntitySet="DBMovies1" />
+            <End Role="DBReview" EntitySet="DBReviews" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="DBCategory">
           <Key>
@@ -831,6 +861,7 @@
           <NavigationProperty Name="DBRents" Relationship="MovieClubDBModel.FK_DBRents_DBMovies" FromRole="DBMovie" ToRole="DBRent" />
           <NavigationProperty Name="DBReservations" Relationship="MovieClubDBModel.FK_DBReservations_DBMovies" FromRole="DBMovie" ToRole="DBReservation" />
           <NavigationProperty Name="DBWatchLists" Relationship="MovieClubDBModel.FK_DBWatchLists_DBMovies" FromRole="DBMovie" ToRole="DBWatchList" />
+          <NavigationProperty Name="DBReviews" Relationship="MovieClubDBModel.FK_DBReviews_DBMovies" FromRole="DBMovie" ToRole="DBReview" />
         </EntityType>
         <EntityType Name="DBUser">
           <Key>
@@ -1281,6 +1312,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DBReview">
+          <Key>
+            <PropertyRef Name="ReviewId" />
+          </Key>
+          <Property Name="ReviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DBMovy" Relationship="MovieClubDBModel.FK_DBReviews_DBMovies" FromRole="DBReview" ToRole="DBMovie" />
+        </EntityType>
+        <Association Name="FK_DBReviews_DBMovies">
+          <End Type="MovieClubDBModel.DBMovie" Role="DBMovie" Multiplicity="1" />
+          <End Type="MovieClubDBModel.DBReview" Role="DBReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBReview">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1485,6 +1537,15 @@
                 <ScalarProperty Name="PayAmount" ColumnName="PayAmount" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="PaymentHistoryId" ColumnName="PaymentHistoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBReviews">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBReview">
+              <MappingFragment StoreEntitySet="DBReviews">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

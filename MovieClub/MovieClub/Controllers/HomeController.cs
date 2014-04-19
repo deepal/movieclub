@@ -117,7 +117,7 @@ namespace MovieClub.Controllers
             }
 
             homepagemodel.NewlyAdded = newmovielist;
-
+            
             return View(homepagemodel);
         }
 

@@ -101,6 +101,11 @@ namespace MovieClub.Controllers
             }
             else
             {
+                if (list > 5)
+                {
+                    return RedirectToAction("Error", "Home", new { status = "404" });
+                }
+
                 switch (list)
                 {
                     case LATEST:

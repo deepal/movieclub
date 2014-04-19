@@ -43,5 +43,6 @@ namespace MovieClub.MovieDB
         public DbSet<DBEmployeePendingPayment> DBEmployeePendingPayments { get; set; }
         public DbSet<DBPaymentsDue> DBPaymentsDues { get; set; }
         public DbSet<DBPaymentHistory> DBPaymentHistories { get; set; }
+        public DbSet<DBReview> DBReviews { get; set; }
     }
 }

@@ -342,6 +342,11 @@
     <Content Include="Content\css\foundation.css" />
     <Content Include="Content\css\foundation.min.css" />
     <Content Include="Content\css\images\animated-overlay.gif" />
+    <Content Include="Content\css\images\arrows.png" />
+    <Content Include="Content\css\images\arrows_dark.png" />
+    <Content Include="Content\css\images\buttons.png" />
+    <Content Include="Content\css\images\item-loader.gif" />
+    <Content Include="Content\css\images\loader.gif" />
     <Content Include="Content\css\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\css\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Content\css\images\ui-bg_flat_10_000000_40x100.png" />
@@ -793,11 +798,13 @@
     <Content Include="Content\css\jquery-ui\vader\jquery-ui.css" />
     <Content Include="Content\css\jquery-ui\vader\jquery-ui.min.css" />
     <Content Include="Content\css\jquery-ui\vader\jquery.ui.theme.css" />
+    <Content Include="Content\css\jquery.rondell.css" />
     <Content Include="Content\css\liquidcarousel.css" />
     <Content Include="Content\css\myaccount.css" />
     <Content Include="Content\css\normalize.css" />
     <Content Include="Content\css\rateit.css" />
     <Content Include="Content\css\register.css" />
+    <Content Include="Content\css\rondellcustom.css" />
     <Content Include="Content\css\searchpage.css" />
     <Content Include="Content\css\simplePagination.css" />
     <Content Include="Content\css\style.css" />
@@ -815,7 +822,13 @@
     <Content Include="Content\images\dl-arr.png" />
     <Content Include="Content\images\down-arr.gif" />
     <Content Include="Content\images\download.png" />
+    <Content Include="Content\images\kj.gif" />
+    <Content Include="Content\images\kj.jpg" />
+    <Content Include="Content\images\kj.png" />
     <Content Include="Content\images\main-red-bg.gif" />
+    <Content Include="Content\images\movies.jpg" />
+    <Content Include="Content\images\movies.png" />
+    <Content Include="Content\images\pearson.png" />
     <Content Include="Content\images\poster-na.jpg" />
     <Content Include="Content\images\star.gif" />
     <Content Include="Content\images\stars.png" />
@@ -825,7 +838,9 @@
     <Content Include="Content\js\jquery-ias.min.js" />
     <Content Include="Content\js\jquery-ui.js" />
     <Content Include="Content\js\jquery.leanModal.min.js" />
+    <Content Include="Content\js\jquery.mousewheel-3.0.6.min.js" />
     <Content Include="Content\js\jquery.pagination.js" />
+    <Content Include="Content\js\jquery.rondell.js" />
     <Content Include="Content\js\jquery.simplePagination.js" />
     <Content Include="Content\js\jquery.ticker.js" />
     <Content Include="Content\js\moviecollection.js" />
@@ -986,6 +1001,14 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\ticker\images\controls.png" />
+    <Content Include="Content\ticker\images\dl-arr.png" />
+    <Content Include="Content\ticker\images\down-arr.gif" />
+    <Content Include="Content\ticker\images\forkme.png" />
+    <Content Include="Content\ticker\images\main-red-bg.gif" />
+    <Content Include="Content\ticker\includes\jquery.ticker.js" />
+    <Content Include="Content\ticker\styles\font\League_Gothic-webfont.svg" />
+    <Content Include="Content\ticker\styles\ticker-style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <EntityDeploy Include="MovieDB\MovieClubDB.edmx">
@@ -1016,6 +1039,9 @@
     <Content Include="Content\js\tinymce\skins\lightgray\fonts\tinymce.eot" />
     <Content Include="Content\js\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="Content\js\tinymce\skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="Content\ticker\styles\font\League_Gothic-webfont.eot" />
+    <Content Include="Content\ticker\styles\font\League_Gothic-webfont.ttf" />
+    <Content Include="Content\ticker\styles\font\League_Gothic-webfont.woff" />
     <None Include="NWebsecConfig\HttpHeaderSecurityModuleConfig.xsd">
       <SubType>Designer</SubType>
     </None>

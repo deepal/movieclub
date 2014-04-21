@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NWebsec</name>
+    </assembly>
+    <members>
+        <member name="T:NWebsec.Csp.CspViolationReport">
+            <summary>
+            Represents a Content Security Policy violation report.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspViolationReport.Details">
+            <summary>
+            Gets the detailed Content Security Policy violation report. The default is the empty string.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspViolationReport.UserAgent">
+            <summary>
+            Gets the User Agent that reported the Content Security Policy violation. The default is the empty string.
+            </summary>
+        </member>
+        <member name="T:NWebsec.Csp.CspReportDetails">
+            <summary>
+            Represents the detailed Content Security Policy violation report. The default is the empty string.
+            </summary>
+            <remarks>Browser implementations differ, it might vary which fields are set in the violation report.</remarks>
+        </member>
+        <member name="P:NWebsec.Csp.CspReportDetails.DocumentUri">
+            <summary>
+            Gets the address of the protected resource where the policy was violated. The default is the empty string.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspReportDetails.Referrer">
+            <summary>
+            Gets the referrer attribute of the protected resource. The default is the empty string.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspReportDetails.BlockedUri">
+            <summary>
+            Gets the URI of the resource that was prevented from loading due to the policy violation. The default is the empty string.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspReportDetails.ViolatedDirective">
+            <summary>
+            Gets the policy directive that was violated. The default is the empty string.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspReportDetails.OriginalPolicy">
+            <summary>
+            Gets the original policy as received by the user-agent. The default is the empty string.
+            </summary>
+        </member>
+        <member name="T:NWebsec.Csp.CspViolationReportEventArgs">
+            <summary>
+            Represents the event data for a Content Security Policy violation.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspViolationReportEventArgs.ViolationReport">
+            <summary>
+            Gets the Content Security Policy violation report. Treat the data as unvalidated input.
+            </summary>
+        </member>
+        <member name="F:NWebsec.Csp.Source.Inherit">
+            <summary>
+            The source should inherit previous settings.
+            </summary>
+        </member>
+        <member name="F:NWebsec.Csp.Source.Enable">
+            <summary>
+            The source should be enabled, overriding previous settings.
+            </summary>
+        </member>
+        <member name="F:NWebsec.Csp.Source.Disable">
+            <summary>
+            The source should be disabled, clearing previous settings.
+            </summary>
+        </member>
+        <member name="F:NWebsec.HttpHeaders.XFrameOptionsPolicy.Disabled">
+            <summary>Specifies that the X-Frame-Options header should not be set in the HTTP response.</summary>
+        </member>
+        <member name="F:NWebsec.HttpHeaders.XFrameOptionsPolicy.Deny">
+            <summary>Specifies that the X-Frame-Options header should be set in the HTTP response, instructing the browser to not display the page when it is loaded in an iframe.</summary>
+        </member>
+        <member name="F:NWebsec.HttpHeaders.XFrameOptionsPolicy.SameOrigin">
+            <summary>Specifies that the X-Frame-Options header should be set in the HTTP response, instructing the browser to display the page when it is loaded in an iframe - but only if the iframe is from the same origin as the page.</summary>
+        </member>
+        <member name="F:NWebsec.HttpHeaders.XXssProtectionPolicy.Disabled">
+            <summary>Specifies that the X-Xss-Protection header should not be set in the HTTP response.</summary>
+        </member>
+        <member name="F:NWebsec.HttpHeaders.XXssProtectionPolicy.FilterDisabled">
+            <summary>Specifies that the X-Xss-Protection header should be set in the HTTP response, explicitly disabling the IE XSS filter.</summary>
+        </member>
+        <member name="F:NWebsec.HttpHeaders.XXssProtectionPolicy.FilterEnabled">
+            <summary>Specifies that the X-Xss-Protection header should be set in the HTTP response, explicitly enabling the IE XSS filter.</summary>
+        </member>
+    </members>
+</doc>

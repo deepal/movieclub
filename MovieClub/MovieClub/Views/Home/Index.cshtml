@@ -12,7 +12,8 @@
 }
 
 @section featured{
-    @Html.Partial("_FeaturedPartial", homepage.Featureds)
+
+    @Html.Partial("_FeaturedPartial", homepage)
     @Html.Partial("_WhatsNewPartial", homepage.NewlyAdded)
 }
 
@@ -65,10 +66,16 @@
     <link type='text/css' rel='stylesheet' href='~/Content/css/carousal.css' />
     <link type='text/css' rel='stylesheet' href='~/Content/css/topcat.css' />
     <link type='text/css' rel='stylesheet' href='~/Content/css/whatsnew.css' />
+    <link type="text/css" rel="stylesheet" href="~/Content/css/jquery.rondell.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/css/rondellcustom.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/ticker/styles/ticker-style.css" />
 }
 
 @section customscripts{
     <script type="text/javascript" src="~/Content/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.rondell.js"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.mousewheel-3.0.6.min.js"></script>
+    <script type="text/javascript" src="~/Content/ticker/includes/jquery.ticker.js"></script>
 }
 
 @section scripts{
@@ -79,7 +86,36 @@
             })
             
         });
+
     </script>
+    <script type="text/javascript">
+        $(function () {
+
+
+            // Create a rondell with the 'carousel' preset and set an option
+            // to disable the rondell while the lightbox is displayed
+            $("#rondellCarousel > *").rondell({
+                preset: "cubic",
+                theme: "light",
+                scaling: 2,
+                autoRotation:{ 
+                    enabled: true,
+                    direction: 1,
+                    once: false,
+                    delay: 3000
+                },
+                mousewheel: {
+                    enabled: true,
+                    threshold: 0,
+                    minTimeBetweenShifts: 500
+                }
+            });
+            
+
+            
+        });
+    </script>
+
 
 
 }

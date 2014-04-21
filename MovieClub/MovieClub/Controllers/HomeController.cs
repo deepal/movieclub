@@ -117,7 +117,10 @@ namespace MovieClub.Controllers
             }
 
             homepagemodel.NewlyAdded = newmovielist;
-            
+
+            homepagemodel.CategoryCount = db.DBCategories.Count();
+            homepagemodel.MovieCount = db.DBMovies.Count();
+
             return View(homepagemodel);
         }
 

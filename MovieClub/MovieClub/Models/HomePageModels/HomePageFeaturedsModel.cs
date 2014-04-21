@@ -10,7 +10,9 @@ namespace MovieClub.Models.HomePageModels
         public List<SimpleMovieDetails> RecommendedForYou { get; set; }
         public List<SimpleMovieDetails> NewlyAdded { get; set; }
         public List<List<SimpleMovieDetails>> TopCats { get; set; }
-
         public List<MovieClub.Models.FeaturedMovieDetails> Featureds { get; set; }
+        public int MovieCount { get; set; }
+        public int CategoryCount { get; set; }
+
     }
 }

@@ -1,0 +1,18 @@
+﻿.rondell-caption p{
+    font-size:11px !important;
+}
+
+.rondell-h5{
+    font-size:14px !important;
+    color:white !important;
+    font-weight:bold;
+}
+
+#rondellCarousel{
+    text-align:center;
+    margin:20px 20px 20px 0;
+}
+
+#rondellCarousel > *{
+    z-index:0;
+}

@@ -126,26 +126,52 @@
     margin-top:0;
 }
 
-.featured-div-caption{
-    -webkit-transform:rotate(270deg);
-    -moz-transform:rotate(270deg);
-    transform:rotate(270deg);
-    padding:10px 20px 0 0;
-    margin-top:50px;
-}
 
-.featured-div-caption p{
-    font-size:24px;
-    font-weight:bold;
-    color:#cecece;
-}
 
 .featured-div{
-    border:5px solid #dadada;
-    border-radius:15px;
+    margin-left:10px;
+    background:whitesmoke;
+    padding:5px;
+
 }
 
+.featured-div > h5{
+    font-size: 32px;
+    font-weight: bold;
+    color: #bababa;
+    padding-left: 10px;
+    font-family: 'Baskerville Old Face';
+    border-bottom:1px solid #dadada;
+}
 
+.noticeboard{
+    margin-left:10px;
+    padding:10px;
+}
+
+.noticeboard h6{
+    font-weight:bold !important;
+    margin-bottom:30px;
+    text-align:center !important;
+    font-size:24px !important;
+    font-family:'Buxton Sketch';
+}
+
+.noticeboard img{
+    margin-bottom:20px;
+    clip:rect(0px,60px,200px,0px);
+}
+
+.image-container {
+  max-height:170px;
+  overflow:hidden;
+}
+
+.noticeboard p{
+    font-weight:bold;
+    color:#808080;
+    margin:0;
+}
 
 /*movie details page-----------------------------------------------------------------*/
 

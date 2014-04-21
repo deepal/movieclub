@@ -302,8 +302,9 @@ namespace MovieClub.Controllers
             }
             catch (Exception)
             {
+                throw;
                 //return HttpNotFound();
-                return RedirectToAction("Error", "Home", new { status = "404" });
+                //return RedirectToAction("Error", "Home", new { status = "404" });
             }
 
             dbmovieitem.Views += 1;

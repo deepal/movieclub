@@ -1,0 +1,27 @@
+﻿.catmodal-title{
+    text-align:center;
+    margin-bottom:25px;
+    color:#b9b9b9;
+}
+
+.allcategories{
+    max-height:300px;
+    overflow:auto;
+}
+
+.cat-item{
+    width:200px;
+    padding:5px;
+    float:left;
+    margin-right:40px;
+    float:left;
+}
+
+.cat-item a{
+    font-size:12px;
+}
+
+#catModal{
+    width:900px !important;
+    margin-left: -34%;
+}

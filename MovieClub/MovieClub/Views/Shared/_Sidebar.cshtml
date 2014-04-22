@@ -17,7 +17,7 @@
 
         <li class="divider"></li>
 
-        <li class="heading">Catagories</li>
+        <li class="heading">Top Catagories<a class="right" href="/Content/Categories" data-reveal-id="catModal" data-reveal-ajax="true">All &raquo;</a></li>
 
         @foreach (var cat in model.categorylist)
         {
@@ -29,6 +29,9 @@
 
         <li class="divider"></li>
     </ul>
-
+    
+    <div id="catModal" class="reveal-modal medium" data-reveal>
+        
+    </div>
     <div id="dummy" style="clear:both"></div>
 </div>

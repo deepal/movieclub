@@ -333,6 +333,7 @@
     <Content Include="Content\chosen\chosen.min.css" />
     <Content Include="Content\chosen\chosen.proto.min.js" />
     <Content Include="Content\css\admin.css" />
+    <Content Include="Content\css\allcatmodal.css" />
     <Content Include="Content\css\categorypage.css" />
     <Content Include="Content\css\foundation-icons.css" />
     <Content Include="Content\css\foundation-icons.svg" />
@@ -1118,6 +1119,7 @@
     <Content Include="Views\Admin\_ManageMoviesPartial.cshtml" />
     <Content Include="Views\Home\_WhatsNewPartial.cshtml" />
     <Content Include="Views\Admin\_PaymentHistoryPartial.cshtml" />
+    <Content Include="Views\Content\Categories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\posters\" />

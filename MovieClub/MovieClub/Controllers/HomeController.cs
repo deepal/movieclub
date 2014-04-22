@@ -118,7 +118,26 @@ namespace MovieClub.Controllers
 
             homepagemodel.NewlyAdded = newmovielist;
 
-            homepagemodel.CategoryCount = db.DBCategories.Count();
+            var Categories = db.DBCategories.ToList<MovieDB.DBCategory>();
+            List<Category> categorylist = new List<Category>();
+            foreach (var category in Categories)
+            {
+                var taggedCount = db.DBMovieToCategories.Count(m => m.CategoryId == category.CategoryId);
+
+                if (taggedCount > 0)
+                {
+                    categorylist.Add(new Models.Category()
+                    {
+                        Id = category.CategoryId,
+                        Name = category.CategoryName,
+                        TaggedMovieCount = taggedCount
+                    });
+                }
+            }
+
+            homepagemodel.CategoryCount = categorylist.Count();
+
+
             homepagemodel.MovieCount = db.DBMovies.Count();
 
             return View(homepagemodel);

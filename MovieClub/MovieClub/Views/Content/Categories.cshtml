@@ -1,0 +1,16 @@
+﻿@model List<MovieClub.Models.Category>
+
+@{
+    ViewBag.Title = "Categories";
+    Layout = null;
+    var categories = Model;
+}
+<h4 class="catmodal-title">All Categories</h4>
+<div class="allcategories">
+    @foreach (var item in categories)
+    {
+        <div class="cat-item">
+            <a href="/Content/Collection/@item.Id">@item.Name <span class="label secondary tiny radius right">@item.TaggedMovieCount</span></a>
+        </div>  
+    }
+</div>

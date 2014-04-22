@@ -41,7 +41,8 @@ namespace MovieClub.Controllers
         {
             return View();
         }
-        
+
+
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Collection(int Id, int? Page, int? Method, int? list)
@@ -371,11 +372,41 @@ namespace MovieClub.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult Sidebar()
+        [HttpGet]
+        public ActionResult Categories()
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
             var Categories = db.DBCategories.ToList<MovieDB.DBCategory>();
             Categories.Sort((c1, c2) => c1.CategoryName.CompareTo(c2.CategoryName));
+            
+            List<Category> categorylist = new List<Category>();
+
+            foreach (var category in Categories)
+            {
+                var taggedCount = db.DBMovieToCategories.Count(m => m.CategoryId == category.CategoryId);
+
+                if (taggedCount > 0)
+                {
+                    categorylist.Add(new Models.Category()
+                    {
+                        Id = category.CategoryId,
+                        Name = category.CategoryName,
+                        TaggedMovieCount = taggedCount
+                    });
+                }
+
+            }
+
+            return View(categorylist);
+        }
+
+
+        [AllowAnonymous]
+        public ActionResult Sidebar()
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            var Categories = db.DBCategories.ToList<MovieDB.DBCategory>();
+            //Categories.Sort((c1, c2) => c1.CategoryName.CompareTo(c2.CategoryName));
             Models.SidebarCategoriesModel sidebardata = new Models.SidebarCategoriesModel();
             sidebardata.categorylist = new List<Category>();
 
@@ -383,14 +414,20 @@ namespace MovieClub.Controllers
             {
                 var taggedCount = db.DBMovieToCategories.Count(m => m.CategoryId == category.CategoryId);
 
-                sidebardata.categorylist.Add(new Models.Category() { 
-                    Id = category.CategoryId,
-                    Name = category.CategoryName,
-                    TaggedMovieCount = taggedCount
-                });
+                if (taggedCount > 0)
+                {
+                    sidebardata.categorylist.Add(new Models.Category()
+                    {
+                        Id = category.CategoryId,
+                        Name = category.CategoryName,
+                        TaggedMovieCount = taggedCount
+                    });
+                }
 
             }
 
+            sidebardata.categorylist.Sort((x, y) => y.TaggedMovieCount.CompareTo(x.TaggedMovieCount));
+            sidebardata.categorylist = sidebardata.categorylist.GetRange(0, int.Parse(System.Configuration.ConfigurationManager.AppSettings["SidebarCategoryCount"]));
             return PartialView("_Sidebar", sidebardata);
         }
 

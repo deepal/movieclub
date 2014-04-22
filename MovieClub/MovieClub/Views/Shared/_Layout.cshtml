@@ -9,8 +9,10 @@
     @Styles.Render("~/Content/Site.css")
     @Styles.Render("~/Content/css/glyphicons.css")
     @Styles.Render("~/Content/css/allcatmodal.css")
+    @Styles.Render("~/Content/css/toastr.css")
     @Scripts.Render("~/Scripts/jquery-1.11.0.min.js")
     @Scripts.Render("~/Content/js/vendor/modernizr.js")
+    @Scripts.Render("~/Content/js/toastr.js")
 
     @RenderSection("customstyles",required:false)
     @RenderSection("customscripts",required:false)
@@ -40,26 +42,13 @@
                                 </div>
                             }
                     </li>
-                    <!--
-                        
-                        @@if (Request.IsAuthenticated)
-                        {
-                            <li class="divider"></li>
-                            <li>
-                                <ul class="left">
-                                    <li class="has-dropdown">
-                                        <a href="#">Quick Links</a>
-                                        <ul class="dropdown">
-                                            <li><a href="">Watchlist</a></li>
-                                            <li><a href="">My Favorites</a></li>
-                                        </ul>
-                                </ul>
-                            </li>
-                        }
-
-                    -->
-
+                    <li class="divider"></li>
+                    <li><a href="/User/Suggest" data-reveal-id="suggestModal" data-reveal-ajax="true">Suggest a movie</a></li>
+                    <li class="divider"></li>
                 </ul>
+                <div id="suggestModal" class="reveal-modal small" data-reveal>
+                    test
+                </div>
             </section>
             <section class="top-bar-section">
                 <ul class="right">
@@ -76,48 +65,47 @@
         </nav>
     </div>
 
-    <div class="row">
-        <div class="large-19 medium-19 sidebar-custom columns medi" >
-            @{Html.RenderAction("Sidebar", "Content");}
-        </div> 
-        <div class="large-81 medium-81 columns content-wrapper-custom">
-            <div id="body-content" class="content-custom">
-                @RenderSection("news",required:false)
-                <!-- featured content start-->
-                @RenderSection("featured", required: false)
-                <!-- Featured content end-->
+    
 
-                <!-- featured content start-->
-                @RenderSection("actioncatagory", required: false)
-                <!-- Featured content end-->
+        <div class="row">
+            <div class="large-19 medium-19 sidebar-custom columns medi">
+                @{Html.RenderAction("Sidebar", "Content");}
+            </div>
+            <div class="large-81 medium-81 columns content-wrapper-custom">
+                <div id="body-content" class="content-custom">
+                    @RenderSection("news", required: false)
+                    <!-- featured content start-->
+                    @RenderSection("featured", required: false)
+                    <!-- Featured content end-->
+                    <!-- featured content start-->
+                    @RenderSection("actioncatagory", required: false)
+                    <!-- Featured content end-->
+                    <!-- featured content start-->
+                    @RenderSection("thrillercatagory", required: false)
+                    <!-- Featured content end-->
+                    @RenderBody()
 
-                <!-- featured content start-->
-                @RenderSection("thrillercatagory", required: false)
-                <!-- Featured content end-->
-
-                @RenderBody()
-                
+                </div>
             </div>
         </div>
-    </div>
 
+        @Scripts.Render("~/Content/js/foundation.min.js")
+        <script>
+            $(document).foundation({
+                alert: {
+                    animation_speed: 500,
+                    animation: 'fadeOut'
+                }
+            });
 
+            
 
-    
-    @Scripts.Render("~/Content/js/foundation.min.js")
-    <script>
-        $(document).foundation({
-            alert: {
-                animation_speed: 500,
-                animation: 'fadeOut'
-            }
-        });
-    </script>
-    @RenderSection("scripts", required: false)
+        </script>
+        @RenderSection("scripts", required: false)
 
-    <form id="__AjaxAntiForgeryForm" action="#" method="post">
-        @Html.AntiForgeryToken()
-    </form>  
-    
+        <form id="__AjaxAntiForgeryForm" action="#" method="post">
+            @Html.AntiForgeryToken()
+        </form>
+
 </body>
 </html>

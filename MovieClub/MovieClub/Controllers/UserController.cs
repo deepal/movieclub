@@ -53,6 +53,45 @@ namespace MovieClub.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Suggest()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Suggest(string moviename, string info)
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+
+            try
+            {
+                db.DBSuggestions.Add(new MovieDB.DBSuggestion()
+                {
+                    UserId = UserOperations.GetCurrentUser().UserId,
+                    MovieName = moviename,
+                    Description = info,
+                    Timestamp = DateTime.Now
+                });
+                db.SaveChanges();
+
+                return Json(new {
+                    result = "ok",
+                    message = "Your suggestion is queued!"
+                });
+
+            }
+            catch (Exception)
+            {
+                return Json(new {
+                    result = "error",
+                    message = "Could not add your suggestion! Check your connection."
+                });
+            }
+
+
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddToWatchList()

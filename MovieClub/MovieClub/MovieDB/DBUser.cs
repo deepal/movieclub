@@ -26,6 +26,7 @@ namespace MovieClub.MovieDB
             this.DBRents = new HashSet<DBRent>();
             this.DBReservations = new HashSet<DBReservation>();
             this.DBWatchLists = new HashSet<DBWatchList>();
+            this.DBSuggestions = new HashSet<DBSuggestion>();
         }
     
         public int UserId { get; set; }
@@ -48,5 +49,6 @@ namespace MovieClub.MovieDB
         public virtual DBUser DBUsers1 { get; set; }
         public virtual DBUser DBUser1 { get; set; }
         public virtual ICollection<DBWatchList> DBWatchLists { get; set; }
+        public virtual ICollection<DBSuggestion> DBSuggestions { get; set; }
     }
 }

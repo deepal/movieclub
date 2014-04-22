@@ -177,6 +177,16 @@
           <Property Name="MovieId" Type="int" Nullable="false" />
           <Property Name="Username" Type="varchar" MaxLength="200" />
         </EntityType>
+        <EntityType Name="DBSuggestions">
+          <Key>
+            <PropertyRef Name="SuggestionId" />
+          </Key>
+          <Property Name="SuggestionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="MovieName" Type="varchar" MaxLength="300" />
+          <Property Name="Description" Type="varchar" MaxLength="1000" />
+          <Property Name="Timestamp" Type="datetime" />
+        </EntityType>
         <EntityType Name="DBUsers">
           <Key>
             <PropertyRef Name="UserId" />
@@ -486,6 +496,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DBSuggestions_DBUsers">
+          <End Role="DBUsers" Type="Self.DBUsers" Multiplicity="1" />
+          <End Role="DBSuggestions" Type="Self.DBSuggestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBSuggestions">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DBUsers_DBUsers">
           <End Role="DBUsers" Type="Self.DBUsers" Multiplicity="1" />
           <End Role="DBUsers1" Type="Self.DBUsers" Multiplicity="0..1" />
@@ -544,6 +566,7 @@
           <EntitySet Name="DBRents" EntityType="Self.DBRents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBReservations" EntityType="Self.DBReservations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBReviews" EntityType="Self.DBReviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DBSuggestions" EntityType="Self.DBSuggestions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBUsers" EntityType="Self.DBUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DBWatchLists" EntityType="Self.DBWatchLists" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_DBAdmins_DBUsers" Association="Self.FK_DBAdmins_DBUsers">
@@ -629,6 +652,10 @@
           <AssociationSet Name="FK_DBReviews_DBMovies" Association="Self.FK_DBReviews_DBMovies">
             <End Role="DBMovies" EntitySet="DBMovies" />
             <End Role="DBReviews" EntitySet="DBReviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DBSuggestions_DBUsers" Association="Self.FK_DBSuggestions_DBUsers">
+            <End Role="DBUsers" EntitySet="DBUsers" />
+            <End Role="DBSuggestions" EntitySet="DBSuggestions" />
           </AssociationSet>
           <AssociationSet Name="FK_DBUsers_DBUsers" Association="Self.FK_DBUsers_DBUsers">
             <End Role="DBUsers" EntitySet="DBUsers" />
@@ -763,6 +790,11 @@
             <End Role="DBMovie" EntitySet="DBMovies1" />
             <End Role="DBReview" EntitySet="DBReviews" />
           </AssociationSet>
+          <EntitySet Name="DBSuggestions" EntityType="MovieClubDBModel.DBSuggestion" />
+          <AssociationSet Name="FK_DBSuggestions_DBUsers" Association="MovieClubDBModel.FK_DBSuggestions_DBUsers">
+            <End Role="DBUser" EntitySet="DBUsers" />
+            <End Role="DBSuggestion" EntitySet="DBSuggestions" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="DBCategory">
           <Key>
@@ -886,6 +918,7 @@
           <NavigationProperty Name="DBUsers1" Relationship="MovieClubDBModel.FK_DBUsers_DBUsers" FromRole="DBUser" ToRole="DBUser1" />
           <NavigationProperty Name="DBUser1" Relationship="MovieClubDBModel.FK_DBUsers_DBUsers" FromRole="DBUser1" ToRole="DBUser" />
           <NavigationProperty Name="DBWatchLists" Relationship="MovieClubDBModel.FK_DBWatchLists_DBUsers" FromRole="DBUser" ToRole="DBWatchList" />
+          <NavigationProperty Name="DBSuggestions" Relationship="MovieClubDBModel.FK_DBSuggestions_DBUsers" FromRole="DBUser" ToRole="DBSuggestion" />
         </EntityType>
         <EntityType Name="DBRating">
           <Key>
@@ -1333,6 +1366,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DBSuggestion">
+          <Key>
+            <PropertyRef Name="SuggestionId" />
+          </Key>
+          <Property Name="SuggestionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="MovieName" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Timestamp" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DBUser" Relationship="MovieClubDBModel.FK_DBSuggestions_DBUsers" FromRole="DBSuggestion" ToRole="DBUser" />
+        </EntityType>
+        <Association Name="FK_DBSuggestions_DBUsers">
+          <End Type="MovieClubDBModel.DBUser" Role="DBUser" Multiplicity="1" />
+          <End Type="MovieClubDBModel.DBSuggestion" Role="DBSuggestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBSuggestion">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1546,6 +1602,17 @@
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="MovieId" ColumnName="MovieId" />
                 <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBSuggestions">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBSuggestion">
+              <MappingFragment StoreEntitySet="DBSuggestions">
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="MovieName" ColumnName="MovieName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SuggestionId" ColumnName="SuggestionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

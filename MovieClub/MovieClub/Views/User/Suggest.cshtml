@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+}
+
+<form>
+    <label for="suggestion-name">Movie name</label>
+    <input type="text" placeholder="Movie name" id="suggestion-name" />
+
+    <label for="suggestion-info">Additional information (IMDb URL etc.)</label>
+    <textarea placeholder="Additional information" id="suggestion-info" rows="4"></textarea>
+    <div style="text-align:center">
+        <input type="submit" id="suggest-button" class="button tiny" value="Suggest" />
+    </div>
+</form>
+
+<script>
+    $("#suggest-button").click(function (e) {
+        
+        var moviename = $("#suggestion-name").val();
+        var info = $("#suggestion-info").val();
+
+        $.ajax({
+            url: "/User/Suggest",
+            type: "POST",
+            data:{
+                moviename: moviename,
+                info: info
+            },
+            dataType: "text"
+        })
+        .success(function (data) {
+            var obj = $.parseJSON(data);
+            if (obj.result == "ok") {
+                //alert("ok");
+                toastr.success(obj.message);
+            }
+            else {
+                //alert("fail");
+                toastr.error(obj.message);
+            }
+        })
+        .error(function () {
+            //alert("die");
+            toastr.error("Could not connect! Check your connection.");
+        });
+
+        e.preventDefault();
+        $("#suggestModal").foundation('reveal', 'close');
+    });
+</script>

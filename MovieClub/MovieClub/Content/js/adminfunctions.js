@@ -62,3 +62,16 @@ function updatePaymentHistory() {
         $("#table-payments-history tbody").html("<p>Error loading payment history!</p>");
     });
 }
+
+function updateSuggestedMovies() {
+    $.ajax({
+        url: "/Admin/SuggestedMovies",
+        type: "GET"
+    })
+    .success(function (data) {
+        $("#table-suggestions tbody").html(data);
+    })
+    .error(function () {
+        $("#table-suggestions tbody").html("<tr><td colspan='4'>Error loading suggestions!<td></tr>");
+    });
+}

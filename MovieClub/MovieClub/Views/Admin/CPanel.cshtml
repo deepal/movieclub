@@ -12,6 +12,7 @@
     <dd><a href="#panel-users"><i class="fi-torsos-all"></i>Users</a></dd>
     <dd><a href="#panel-pending-payments"><i class="fi-shopping-bag"></i>Pending Payments</a></dd>
     <dd><a href="#panel-payments-history"><i class="fi-list-number"></i>Payment History</a></dd>
+    <dd><a href="#panel-suggestions"><i class="fi-comments"></i>Suggested Movies</a></dd>
     @*<dd><a href="#panel-rents-history"><i class="fi-shopping-bag"></i>Rents History</a></dd>*@
 </dl>
 
@@ -112,7 +113,20 @@
         </table>
     </div>
 
-    @*<div id="panel-rents-history" class="content">
+    <div id="panel-suggestions" class="content">
+        <table id="table-suggestions">
+            <thead>
+                <tr>
+                    <th width="150">Username</th>
+                    <th width="300">Movie name</th>
+                    <th width="500">More info</th>
+                    <th width="200">Date</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+         @*<div id="panel-rents-history" class="content">
         <table id="table-rents-history">
             <thead>
                 <tr>
@@ -126,14 +140,14 @@
         </table>
     </div>*@
 
-    <div id="myModal" class="reveal-modal modal-custom-message" data-reveal>
-    </div>
+        <div id="myModal" class="reveal-modal modal-custom-message" data-reveal>
+        </div>
 
-    <div id="myModalpayment" class="reveal-modal modal-custom" data-reveal>
-    </div>
+        <div id="myModalpayment" class="reveal-modal modal-custom" data-reveal>
+        </div>
 
-    <div id="myModalIssueUnreserved" class="reveal-modal modal-isu" data-reveal>
-    </div>
+        <div id="myModalIssueUnreserved" class="reveal-modal modal-isu" data-reveal>
+        </div>
 
     </div>
 
@@ -167,6 +181,8 @@
             updateUsers();
 
             updatePaymentHistory();
+
+            updateSuggestedMovies();
 
             /*---------------------------------------------------------------*/
 

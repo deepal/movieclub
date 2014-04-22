@@ -1,0 +1,25 @@
+﻿@model List<MovieClub.Models.AdminModels.SuggestedMovieModal>
+
+@{
+    var movies = Model;
+}
+
+@if (movies.Count > 0)
+{
+    foreach (var item in movies)
+    {
+        <tr>
+            <td>@item.Username</td>
+            <td>@item.MovieName</td>
+            <td>@Html.Raw(item.Info)</td>
+            <td>@item.Timestamp</td>
+        </tr>
+    }
+
+}
+else
+{
+    <tr>
+        <td colspan="4">No suggestions</td>
+    </tr>
+}

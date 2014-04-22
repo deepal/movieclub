@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -264,6 +265,41 @@ namespace MovieClub.Controllers
                 });
             }
             return PartialView("_ReservedMoviesPartial", reservedmovies);
+        }
+
+        [HttpGet]
+        public ActionResult SuggestedMovies()
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+
+            var suggestions = db.DBSuggestions.Join(db.DBUsers,
+                l=>l.UserId,
+                r=>r.UserId,
+                (l,r)=>new{
+                    Username = r.UserName,
+                    UserId = l.UserId,
+                    Moviename = l.MovieName,
+                    Info = l.Description,
+                    Timestamp = l.Timestamp
+                }).ToList();
+
+            suggestions.Sort((x,y)=>((DateTime)y.Timestamp).CompareTo((DateTime)x.Timestamp));
+
+            List<Models.AdminModels.SuggestedMovieModal> sug = new List<Models.AdminModels.SuggestedMovieModal>();
+            Regex rg = new Regex("(https?://[^ ]+)");
+
+            foreach (var item in suggestions)
+            {
+                sug.Add(new Models.AdminModels.SuggestedMovieModal() {
+                    UserId = item.UserId,
+                    Username = item.Username,
+                    MovieName = item.Moviename,
+                    Info = rg.Replace(item.Info, "<a href=\"$1\">$1</a>"),
+                    Timestamp = (DateTime)item.Timestamp
+                });
+            }
+
+            return PartialView("_SuggestedMoviesPartial",sug);
         }
 
         [HttpPost]

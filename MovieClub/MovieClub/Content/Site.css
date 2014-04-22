@@ -427,6 +427,19 @@ footer{
     font-size:12px !important;
 }
 
+#suggestModal *{
+    font-size:12px !important;
+}
+
+#suggestModal form{
+    margin-bottom:0;
+}
+
+#suggest-button{
+    text-align:center;
+    margin-bottom:0;
+}
+
 footer *{
     color:white;
 }

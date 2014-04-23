@@ -16,7 +16,6 @@ namespace MovieClub.Controllers
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
             var uid = UserOperations.GetCurrentUser().UserId;
-            ViewBag.UserId = uid;
             var messagecount = db.DBInboxMessages.Count(m=>m.UserId==uid&&m.Status==1);
             ViewBag.NewMessageCount = messagecount;
             return View();
@@ -60,6 +59,7 @@ namespace MovieClub.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Suggest(string moviename, string info)
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
@@ -462,7 +462,7 @@ namespace MovieClub.Controllers
         }
 
         [HttpGet]
-        public ActionResult Messages()
+        public ActionResult Messages(bool? popup)
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
             var uid = UserOperations.GetCurrentUser().UserId;
@@ -480,12 +480,26 @@ namespace MovieClub.Controllers
                     Status = message.Status
                 });
             }
-            return PartialView("_InboxMessagesPartial", messagebox);
+            if (popup == null)
+            {
+                return PartialView("_InboxMessagesPartial", messagebox);
+            }
+            return View(messagebox);
         }
 
-        [HttpPost]
-        public ActionResult MarkMessagesRead(int uid)
+        public static int GetNewMessageCount()
         {
+            var user = UserOperations.GetCurrentUser().UserId;
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+
+            return db.DBInboxMessages.Count(m => m.UserId == user && m.Status == 1);
+        }
+        
+
+        [HttpPost]
+        public ActionResult MarkMessagesRead()
+        {
+            var uid = UserOperations.GetCurrentUser().UserId;
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
             db.DBInboxMessages.Where(m => m.UserId == uid).ToList().ForEach(m => m.Status = 0);
             db.SaveChanges();

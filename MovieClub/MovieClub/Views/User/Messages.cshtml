@@ -1,0 +1,35 @@
+﻿@model List<MovieClub.Models.MyAccountModels.InboxMessageModel>
+
+@{
+    Layout = null;
+    var messages = Model;
+}
+@if (messages.Where(m => m.Status == 1).Count() > 0)
+{
+    <h5 class="msg-title">Unread Messages</h5>
+    <table class="msg-table">
+        <tbody>
+            @foreach (var item in messages)
+            {
+                if (item.Status == 1)
+                {
+                    <tr>
+                        <td>@item.Description <span class="right">@item.Date</span></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    
+}
+else
+{
+    <div style="text-align:center">
+        <p class="no-messages">No new messages</p>
+    </div>
+}
+
+<script src="~/Content/js/userfunctions.js"></script>
+<script>
+    readMessages();
+</script>

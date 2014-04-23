@@ -9,14 +9,19 @@
     @Styles.Render("~/Content/Site.css")
     @Styles.Render("~/Content/css/glyphicons.css")
     @Styles.Render("~/Content/css/allcatmodal.css")
+    @Styles.Render("~/Content/css/inboxpopup.css")
     @Styles.Render("~/Content/css/toastr.css")
     @Scripts.Render("~/Scripts/jquery-1.11.0.min.js")
     @Scripts.Render("~/Content/js/vendor/modernizr.js")
     @Scripts.Render("~/Content/js/toastr.js")
-
     @RenderSection("customstyles",required:false)
     @RenderSection("customscripts",required:false)
-     
+    <script>
+        function markread() {
+            $("#inboxcount").remove();
+        }
+    </script>
+
 </head>
 <body>
 
@@ -53,8 +58,25 @@
             <section class="top-bar-section">
                 <ul class="right">
                     <li class="divider"></li>
+                    @if(Request.IsAuthenticated){
+                        <li>
+                            <a onclick="markread();" href="/User/Messages/?popup=true" data-reveal-id="inboxmodal" data-reveal-ajax="true">
+                                <img id="messagespop" src="~/Content/images/new-messages-red.png" height="40" width="40" />
+                                @{
+                                    var msgcount = MovieClub.Controllers.UserController.GetNewMessageCount();
+                                    if (msgcount > 0)
+                                    {
+                                        <span id="inboxcount" class="label tiny round">@msgcount</span>
+                                    }
+                                }
+                            </a>
+                        </li>
+                    }
                     <li>@Html.Partial("_LoginPartial")</li>
                 </ul>
+                <div id="inboxmodal" class="reveal-modal medium" data-reveal>
+
+                </div>
             </section>
             <section class="top-bar-section">
                 @if (MovieClub.Operations.UserOperations.IsAdmin())

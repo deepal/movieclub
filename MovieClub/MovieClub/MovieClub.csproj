@@ -366,6 +366,7 @@
     <Content Include="Content\css\images\ui-icons_ef8c08_256x240.png" />
     <Content Include="Content\css\images\ui-icons_ffd27a_256x240.png" />
     <Content Include="Content\css\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\css\inboxpopup.css" />
     <Content Include="Content\css\jquery-ui\black-tie\images\animated-overlay.gif" />
     <Content Include="Content\css\jquery-ui\black-tie\images\ui-bg_diagonals-thick_8_333333_40x40.png" />
     <Content Include="Content\css\jquery-ui\black-tie\images\ui-bg_flat_65_ffffff_40x100.png" />
@@ -827,16 +828,21 @@
     <Content Include="Content\images\dl-arr.png" />
     <Content Include="Content\images\down-arr.gif" />
     <Content Include="Content\images\download.png" />
+    <Content Include="Content\images\Inbox-icon.png" />
     <Content Include="Content\images\kj.gif" />
     <Content Include="Content\images\kj.jpg" />
     <Content Include="Content\images\kj.png" />
+    <Content Include="Content\images\mail-icon.png" />
     <Content Include="Content\images\main-red-bg.gif" />
     <Content Include="Content\images\movies.jpg" />
     <Content Include="Content\images\movies.png" />
+    <Content Include="Content\images\msg.png" />
+    <Content Include="Content\images\new-messages-red.png" />
     <Content Include="Content\images\pearson.png" />
     <Content Include="Content\images\poster-na.jpg" />
     <Content Include="Content\images\star.gif" />
     <Content Include="Content\images\stars.png" />
+    <Content Include="Content\images\user.png" />
     <Content Include="Content\js\AjaxAntiForgeryTokens.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\adminfunctions.js" />
@@ -946,6 +952,7 @@
     <Content Include="Content\js\tinymce\themes\modern\theme.min.js" />
     <Content Include="Content\js\tinymce\tinymce.min.js" />
     <Content Include="Content\js\toastr.js" />
+    <Content Include="Content\js\userfunctions.js" />
     <Content Include="Content\js\vendor\fastclick.js" />
     <Content Include="Content\js\vendor\jquery.cookie.js" />
     <Content Include="Content\js\vendor\jquery.js" />
@@ -1126,6 +1133,7 @@
     <Content Include="Views\Content\Categories.cshtml" />
     <Content Include="Views\User\Suggest.cshtml" />
     <Content Include="Views\Admin\_SuggestedMoviesPartial.cshtml" />
+    <Content Include="Views\User\Messages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\posters\" />

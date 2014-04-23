@@ -276,6 +276,7 @@ namespace MovieClub.Controllers
                 l=>l.UserId,
                 r=>r.UserId,
                 (l,r)=>new{
+                    SuggestionId = l.SuggestionId,
                     Username = r.UserName,
                     UserId = l.UserId,
                     Moviename = l.MovieName,
@@ -291,6 +292,7 @@ namespace MovieClub.Controllers
             foreach (var item in suggestions)
             {
                 sug.Add(new Models.AdminModels.SuggestedMovieModal() {
+                    SuggestionId = item.SuggestionId,
                     UserId = item.UserId,
                     Username = item.Username,
                     MovieName = item.Moviename,
@@ -300,6 +302,29 @@ namespace MovieClub.Controllers
             }
 
             return PartialView("_SuggestedMoviesPartial",sug);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CheckSuggestion(int sid)
+        {
+            try
+            {
+                MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+                var sug = db.DBSuggestions.Where(s => s.SuggestionId == sid).FirstOrDefault();
+                db.DBSuggestions.Remove(sug);
+                db.SaveChanges();
+            }
+            catch
+            {
+                return Json(new {
+                    result = "error"
+                });
+            }
+            return Json(new
+            {
+                result = "ok"
+            });
         }
 
         [HttpPost]

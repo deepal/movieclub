@@ -2,8 +2,7 @@
 {
     <text>
         <li>
-            @Html.ActionLink("Hello " + User.Identity.Name + " !", "MyAccount", "User", routeValues: null, htmlAttributes: new { @class = "", title = "Manage" })
-            
+            <a href="/User/MyAccount" title="My Account">Hello @User.Identity.Name !</a>          
         </li>
     </text>
 }

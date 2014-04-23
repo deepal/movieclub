@@ -1,0 +1,28 @@
+﻿.msg-title{
+    text-align:center;
+    font-size:14px;
+    font-weight:bold;
+    color:#808080;
+}
+
+.msg-table{
+    width:100%;
+}
+
+.msg-table *{
+    font-size:12px;
+}
+
+.msg-table tbody tr{
+    width:100%;
+}
+
+.msg-table tbody tr td .right{
+    color:#bdbdbd;
+}
+
+.no-messages{
+    font-size:12px;
+    padding:0;
+    margin:0;
+}

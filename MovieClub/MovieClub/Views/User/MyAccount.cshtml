@@ -1,7 +1,6 @@
 ﻿
 @{
     ViewBag.Title = "MyAccount";
-    var uid = ViewBag.UserId;
 }
 
 <div id="myaccount">
@@ -13,7 +12,7 @@
         <dd><a href="#panel-rents-pending"><i class="fi-price-tag"></i>Pending to return</a></dd>
         <dd><a href="#panel-rents"><i class="fi-book"></i>History</a></dd>
         <dd>
-            <a href="#panel-inbox" id="inbox-tab" onclick="readMessages(@uid)"><i class="fi-mail"></i>Inbox Messages
+            <a href="#panel-inbox" id="inbox-tab" onclick="readMessages()"><i class="fi-mail"></i>Inbox Messages
                 @if(ViewBag.NewMessageCount>0){
                     <span id="notif-count" class="success label tiny round">@ViewBag.NewMessageCount</span>
                 }
@@ -148,21 +147,10 @@
 }
 
 @section scripts{
+    <script src="~/Content/js/userfunctions.js"></script>
     <script>
 
-        function readMessages(uid) {
-            $.ajax({
-                url: "/User/MarkMessagesRead/?uid=" + uid,
-                type: "POST",
-                dataType: "text"
-            })
-            .success(function (data) {
-
-            })
-            .error(function () {
-
-            });
-        }
+        
 
         $(document).ready(function () {
 

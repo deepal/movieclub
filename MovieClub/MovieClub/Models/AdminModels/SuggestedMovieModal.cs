@@ -7,6 +7,7 @@ namespace MovieClub.Models.AdminModels
 {
     public class SuggestedMovieModal
     {
+        public int SuggestionId { get; set; }
         public int UserId { get; set; }
         public string Username { get; set; }
         public string MovieName { get; set; }

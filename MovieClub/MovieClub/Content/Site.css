@@ -440,6 +440,15 @@ footer{
     margin-bottom:0;
 }
 
+#messagespop{
+    padding-bottom:3px;
+}
+
+#inboxcount{
+    font-size:8px;
+
+}
+
 footer *{
     color:white;
 }

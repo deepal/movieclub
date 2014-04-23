@@ -341,6 +341,19 @@ namespace MovieClub.Controllers
                     ViewBag.UserRating = votes.First().Rating;
                 }
             }
+
+            List<ReviewModel> reviews = new List<ReviewModel>();
+
+            var rvws = db.DBReviews.Where(rv=>rv.MovieId==Id);
+
+            foreach (var review in rvws)
+            {
+                reviews.Add(new ReviewModel() {
+                    Username = review.Username,
+                    Comment = review.Comment
+                });
+            }
+
             return View(new MovieDetails() {
                 Actors = dbmovieitem.Actors,
                 Awards = dbmovieitem.Awards,
@@ -369,6 +382,24 @@ namespace MovieClub.Controllers
                 DirectorsList = stringToTagList(dbmovieitem.Director,','),
                 TrailerURL = dbmovieitem.TrailerURL
             });
+        }
+
+        [HttpGet]
+        public ActionResult GetReviews(int mid)
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            var rs = db.DBReviews.Where(rv => rv.MovieId == mid).ToList();
+            List<ReviewModel> reviews = new List<ReviewModel>();
+
+            foreach (var item in rs)
+            {
+                reviews.Add(new ReviewModel() { 
+                    Comment = item.Comment,
+                    Username = item.Username
+                });
+            }
+            reviews.Reverse();
+            return PartialView("_ReviewsPartial",reviews);
         }
 
         [AllowAnonymous]

@@ -177,7 +177,7 @@
                             <video id="video-clip" class="video-js vjs-default-skin" controls
                                    preload="auto" width="640" height="264" poster=""
                                    data-setup="{}">
-                                <source src="@movie.TrailerURL.Replace("~",string.Empty)" type='video/mp4'>
+                                <source src="@movie.TrailerURL.Replace("~", string.Empty)" type='video/mp4'>
                             </video>
                         </div>
                     </div>
@@ -188,12 +188,25 @@
                         @movie.Views Views
                     </div>
                     <div id="md-date">
-                        Added on @String.Format("{0:MMMM dd yyyy}", movie.AddedDate); 
+                        Added on @String.Format("{0:MMMM dd yyyy}", movie.AddedDate)
                     </div>
                     <div style="clear:both">
                     </div>
                 </div>
                 
+                <div id="moviedetails-reviews">
+                    <div id="add-review">
+                        <textarea id="review-content" placeholder="Write a review"></textarea>
+                        <button id="review-button" class="button tiny secondary right">Post</button>
+                    </div>
+                    <div id="reviews-title">
+                        @System.Configuration.ConfigurationManager.AppSettings["OrganizationName"] User Reviews
+                    </div>
+                    <div id="old-reviews">
+
+                    </div>
+                </div>
+
             </div>
         </div>
         
@@ -242,6 +255,7 @@
     </style>
     @Styles.Render("~/Content/css/rateit.css")
     @Styles.Render("~/Content/css/toastr.css")
+    @Styles.Render("~/Content/css/reviews.css")
 }
 
 @section customscripts{
@@ -250,10 +264,39 @@
     @Scripts.Render("~/Content/js/toastr.js")
     @Scripts.Render("~/Content/js/jquery.leanModal.min.js")
     @Scripts.Render("~/Content/js/AjaxAntiForgeryTokens.js")
+    @Scripts.Render("~/Content/js/contentfunctions.js")
     <script>
 
         $(document).ready(function () {
 
+            $("#review-button").click(function (e) {
+                var comment = $("#review-content").val();
+                $.ajax({
+                    url: "/User/ReviewMovie/?movieid=@movie.Id&&comment="+comment,
+                    type: "POST",
+                    data: AddAntiForgeryToken({}),
+                    dataType: "text"
+                })
+                .success(function (data) {
+                    var obj = $.parseJSON(data);
+                    if (obj.result == "ok") {
+                        updateReviews("@movie.Id");
+                        $("#review-content").val("");
+                    }
+                    else if (obj.result == "error") {
+                        toastr.error("Could not post your review! Try again later.");
+                    }
+                })
+                .error(function () {
+                    toastr.error("Could not connect! Check your connection");
+                });
+
+                e.preventDefault();
+            });
+
+            $("#old-reviews").html("<img src='/Content/images/ajax-loader.gif'/>");
+
+            updateReviews("@movie.Id");
 
             $("#add-to-favorites").click(function (e) {
                 var mid = "@movie.Id";

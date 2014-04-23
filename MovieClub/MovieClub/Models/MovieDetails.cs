@@ -47,6 +47,7 @@ namespace MovieClub.Models
         public List<string> ActorsList { get; set; }
         public List<string> WritersList { get; set; }
         public List<string> DirectorsList { get; set; }
+        public List<ReviewModel> Reviews { get; set; }
         
     }
 }

@@ -58,7 +58,17 @@
                     @if (Request.IsAuthenticated)
                     {
                         <li class="divider"></li>
-                        <li><a href="/User/Suggest" data-reveal-id="suggestModal" data-reveal-ajax="true"><img src="/Content/images/suggest.png" height="30" width="30" /> Suggest a Movie</a></li>
+                        <li>
+                            <a id="suggest-movie" role="button" href="#">
+                                <img src="/Content/images/suggest.png" height="30" width="30" /> Suggest a Movie
+                            </a>
+                            <script>
+                                $("#suggest-movie").click(function (e) {
+                                    $('#suggestModal').foundation('reveal', 'open', '/User/Suggest');
+                                    e.preventDefault();
+                                })
+                            </script>
+                        </li>
                         <li class="divider"></li>
                     }
 
@@ -74,7 +84,7 @@
                     @if (Request.IsAuthenticated)
                     {
                         <li>
-                            <a onclick="markread();" href="/User/Messages/?popup=true" data-reveal-id="inboxmodal" data-reveal-ajax="true">
+                            <a id="inbox" role="button" onclick="markread();" href="#">
                                 <img id="messagespop" src="~/Content/images/new-messages-red.png" height="40" width="40" />
                                 @{
                                     var msgcount = MovieClub.Controllers.UserController.GetNewMessageCount();
@@ -84,6 +94,12 @@
                                     }
                                 }
                             </a>
+                            <script>
+                                $("#inbox").click(function (e) {
+                                    $('#inboxmodal').foundation('reveal', 'open', '/User/Messages/?popup=true');
+                                    e.preventDefault();
+                                });
+                            </script>
                         </li>
                     }
                     <li class="divider"></li>

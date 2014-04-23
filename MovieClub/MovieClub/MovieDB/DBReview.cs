@@ -17,6 +17,7 @@ namespace MovieClub.MovieDB
         public int ReviewId { get; set; }
         public int MovieId { get; set; }
         public string Username { get; set; }
+        public string Comment { get; set; }
     
         public virtual DBMovie DBMovy { get; set; }
     }

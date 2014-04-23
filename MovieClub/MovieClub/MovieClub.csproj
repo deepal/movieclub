@@ -228,6 +228,7 @@
     <Compile Include="Models\MyAccountModels\RecommendationModel.cs" />
     <Compile Include="Models\MyAccountModels\RentsHistoryModel.cs" />
     <Compile Include="Models\MyAccountModels\ReservationModel.cs" />
+    <Compile Include="Models\ReviewModel.cs" />
     <Compile Include="Models\SearchResults.cs" />
     <Compile Include="Models\SidebarCategoriesModel.cs" />
     <Compile Include="Models\Category.cs" />
@@ -810,6 +811,7 @@
     <Content Include="Content\css\normalize.css" />
     <Content Include="Content\css\rateit.css" />
     <Content Include="Content\css\register.css" />
+    <Content Include="Content\css\reviews.css" />
     <Content Include="Content\css\rondellcustom.css" />
     <Content Include="Content\css\searchpage.css" />
     <Content Include="Content\css\simplePagination.css" />
@@ -849,6 +851,7 @@
     <Content Include="Content\js\AjaxAntiForgeryTokens.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\adminfunctions.js" />
+    <Content Include="Content\js\contentfunctions.js" />
     <Content Include="Content\js\jquery-ias.min.js" />
     <Content Include="Content\js\jquery-ui.js" />
     <Content Include="Content\js\jquery.leanModal.min.js" />
@@ -1137,6 +1140,7 @@
     <Content Include="Views\User\Suggest.cshtml" />
     <Content Include="Views\Admin\_SuggestedMoviesPartial.cshtml" />
     <Content Include="Views\User\Messages.cshtml" />
+    <Content Include="Views\Content\_ReviewsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\posters\" />

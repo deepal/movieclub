@@ -264,6 +264,36 @@ namespace MovieClub.Controllers
 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ReviewMovie(string comment, int movieid)
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+
+            var username = User.Identity.Name;
+            try
+            {
+                db.DBReviews.Add(new MovieDB.DBReview()
+                {
+                    Username = username,
+                    MovieId = movieid,
+                    Comment = comment
+                });
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return Json(new
+                {
+                    result = "error"
+                });
+            }
+
+            return Json(new { 
+                result = "ok"
+            });
+        }
+
 
         [HttpGet]
         public ActionResult Favorites()

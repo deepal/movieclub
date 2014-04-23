@@ -176,6 +176,7 @@
           <Property Name="ReviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MovieId" Type="int" Nullable="false" />
           <Property Name="Username" Type="varchar" MaxLength="200" />
+          <Property Name="Comment" Type="varchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="DBSuggestions">
           <Key>
@@ -1353,6 +1354,7 @@
           <Property Name="MovieId" Type="Int32" Nullable="false" />
           <Property Name="Username" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DBMovy" Relationship="MovieClubDBModel.FK_DBReviews_DBMovies" FromRole="DBReview" ToRole="DBMovie" />
+          <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_DBReviews_DBMovies">
           <End Type="MovieClubDBModel.DBMovie" Role="DBMovie" Multiplicity="1" />
@@ -1599,6 +1601,7 @@
           <EntitySetMapping Name="DBReviews">
             <EntityTypeMapping TypeName="MovieClubDBModel.DBReview">
               <MappingFragment StoreEntitySet="DBReviews">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="MovieId" ColumnName="MovieId" />
                 <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />

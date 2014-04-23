@@ -1,0 +1,27 @@
+﻿@model List<MovieClub.Models.ReviewModel>
+
+@{
+    var reviews = Model;
+}
+
+@if (reviews.Count > 0)
+{
+    foreach (var item in reviews)
+    {
+        <div class="review">
+            <div class="review-user">By @item.Username</div>
+            <div class="review-comment">@item.Comment</div>
+        </div>
+    }
+}
+else
+{
+    <div class="no-reviews">
+        No reviews yet!
+    </div>
+}
+
+
+
+
+

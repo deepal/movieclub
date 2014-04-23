@@ -29,7 +29,7 @@
         <nav class="top-bar sticky" data-topbar>
             <ul class="title-area">
                 <li class="name">
-                    <h1 id="header-text"><a href="/">@System.Configuration.ConfigurationManager.AppSettings["OrganizationName"] @System.Configuration.ConfigurationManager.AppSettings["ClubName"]</a></h1>
+                    <h1 id="header-text"><a href="/"><img src="/Content/images/reel2.png" height="30" width="30" /> @System.Configuration.ConfigurationManager.AppSettings["OrganizationName"] @System.Configuration.ConfigurationManager.AppSettings["ClubName"]</a></h1>
                 </li>
             </ul>
             <section class="top-bar-section">
@@ -47,12 +47,15 @@
                                 </div>
                             }
                     </li>
-                    <li class="divider"></li>
-                    <li><a href="/User/Suggest" data-reveal-id="suggestModal" data-reveal-ajax="true">Suggest a movie</a></li>
-                    <li class="divider"></li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="divider"></li>
+                        <li><a href="/User/Suggest" data-reveal-id="suggestModal" data-reveal-ajax="true"><img src="/Content/images/suggest.png" height="30" width="30" /> Suggest a Movie</a></li>
+                        <li class="divider"></li>
+                    }
                 </ul>
                 <div id="suggestModal" class="reveal-modal small" data-reveal>
-                    test
+
                 </div>
             </section>
             <section class="top-bar-section">
@@ -72,6 +75,7 @@
                             </a>
                         </li>
                     }
+                    <li class="divider"></li>
                     <li>@Html.Partial("_LoginPartial")</li>
                 </ul>
                 <div id="inboxmodal" class="reveal-modal medium" data-reveal>

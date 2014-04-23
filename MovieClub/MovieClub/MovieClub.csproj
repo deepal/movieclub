@@ -840,8 +840,11 @@
     <Content Include="Content\images\new-messages-red.png" />
     <Content Include="Content\images\pearson.png" />
     <Content Include="Content\images\poster-na.jpg" />
+    <Content Include="Content\images\reel.png" />
+    <Content Include="Content\images\reel2.png" />
     <Content Include="Content\images\star.gif" />
     <Content Include="Content\images\stars.png" />
+    <Content Include="Content\images\suggest.png" />
     <Content Include="Content\images\user.png" />
     <Content Include="Content\js\AjaxAntiForgeryTokens.js" />
     <Content Include="Content\js\bootstrap.min.js" />

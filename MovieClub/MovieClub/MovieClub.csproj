@@ -855,6 +855,7 @@
     <Content Include="Content\js\contentfunctions.js" />
     <Content Include="Content\js\jquery-ias.min.js" />
     <Content Include="Content\js\jquery-ui.js" />
+    <Content Include="Content\js\jquery.autocomplete.js" />
     <Content Include="Content\js\jquery.leanModal.min.js" />
     <Content Include="Content\js\jquery.mousewheel-3.0.6.min.js" />
     <Content Include="Content\js\jquery.pagination.js" />

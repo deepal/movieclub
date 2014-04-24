@@ -450,6 +450,15 @@ footer{
 
 }
 
+.tabs dd *{
+    font-size:12px !important;
+}
+
+.tabs .active{
+    border-left:1px solid #dadada !important;
+    border-right:1px solid #dadada !important;
+}
+
 footer *{
     color:white;
 }

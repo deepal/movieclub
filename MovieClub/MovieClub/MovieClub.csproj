@@ -215,6 +215,7 @@
     <Compile Include="Models\AdminModels\PaymentHistoryModel.cs" />
     <Compile Include="Models\AdminModels\PendingPaymentsModel.cs" />
     <Compile Include="Models\AdminModels\PendingReturnsModel.cs" />
+    <Compile Include="Models\AdminModels\PendingReviewsModel.cs" />
     <Compile Include="Models\AdminModels\ReservedMovieModel.cs" />
     <Compile Include="Models\AdminModels\SuggestedMovieModal.cs" />
     <Compile Include="Models\AdminModels\UserModel.cs" />
@@ -1141,6 +1142,7 @@
     <Content Include="Views\Admin\_SuggestedMoviesPartial.cshtml" />
     <Content Include="Views\User\Messages.cshtml" />
     <Content Include="Views\Content\_ReviewsPartial.cshtml" />
+    <Content Include="Views\Admin\_PendingReviewsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\posters\" />

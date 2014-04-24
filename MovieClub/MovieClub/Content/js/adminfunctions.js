@@ -75,3 +75,16 @@ function updateSuggestedMovies() {
         $("#table-suggestions tbody").html("<tr><td colspan='5'>Error loading suggestions!<td></tr>");
     });
 }
+
+function updatePendingReviews() {
+    $.ajax({
+        url: "/Admin/PendingReviews",
+        type: "GET"
+    })
+    .success(function (data) {
+        $("#table-pending-reviews tbody").html(data);
+    })
+    .error(function () {
+        $("#table-suggestions tbody").html("<tr><td colspan='5'>Error loading pending reviews!<td></tr>");
+    });
+}

@@ -1,0 +1,26 @@
+﻿@model List<MovieClub.Models.AdminModels.PendingReviewsModel>
+
+@{
+    var moderations = Model;
+}
+
+@if(moderations.Count>0)
+{
+    foreach (var item in moderations)
+    {
+        <tr>
+            <td>@item.Username</td>
+            <td><a href="/Content/MovieDetails/@item.MovieId">@item.MovieName</a></td>
+            <td>@item.Comment</td>
+            <td>@item.Timestamp</td>
+            <td><a href="#" onclick="approveReview(@item.ReviewId)">Approve</a><a href="#" onclick="rejectReview(@item.ReviewId)" style="color:red">Reject</a></td>
+        </tr>
+    }
+}
+else
+{
+    <tr>
+        <td colspan="5">No pending moderations!</td>
+    </tr>
+}
+

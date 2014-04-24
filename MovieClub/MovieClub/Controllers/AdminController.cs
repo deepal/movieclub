@@ -436,6 +436,127 @@ namespace MovieClub.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult PendingReviews()
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+
+            var pr = db.DBReviews.Where(r => r.Moderated == 0).Join(db.DBUsers,
+                l => l.UserId,
+                r => r.UserId,
+                (l, r) => new
+                {
+                 UserId = l.UserId,
+                 Username = r.UserName,
+                 MovieId = l.MovieId,
+                 ReviewId = l.ReviewId,
+                 Timestamp = l.Timestamp,
+                 Comment = l.Comment,
+                }).Join(db.DBMovies,
+                x=>x.MovieId,
+                y=>y.Id,
+                (x, y) => new
+                {
+                    UserId = x.UserId,
+                    Username = x.Username,
+                    MovieId = x.MovieId,
+                    ReviewId = x.ReviewId,
+                    Timestamp = x.Timestamp,
+                    Comment = x.Comment,
+                    MovieName = y.Name
+                });
+
+            List<Models.AdminModels.PendingReviewsModel> moderations = new List<Models.AdminModels.PendingReviewsModel>();
+
+            foreach (var item in pr)
+            {
+                moderations.Add(new Models.AdminModels.PendingReviewsModel() {
+                    MovieId = item.MovieId,
+                    ReviewId = item.ReviewId,
+                    Timestamp = (DateTime)item.Timestamp,
+                    UserId = item.UserId,
+                    Username = item.Username,
+                    Comment = item.Comment,
+                    MovieName = item.MovieName
+                });
+            }
+
+            return PartialView("_PendingReviewsPartial", moderations);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ApproveReview(int rid)
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            var reviews = db.DBReviews.Where(r => r.ReviewId == rid);
+            try
+            {
+                if (reviews.Count() != 0)
+                {
+                    reviews.First().Moderated = 1;
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        result = "error",
+                        message = "No such review!"
+                    });
+                }
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return Json(new
+                {
+                    result = "error",
+                    message = "Error occured! Try again later."
+                });
+            }
+
+            return Json(new
+            {
+                result = "ok",
+                message = "Review Approved!"
+            });
+        }
+
+        public ActionResult RejectReview(int rid)
+        {
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            var reviews = db.DBReviews.Where(r => r.ReviewId == rid);
+            try
+            {
+                if (reviews.Count() != 0)
+                {
+                    db.DBReviews.Remove(reviews.FirstOrDefault());
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        result = "error",
+                        message = "No such review!"
+                    });
+                }
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return Json(new
+                {
+                    result = "error",
+                    message = "Error occured! Try again later."
+                });
+            }
+
+            return Json(new
+            {
+                result = "ok",
+                message = "Review Rejected!"
+            });
+        }
 
         public bool AddMovieToDB(MovieDB.MovieClubDBE db, MovieDetails movie)
         {

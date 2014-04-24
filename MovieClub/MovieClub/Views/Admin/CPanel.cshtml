@@ -13,6 +13,7 @@
     <dd><a href="#panel-pending-payments"><i class="fi-shopping-bag"></i>Pending Payments</a></dd>
     <dd><a href="#panel-payments-history"><i class="fi-list-number"></i>Payment History</a></dd>
     <dd><a href="#panel-suggestions"><i class="fi-comments"></i>Suggested Movies</a></dd>
+    <dd><a href="#panel-pending-reviews"><i class="fi-flag"></i>Pending Reviews</a></dd>
     @*<dd><a href="#panel-rents-history"><i class="fi-shopping-bag"></i>Rents History</a></dd>*@
 </dl>
 
@@ -24,6 +25,7 @@
                 Issue a movie without previous reservation?
             </a>
         </div>
+        <div class="admin-title">Reservations</div>
         <div>
             <table id="table-reservations">
                 <thead>
@@ -53,6 +55,7 @@
     </div>
 
     <div id="panel-returns" class="content">
+        <div class="admin-title">Pending Returns</div>
         <table id="table-returns">
             <thead>
                 <tr>
@@ -70,6 +73,7 @@
     </div>
 
     <div id="panel-users" class="content">
+        <div class="admin-title">Users</div>
         <table id="table-users">
             <thead>
                 <tr>
@@ -86,6 +90,7 @@
     </div>
 
     <div id="panel-pending-payments" class="content">
+        <div class="admin-title">Pending Payments</div>
         <table id="table-pending-payments">
             <thead>
                 <tr>
@@ -100,6 +105,7 @@
     </div>
 
     <div id="panel-payments-history" class="content">
+        <div class="admin-title">Payments History</div>
         <table id="table-payments-history">
             <thead>
                 <tr>
@@ -114,6 +120,7 @@
     </div>
 
     <div id="panel-suggestions" class="content">
+        <div class="admin-title">User's Suggestions</div>
         <table id="table-suggestions">
             <thead>
                 <tr>
@@ -127,6 +134,23 @@
             <tbody></tbody>
         </table>
     </div>
+
+    <div id="panel-pending-reviews" class="content">
+        <div class="admin-title">Moderations</div>
+        <table id="table-pending-reviews">
+            <thead>
+                <tr>
+                    <th width="150">Username</th>
+                    <th width="300">Movie name</th>
+                    <th width="400">Review</th>
+                    <th width="200">Date</th>
+                    <th width="100">Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
          @*<div id="panel-rents-history" class="content">
         <table id="table-rents-history">
             <thead>
@@ -185,11 +209,58 @@
 
             updateSuggestedMovies();
 
+            updatePendingReviews();
+
             /*---------------------------------------------------------------*/
 
         });
 
+
+        function approveReview(rid) {
+            $.ajax({
+                url: "/Admin/ApproveReview/?rid="+rid,
+                type: "POST",
+                data: AddAntiForgeryToken({}),
+                dataType: "text"
+            })
+            .success(function (data) {
+                var obj = $.parseJSON(data);
+                if (obj.result == "ok") {
+                    updatePendingReviews();
+                    toastr.success(obj.message);
+                }
+                else if (obj.result == "error") {
+                    toastr.success(obj.message);
+                }
+            })
+            .error(function () {
+                toastr.error("Could not connect! Check your connection.");
+            });
+        }
         
+
+        function rejectReview(rid) {
+            $.ajax({
+                url: "/Admin/RejectReview/?rid=" + rid,
+                type: "POST",
+                data: AddAntiForgeryToken({}),
+                dataType: "text"
+            })
+            .success(function (data) {
+                var obj = $.parseJSON(data);
+                if (obj.result == "ok") {
+                    updatePendingReviews();
+                    toastr.success(obj.message);
+                }
+                else if (obj.result == "error") {
+                    toastr.success(obj.message);
+                }
+            })
+            .error(function () {
+                toastr.error("Could not connect! Check your connection.");
+            });
+        }
+
 
         function issueMovie(movieid,userid) {
             $.ajax({

@@ -179,3 +179,11 @@ input[type=checkbox]{
 .dialog-confirm{
     font-size:12px;
 }
+
+.admin-title{
+    font-size:24px;
+    font-weight:bold;
+    color:#aaaaaa;
+    padding-bottom:10px;
+    padding-top:10px;
+}

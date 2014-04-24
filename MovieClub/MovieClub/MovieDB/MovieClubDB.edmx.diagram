@@ -46,10 +46,11 @@
         <AssociationConnector Association="MovieClubDBModel.FK_DBReservations_DBUsers" />
         <AssociationConnector Association="MovieClubDBModel.FK_DBUsers_DBUsers" />
         <AssociationConnector Association="MovieClubDBModel.FK_DBWatchLists_DBUsers" />
-        <EntityTypeShape EntityType="MovieClubDBModel.DBReview" Width="1.5" PointX="3" PointY="13.625" />
-        <AssociationConnector Association="MovieClubDBModel.FK_DBReviews_DBMovies" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBSuggestion" Width="1.5" PointX="9.25" PointY="12.75" />
         <AssociationConnector Association="MovieClubDBModel.FK_DBSuggestions_DBUsers" />
+        <EntityTypeShape EntityType="MovieClubDBModel.DBReview" Width="1.5" PointX="12.25" PointY="5.25" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBReviews_DBMovies" />
+        <AssociationConnector Association="MovieClubDBModel.FK_DBReviews_DBUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

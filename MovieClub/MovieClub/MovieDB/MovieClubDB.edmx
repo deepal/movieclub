@@ -175,8 +175,10 @@
           </Key>
           <Property Name="ReviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MovieId" Type="int" Nullable="false" />
-          <Property Name="Username" Type="varchar" MaxLength="200" />
+          <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Comment" Type="varchar" MaxLength="1000" />
+          <Property Name="Timestamp" Type="datetime" />
+          <Property Name="Moderated" Type="int" />
         </EntityType>
         <EntityType Name="DBSuggestions">
           <Key>
@@ -497,6 +499,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DBReviews_DBUsers">
+          <End Role="DBUsers" Type="Self.DBUsers" Multiplicity="1" />
+          <End Role="DBReviews" Type="Self.DBReviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUsers">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBReviews">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DBSuggestions_DBUsers">
           <End Role="DBUsers" Type="Self.DBUsers" Multiplicity="1" />
           <End Role="DBSuggestions" Type="Self.DBSuggestions" Multiplicity="*" />
@@ -654,6 +668,10 @@
             <End Role="DBMovies" EntitySet="DBMovies" />
             <End Role="DBReviews" EntitySet="DBReviews" />
           </AssociationSet>
+          <AssociationSet Name="FK_DBReviews_DBUsers" Association="Self.FK_DBReviews_DBUsers">
+            <End Role="DBUsers" EntitySet="DBUsers" />
+            <End Role="DBReviews" EntitySet="DBReviews" />
+          </AssociationSet>
           <AssociationSet Name="FK_DBSuggestions_DBUsers" Association="Self.FK_DBSuggestions_DBUsers">
             <End Role="DBUsers" EntitySet="DBUsers" />
             <End Role="DBSuggestions" EntitySet="DBSuggestions" />
@@ -786,15 +804,19 @@
             <End Role="DBUser" EntitySet="DBUsers" />
             <End Role="DBWatchList" EntitySet="DBWatchLists" />
           </AssociationSet>
+          <EntitySet Name="DBSuggestions" EntityType="MovieClubDBModel.DBSuggestion" />
+          <AssociationSet Name="FK_DBSuggestions_DBUsers" Association="MovieClubDBModel.FK_DBSuggestions_DBUsers">
+            <End Role="DBUser" EntitySet="DBUsers" />
+            <End Role="DBSuggestion" EntitySet="DBSuggestions" />
+          </AssociationSet>
           <EntitySet Name="DBReviews" EntityType="MovieClubDBModel.DBReview" />
           <AssociationSet Name="FK_DBReviews_DBMovies" Association="MovieClubDBModel.FK_DBReviews_DBMovies">
             <End Role="DBMovie" EntitySet="DBMovies1" />
             <End Role="DBReview" EntitySet="DBReviews" />
           </AssociationSet>
-          <EntitySet Name="DBSuggestions" EntityType="MovieClubDBModel.DBSuggestion" />
-          <AssociationSet Name="FK_DBSuggestions_DBUsers" Association="MovieClubDBModel.FK_DBSuggestions_DBUsers">
+          <AssociationSet Name="FK_DBReviews_DBUsers" Association="MovieClubDBModel.FK_DBReviews_DBUsers">
             <End Role="DBUser" EntitySet="DBUsers" />
-            <End Role="DBSuggestion" EntitySet="DBSuggestions" />
+            <End Role="DBReview" EntitySet="DBReviews" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="DBCategory">
@@ -920,6 +942,7 @@
           <NavigationProperty Name="DBUser1" Relationship="MovieClubDBModel.FK_DBUsers_DBUsers" FromRole="DBUser1" ToRole="DBUser" />
           <NavigationProperty Name="DBWatchLists" Relationship="MovieClubDBModel.FK_DBWatchLists_DBUsers" FromRole="DBUser" ToRole="DBWatchList" />
           <NavigationProperty Name="DBSuggestions" Relationship="MovieClubDBModel.FK_DBSuggestions_DBUsers" FromRole="DBUser" ToRole="DBSuggestion" />
+          <NavigationProperty Name="DBReviews" Relationship="MovieClubDBModel.FK_DBReviews_DBUsers" FromRole="DBUser" ToRole="DBReview" />
         </EntityType>
         <EntityType Name="DBRating">
           <Key>
@@ -1346,28 +1369,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="DBReview">
-          <Key>
-            <PropertyRef Name="ReviewId" />
-          </Key>
-          <Property Name="ReviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MovieId" Type="Int32" Nullable="false" />
-          <Property Name="Username" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DBMovy" Relationship="MovieClubDBModel.FK_DBReviews_DBMovies" FromRole="DBReview" ToRole="DBMovie" />
-          <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <Association Name="FK_DBReviews_DBMovies">
-          <End Type="MovieClubDBModel.DBMovie" Role="DBMovie" Multiplicity="1" />
-          <End Type="MovieClubDBModel.DBReview" Role="DBReview" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DBMovie">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DBReview">
-              <PropertyRef Name="MovieId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="DBSuggestion">
           <Key>
             <PropertyRef Name="SuggestionId" />
@@ -1387,6 +1388,43 @@
               <PropertyRef Name="UserId" />
             </Principal>
             <Dependent Role="DBSuggestion">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DBReview">
+          <Key>
+            <PropertyRef Name="ReviewId" />
+          </Key>
+          <Property Name="ReviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Timestamp" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DBMovy" Relationship="MovieClubDBModel.FK_DBReviews_DBMovies" FromRole="DBReview" ToRole="DBMovie" />
+          <NavigationProperty Name="DBUser" Relationship="MovieClubDBModel.FK_DBReviews_DBUsers" FromRole="DBReview" ToRole="DBUser" />
+          <Property Name="Moderated" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_DBReviews_DBMovies">
+          <End Type="MovieClubDBModel.DBMovie" Role="DBMovie" Multiplicity="1" />
+          <End Type="MovieClubDBModel.DBReview" Role="DBReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBMovie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DBReview">
+              <PropertyRef Name="MovieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DBReviews_DBUsers">
+          <End Type="MovieClubDBModel.DBUser" Role="DBUser" Multiplicity="1" />
+          <End Type="MovieClubDBModel.DBReview" Role="DBReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DBUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="DBReview">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1598,16 +1636,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DBReviews">
-            <EntityTypeMapping TypeName="MovieClubDBModel.DBReview">
-              <MappingFragment StoreEntitySet="DBReviews">
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
-                <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DBSuggestions">
             <EntityTypeMapping TypeName="MovieClubDBModel.DBSuggestion">
               <MappingFragment StoreEntitySet="DBSuggestions">
@@ -1616,6 +1644,18 @@
                 <ScalarProperty Name="MovieName" ColumnName="MovieName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="SuggestionId" ColumnName="SuggestionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DBReviews">
+            <EntityTypeMapping TypeName="MovieClubDBModel.DBReview">
+              <MappingFragment StoreEntitySet="DBReviews">
+                <ScalarProperty Name="Moderated" ColumnName="Moderated" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

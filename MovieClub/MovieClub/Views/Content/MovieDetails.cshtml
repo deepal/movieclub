@@ -194,18 +194,21 @@
                     </div>
                 </div>
                 
-                <div id="moviedetails-reviews">
-                    <div id="add-review">
-                        <textarea id="review-content" placeholder="Write a review"></textarea>
-                        <button id="review-button" class="button tiny secondary right">Post</button>
-                    </div>
-                    <div id="reviews-title">
-                        @System.Configuration.ConfigurationManager.AppSettings["OrganizationName"] User Reviews
-                    </div>
-                    <div id="old-reviews">
+                @if (bool.Parse(System.Configuration.ConfigurationManager.AppSettings["ReviewEnabled"]))
+                {
+                    <div id="moviedetails-reviews">
+                        <div id="add-review">
+                            <textarea id="review-content" placeholder="Write a review"></textarea>
+                            <button id="review-button" class="button tiny secondary right">Post</button>
+                        </div>
+                        <div id="reviews-title">
+                            @System.Configuration.ConfigurationManager.AppSettings["OrganizationName"] User Reviews
+                        </div>
+                        <div id="old-reviews">
 
+                        </div>
                     </div>
-                </div>
+                }
 
             </div>
         </div>
@@ -214,31 +217,6 @@
     
 </div>
 
-@section scripts{
-    <!--<script type="text/javascript">
-        $(document).ready(function () {
-            $.ajax({
-                type: "GET",
-                url: "http://www.omdbapi.com/",
-                data: {
-                    t: "",
-                    r: "json",
-                    plot: "full"
-                }
-                
-            }).success(function (data) {
-                
-                var obj = $.parseJSON(data);
-                $("#jsoncontent").html(obj.Plot);
-                $("#image").image = obj.Poster;
-            })
-            .error(function () {
-                $("#jsoncontent").html("Error getting movie details");
-            });
-        });
-
-    </script>-->
-}
 
 @section customstyles{
     <link href='http://fonts.googleapis.com/css?family=Gilda+Display' rel='stylesheet' type='text/css'>
@@ -269,34 +247,41 @@
 
         $(document).ready(function () {
 
-            $("#review-button").click(function (e) {
-                var comment = $("#review-content").val();
-                $.ajax({
-                    url: "/User/ReviewMovie/?movieid=@movie.Id&&comment="+comment,
-                    type: "POST",
-                    data: AddAntiForgeryToken({}),
-                    dataType: "text"
-                })
-                .success(function (data) {
-                    var obj = $.parseJSON(data);
-                    if (obj.result == "ok") {
-                        updateReviews("@movie.Id");
-                        $("#review-content").val("");
-                    }
-                    else if (obj.result == "error") {
-                        toastr.error("Could not post your review! Try again later.");
-                    }
-                })
-                .error(function () {
-                    toastr.error("Could not connect! Check your connection");
+            if ("@System.Configuration.ConfigurationManager.AppSettings["ReviewEnabled"]" == "true") {
+                $("#review-button").click(function (e) {
+                    var comment = $("#review-content").val();
+                    $.ajax({
+                        url: "/User/ReviewMovie/?movieid=@movie.Id&&comment=" + comment,
+                        type: "POST",
+                        data: AddAntiForgeryToken({}),
+                        dataType: "text"
+                    })
+                    .success(function (data) {
+                        var obj = $.parseJSON(data);
+                        if (obj.result == "ok") {
+                            updateReviews("@movie.Id");
+                            $("#review-content").val("");
+                        }
+                        else if (obj.result == "pending") {
+                            toastr.info("Your review will be posted after being moderated");
+                            $("#review-content").val("");
+                        }
+                        else if (obj.result == "error") {
+                            toastr.error("Could not post your review! Try again later.");
+                        }
+                    })
+                    .error(function () {
+                        toastr.error("Could not connect! Check your connection");
+                    });
+
+                    e.preventDefault();
                 });
 
-                e.preventDefault();
-            });
+                $("#old-reviews").html("<img src='/Content/images/ajax-loader.gif'/>");
 
-            $("#old-reviews").html("<img src='/Content/images/ajax-loader.gif'/>");
-
-            updateReviews("@movie.Id");
+                updateReviews("@movie.Id");
+            }
+            
 
             $("#add-to-favorites").click(function (e) {
                 var mid = "@movie.Id";

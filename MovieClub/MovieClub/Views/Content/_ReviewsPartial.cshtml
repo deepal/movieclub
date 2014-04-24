@@ -2,6 +2,7 @@
 
 @{
     var reviews = Model;
+    var movieid = ViewBag.MovieId;
 }
 
 @if (reviews.Count > 0)
@@ -9,8 +10,18 @@
     foreach (var item in reviews)
     {
         <div class="review">
-            <div class="review-user">By @item.Username</div>
+            <div class="review-user">
+                By @item.Username
+            </div>
+            <div class="review-date">
+                @String.Format("{0:MMMM dd yyyy}", item.Timestamp)
+            </div>
             <div class="review-comment">@item.Comment</div>
+            @if (@item.DeleteEnabled)
+            {
+                <div class="review-delete"><a class="review-delete-button" onclick="deleteReview(@item.ReviewId)">delete</a></div>
+            }
+            <div style="clear:both"></div>
         </div>
     }
 }
@@ -20,7 +31,31 @@ else
         No reviews yet!
     </div>
 }
+<script src="~/Content/js/contentfunctions.js"></script>
+<script src="~/Content/js/AjaxAntiForgeryTokens.js"></script>
 
+<script>
+    function deleteReview(rid) {
+        $.ajax({
+            url: "/User/DeleteReview/?rid="+rid,
+            type: "POST",
+            dataType: "text",
+            data: AddAntiForgeryToken({})
+        })
+        .success(function (data) {
+            var obj = $.parseJSON(data);
+            if (obj.result == "ok") {
+                updateReviews("@movieid");
+            }
+            else if (obj.result == "error") {
+                toastr.error("Error occured! Try again later");
+            }
+        })
+        .error(function () {
+            toastr.error("Could not connect! Check your connection.");
+        });
+    }
+</script>
 
 
 

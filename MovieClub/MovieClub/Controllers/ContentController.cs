@@ -342,17 +342,6 @@ namespace MovieClub.Controllers
                 }
             }
 
-            List<ReviewModel> reviews = new List<ReviewModel>();
-
-            var rvws = db.DBReviews.Where(rv=>rv.MovieId==Id);
-
-            foreach (var review in rvws)
-            {
-                reviews.Add(new ReviewModel() {
-                    Username = review.Username,
-                    Comment = review.Comment
-                });
-            }
 
             return View(new MovieDetails() {
                 Actors = dbmovieitem.Actors,
@@ -387,19 +376,107 @@ namespace MovieClub.Controllers
         [HttpGet]
         public ActionResult GetReviews(int mid)
         {
+            var moderationEnabled = bool.Parse(System.Configuration.ConfigurationManager.AppSettings["ModerateReviews"]);
+            var reviewEnabled = bool.Parse(System.Configuration.ConfigurationManager.AppSettings["ReviewEnabled"]);
+            var deleteEnabled = false;
+
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
-            var rs = db.DBReviews.Where(rv => rv.MovieId == mid).ToList();
+            var rs = db.DBReviews.Where(rv => rv.MovieId == mid).Join(db.DBUsers,
+                l=>l.UserId,
+                r=>r.UserId,
+                (l,r)=>new{
+                    ReviewId = l.ReviewId,
+                    UserId = l.UserId,
+                    Username = r.UserName,
+                    MovieId = l.MovieId,
+                    Comment = l.Comment,
+                    Timestamp = l.Timestamp,
+                    Moderated = l.Moderated
+                });
             List<ReviewModel> reviews = new List<ReviewModel>();
 
-            foreach (var item in rs)
+            int? currentUid = null;
+
+            if (Request.IsAuthenticated)
             {
-                reviews.Add(new ReviewModel() { 
-                    Comment = item.Comment,
-                    Username = item.Username
-                });
+                currentUid = UserOperations.GetCurrentUser().UserId;
             }
-            reviews.Reverse();
-            return PartialView("_ReviewsPartial",reviews);
+
+            if (reviewEnabled)
+            {
+                if (!moderationEnabled)
+                {
+                    foreach (var item in rs)
+                    {
+
+                        if (currentUid != null)
+                        {
+                            if (item.UserId == (int)currentUid)
+                            {
+                                deleteEnabled = true;
+                            }
+                            else
+                            {
+                                deleteEnabled = false;
+                            }
+                        }
+                        else
+                        {
+                            deleteEnabled = false;
+                        }
+
+                        reviews.Add(new ReviewModel()
+                        {
+                            ReviewId = item.ReviewId,
+                            UserId = item.UserId,
+                            Username = item.Username,
+                            MovieId = item.MovieId,
+                            Comment = item.Comment,
+                            Timestamp = (DateTime)item.Timestamp,
+                            DeleteEnabled = deleteEnabled
+                        });
+                    }
+                }
+                else
+                {
+                    foreach (var item in rs)
+                    {
+                        if (currentUid != null)
+                        {
+                            if (item.UserId == (int)currentUid)
+                            {
+                                deleteEnabled = true;
+                            }
+                            else
+                            {
+                                deleteEnabled = false;
+                            }
+                        }
+                        else
+                        {
+                            deleteEnabled = false;
+                        }
+
+                        if (item.Moderated == 1)
+                        {
+                            reviews.Add(new ReviewModel()
+                            {
+                                ReviewId = item.ReviewId,
+                                UserId = item.UserId,
+                                Username = item.Username,
+                                MovieId = item.MovieId,
+                                Comment = item.Comment,
+                                Timestamp = (DateTime)item.Timestamp,
+                                DeleteEnabled = deleteEnabled
+                            });
+                        }
+                    }
+                }
+            }
+
+            reviews.Sort((x, y) => ((DateTime)y.Timestamp).CompareTo((x.Timestamp)));
+            ViewBag.MovieId = mid;
+            return PartialView("_ReviewsPartial", reviews);
         }
 
         [AllowAnonymous]

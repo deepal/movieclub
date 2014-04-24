@@ -268,30 +268,81 @@ namespace MovieClub.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ReviewMovie(string comment, int movieid)
         {
-            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+            var reviewEnabled = bool.Parse(System.Configuration.ConfigurationManager.AppSettings["ReviewEnabled"]);
+            var moderationEnabled = bool.Parse(System.Configuration.ConfigurationManager.AppSettings["ModerateReviews"]);
 
-            var username = User.Identity.Name;
+            if(reviewEnabled){
+                MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+
+                var userid = UserOperations.GetCurrentUser().UserId;
+
+                try
+                {
+                    db.DBReviews.Add(new MovieDB.DBReview()
+                    {
+                        UserId = userid,
+                        MovieId = movieid,
+                        Comment = comment,
+                        Timestamp = DateTime.Now,
+                        Moderated = 0
+                    });
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    return Json(new
+                    {
+                        result = "error"
+                    });
+                }
+
+                if (moderationEnabled)
+                {
+                    return Json(new
+                    {
+                        result = "pending"
+                    });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        result = "ok"
+                    });
+                }
+            }
+
+            return Json(new
+            {
+                result = "error"
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteReview(int rid)
+        {
             try
             {
-                db.DBReviews.Add(new MovieDB.DBReview()
-                {
-                    Username = username,
-                    MovieId = movieid,
-                    Comment = comment
-                });
+                MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+                var currentUserid = UserOperations.GetCurrentUser().UserId;
+
+                var rv = db.DBReviews.Where(r => r.UserId == currentUserid && r.ReviewId == rid).FirstOrDefault();
+
+                db.DBReviews.Remove(rv);
                 db.SaveChanges();
             }
             catch (Exception)
             {
-                return Json(new
-                {
-                    result = "error"
+                return Json(new { 
+                    result="error"
                 });
             }
 
             return Json(new { 
-                result = "ok"
+                result="ok"
             });
+
         }
 
 

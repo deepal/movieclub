@@ -16,9 +16,12 @@ namespace MovieClub.MovieDB
     {
         public int ReviewId { get; set; }
         public int MovieId { get; set; }
-        public string Username { get; set; }
+        public int UserId { get; set; }
         public string Comment { get; set; }
+        public Nullable<System.DateTime> Timestamp { get; set; }
+        public Nullable<int> Moderated { get; set; }
     
         public virtual DBMovie DBMovy { get; set; }
+        public virtual DBUser DBUser { get; set; }
     }
 }

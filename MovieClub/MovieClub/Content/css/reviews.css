@@ -28,6 +28,8 @@
 #review-button{
     padding:10px;
     margin-bottom:10px;
+    width:10%;
+    min-width:50px;
 }
 
 #old-reviews{
@@ -48,10 +50,23 @@
     color:#808080;
     font-style:italic;
     padding-bottom:5px;
+    float:left;
+}
+
+.review-date{
+    float:right;
+    font-size:11px !important;
+    color:#808080;
+}
+
+.review-delete{
+    clear:both;
+    float:right;
 }
 
 .review-comment{
     padding:5px;
+    clear:both;
 }
 
 .no-reviews{

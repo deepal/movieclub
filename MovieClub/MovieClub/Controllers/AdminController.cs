@@ -77,13 +77,15 @@ namespace MovieClub.Controllers
 
                 return Json(new
                 {
-                    result = "ok"
+                    result = "ok",
+                    message = "Reviewing Enabled: "+status
                 });
             }
             catch (Exception)
             {
                 return Json(new {
-                    result = "error"
+                    result = "error",
+                    message = "Error occured! Try again later"
                 });
             }
         }
@@ -100,14 +102,16 @@ namespace MovieClub.Controllers
 
                 return Json(new
                 {
-                    result = "ok"
+                    result = "ok",
+                    message = "Moderation before posting reviews: "+status
                 });
             }
             catch (Exception)
             {
                 return Json(new
                 {
-                    result = "error"
+                    result = "error",
+                    message = "Error occured! Try again later"
                 });
             }
         }

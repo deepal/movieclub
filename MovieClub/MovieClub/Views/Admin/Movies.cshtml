@@ -3,12 +3,30 @@
 @{
     ViewBag.Title = "Manage Movies";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    
 }
 <div class="row">
     <div class="small-100 large-30 medium-50 columns left">
         <input type="text" placeholder="Type to search movie" id="search-movie-admin" />
     </div>
-    <div class="admin-title">Manage Movies</div>
+    <div id="config-panel" class="right">
+        <table>
+            <tr>
+                <td>Enable Reviews</td>
+                <td>
+                    <div class="config-check">
+                        <input type="checkbox" id="config-review-enabled" @if (ViewBag.ReviewStatus) { <text> checked="checked" </text> } />
+                    </div>
+                </td>
+                <td></td><td></td>
+                <td>Enable Review Moderation</td>
+                <td>
+                    <div class="config-check"><input type="checkbox" id="config-moderation-enabled" @if (ViewBag.ModerationStatus) { <text> checked="checked" </text>  } /></div> 
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="padding-left:15px"><div class="admin-title">Manage Movies</div></div>
     <div class="small-100 large-100 medium-100 columns">
         <div id="movies-list">
             <img style="margin-top:20px" src="/Content/images/ajax-loader-bar.gif" />
@@ -61,6 +79,44 @@
                 toastr.error("Could not delete movie! Check your connection.")
             });
         }
+
+        $("#config-review-enabled").click(function (e) {
+            var enabled = $(this).is(":checked");
+            $.ajax({
+                url: "/Admin/ChangeReviewingStatus/?status=" + enabled,
+                type: "POST",
+                dataType: "text",
+                data: AddAntiForgeryToken({})
+            })
+            .success(function (data) {
+                var obj = $.parseJSON(data);
+                if (obj.result == "ok") {
+                    toastr.success("Reviewing Enabled!");
+                }
+                else {
+                    toastr.success("Reviewing Disabled!");
+                }
+            });
+        });
+
+        $("#config-moderation-enabled").click(function (e) {
+            var enabled = $(this).is(":checked");
+            $.ajax({
+                url: "/Admin/ChangeModerationStatus/?status=" + enabled,
+                type: "POST",
+                dataType: "text",
+                data: AddAntiForgeryToken({})
+            })
+            .success(function (data) {
+                var obj = $.parseJSON(data);
+                if (obj.result == "ok") {
+                    toastr.success("Reviewing Enabled!");
+                }
+                else {
+                    toastr.success("Reviewing Disabled!");
+                }
+            });
+        });
 
         $("#search-movie-admin").keyup(function (event) {
             $.ajax({

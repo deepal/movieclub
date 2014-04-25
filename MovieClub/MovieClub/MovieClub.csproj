@@ -827,6 +827,7 @@
     <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\bodybackground.png" />
     <Content Include="Content\images\controls.png" />
+    <Content Include="Content\images\pointer1.cur" />
     <Content Include="Content\images\delete.gif" />
     <Content Include="Content\images\dl-arr.png" />
     <Content Include="Content\images\down-arr.gif" />

@@ -247,7 +247,7 @@
 
         $(document).ready(function () {
 
-            if ("@System.Configuration.ConfigurationManager.AppSettings["ReviewEnabled"]" == "true") {
+            if ("@System.Configuration.ConfigurationManager.AppSettings["ReviewEnabled"]".toLowerCase() == "true") {
                 $("#review-button").click(function (e) {
                     var comment = $("#review-content").val();
                     $.ajax({

@@ -186,4 +186,12 @@ input[type=checkbox]{
     color:#aaaaaa;
     padding-bottom:10px;
     padding-top:10px;
+    clear:both;
+}
+
+#config-panel{
+    margin-right:15px;
+}
+
+.config-check input[type=checkbox]{
 }

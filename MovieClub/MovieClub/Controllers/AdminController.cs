@@ -3,11 +3,13 @@ using MovieClub.Models;
 using MovieClub.Operations;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 
 namespace MovieClub.Controllers
@@ -57,10 +59,58 @@ namespace MovieClub.Controllers
         [HttpGet]
         public ActionResult Movies()
         {
+
+            ViewBag.ReviewStatus = bool.Parse(System.Configuration.ConfigurationManager.AppSettings["ReviewEnabled"]);
+            ViewBag.ModerationStatus = bool.Parse(System.Configuration.ConfigurationManager.AppSettings["ModerateReviews"]);
             return View();
         }
 
+        [HttpPost]
+        public ActionResult ChangeReviewingStatus(bool status)
+        {
+            try
+            {
+                Configuration config = WebConfigurationManager.OpenWebConfiguration(Request.ApplicationPath);
+                config.AppSettings.Settings.Remove("ReviewEnabled");
+                config.AppSettings.Settings.Add("ReviewEnabled", status.ToString());
+                config.Save();
 
+                return Json(new
+                {
+                    result = "ok"
+                });
+            }
+            catch (Exception)
+            {
+                return Json(new {
+                    result = "error"
+                });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ChangeModerationStatus(bool status)
+        {
+            try
+            {
+                Configuration config = WebConfigurationManager.OpenWebConfiguration(Request.ApplicationPath);
+                config.AppSettings.Settings.Remove("ModerateReviews");
+                config.AppSettings.Settings.Add("ModerateReviews", status.ToString());
+                config.Save();
+
+                return Json(new
+                {
+                    result = "ok"
+                });
+            }
+            catch (Exception)
+            {
+                return Json(new
+                {
+                    result = "error"
+                });
+            }
+        }
 
         [HttpGet]
         public ActionResult ManageMovies(string q)

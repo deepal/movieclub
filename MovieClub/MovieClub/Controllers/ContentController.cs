@@ -25,15 +25,6 @@ namespace MovieClub.Controllers
         public const int TOP_MOVIECLUB = 3;
         public const int MOST_VIEWED = 4;
         public const int ALL = 5;
-        
-
-        // GET: /MovieClub/
-        [HttpGet]
-        [AllowAnonymous]
-        public ActionResult Index()
-        {            
-            return View();
-        }
 
         [HttpGet]
         [AllowAnonymous]
@@ -41,7 +32,6 @@ namespace MovieClub.Controllers
         {
             return View();
         }
-
 
         [HttpGet]
         [AllowAnonymous]

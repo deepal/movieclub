@@ -18,14 +18,14 @@ namespace MovieClub.Controllers
     
     public class AccountController : Controller
     {
-        //
-        // GET: /Account/Login
+        
         [AllowAnonymous]
         public string GetSolUserName()
         {
             return "deepal";
             //return HttpContext.User.Identity.Name;
         }
+
 
         [AllowAnonymous]
         [HttpGet]
@@ -51,8 +51,6 @@ namespace MovieClub.Controllers
         }
 
 
-        //
-        // POST: /Account/LogOff
         [HttpPost]
         [RequireMembership]
         [ValidateAntiForgeryToken]
@@ -62,10 +60,6 @@ namespace MovieClub.Controllers
             System.Web.Security.FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
         }
-
-        //
-        // GET: /Account/Register
-
 
         [AllowAnonymous]
         public ActionResult Register()
@@ -80,10 +74,7 @@ namespace MovieClub.Controllers
 
             return View();
         }
-
-        //
-        // POST: /Account/Register
-
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -122,26 +113,5 @@ namespace MovieClub.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/Disassociate
-
-        
-        /*
-         #region Helpers
-        private ActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
-        }
-
-        #endregion 
-         
-         */
     }
 }

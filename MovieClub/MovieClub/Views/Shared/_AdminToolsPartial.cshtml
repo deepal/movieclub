@@ -2,12 +2,21 @@
 <section class="top-bar-section">
     <ul class="right">
         <li class="has-dropdown">
-            <a href="#" class="success">Administrator</a>
+            <a href="#" class="success">Administrator Tools</a>
             <ul class="dropdown">
+                <li><label>Basic</label></li>
                 <li><a href="/Admin/AddMovie">Add Movie</a></li>
                 <li><a href="/Admin/Movies">Manage Movies</a></li>
                 <li class="divider"></li>
-                <li class="active"><a href="/Admin/CPanel">Control panel</a></li>
+                <li><label>Advanced</label></li>
+                <li class="has-dropdown">
+                    <a href="#">Settings</a>
+                    <ul class="dropdown">
+                        <li><label>Settings</label></li>
+                        <li><a href="/Admin/CPanel">Control panel</a></li>
+                        <li><a href="/Admin/Configuration">Global Configuration</a></li>
+                    </ul>
+                </li>
             </ul>
         </li>
     </ul>

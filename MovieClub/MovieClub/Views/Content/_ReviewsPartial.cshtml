@@ -33,11 +33,12 @@ else
 }
 <script src="~/Content/js/contentfunctions.js"></script>
 <script src="~/Content/js/AjaxAntiForgeryTokens.js"></script>
+<script src="~/Content/js/adminfunctions.js"></script>
 
 <script>
     function deleteReview(rid) {
         $.ajax({
-            url: "/User/DeleteReview/?rid="+rid,
+            url: "/User/DeleteReview/?rid=" + rid,
             type: "POST",
             dataType: "text",
             data: AddAntiForgeryToken({})

@@ -9,43 +9,10 @@
     <label for="suggestion-info">Additional information</label>
     <textarea placeholder="Additional information that helps to uniquely identify the movie (Ex: IMDb ID/URL, Other URL, Year etc.)" id="suggestion-info" rows="4"></textarea>
     <div style="text-align:center">
-        <input type="submit" id="suggest-button" class="button tiny" value="Suggest" />
+        <button id="suggest-button" class="button tiny">Suggest</button>
     </div>
 </form>
 
 <script src="~/Content/js/adminfunctions.js"></script>
-<script>
-    $("#suggest-button").click(function (e) {
-        
-        var moviename = $("#suggestion-name").val();
-        var info = $("#suggestion-info").val();
-
-        $.ajax({
-            url: "/User/Suggest",
-            type: "POST",
-            data: AddAntiForgeryToken({
-                moviename: moviename,
-                info: info
-            }),
-            dataType: "text"
-        })
-        .success(function (data) {
-            var obj = $.parseJSON(data);
-            if (obj.result == "ok") {
-                //alert("ok");
-                toastr.success(obj.message);
-            }
-            else {
-                //alert("fail");
-                toastr.error(obj.message);
-            }
-        })
-        .error(function () {
-            //alert("die");
-            toastr.error("Could not connect! Check your connection.");
-        });
-
-        e.preventDefault();
-        $("#suggestModal").foundation('reveal', 'close');
-    });
-</script>
+<script src="~/Content/js/AjaxAntiForgeryTokens.js"></script>
+<script src="~/Content/js/suggestmovie.js"></script>

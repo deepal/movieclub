@@ -9,7 +9,7 @@
     foreach (var item in movies)
     {
         <tr>
-            <td><a href="#" class="close"><input type="checkbox" class="checked" data-suggestion="@item.SuggestionId" /></a></td>
+            <td><a href="#" class="close"><input type="checkbox" class="sugchecked" data-suggestion="@item.SuggestionId" /></a></td>
             <td>@item.Username</td>
             <td>@item.MovieName</td>
             <td>@Html.Raw(item.Info)</td>
@@ -26,26 +26,3 @@ else
 }
 <script src="~/Content/js/adminfunctions.js"></script>
 <script src="~/Content/js/AjaxAntiForgeryTokens.js"></script>
-<script>
-    $(".checked").click(function (e) {
-        $.ajax({
-            url: "/Admin/CheckSuggestion/?sid=" + $(this).attr("data-suggestion"),
-            type: "POST",
-            data: AddAntiForgeryToken({}),
-            dataType: "text"
-        })
-        .success(function (data) {
-            var obj = $.parseJSON(data);
-            if (obj.result == "error") {
-                toastr.error("Error occured! Try again later");
-            }
-            else if (obj.result == "ok") {
-                updateSuggestedMovies();
-            }
-        })
-        .error(function () {
-            //alert("Error occured! Try again later");
-            toastr.error("Could not connect! Check your connection.");
-        });
-    });
-</script>

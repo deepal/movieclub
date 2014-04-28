@@ -50,6 +50,7 @@ namespace MovieClub.Controllers
             
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
             List<SimpleMovieDetails> movielist = new List<SimpleMovieDetails>();
+            int moviesperpage = int.Parse(System.Configuration.ConfigurationManager.AppSettings["MovieCollectionPageSize"]);
 
             if (list == null)
             {
@@ -245,7 +246,7 @@ namespace MovieClub.Controllers
 
             var movies = movielist;
 
-            var pageC = (int)(Math.Ceiling(((double)(movies.Count)) / 15));
+            var pageC = (int)(Math.Ceiling(((double)(movies.Count)) / moviesperpage));
 
             if (Page == null || Page == 0)
             {
@@ -256,10 +257,10 @@ namespace MovieClub.Controllers
             int remaining;
             if (Page <= pageC)
             {
-                remaining = (movies.Count) - (15 * (((int)Page) - 1));
+                remaining = (movies.Count) - (moviesperpage * (((int)Page) - 1));
 
-                var currentindex = (((int)Page) - 1) * 15;
-                var currentpagemovies = movies.GetRange(currentindex, Math.Min(15, remaining));
+                var currentindex = (((int)Page) - 1) * moviesperpage;
+                var currentpagemovies = movies.GetRange(currentindex, Math.Min(moviesperpage, remaining));
 
                 catmodel = new Models.CategoryModel()
                 {

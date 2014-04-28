@@ -13,7 +13,10 @@
 
 @section featured{
 
-    @Html.Partial("_FeaturedPartial", homepage)
+    @if (homepage.Featureds.Count != 0)
+    {
+        @Html.Partial("_FeaturedPartial", homepage);
+    }
     @Html.Partial("_WhatsNewPartial", homepage.NewlyAdded)
 }
 
@@ -93,7 +96,7 @@
             // Create a rondell with the 'carousel' preset and set an option
             // to disable the rondell while the lightbox is displayed
             $("#rondellCarousel > *").rondell({
-                preset: "cubic",
+                preset: "carousel",
                 theme: "light",
                 scaling: 2,
                 autoRotation:{ 

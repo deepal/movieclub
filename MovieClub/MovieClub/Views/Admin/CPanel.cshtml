@@ -189,7 +189,7 @@
     @Scripts.Render("~/Content/js/toastr.js")
     @Scripts.Render("~/Content/js/AjaxAntiForgeryTokens.js")
 
-    <script type="text/javascript" src="/Content/js/adminfunctions.js"></script>
+    <script type="text/javascript" src="~/Content/js/adminfunctions.js"></script>
 
     <script type="text/javascript">
 
@@ -214,138 +214,6 @@
             /*---------------------------------------------------------------*/
 
         });
-
-
-        function approveReview(rid) {
-            $.ajax({
-                url: "/Admin/ApproveReview/?rid="+rid,
-                type: "POST",
-                data: AddAntiForgeryToken({}),
-                dataType: "text"
-            })
-            .success(function (data) {
-                var obj = $.parseJSON(data);
-                if (obj.result == "ok") {
-                    updatePendingReviews();
-                    toastr.success(obj.message);
-                }
-                else if (obj.result == "error") {
-                    toastr.success(obj.message);
-                }
-            })
-            .error(function () {
-                toastr.error("Could not connect! Check your connection.");
-            });
-        }
-        
-
-        function rejectReview(rid) {
-            $.ajax({
-                url: "/Admin/RejectReview/?rid=" + rid,
-                type: "POST",
-                data: AddAntiForgeryToken({}),
-                dataType: "text"
-            })
-            .success(function (data) {
-                var obj = $.parseJSON(data);
-                if (obj.result == "ok") {
-                    updatePendingReviews();
-                    toastr.success(obj.message);
-                }
-                else if (obj.result == "error") {
-                    toastr.success(obj.message);
-                }
-            })
-            .error(function () {
-                toastr.error("Could not connect! Check your connection.");
-            });
-        }
-
-
-        function issueMovie(movieid,userid) {
-            $.ajax({
-                url: "/Admin/Issue/?u=" + userid + "&&movie=" + movieid,
-                data:AddAntiForgeryToken({}),
-                type: "POST",
-                dataType: "text"
-            })
-                .success(function (data) {
-                    var obj = $.parseJSON(data);
-                    if (obj.result == "ok") {
-
-                        $.ajax({
-                            type: "GET",
-                            url: "/Admin/ReservedMovies"
-                        })
-                        .success(function (data) {
-                            $("#table-reservations tbody").html(data);
-                        })
-                        .error(function () {
-                            $("#table-reservations tbody").html("<p>Error loading reservations. Try refreshing the page.</p>");
-                        });
-
-                        //refresh pending returns view
-                        updatePendingReturns();
-
-                        //$.ajax({
-                        //    url: "/Admin/PendingReturns",
-                        //    type: "GET"
-                        //})
-                        //.success(function (data) {
-                        //    $("#table-returns tbody").html(data);
-                        //})
-                        //.error(function () {
-                        //    $("#table-returns tbody").html("<p>Error loading pending returns!</p>");
-                        //});
-
-                        toastr.success(obj.message);
-                    }
-                    else if (obj.result == "error") {
-                        toastr.warning(obj.message);
-                    }
-                    else {
-                        toastr.error("Unknown error occured!");
-                    }
-                })
-                .error(function () {
-                    toastr.error("Error occured! Check your connection.");
-                });
-        }
-
-        function markAsReturned(movieid,u) {
-            $.ajax({
-                url: "/Admin/MarkAsReturned/?movieid=" + movieid + "&&u=" + u,
-                data: AddAntiForgeryToken({}),
-                type: "POST",
-                dataType: "text"
-            })
-            .success(function (data) {
-                var obj = $.parseJSON(data);
-
-                updatePendingReturns();
-                updatePaymentDues();
-
-                //$.ajax({
-                //    url: "/Admin/PendingReturns",
-                //    type: "GET"
-                //})
-                //.success(function (data) {
-                //    $("#table-returns tbody").html(data);
-                //})
-                //.error(function () {
-                //    $("#table-returns tbody").html("<p>Error loading pending returns!</p>");
-                //});
-
-
-                if (obj.result == "ok") {
-                    toastr.success(obj.message);
-                }
-            })
-            .error(function () {
-                toastr.error("Error occured! Check your connection.");
-            });
-        }
-
     </script>
 
     

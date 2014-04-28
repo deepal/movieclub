@@ -1,0 +1,26 @@
+﻿
+#configtable{
+    margin:10px auto;
+    width:900px;
+}
+
+#configtable *{
+    font-size:12px !important;
+}
+
+#configtable input{
+    margin:5px;
+    margin-right:10px;
+}
+
+#configtitle{
+    font-size:24px;
+    font-weight:bold;
+    color:#808080;
+    margin:20px;
+}
+
+#savebutton{
+    margin:15px;
+    text-align:center;
+}

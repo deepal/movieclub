@@ -208,6 +208,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AdminModels\ConfigModel.cs" />
     <Compile Include="Models\AdminModels\DetailedPaymentModel.cs" />
     <Compile Include="Models\AdminModels\GetReservationModel.cs" />
     <Compile Include="Models\AdminModels\IssueUnreservedModel.cs" />
@@ -341,6 +342,7 @@
     <Content Include="Content\css\admin.css" />
     <Content Include="Content\css\allcatmodal.css" />
     <Content Include="Content\css\categorypage.css" />
+    <Content Include="Content\css\config.css" />
     <Content Include="Content\css\foundation-icons.css" />
     <Content Include="Content\css\foundation-icons.svg" />
     <Content Include="Content\css\glyphicons.css" />
@@ -863,6 +865,7 @@
     <Content Include="Content\js\jquery.rondell.js" />
     <Content Include="Content\js\jquery.simplePagination.js" />
     <Content Include="Content\js\jquery.ticker.js" />
+    <Content Include="Content\js\managemovies.js" />
     <Content Include="Content\js\moviecollection.js" />
     <Content Include="Content\js\foundation.min.js" />
     <Content Include="Content\js\foundation\foundation.abide.js" />
@@ -888,6 +891,7 @@
     <Content Include="Content\js\jquery.liquidcarousel.pack.js" />
     <Content Include="Content\js\jquery.rateit.js" />
     <Content Include="Content\js\jquery.tablesorter.js" />
+    <Content Include="Content\js\suggestmovie.js" />
     <Content Include="Content\js\tinymce\license.txt" />
     <Content Include="Content\js\tinymce\plugins\advlist\plugin.min.js" />
     <Content Include="Content\js\tinymce\plugins\anchor\plugin.min.js" />
@@ -1145,6 +1149,7 @@
     <Content Include="Views\User\Messages.cshtml" />
     <Content Include="Views\Content\_ReviewsPartial.cshtml" />
     <Content Include="Views\Admin\_PendingReviewsPartial.cshtml" />
+    <Content Include="Views\Admin\Configuration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\posters\" />

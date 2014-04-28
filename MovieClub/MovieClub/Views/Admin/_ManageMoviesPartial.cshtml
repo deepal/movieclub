@@ -98,36 +98,5 @@
 </div>
 
 
-<script>
-    $(".featuredcheckbox").change(function (e) {
-
-        $.ajax({
-            url: "/Admin/FeatureMovie/?",
-            type: "post",
-            data: AddAntiForgeryToken({
-                movieid: $(this).attr("data-movieid"),
-                featured: $(this).is(":checked")
-            }),
-            dataType: "text"
-        })
-        .success(function (data) {
-            var obj = $.parseJSON(data);
-            if (obj.result == "ok") {
-                toastr.success(obj.message);
-            }
-            else if (obj.result == "error") {
-                $(this).removeAttr("checked");
-                toastr.warning(obj.message);
-            }
-        })
-        .error(function () {
-            toastr.error("Error occured! Check your connection.");
-        });
-    });
-
-    
-
-   
-
-</script>
+<script src="~/Content/js/managemovies.js"></script>
 

@@ -1,0 +1,136 @@
+﻿@model MovieClub.Models.AdminModels.ConfigModel
+
+@{
+    ViewBag.Title = "Configuration";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div id="configtitle" style="text-align:center">Configuration</div>
+    
+    <div id="config-content" class="row">
+        <div class="large-90 large-centered medium-95 medium-centered small-100 columns">
+            
+            @if (ViewBag.SuccessMessage != null)
+            {
+                <div class="alert-box success">
+                    @ViewBag.SuccessMessage
+                </div>
+            }
+            
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="alert-box alert">
+
+                </div>
+            }
+
+            <table id="configtable">
+                <tr>
+                    <td>@Html.LabelFor(model => model.OrganizationName, "Organization Name")</td>
+                    <td>
+                        @Html.EditorFor(model => model.OrganizationName)
+                        @Html.ValidationMessageFor(model => model.OrganizationName)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>@Html.LabelFor(model => model.ClubName, "Club Name")</td>
+                    <td>
+                        @Html.EditorFor(model => model.ClubName)
+                        @Html.ValidationMessageFor(model => model.ClubName)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>@Html.LabelFor(model => model.ImdbAPIUrl, "IMDb API")</td>
+                    <td>
+                        @Html.EditorFor(model => model.ImdbAPIUrl)
+                        @Html.ValidationMessageFor(model => model.ImdbAPIUrl)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>@Html.LabelFor(model => model.MovieCollectionPageSize, "Movie Collection Page Size")</td>
+                    <td>
+                        @Html.EditorFor(model => model.MovieCollectionPageSize)
+                        @Html.ValidationMessageFor(model => model.MovieCollectionPageSize)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>@Html.LabelFor(model => model.MaxFeaturedsCount, "Max Featured Movie count (Existing Featured movies list will be reset) ")</td>
+                    <td>
+                        @Html.EditorFor(model => model.MaxFeaturedsCount)
+                        @Html.ValidationMessageFor(model => model.MaxFeaturedsCount)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>@Html.LabelFor(model => model.SidebarCategoryCount, "Max No. of Categories displayed in sidebar")</td>
+                    <td>
+                        @Html.EditorFor(model => model.SidebarCategoryCount)
+                        @Html.ValidationMessageFor(model => model.SidebarCategoryCount)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>@Html.LabelFor(model => model.ReviewEnabled, "Enable reviewing movies (Current reviews won't be deleted)")</td>
+                    <td>
+                        @Html.EditorFor(model => model.ReviewEnabled)
+                        @Html.ValidationMessageFor(model => model.ReviewEnabled)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>@Html.LabelFor(model => model.ModerationEnabled, "Enable Review Moderation before posting")</td>
+                    <td>
+                        @Html.EditorFor(model => model.ModerationEnabled)
+                        @Html.ValidationMessageFor(model => model.ModerationEnabled)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>@Html.LabelFor(model => model.DefaultRentingDuration, "Max Renting Duration")</td>
+                    <td>
+                        @Html.EditorFor(model => model.DefaultRentingDuration)
+                        @Html.ValidationMessageFor(model => model.DefaultRentingDuration)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>@Html.LabelFor(model => model.DefaultCharge, "Initial charge per movie")</td>
+                    <td>
+                        @Html.EditorFor(model => model.DefaultCharge)
+                        @Html.ValidationMessageFor(model => model.DefaultCharge)
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>@Html.LabelFor(model => model.FinePerDay, "Fine per day")</td>
+                    <td>
+                        @Html.EditorFor(model => model.FinePerDay)
+                        @Html.ValidationMessageFor(model => model.FinePerDay)
+                    </td>
+                </tr>
+
+            </table>
+            <div id="savebutton">
+                <input type="submit" id="saveconfig" class="button small" value="Save Changes" />
+            </div>
+        </div>
+    </div>
+
+}
+
+@section customstyles{
+    @Styles.Render("~/Content/css/config.css")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

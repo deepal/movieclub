@@ -18,6 +18,83 @@ namespace MovieClub.Controllers
     public class AdminController : Controller
     {
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Configuration(Models.AdminModels.ConfigModel config)
+        {
+
+            try
+            {
+                Configuration cf = WebConfigurationManager.OpenWebConfiguration(Request.ApplicationPath);
+                if (!ModelState.IsValid)
+                {
+                    ModelState.AddModelError("", "Couldn't save changes! Check all fields.");
+                    return View(config);
+                }
+                cf.AppSettings.Settings.Remove("OrganizationName");
+                cf.AppSettings.Settings.Add("OrganizationName",config.OrganizationName);
+                cf.AppSettings.Settings.Remove("ClubName");
+                cf.AppSettings.Settings.Add("ClubName",config.ClubName);
+                cf.AppSettings.Settings.Remove("IMDbAPI");
+                cf.AppSettings.Settings.Add("IMDbAPI",config.ImdbAPIUrl);
+                cf.AppSettings.Settings.Remove("MovieCollectionPageSize");
+                cf.AppSettings.Settings.Add("MovieCollectionPageSize",config.MovieCollectionPageSize.ToString());
+                cf.AppSettings.Settings.Remove("SidebarCategoryCount");
+                cf.AppSettings.Settings.Add("SidebarCategoryCount",config.SidebarCategoryCount.ToString());
+                cf.AppSettings.Settings.Remove("ReviewEnabled");
+                cf.AppSettings.Settings.Add("ReviewEnabled",config.ReviewEnabled.ToString());
+                cf.AppSettings.Settings.Remove("ModerateReviews");
+                cf.AppSettings.Settings.Add("ModerateReviews",config.ModerationEnabled.ToString());
+                cf.AppSettings.Settings.Remove("DefaultRentDuration");
+                cf.AppSettings.Settings.Add("DefaultRentDuration",config.DefaultRentingDuration.ToString());
+                cf.AppSettings.Settings.Remove("DefaultCharge");
+                cf.AppSettings.Settings.Add("DefaultCharge",config.DefaultCharge.ToString());
+                cf.AppSettings.Settings.Remove("DefaultFinePerDay");
+                cf.AppSettings.Settings.Add("DefaultFinePerDay",config.FinePerDay.ToString());
+
+                if (int.Parse(System.Configuration.ConfigurationManager.AppSettings["MaxFeaturedsCount"]) > config.MaxFeaturedsCount)
+                {
+                    MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+
+                    foreach (var item in db.DBFeatureds.ToList())
+                    {
+                        db.DBFeatureds.Remove(item);
+                    }
+                    db.SaveChanges();
+                }
+                
+                cf.AppSettings.Settings.Remove("MaxFeaturedsCount");
+                cf.AppSettings.Settings.Add("MaxFeaturedsCount", config.MaxFeaturedsCount.ToString());
+
+                cf.Save();
+                ViewBag.SuccessMessage = "Changes Saved!";
+            }
+            catch (Exception)
+            {
+                ViewBag.ErrorMessage = "Changes could not be saved! Refresh the page to retry.";
+            }
+
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Configuration()
+        {
+            Models.AdminModels.ConfigModel config = new Models.AdminModels.ConfigModel();
+            config.ClubName = System.Configuration.ConfigurationManager.AppSettings["ClubName"];
+            config.DefaultCharge = float.Parse(System.Configuration.ConfigurationManager.AppSettings["DefaultCharge"]);
+            config.DefaultRentingDuration = int.Parse(System.Configuration.ConfigurationManager.AppSettings["DefaultRentDuration"]);
+            config.FinePerDay = float.Parse(System.Configuration.ConfigurationManager.AppSettings["DefaultFinePerDay"]);
+            config.ImdbAPIUrl = System.Configuration.ConfigurationManager.AppSettings["IMDbAPI"];
+            config.MaxFeaturedsCount = int.Parse(System.Configuration.ConfigurationManager.AppSettings["MaxFeaturedsCount"]);
+            config.ModerationEnabled = bool.Parse(System.Configuration.ConfigurationManager.AppSettings["ModerateReviews"]);
+            config.MovieCollectionPageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["MovieCollectionPageSize"]);
+            config.OrganizationName = System.Configuration.ConfigurationManager.AppSettings["OrganizationName"];
+            config.ReviewEnabled = bool.Parse(System.Configuration.ConfigurationManager.AppSettings["ReviewEnabled"]);
+            config.SidebarCategoryCount = int.Parse(System.Configuration.ConfigurationManager.AppSettings["SidebarCategoryCount"]);
+            
+            return View(config);
+        }
 
         [HttpGet]
         public ActionResult CPanel()

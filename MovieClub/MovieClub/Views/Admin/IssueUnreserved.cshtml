@@ -63,33 +63,4 @@
         $("#mmc").html("@System.Configuration.ConfigurationManager.AppSettings["OrganizationName"]"+" Rating: " + $("option:selected", this).attr("data-movieclub"));
         $("#tinymovie").html("<img id='poster-stamp' src='/Content/images/posters/" + $("option:selected", this).attr("data-poster") + ".jpg' alt='No Poster' />");
     });
-
-    $("#issueUnres").click(function (e) {
-        $('#myModalIssueUnreserved').foundation('reveal', 'close');
-        $.ajax({
-            url: "/Admin/Issue",
-            data: AddAntiForgeryToken({
-                u: $("#userslist").val(),//$("#userlist option:selected", this).val(),
-                movie: $("#movieslist").val(),//$("#movieslist option:selected", this).val()
-                unreserved: true
-            }),
-            type: "POST",
-            dataType: "text"
-        })
-        .success(function (data) {
-            var obj = $.parseJSON(data);
-            if (obj.result == "ok") {
-                toastr.success(obj.message);
-                updatePendingReturns();
-            }
-            else {
-                toastr.warning(obj.message);
-            }
-        })
-        .error(function () {
-            toastr.error("Failed! Check your connection.");
-        });
-        e.preventDefault();
-    });
 </script>
-

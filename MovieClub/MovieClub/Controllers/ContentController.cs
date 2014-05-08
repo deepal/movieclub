@@ -508,7 +508,7 @@ namespace MovieClub.Controllers
             //Categories.Sort((c1, c2) => c1.CategoryName.CompareTo(c2.CategoryName));
             Models.SidebarCategoriesModel sidebardata = new Models.SidebarCategoriesModel();
             sidebardata.categorylist = new List<Category>();
-
+            
             foreach (var category in Categories)
             {
                 var taggedCount = db.DBMovieToCategories.Count(m => m.CategoryId == category.CategoryId);

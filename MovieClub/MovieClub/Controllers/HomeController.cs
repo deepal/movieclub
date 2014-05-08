@@ -17,7 +17,7 @@ namespace MovieClub.Controllers
         {
             MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
             HomePageFeaturedsModel homepagemodel = new HomePageFeaturedsModel();
-
+            
             var featureds = db.DBFeatureds.ToList().Join(db.DBMovies,
                 l => l.MovieId,
                 r => r.Id,
@@ -30,9 +30,9 @@ namespace MovieClub.Controllers
                     MovieclubRatings = r.MovieClubRatings,
                     ImdbRatings = r.ImdbRatings
                 });
-
+            
             List<FeaturedMovieDetails> movies = new List<FeaturedMovieDetails>();
-
+            
             foreach (var item in featureds)
             {
                 movies.Add(new FeaturedMovieDetails() {
@@ -44,7 +44,7 @@ namespace MovieClub.Controllers
                     ImdbRatings = item.ImdbRatings
                 });
             }
-
+            
             homepagemodel.Featureds = movies;
 
             List<List<SimpleMovieDetails>> topcats = new List<List<SimpleMovieDetails>>();

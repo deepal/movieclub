@@ -1,0 +1,17 @@
+﻿#login-form ul{
+    list-style-type:none;
+}
+
+#login-form ul li{
+    display:inline !important;
+}
+
+#login-remember-me div{
+    float:left;
+}
+
+
+#login-buttons{
+    clear:both;
+    text-align:center;
+}

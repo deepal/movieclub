@@ -36,6 +36,8 @@ namespace MovieClub.MovieDB
         public Nullable<System.DateTime> AccountCreatedDate { get; set; }
         public int EmpId { get; set; }
         public string Email { get; set; }
+        public string Password { get; set; }
+        public string pSalt { get; set; }
     
         public virtual DBAdmin DBAdmin { get; set; }
         public virtual ICollection<DBEmployeePendingPayment> DBEmployeePendingPayments { get; set; }

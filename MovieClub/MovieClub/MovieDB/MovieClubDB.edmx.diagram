@@ -13,8 +13,8 @@
         <EntityTypeShape EntityType="MovieClubDBModel.DBAdmin" Width="1.5" PointX="5.375" PointY="6.75" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBMovie" Width="1.5" PointX="0.75" PointY="2.5" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBUser" Width="1.5" PointX="7" PointY="3.375" />
-        <EntityTypeShape EntityType="MovieClubDBModel.DBRating" Width="1.5" PointX="7.375" PointY="6.75" />
-        <EntityTypeShape EntityType="MovieClubDBModel.DBWatchList" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="MovieClubDBModel.DBRating" Width="1.5" PointX="7.75" PointY="10.375" />
+        <EntityTypeShape EntityType="MovieClubDBModel.DBWatchList" Width="1.5" PointX="7.875" PointY="0.5" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBRecommendation" Width="1.5" PointX="5" PointY="3.75" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBActivityLog" Width="1.5" PointX="0.75" PointY="9.75" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBInboxMessage" Width="1.5" PointX="9.375" PointY="3.75" />
@@ -22,7 +22,7 @@
         <EntityTypeShape EntityType="MovieClubDBModel.DBFeatured" Width="1.5" PointX="5.375" PointY="9.75" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBEmployeePendingPayment" Width="1.5" PointX="9.375" PointY="6.75" />
         <EntityTypeShape EntityType="MovieClubDBModel.DBPaymentsDue" Width="1.5" PointX="9.625" PointY="9" />
-        <EntityTypeShape EntityType="MovieClubDBModel.DBPaymentHistory" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="MovieClubDBModel.DBPaymentHistory" Width="1.5" PointX="10.625" PointY="0.75" />
         <AssociationConnector Association="MovieClubDBModel.FK_DBAdmins_DBUsers" />
         <AssociationConnector Association="MovieClubDBModel.FK_DBMovieToCategory_DBCategories" />
         <AssociationConnector Association="MovieClubDBModel.FK_DBEmployeePendingPayments_DBUsers" />
@@ -46,9 +46,9 @@
         <AssociationConnector Association="MovieClubDBModel.FK_DBReservations_DBUsers" />
         <AssociationConnector Association="MovieClubDBModel.FK_DBUsers_DBUsers" />
         <AssociationConnector Association="MovieClubDBModel.FK_DBWatchLists_DBUsers" />
-        <EntityTypeShape EntityType="MovieClubDBModel.DBSuggestion" Width="1.5" PointX="9.25" PointY="12.75" />
+        <EntityTypeShape EntityType="MovieClubDBModel.DBSuggestion" Width="1.5" PointX="5.875" PointY="12.25" />
         <AssociationConnector Association="MovieClubDBModel.FK_DBSuggestions_DBUsers" />
-        <EntityTypeShape EntityType="MovieClubDBModel.DBReview" Width="1.5" PointX="12.25" PointY="5.25" />
+        <EntityTypeShape EntityType="MovieClubDBModel.DBReview" Width="1.5" PointX="11.375" PointY="5.25" />
         <AssociationConnector Association="MovieClubDBModel.FK_DBReviews_DBMovies" />
         <AssociationConnector Association="MovieClubDBModel.FK_DBReviews_DBUsers" />
       </Diagram>

@@ -1,0 +1,55 @@
+﻿@model MovieClub.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="row">
+        <div id="login-form" class="large-40 large-centered medium-50 medium-centered small-100 columns">
+
+            <h4>Login</h4>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Username)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Username)
+                @Html.ValidationMessageFor(model => model.Username)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Password)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+
+            <div class="editor-field" id="login-remember-me">
+                <ul>
+                    <li>@Html.EditorFor(model => model.RememberMe)</li>
+                    <li>@Html.LabelFor(model => model.RememberMe)</li>
+                </ul>
+                @Html.ValidationMessageFor(model => model.RememberMe)
+            </div>
+
+            <div id="login-buttons">
+                <p>
+                    <input id="login-button" type="submit" value="Login" class="button tiny" />
+                </p>
+            </div>
+        </div>
+    </div>
+}
+
+@section customstyles{
+    @Styles.Render("~/Content/css/login.css")
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

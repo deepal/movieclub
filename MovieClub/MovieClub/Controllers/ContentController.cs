@@ -33,6 +33,14 @@ namespace MovieClub.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Collections the specified identifier.
+        /// </summary>
+        /// <param name="Id">The identifier for Movie.</param>
+        /// <param name="Page">The page in category view.</param>
+        /// <param name="Method">The method.</param>
+        /// <param name="list">The list.</param>
+        /// <returns>Returns the view of movie collection</returns>
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Collection(int Id, int? Page, int? Method, int? list)

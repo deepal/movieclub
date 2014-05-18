@@ -203,7 +203,6 @@
     <Compile Include="Controllers\WebServiceController.cs" />
     <Compile Include="CustomAttributes\RequireAdminAttribute.cs" />
     <Compile Include="CustomAttributes\RequireMembershipAttribute.cs" />
-    <Compile Include="CustomAttributes\ValidatePearsonEmailAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -223,6 +222,7 @@
     <Compile Include="Models\AdminModels\UserReservedModel.cs" />
     <Compile Include="Models\ConfigData.cs" />
     <Compile Include="Models\HomePageModels\HomePageFeaturedsModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\MovieCollection.cs" />
     <Compile Include="Models\MyAccountModels\CurrentRentModel.cs" />
     <Compile Include="Models\MyAccountModels\InboxMessageModel.cs" />
@@ -240,6 +240,7 @@
     <Compile Include="Models\MovieDetails.cs" />
     <Compile Include="Models\MovieDataContext.cs" />
     <Compile Include="Models\RecommendedMovies.cs" />
+    <Compile Include="Models\SignUpUserModel.cs" />
     <Compile Include="Models\SimpleMovieDetails.cs" />
     <Compile Include="Models\UserDetails.cs" />
     <Compile Include="MovieDB\DBActivityLog.cs">
@@ -322,6 +323,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MovieClubDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Operations\AccountOperations.cs" />
     <Compile Include="Operations\HomePageOperations.cs" />
     <Compile Include="Operations\MovieIssuesOperations.cs" />
     <Compile Include="Operations\UserOperations.cs" />
@@ -810,6 +812,7 @@
     <Content Include="Content\css\jquery-ui\vader\jquery.ui.theme.css" />
     <Content Include="Content\css\jquery.rondell.css" />
     <Content Include="Content\css\liquidcarousel.css" />
+    <Content Include="Content\css\login.css" />
     <Content Include="Content\css\myaccount.css" />
     <Content Include="Content\css\normalize.css" />
     <Content Include="Content\css\rateit.css" />
@@ -817,6 +820,7 @@
     <Content Include="Content\css\reviews.css" />
     <Content Include="Content\css\rondellcustom.css" />
     <Content Include="Content\css\searchpage.css" />
+    <Content Include="Content\css\signup.css" />
     <Content Include="Content\css\simplePagination.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\ticker-style.css" />
@@ -1150,6 +1154,8 @@
     <Content Include="Views\Content\_ReviewsPartial.cshtml" />
     <Content Include="Views\Admin\_PendingReviewsPartial.cshtml" />
     <Content Include="Views\Admin\Configuration.cshtml" />
+    <Content Include="Views\Account\SignUp.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\images\posters\" />

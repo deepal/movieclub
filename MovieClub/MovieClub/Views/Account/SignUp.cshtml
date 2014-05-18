@@ -1,0 +1,70 @@
+﻿@model MovieClub.Models.SignUpUserModel
+
+@{
+    ViewBag.Title = "Sign Up";
+}
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true,"Could not crete account!", new { @class = "alert-box alert" })
+    
+    if (ViewBag.Message != null)
+    {
+        <div data-alert class="alert-box success">
+            @ViewBag.Message
+        </div>
+    }
+
+    <fieldset>
+        <legend>Create new account</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserName, "Username")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RetypePassword, "Retype Password")
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.RetypePassword)
+            @Html.ValidationMessageFor(model => model.RetypePassword)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EmployeeId, "Employee ID")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EmployeeId)
+            @Html.ValidationMessageFor(model => model.EmployeeId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email,"Email Address")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div id="sign-up-buttons">
+            <input type="submit" class="button tiny" value="Sign up" />
+        </div>
+
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

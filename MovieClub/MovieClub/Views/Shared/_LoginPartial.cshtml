@@ -1,14 +1,18 @@
 ﻿@if (Request.IsAuthenticated)
 {
     <text>
-        <li>
-            <a href="/User/MyAccount" title="My Account">Hello @User.Identity.Name !</a>          
+        <li class="has-dropdown">
+            <a href="/User/MyAccount" title="My Account">Hello @User.Identity.Name !</a>
+            <ul class="dropdown">
+                <li><a href="/Account/LogOff">Log off</a></li>
+            </ul>
         </li>
     </text>
 }
 else
 {
     <ul>
-        <li>@Html.ActionLink("Login or Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginlink" })</li>
+        <li>@Html.ActionLink("Sign up", "SignUp", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
     </ul>
 }

@@ -272,6 +272,14 @@ namespace MovieClub.Controllers
             var moderationEnabled = bool.Parse(System.Configuration.ConfigurationManager.AppSettings["ModerateReviews"]);
 
             if(reviewEnabled){
+                if (comment.Replace(" ",string.Empty).Length == 0)
+                {
+                    return Json(new
+                    {
+                        result = "empty"
+                    });
+                }
+
                 MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
 
                 var userid = UserOperations.GetCurrentUser().UserId;

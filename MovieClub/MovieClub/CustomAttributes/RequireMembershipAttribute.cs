@@ -19,7 +19,7 @@ namespace MovieClub.CustomAttributes
                 filterContext.Result = new RedirectToRouteResult(
                     new RouteValueDictionary { 
                         { "controller", "Account" }, 
-                        { "action", "Register" } }
+                        { "action", "Login" } }
                     );
             }
         }

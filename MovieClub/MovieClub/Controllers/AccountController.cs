@@ -29,6 +29,7 @@ namespace MovieClub.Controllers
         }
 
         [HttpGet]
+        [NonAction]
         public ActionResult SignIn()
         {
             return View();
@@ -108,6 +109,18 @@ namespace MovieClub.Controllers
                         Password = hashString,
                         pSalt = salt
                     });
+
+                    db.SaveChanges();
+
+                    var isFirstUser = ((db.DBUsers.Count() == 1) && (db.DBUsers.Count(u=>u.UserName == newuser.UserName)==1));
+
+                    if (isFirstUser)
+                    {
+                        var newuserid = db.DBUsers.First(u => u.UserName == newuser.UserName).UserId;
+                        db.DBAdmins.Add(new MovieDB.DBAdmin() {
+                            UserId = newuserid
+                        });
+                    }
 
                     db.SaveChanges();
                 }
@@ -224,6 +237,7 @@ namespace MovieClub.Controllers
         }
 
         [AllowAnonymous]
+        [NonAction]
         public ActionResult Register()
         {
             var soluname = GetSolUserName();
@@ -240,6 +254,7 @@ namespace MovieClub.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [NonAction]
         public ActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)

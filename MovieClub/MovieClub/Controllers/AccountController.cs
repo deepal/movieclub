@@ -181,8 +181,14 @@ namespace MovieClub.Controllers
 
         public bool checkLogin(List<MovieDB.DBUser> allUsers, string username, string password)
         {
-            var salt = allUsers.First(u => u.UserName == username).pSalt;
-            var pass = allUsers.First(u => u.UserName == username).Password;
+
+            if (allUsers.Count == 0)
+            {
+                return false;
+            }
+
+            var salt = allUsers.First(u => u.UserName.ToLower() == username).pSalt;
+            var pass = allUsers.First(u => u.UserName.ToLower() == username).Password;
 
             byte[] loginPass = Encoding.ASCII.GetBytes(password + salt);
             byte[] hash;

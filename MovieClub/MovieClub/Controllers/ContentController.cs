@@ -32,7 +32,7 @@ namespace MovieClub.Controllers
         {
             return View();
         }
-        
+
         /// <summary>
         /// Collections the specified identifier.
         /// </summary>

@@ -945,8 +945,8 @@
           <NavigationProperty Name="DBWatchLists" Relationship="MovieClubDBModel.FK_DBWatchLists_DBUsers" FromRole="DBUser" ToRole="DBWatchList" />
           <NavigationProperty Name="DBSuggestions" Relationship="MovieClubDBModel.FK_DBSuggestions_DBUsers" FromRole="DBUser" ToRole="DBSuggestion" />
           <NavigationProperty Name="DBReviews" Relationship="MovieClubDBModel.FK_DBReviews_DBUsers" FromRole="DBUser" ToRole="DBReview" />
-          <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="true" />
-          <Property Name="pSalt" Type="String" MaxLength="160" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="pSalt" Type="String" MaxLength="160" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DBRating">
           <Key>

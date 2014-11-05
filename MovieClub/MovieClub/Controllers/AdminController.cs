@@ -143,6 +143,24 @@ namespace MovieClub.Controllers
         }
 
         [HttpPost]
+        public ActionResult UpdateImdbInfo(string imdbId)
+        {
+
+            MovieDB.MovieClubDBE db = new MovieDB.MovieClubDBE();
+
+            var movies = db.DBMovies.ToList();
+
+            foreach(var mv in movies){
+                //for each movie, send request to IMDb and fetch lates information 
+            }
+
+            return Json(new
+            {
+                result = "ok"
+            });
+        }
+
+        [HttpPost]
         public ActionResult ChangeReviewingStatus(bool status)
         {
             try

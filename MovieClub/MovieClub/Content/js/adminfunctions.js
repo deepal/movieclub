@@ -225,7 +225,7 @@ function showSuggestions(displaytext, moviename) {
         }
     })
     .success(function (data) {
-        var obj = $.parseJSON(data);
+        var obj = data;
         if (obj.Search.length > 0) {
             $("#notice span").html(displaytext + " :")
         }
@@ -291,7 +291,7 @@ function fillImdbData(movieobj) {
         }
     })
     .success(function (data) {
-        var fullplotobj = jQuery.parseJSON(data);
+        var fullplotobj = data;
         if (fullplotobj.Response == "False") {
             $("#PlotFull").val("");
         }
@@ -324,7 +324,7 @@ function fetchImdbDataByID(imdbid) {
     .success(function (data) {
         $("#btn-fetch-imdb").html("Fetch IMDb data");
         $("#btn-fetch-imdb").removeClass("disabled");
-        var movieobj = jQuery.parseJSON(data);
+        var movieobj = data;
         if (movieobj.Response == "False") {
             clearform();
             showMessage(movieobj.Error, "warning");
@@ -355,7 +355,7 @@ function fetchImdbData(moviename) {
     .success(function (data) {
         $("#btn-fetch-imdb").html("Fetch IMDb data");
         $("#btn-fetch-imdb").removeClass("disabled");
-        var movieobj = jQuery.parseJSON(data);
+        var movieobj = data;
         if (movieobj.Response == "False") {
             clearform();
             showMessage(movieobj.Error, "warning");

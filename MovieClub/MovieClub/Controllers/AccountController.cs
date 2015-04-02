@@ -122,7 +122,6 @@ namespace MovieClub.Controllers
             }
         }
 
-
         [AllowAnonymous]
         [HttpGet]
         public ActionResult Login()
